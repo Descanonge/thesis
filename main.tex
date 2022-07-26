@@ -1,0 +1,169 @@
+\documentclass[french, a4paper, twoside, 11pt, draft]{book}
+
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage[T1]{fontenc}
+
+\usepackage[french]{babel}
+\usepackage{csquotes}
+
+\usepackage[backend=biber, style=authoryear]{biblatex}
+
+\usepackage{mathpazo}
+\usepackage{eulervm}
+\usepackage{bm}
+\usepackage{amsmath, amssymb}
+
+\usepackage{siunitx}
+
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{cleveref}
+
+\usepackage[depth=4]{bookmark}
+
+\usepackage{graphicx}
+\usepackage{listings}
+
+\newcommand\Author{HAËCK, Clément}
+\newcommand\Email{clement-haeck@orange.fr}
+\newcommand\Title{Titre de thèse}
+\newcommand\Subject{sujet}
+\newcommand\Keywords{mots clefs}
+
+
+\graphicspath{{resources/}}
+\counterwithin{figure}{section}
+\counterwithin{equation}{section}
+\AtBeginDocument{\counterwithin{lstlisting}{section}}
+
+\bibliography{./resources/library}
+\ExecuteBibliographyOptions{hyperref, indexing=bib, giveninits=true, uniquename=init}
+\DeclareNameAlias{sortname}{family-given}
+
+% Citing commands
+\DeclareFieldFormat{citehyperref}{%
+  \DeclareFieldAlias{bibhyperref}{noformat}% Avoid nested links
+  \bibhyperref{#1}}
+\DeclareFieldFormat{textcitehyperref}{%
+  \DeclareFieldAlias{bibhyperref}{noformat}%
+  \bibhyperref{%
+    #1%
+    \ifbool{cbx:parens}
+    {\bibcloseparen\global\boolfalse{cbx:parens}}
+    {}}%
+}
+
+% Redeclare macros
+\savebibmacro{cite}
+\savebibmacro{textcite}
+\renewbibmacro*{cite}{%
+  \printtext[citehyperref]{%
+    \restorebibmacro{cite}%
+    \usebibmacro{cite}}}
+
+\renewbibmacro*{textcite}{%
+  \printtext[textcitehyperref]{%
+    \restorebibmacro{textcite}%
+    \usebibmacro{textcite}}}
+
+\sisetup{mode=text, output-decimal-marker = {.}, per-mode = symbol,
+  qualifier-mode = phrase, qualifier-phrase = { de },
+  list-units = brackets, range-units = brackets, range-phrase = --,
+  separate-uncertainty
+}
+
+\hypersetup{
+  colorlinks   = true,
+  unicode      = true,
+  linktocpage  = true,
+  urlcolor     = BlueViolet,
+  linkcolor    = RoyalBlue,
+  citecolor    = RoyalBlue,
+}
+
+\AtEndPreamble{
+  \hypersetup{
+    pdftitle={\Title},
+    pdfauthor={\Author, \Email},
+    pdfsubject={\Subject},
+    pdfkeywords={\Keywords}
+  }
+}
+
+\AtBeginDocument{
+  \pagenumbering{gobble}
+}
+
+\begin{document}
+
+% Page de garde
+
+\newgeometry{margin=5em}
+\begin{center}
+  % logos
+  \includegraphics[height=4em]{Logos/sorbonne.pdf}
+  \hfill
+  \includegraphics[height=4em]{Logos/locean.png}
+  \hfill
+  \includegraphics[height=4em]{Logos/ipsl.png}
+  \hfill
+  \includegraphics[height=4em]{Logos/chanel_enspsl.png}
+
+  \vspace{4em}
+  {\LARGE Sorbonne Université}\\[2ex]
+  École Doctorale 129 Sciences de l'Environnement\\
+  \emph{Laboratoire d'Océanographie et du Climat: Expérimentations et Approches Numériques}
+
+  \vspace{4em}
+
+  \textbf{{\LARGE \Title}}\\[2ex]
+  par Clément Haëck\\[2ex]
+  Thèse de doctorat\\
+  Domaine
+
+  \vspace{4em}
+
+  Dirigée par Marina Lévy et Laurent Bopp
+
+  \vspace{4em}
+
+  Présentée et soutenue publiquement le\\
+\end{center}
+Devant un jury composé de:\\[1ex]
+\begin{tabular}{p{0.3\textwidth}p{0.3\textwidth}p{0.3\textwidth}<{\raggedleft}}
+  Marina LÉVY & Directrice de Recherche & Directrice de thèse \\
+  Laurent BOPP & Directeur de Recherche & Co-directeur de thèse \\
+\end{tabular}
+
+\restoregeometry
+\newpage
+
+\section*{Résumé}
+Résumé
+
+\section*{Abstract}
+Abstract
+
+% Remerciements
+\newpage
+\section*{Remerciements}
+Je remercie tatata.
+
+\newpage
+% TOC
+\tableofcontents
+\newpage
+
+
+
+\pagenumbering{arabic}
+
+\include{intro}
+\include{chp1}
+\include{chp2}
+\include{chp3}
+\include{conclusion}
+
+\printbibliography{}
+
+\end{document}
