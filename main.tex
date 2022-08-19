@@ -1,75 +1,48 @@
-\documentclass[french, a4paper, twoside, 11pt, draft]{book}
+\documentclass[french, a4paper, 12pt, twoside, openright]{memoir}
 
-\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
 \usepackage[T1]{fontenc}
+\usepackage{charter}
 
 \usepackage[french]{babel}
 \usepackage{csquotes}
 
-\usepackage[backend=biber, style=authoryear]{biblatex}
+\usepackage[style=authoryear-comp]{biblatex}
 
-\usepackage{mathpazo}
-\usepackage{eulervm}
 \usepackage{bm}
 \usepackage{amsmath, amssymb}
 
-\usepackage{siunitx}
-
-\usepackage{hyperref}
 \usepackage[dvipsnames]{xcolor}
-\usepackage{cleveref}
-
+\usepackage{siunitx}
 \usepackage[depth=4]{bookmark}
-
 \usepackage{graphicx}
 \usepackage{listings}
 
-\newcommand\Author{HAËCK, Clément}
+\usepackage{hyperref}
+
+\newcommand\Author{Clément Haëck}
 \newcommand\Email{clement-haeck@orange.fr}
-\newcommand\Title{Titre de thèse}
+\newcommand\Title{Quantification de l'impact des fronts sur le Phytoplancton dans la région du Gulf-Stream grâce à l'imagerie satellitaire}
 \newcommand\Subject{sujet}
 \newcommand\Keywords{mots clefs}
 
+\chapterstyle{veelo}
+\pagestyle{ruled}
 
 \graphicspath{{resources/}}
-\counterwithin{figure}{section}
-\counterwithin{equation}{section}
-\AtBeginDocument{\counterwithin{lstlisting}{section}}
 
-\bibliography{./resources/library}
-\ExecuteBibliographyOptions{hyperref, indexing=bib, giveninits=true, uniquename=init}
-\DeclareNameAlias{sortname}{family-given}
-
-% Citing commands
-\DeclareFieldFormat{citehyperref}{%
-  \DeclareFieldAlias{bibhyperref}{noformat}% Avoid nested links
-  \bibhyperref{#1}}
-\DeclareFieldFormat{textcitehyperref}{%
-  \DeclareFieldAlias{bibhyperref}{noformat}%
-  \bibhyperref{%
-    #1%
-    \ifbool{cbx:parens}
-    {\bibcloseparen\global\boolfalse{cbx:parens}}
-    {}}%
+\addbibresource[label=refs]{resources/references.bib}
+\ExecuteBibliographyOptions{
+  hyperref=true, indexing=bib, uniquename=full,
+  sorting=nyt, sortcites=true, pluralothers=true, refsection=chapter,
+  url=false, dashed=false, mergedate=false
 }
+% Remove small caps in family names
+\DefineBibliographyExtras{french}{\restorecommand\mkbibnamefamily}
 
-% Redeclare macros
-\savebibmacro{cite}
-\savebibmacro{textcite}
-\renewbibmacro*{cite}{%
-  \printtext[citehyperref]{%
-    \restorebibmacro{cite}%
-    \usebibmacro{cite}}}
-
-\renewbibmacro*{textcite}{%
-  \printtext[textcitehyperref]{%
-    \restorebibmacro{textcite}%
-    \usebibmacro{textcite}}}
-
-\sisetup{mode=text, output-decimal-marker = {.}, per-mode = symbol,
-  qualifier-mode = phrase, qualifier-phrase = { de },
-  list-units = brackets, range-units = brackets, range-phrase = --,
-  separate-uncertainty
+\sisetup{mode=text, output-decimal-marker={.}, per-mode=symbol,
+  qualifier-mode=phrase, qualifier-phrase={ de },
+  list-units=bracket, range-units=bracket, range-phrase=--,
+  uncertainty-mode=separate
 }
 
 \hypersetup{
@@ -90,80 +63,96 @@
   }
 }
 
-\AtBeginDocument{
-  \pagenumbering{gobble}
-}
 
 \begin{document}
+\pagenumbering{Alph}
 
-% Page de garde
+\begin{titlingpage}
+\calccentering{\unitlength}
+\begin{adjustwidth*}{\unitlength}{-\unitlength}
 
-\newgeometry{margin=5em}
+\vspace{-2em}
+
 \begin{center}
-  % logos
-  \includegraphics[height=4em]{Logos/sorbonne.pdf}
+  \includegraphics[height=3em]{Logos/sorbonne.pdf}
   \hfill
-  \includegraphics[height=4em]{Logos/locean.png}
+  \includegraphics[height=3em]{Logos/locean.png}
   \hfill
-  \includegraphics[height=4em]{Logos/ipsl.png}
+  \includegraphics[height=3em]{Logos/ipsl.png}
   \hfill
-  \includegraphics[height=4em]{Logos/chanel_enspsl.png}
+  \includegraphics[height=3em]{Logos/chanel_enspsl.png}
 
-  \vspace{4em}
+  \vspace{3em}
+
   {\LARGE Sorbonne Université}\\[2ex]
   École Doctorale 129 Sciences de l'Environnement\\
   \emph{Laboratoire d'Océanographie et du Climat: Expérimentations et Approches Numériques}
 
-  \vspace{4em}
+  \vspace{3em}
 
-  \textbf{{\LARGE \Title}}\\[2ex]
-  par Clément Haëck\\[2ex]
+  \par\noindent\rule[0.7em]{\textwidth}{2pt}
+  {\bfseries\Large \Title}\\
+  \par\noindent\rule{\textwidth}{2pt}
+
+  \vspace{1em}
+
+  {\normalsize par Clément Haëck}\\
+  \vspace{3em}
+
   Thèse de doctorat\\
-  Domaine
+  Spécialité : Cycles biogéochimiques et changements environnementaux globaux
 
-  \vspace{4em}
+  \vspace{3em}
 
   Dirigée par Marina Lévy et Laurent Bopp
 
-  \vspace{4em}
-
-  Présentée et soutenue publiquement le\\
+  \vspace{3em}
 \end{center}
-Devant un jury composé de:\\[1ex]
-\begin{tabular}{p{0.3\textwidth}p{0.3\textwidth}p{0.3\textwidth}<{\raggedleft}}
-  Marina LÉVY & Directrice de Recherche & Directrice de thèse \\
-  Laurent BOPP & Directeur de Recherche & Co-directeur de thèse \\
+
+Présentée et soutenue publiquement le 31 février 2023,\\
+devant un jury composé de:\\[1ex]
+\begin{center}
+\begin{tabular}{llr<{\raggedleft}}
+  Prénom NOM & Titre & Rapporteur \\
+  Prénom NOM & Titre & Rapporteur \\
+  Prénom NOM & Titre & Président \\
+  Marina LÉVY & DR CNRS & Directrice de thèse \\
+  Laurent BOPP & DR CNRS & Co-directeur de thèse \\
 \end{tabular}
+\end{center}
 
-\restoregeometry
-\newpage
+\end{adjustwidth*}
+\end{titlingpage}
 
-\section*{Résumé}
-Résumé
+\frontmatter
 
-\section*{Abstract}
-Abstract
+\begin{abstract}
+Abstract \dots
+\end{abstract}
 
 % Remerciements
 \newpage
 \section*{Remerciements}
-Je remercie tatata.
+Remerciements \dots
 
-\newpage
 % TOC
-\tableofcontents
 \newpage
+\tableofcontents*
+\newpage
+\listoffigures
+\newpage
+\listoftables
 
-
-
-\pagenumbering{arabic}
+\mainmatter
 
 \include{intro}
+\printbibliography[heading=subbibintoc]
 \include{chp1}
+\printbibliography[heading=subbibintoc]
 \include{chp2}
+\printbibliography[heading=subbibintoc]
 \include{chp3}
+\printbibliography[heading=subbibintoc]
 \include{conclusion}
-
-\printbibliography{}
 
 \end{document}
