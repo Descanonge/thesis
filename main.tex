@@ -2,15 +2,14 @@
 
 \usepackage{geometry}
 \usepackage[T1]{fontenc}
-\usepackage{charter}
+\usepackage{xcharter-otf}
 
 \usepackage[french]{babel}
 \usepackage{csquotes}
 
 \usepackage[style=authoryear-comp]{biblatex}
 
-\usepackage{bm}
-\usepackage{amsmath, amssymb}
+\usepackage{microtype}
 
 \usepackage[dvipsnames]{xcolor}
 \usepackage{siunitx}
@@ -44,7 +43,7 @@
 
 \graphicspath{{resources/}}
 
-\addbibresource[label=refs]{resources/references_parsed.bib}
+\addbibresource[label=refs]{resources/references.bib}
 \ExecuteBibliographyOptions{
   hyperref=true, indexing=bib, uniquename=full,
   sorting=nyt, sortcites=true, pluralothers=true, refsection=chapter,
@@ -77,6 +76,9 @@
   }
 }
 
+% Commandes
+\newcommand{\chla}{Chl-\emph{a}}
+\newcommand{\Chla}{Chlorophylle-\emph{a}}
 
 \begin{document}
 
