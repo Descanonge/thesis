@@ -1,12 +1,15 @@
 #!/usr/bin/env ipython
 
-import re
+import sys
 
 import bibtexparser
 
 
-ifile = 'resources/references.bib'
-ofile = 'resources/references_parsed.bib'
+args = sys.argv[1:]
+if len(args) < 2:
+    raise IndexError("Need two arguments")
+ifile = args[0]
+ofile = args[1]
 
 
 def set_journal(record):
