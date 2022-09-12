@@ -1,5 +1,6 @@
 \documentclass[french, a4paper, 12pt, twoside, openright]{memoir}
 
+\usepackage{geometry}
 \usepackage[T1]{fontenc}
 \usepackage{charter}
 
@@ -27,6 +28,19 @@
 
 \chapterstyle{veelo}
 \pagestyle{ruled}
+
+% A4 297x210mm
+\settrims{0pt}{0pt}
+\settypeblocksize{197mm}{140mm}{*}
+\setulmargins{4cm}{*}{*}
+\setlrmargins{3cm}{*}{*}
+\setmarginnotes{17pt}{51pt}{\onelineskip}
+\setheadfoot{\onelineskip}{2\onelineskip}
+\setheaderspaces{*}{2\onelineskip}{*}
+\checkandfixthelayout
+
+\setsecnumdepth{subsection}
+\setcounter{tocdepth}{2}
 
 \graphicspath{{resources/}}
 
