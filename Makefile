@@ -5,7 +5,7 @@ BUILDDIR=_build
 BIB_FILE=resources/references
 
 AUXDIR_FLAGS=-auxdir="$(BUILDDIR)" -emulate-aux-dir
-LMK_FLAGS=-pdflua -recorder
+LMK_FLAGS=-pdflua -recorder -quiet
 # 		-interaction=nonstopmode -quiet
 #####
 
@@ -24,6 +24,7 @@ $(PROJECT).pdf: $(PROJECT).tex $(BIB_FILE).bib
 cleanall:
 	latexmk -C $(AUXDIR_FLAGS)
 	rm $(BIB_FILE).bib
+	rm -r $(BUILDDIR)
 
 clean:
 	latexmk -c $(AUXDIR_FLAGS)

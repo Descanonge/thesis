@@ -16,8 +16,15 @@
 \usepackage[depth=4]{bookmark}
 \usepackage{graphicx}
 \usepackage{listings}
-
 \usepackage{hyperref}
+
+\usepackage[
+xindy,
+nogroupskip,
+nonumberlist,
+toc,
+section=section
+]{glossaries}
 
 \newcommand\Author{Clément Haëck}
 \newcommand\Email{clement-haeck@orange.fr}
@@ -76,14 +83,15 @@
   }
 }
 
+\glsdisablehyper
+\makeglossaries
+\loadglsentries{gloss}
+
 \newcommand{\biblio}{{
     \emergencystretch=1em
     \printbibliography[heading=subbibintoc]
   }}
 
-% Commandes
-\newcommand{\chla}{Chl-\emph{a}}
-\newcommand{\Chla}{Chlorophylle-\emph{a}}
 
 \begin{document}
 
@@ -91,6 +99,8 @@
 % Résumé
 % Remerciements
 \include{front_matter}
+
+\printglossary
 
 % TOC
 \clearpage
@@ -101,7 +111,6 @@
 % \listoftables
 
 \mainmatter
-
 
 \include{intro}
 % \biblio
