@@ -76,6 +76,11 @@
   }
 }
 
+\newcommand{\biblio}{{
+    \emergencystretch=1em
+    \printbibliography[heading=subbibintoc]
+  }}
+
 % Commandes
 \newcommand{\chla}{Chl-\emph{a}}
 \newcommand{\Chla}{Chlorophylle-\emph{a}}
@@ -97,14 +102,15 @@
 
 \mainmatter
 
+
 \include{intro}
-\printbibliography[heading=subbibintoc]
+% \biblio
 \include{méthodes}
-\printbibliography[heading=subbibintoc]
+% \biblio
 \include{résultats_1}
-\printbibliography[heading=subbibintoc]
+% \biblio
 \include{résultats_2}
-\printbibliography[heading=subbibintoc]
+% \biblio
 \include{conclusion}
 
 \end{document}

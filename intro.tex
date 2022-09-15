@@ -7,8 +7,7 @@ Quelques pages d'introduction générale pour donner les objectifs.
 
 \section{Le phytoplancton dans le système terre}
 
-(intro globale sur le phytoplancton)
-
+\subsection{Définition du phytoplankton}
 définition: plancton = organisme porté par les courants.
 Phyto: ils pratiquent la photosynthèse, ils transforment le carbone dissous dans l'eau en matière organique.
 Grande variété: de taille et de type et d'espèces.
@@ -20,7 +19,7 @@ Pour croître: ont besoin de lumière, de nutriments, de certaines conditions en
 Sources de mortalité: vieillesse, virus, broutage par le phytoplankton.
 Quelques mots sur le phytoplankton. Plus gros. Migration diurne. Ici aussi grande variété, préférence de broutage: compléxité supplémentaire.
 
-Les limitations majeures restent la lumière et les nutriements.
+Les limitations majeures restent la lumière et les nutriments.
 La lumière n'est pas présente partout identiquement: latitude, saisonalité, et surtout profondeur. Importance de la couche euphotique, en surface.
 Également limité en nutriments dans la quasi-totalité des eaux libres. Les eaux profondes (ou la lumière ne pénètre pas) contiennent des nutriments cependant. On peut définir une nutricline.
 
@@ -28,10 +27,14 @@ Cette dualité des sources de croissance (lumière en surface, nutriments en pro
 Or on considère généralement les courants océaniques à l'ordre 1 comme strictement horizontaux.
 Les petites et moyennes échelles ((sub-)mésoéchelles) présentent des moyens de créer des échanges verticaux (comme on le verra plus tard).
 
+\subsection{Moyens d'étude}
+
 Le phytoplankton est complexe à étudier.
 Une observation synoptique est seulement possible par satellite.
 Ces obs se font sur la couleur de l'océan. (quelques mots sur le principe, depuis quand ça existe, révélation des fines échelles dans les 1ères images).
 Obs de la couleur présente des problèmes. Le lien avec le phytoplankton est indirect et imparfait (utilisation de la Chl-a comme proxy de biomasse). Limitation importante des observations par la couverture nuageuse. Et cela ne scanne que la composition de la surface (combien de m en vrai ?), pas accès à toute la colonne d'eau.
+
+Expliquer la méthode pour obtenir Chl-a depuis satellite. Et méthode de Roy également.
 
 C'est pour cela que les observations in-situ toujours très utiles (pour combler les trous, ou compléter les obs sat). Vision de toute la colonne d'eau. Associé à une obs de la densité (temp + salinité qui n'est pas dispo en sat. à petite échelle).
 Accès à la composition du phytoplancton (et zoo) grầce à différents outils (cytomètre, zooscan, HPLC, -omiques).
@@ -45,54 +48,113 @@ On a pas de paramétrisation des processus bio. Est-ce que c'est seulement possi
 Les modèles climatiques sont, du coup, très incertains en ce qui concerne la bio.
 Grosses barres d'erreurs dans les projections pour le prochain siècle.
 
-\section{Impact des fronts sur phyto}
 
-\subsection{présentation physique des fronts de SMS}
+Difficile de séparer les trois: processus dynamiques, mélange horizontal, et biologie, car ils ont les même temps caractéristiques.
+
+\section{Interactions biophyiques}
+
+Définition par l'échelle spatiale (0.1-10km).
 
 Ce sont les images satellite de couleur de l'océan qui ont révélé l'ubiquité des fines échelles dans l'océan (en surface tout du moins).
+
+Importance de la SMS:
+1) on observe que la variance de la biophysique est importante à ces échelles.
+2) les processus dynamiques crée des échanges verticaux
+3) Mal représenté dans les modèles climatiques, on doit mieux comprendre (et quantifier pour savoir à quel point c'est important)
+
+
+\subsection{Mélange horizontal}
 
 Une partie des fines échelles observées correspondent à l'action de l'advection par les courants de méso-échelle. L'action passive du mélange horizontal fait apparaître de fins filaments.
 Cela permet le mélange de communauté, car rapproche spatialement des parcelles d'eau de différentes origines, avec des caractéristiques physiques et des historique biologiques propres.
 
-Mais à ces échelles (0.1-10km) émergent également des processus dynamiques nouveaux.
-On est alors en dessous du rayon de déformation de Rossby (\(Ro < 1\)).
-Forcage par l'atmosphère (hétérogène) et les courants méso qui génèrent des gradients de densité.
-On décrit certains de ces processus et leur(s) impact(s) dans la suite.
+Approche lagrangienne très utile dans l'étude du phytoplancton, et dans son observation (méthode de sampling Lagrangiennes, ref ).
 
-Difficile de séparer les trois: processus dynamiques, mélange horizontal, et biologie, car ils ont les même temps caractéristiques.
 
-\subsection{mécanismes d'impact sur phyto}
-
-\subsubsection{upwelling des nutriments}
+\subsection{Upwelling de nutriments par les circulations agéostrophiques}
 
 Comme dit plus haut, les échanges verticaux sont important pour la bio.
 Or aux petites échelles on voit apparaître des vitesses verticales de grande magnitude.
 
+à ces échelles (0.1-10km) émergent également des processus dynamiques nouveaux.
+On est alors en dessous du rayon de déformation de Rossby (\(Ro < 1\)).
+Forcage par l'atmosphère (hétérogène) et les courants méso qui génèrent des gradients de densité.
+On décrit certains de ces processus et leur(s) impact(s) dans la suite.
+
 advection selon les isopycnes qui peuvent être penchées.
+
+importance des vents
 
 aspect intermittent (local, petit spot)
 
 winners and losers
 
-\subsubsection{réduction du mélange}
 
-explication mécanismes
+\subsection{Modification de la phénologie du bloom}
 
-exemples de détection précédentes.
+Les gradients de densité existant (créés par mélange par courants méso ou forcages atmos) sont des réservoirs d'énergie potentielle. À un front les isopycnes sont penchées et des circulations sub-méso se créent et transforment l'énergie potentielle en énergie cinétique (tourbillons), ce faisant ramenant les isopycnes à l'horizontale.
+Ces tourbillons formés par l'instabilité de Mixed-Layer (?) s'étendent sur la hauteur de la ML. Ce sont les Mixed-Layer Eddies.
+À travers ces instabilités la sub-mesoéchelle contribue fortement à re-stratifier la couche de surface, et réduire le mélange.
+C'est un processus local et on s'attend donc à un soulèvement local de la couche de mélange au niveau des fronts.
+
+
+Expliquer lancement du bloom printanier par réduction mélange.
+
+On s'attend à un départ du bloom d'abord dans les fronts.
+
+exemples de détection précédentes (mahadevan 2020).
+
+
+\section{Région d'étude: Extension du Gulf Stream}
+
+Notre zone d'étude: 15°N-55°N, 82°W-40°W
+
+\subsection{La physique}
+
+Gyre subtropicale Atlantique Nord.
+
+Courant de bord ouest chaud et salé qui remonte des caraibes le long de la floride.
+Se détache à Cape Hatteras, quitte le plateau continentale et méandre vers l'est.
+Plume énergétique autour de ces méandres (surtout au sud).
+
+Au nord du jet, courant retour (slope current) avec notamment un jet sur le shelf break.
+Entre le Gulf Stream North Wall et le shelf: slope seas. Très froid, plutôt fraiche (plus salé que sur le shelf néanmoins).
+Ce courant froid plonge. Fait partie de la circulation d'overturning de l'atlantique.
+
+\subsection{La biologie}
+
+Gyre très pauvre en nutriment et productivité faible.
+Pourquoi ?
+Pas de circulation méso qui permette l'apport de nutriment en surface.
+Importance de la sub-méso donc pour créer des échanges verticaux.
+
+Eaux au nord du GS très productives.
+Également importances à cause de pêcheries.
+Important bloom (plus de détail, ref sur la phénologie, )
 
 
 \section{Détection des fronts sur images satellites}
-[ou plus généralement à partir de vue synoptique de SST]
+
+On se concentre sur la SST, mais on peut utiliser d'autres traceurs (Chloro par ex).
 
 méthodes avec gradient
 
-méthodes avec fenêtre glissant
-
 méthodes se basant sur histogrammes (Otsu, Cayula)
+méthodes avec fenêtre glissante
 
 méthodes utilisant variance, entropie
 
 Quelques mots sur le suivi des fronts + reconstruction de fronts 'linéaire'
 qu'on utilise pas on reste en 'vue pixelisée'
 
-% LocalWords:  Cayula
+\subsection{Vers des fronts de densité}
+
+Lien entre densité et température.
+La salinité intervient aussi. La salinité par satellite est très basse résolution (SMOS) donc on a pas vraiment accès.
+
+On ne peut qu'espèrer que la salinité ne joue pas un rôle trop grand dans la densité, ie que les fronts ne soient pas trop compensés.
+Pour vérifier cela on doit passer par les campagnes en mer.
+
+Dans la région Nord-Atlantique des transects sont réalisé régulièrement par un navire d'opportunité, l'Oleander.
+[Trouver détails dessus]
+Des résultats suggèrent que la salinité ne joue pas beaucoup (Flagg 2006, succinct).
