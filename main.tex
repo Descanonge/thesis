@@ -18,6 +18,9 @@
 \usepackage{listings}
 \usepackage{hyperref}
 
+\let\printglossary\relax
+\let\theglossary\relax
+\let\endtheglossary\relax
 \usepackage[
 xindy,
 nogroupskip,
@@ -26,11 +29,13 @@ toc,
 section=section
 ]{glossaries}
 
+\usepackage{cleveref}
+
 \newcommand\Author{Clément Haëck}
-\newcommand\Email{clement-haeck@orange.fr}
-\newcommand\Title{Quantification de l'impact des fronts sur le Phytoplancton dans la région du Gulf-Stream grâce à l'imagerie satellitaire}
-\newcommand\Subject{sujet}
-\newcommand\Keywords{mots clefs}
+\newcommand\Email{clement.haeck@locean.ipsl.fr}
+\newcommand\Title{Impact des fronts sur le Phytoplancton dans la région du Gulf-Stream quantifié par imagerie satellitaire}
+\newcommand\Subject{biogeochemistry}
+\newcommand\Keywords{}
 
 \chapterstyle{veelo}
 \pagestyle{ruled}
@@ -58,12 +63,11 @@ section=section
 }
 % Remove small caps in family names
 \DefineBibliographyExtras{french}{\restorecommand\mkbibnamefamily}
+\newcommand\pcite[1]{\parencite}
 
-\sisetup{mode=text, output-decimal-marker={.}, per-mode=symbol,
-  qualifier-mode=phrase, qualifier-phrase={ de },
-  list-units=bracket, range-units=bracket, range-phrase=--,
-  uncertainty-mode=separate
-}
+\sisetup{mode=text, locale=FR}
+\DeclareSIUnit\mgm{\milli\gram\per\cubic\metre}
+\DeclareSIUnit\dC{\degreeCelsius}
 
 \hypersetup{
   colorlinks   = true,
@@ -83,6 +87,7 @@ section=section
   }
 }
 
+\glsaddall
 \glsdisablehyper
 \makeglossaries
 \loadglsentries{gloss}
@@ -100,7 +105,7 @@ section=section
 % Remerciements
 \include{front_matter}
 
-\printglossary
+\printglossary[toctitle=Glossaire]
 
 % TOC
 \clearpage

@@ -1,7 +1,10 @@
 
 \chapter{Méthodes}
+\label{chp:méthodes}
 
 \section{Données}
+
+Dans cette section on décrit les données utilisées dans la suite de la thèse, ou qui ont été considérées à un point.
 
 \subsection{SST}
 
@@ -15,21 +18,70 @@ un seul capteur (à moins de faire soi-même un merge, ce qui est encore plus di
 bien (1km) mais inclue capteur microondes
 
 \subsubsection{ESA CCI SST}
-4km, seulement capteurs IR
+4km, seulement capteurs IR.
+interpolation L4.
+L3 disponibles mais que un capteur à la fois.
+
+grille différente que celle de la chlorophylle.
 
 \subsection{Chlorophylle}
 
+Globcolour processor
+distribué par ESA/CCI
+
 \subsection{Bathymétrie}
+
+jsp.
 
 \section{Délimitations des sous-régions}
 
-On sépare en 3 zone (\fref{fig:zone-delimitation}).
+Zone d'étude hétérogène, notamment en biologie.
+Il apparait 3 régimes différents discuté en intro.
+Pour limiter les comparaisons dans des zones homogènes on découpe la zone d'étude en 3 sous régions.
+
+Une première zone correspondant à la gyre subtropicale de l'Atlantique Nord est délimitée comme étant au sud de 32°N.
+Cela correspond à un saut des valeurs de \gls{chla} à cette latitude.
+Cette séparation est en accord avec la limite entre les biomes présentés par \cite{sarmiento_2004}.
+Cette zone correspond donc à la gyre stratifiée de façon permanente (GS-PS) [GLS ?].
+
+On sépare ensuite la région restante au nord de 32°N en prenant comme limite le front nord du jet du Gulf Stream (le `North wall'). Cette séparation donne donc au sud, une zone peu productive, la gyre subtropicale stratifié de façon saisonière (GS-SS) [GLS ?]; et au nord des eaux plus froides, plus fraîches, et plus productives correspondan au régime de fort bloom (High-Chlorophyll-Bloom) \pcite{sarmiento_2022} ou à des eaux subpolaires \pcite{bock_2022}.
+
+La délimitation entre ces deux zones suit le front nord du jet du Gulf Stream et est donc dynamique. Elle est déterminée pour chaque jour, à partir de l'image en température, de la manière suivante.
+Après exploration des données au long de l'année, il apparaît que la SST est un marqueur relativement fiable et robuste, et que la limite qui nous intéresse ici est facilement repérable dans les valeurs de SST.
+En effet, nous regardons la distribution des valeurs de SST au nord de 32°N, sur laquelle apparaît clairement un pic dans les valeurs élevées correspondant au jet.
+Il est aisé de repérer le pic et le fitter par une Gaussienne. La largeur de pic obtenue est utilisée pour repérer un seuil de température en soustrayant à la température moyenne du pic deux fois son écart-type.
+La valeur de seuil journalière obtenue est filtrée temporellement par un filtre médian d'une fenêtre de 8 jours afin d'éviter les anomalies de détection.
+Enfin ce seuil en température est utilisé pour séparer la région en deux.
+
+\begin{figure}
+  \caption{Figure de Sarmiento 2004 ?}
+  \label{fig:sarmiento}
+\end{figure}
+
+\begin{figure}
+  Histograme de SST. Fit gaussien. Flèche qui dénote sigma (la largeur du pic).
+  Barre verticale pour le seuil.
+  Super-imposer en léger l'histograme <32°N.
+  \caption{Détermination du seuil en température correspondant au front nord du Gulf Stream.}
+  \label{fig:seuil-temp}
+\end{figure}
+
+
+\begin{figure}
+  Superposition de tous les contours de seuil pour une année.
+  Tracé moyen ?
+  \caption{Variation de la délimitation entre les zones GS-SS et HCB.}
+  \label{fig:var-delim}
+\end{figure}
+
 
 \begin{figure}
   % \includegraphics[width=\textwidth]{zones.pdf}
   \caption{Délimitations des zones.}
   \label{fig:zone-delimitation}
 \end{figure}
+
+Enlever les côtes pour éviter régime cotier.
 
 \section{Heterogeneity Index}
 \subsection{Définition}
@@ -43,14 +95,35 @@ Coefficients de normalisation.
 
 \subsection{Sensibilité aux paramètres}
 
+Nécessité d'évaluer les incertitudes sur la méthode.
+Pour voir si résultat significatif.
 Taille de la fenêtre glissante. Coefs de normalisation.
-Ajouter influence de la résolution ?
+
+\subsection{Exemples de fronts}
+
+Sélectionner des images ou ça marche (ou pas).
+Préférentiellement avec couverture MODIS mais pas obligé.
+
+\subsection{Influence de la résolution}
+
+Au moins un petit truc sur les données MODIS.
+Que je me sois pas fait chier à tout faire marcher pour rien...
 
 \section{Extraction des résultats}
 
-concept des pools de pixels?
-utilisation des histogrammes.
+Une fois le HI calculé, il devient possible de catégoriser chaque pixel par la région à laquelle il appartient (GS-SS, GS-SP, HCB), ainsi que par sa valeur de HI.
+On cherche donc à extraire des informations de ces ensembles de pixels ainsi consistués.
+Le nombre total de pixels étant conséquent, et parce que l'établissement des ensembles est compliqué et coûteux (il faut superposer la SST, le HI, et la \gls{chla}), les ensembles de pixels sont chacuns réduits à des histogrammes des variables d'intérêt (SST, \gls{chla}, PFT).
+Cela diminue les étapes de calcul ainsi que la quantité de données à traiter pour obtenir un diagnostique (on passe de \numproduct{~1000;~1000} pixels à \num{~100} intervalles d'histogramme).
+
+Les histogrammes peuvent être rendus représentatifs sans pour autant utiliser un nombre prohibitif d'intervalles, les données étant elles-mêmes stockées compressées et donc discrétisées. Par exemple pour la température, 450 intervalles permettre de couvrir toutes les valeurs (de \qty{-5}{\dC} à \qty{40}{\dC}), avec une largeur d'intervalle de \qty{0.1}{\dC} égale à l'intervalle de discrétisation des données, lui même équivalent à l'incertitude sur la mesure.
+Les intervalles pour la Chlorophylle et les autres variables biologiques sont pris de largeur logarithmique afin de couvrir les plusieurs ordres de grandeur que peuvent prendre leurs valeurs.
+
+Les histogrammes présentent également l'avantage de pouvoir être combiné entre eux.
+En effet, tout les histogrammes calculés sont stockés non-normalisés, en nombre de pixel par intervalle donc. Ainsi plusieurs histogrammes peuvent être sommés entre eux avant d'être normalisés pour en extraire une valeur, comme la valeur médiane de la distribution résultant par exemple.
+Ce procédé est notamment utilisé pour calculé des diagnostiques sur des périodes de temps autre que journalières, sans avoir besoin de refaire un calcul impliquant les pixels.
 
 vérification que les histogrammes sont well-behaved pour prendre des valeurs.
+passage en pdf
 valeurs médianes.
 valeur surplus.

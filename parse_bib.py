@@ -33,6 +33,7 @@ def customizations(record):
 with open(ifile, 'r') as bibtex_file:
     parser = bibtexparser.bparser.BibTexParser()
     parser.customization = customizations
+    parser.ignore_nonstandard_types = False
     bib_db = bibtexparser.load(bibtex_file, parser=parser)
 
 
