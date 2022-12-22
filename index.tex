@@ -11,6 +11,8 @@
 
 \usepackage{microtype}
 
+\usepackage{subfiles}
+
 \usepackage[dvipsnames]{xcolor}
 \usepackage{siunitx}
 \usepackage[depth=4]{bookmark}
@@ -55,7 +57,7 @@ section=section
 
 \graphicspath{{resources/}}
 
-\addbibresource[label=refs]{resources/references.bib}
+\addbibresource[label=refs]{texbuild/processed.bib}
 \ExecuteBibliographyOptions{
   hyperref=true, indexing=bib, uniquename=full,
   sorting=nyt, sortcites=true, pluralothers=true, refsection=chapter,
@@ -63,7 +65,7 @@ section=section
 }
 % Remove small caps in family names
 \DefineBibliographyExtras{french}{\restorecommand\mkbibnamefamily}
-\newcommand\pcite[1]{\parencite}
+\newcommand{\pcite}[1]{\parencite{#1}}
 
 \sisetup{mode=text, locale=FR}
 \DeclareSIUnit\mgm{\milli\gram\per\cubic\metre}
@@ -117,16 +119,9 @@ section=section
 
 \mainmatter
 
-\include{intro}
-% \biblio
-\include{méthodes}
-% \biblio
-\include{res_chl}
-% \biblio
-\include{res_pft}
-% \biblio
-\include{res_global}
-% \biblio
-\include{conclusion}
+\subfile{tex/intro}
+\subfile{tex/méthodes}
+\subfile{tex/res_chl}
+\subfile{tex/conclusion}
 
 \end{document}

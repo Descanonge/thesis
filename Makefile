@@ -1,30 +1,45 @@
 
-PROJECT=main
+PROJECT := thesis
 
-BUILDDIR=_build
-BIB_FILE=resources/references
+BUILDDIR := texbuild
+RES := resources
+REF := references
 
-AUXDIR_FLAGS=-auxdir="$(BUILDDIR)" -emulate-aux-dir
-LMK_FLAGS=-pdflua -recorder -quiet
-# 		-interaction=nonstopmode -quiet
-#####
+BIB_ZOTERO := zotero_export
+BIB_CUSTOM := custom
+BIB_OUTPUT := processed
+BIB_TMP := tmp
+BIB_PARSER := parse_bib.py
 
-BIB_INPUT=$(BIB_FILE)_input.bib
+MAIN := index
+SUBNAMES := intro méthodes res_chl res_pft res_global conclusion
+SUBFILES = $(foreach sn,$(SUBNAMES),tex/$(sn).tex)
 
-.PHONY: $(PROJECT).pdf all clean
+AUXDIR_FLAGS := -auxdir="$(BUILDDIR)" -emulate-aux-dir
+LMK_FLAGS := -pdflua -recorder -quiet -logfilewarninglist
 
-all: $(PROJECT).pdf
+$(foreach file,ZOTERO CUSTOM,$(eval BIB_$(file) = $(REF)/$(BIB_$(file)).bib))
+$(foreach file,TMP OUTPUT,$(eval BIB_$(file) = $(BUILDDIR)/$(BIB_$(file)).bib))
 
-$(BIB_FILE).bib: $(BIB_INPUT) ./parse_bib.py
-	python ./parse_bib.py $(BIB_INPUT) $(BIB_FILE).bib
+.PHONY: all clean $(MAIN) $(SUBNAMES)
 
-$(PROJECT).pdf: $(PROJECT).tex $(BIB_FILE).bib
-	latexmk $(LMK_FLAGS) $(AUXDIR_FLAGS) -use-make $<
+all: index
 
-cleanall:
-	latexmk -C $(AUXDIR_FLAGS)
-	rm $(BIB_FILE).bib
-	rm -r $(BUILDDIR)
+bib: $(BIB_OUTPUT)
+
+$(BIB_OUTPUT): $(BIB_ZOTERO) $(BIB_CUSTOM) $(BIB_PARSER)
+	mkdir -p $(BUILDDIR)
+	cat $(BIB_ZOTERO) $(BIB_CUSTOM) > $(BIB_TMP)
+	python $(BIB_PARSER) $(BIB_TMP) $(BIB_OUTPUT)
+
+
+$(SUBNAMES):%: tex/%.tex $(MAIN).tex bib
+	latexmk $(LMK_FLAGS) $(AUXDIR_FLAGS) $<
+
+$(MAIN): $(MAIN).tex $(SUBFILES) bib
+	latexmk $(LMK_FLAGS) $(AUXDIR_FLAGS) $<
 
 clean:
-	latexmk -c $(AUXDIR_FLAGS)
+	rm -r $(BUILDDIR)
+	rm $(MAIN).fls
+	rm $(foreach sf,$(SUBFILES),$(sf).fls)

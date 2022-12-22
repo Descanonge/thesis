@@ -1,3 +1,5 @@
+\documentclass[index]{subfiles}
+\begin{document}
 
 \chapter{Méthodes}
 \label{chp:méthodes}
@@ -33,6 +35,8 @@ distribué par ESA/CCI
 
 jsp.
 
+\subsection{FSLE}
+
 \section{Délimitations des sous-régions}
 
 Zone d'étude hétérogène, notamment en biologie.
@@ -44,7 +48,7 @@ Cela correspond à un saut des valeurs de \gls{chla} à cette latitude.
 Cette séparation est en accord avec la limite entre les biomes présentés par \cite{sarmiento_2004}.
 Cette zone correspond donc à la gyre stratifiée de façon permanente (GS-PS) [GLS ?].
 
-On sépare ensuite la région restante au nord de 32°N en prenant comme limite le front nord du jet du Gulf Stream (le `North wall'). Cette séparation donne donc au sud, une zone peu productive, la gyre subtropicale stratifié de façon saisonière (GS-SS) [GLS ?]; et au nord des eaux plus froides, plus fraîches, et plus productives correspondan au régime de fort bloom (High-Chlorophyll-Bloom) \pcite{sarmiento_2022} ou à des eaux subpolaires \pcite{bock_2022}.
+On sépare ensuite la région restante au nord de 32°N en prenant comme limite le front nord du jet du Gulf Stream (le `North wall'). Cette séparation donne donc au sud, une zone peu productive, la gyre subtropicale stratifié de façon saisonière (GS-SS) [GLS ?]; et au nord des eaux plus froides, plus fraîches, et plus productives correspondan au régime de fort bloom (High-Chlorophyll-Bloom) \pcite{sarmiento_2004} ou à des eaux subpolaires \pcite{bock_2022}.
 
 La délimitation entre ces deux zones suit le front nord du jet du Gulf Stream et est donc dynamique. Elle est déterminée pour chaque jour, à partir de l'image en température, de la manière suivante.
 Après exploration des données au long de l'année, il apparaît que la SST est un marqueur relativement fiable et robuste, et que la limite qui nous intéresse ici est facilement repérable dans les valeurs de SST.
@@ -93,6 +97,13 @@ Implémentation.
 
 Coefficients de normalisation.
 
+\begin{figure}
+  \centering
+  \includegraphics{méthodes/bimodality.pdf}
+  \caption[Calcul de la bimodalité]{Calcul de la bimodalité à partir de la distribution des valeurs de températures.}
+  \label{fig:bimodality}
+\end{figure}
+
 \subsection{Sensibilité aux paramètres}
 
 Nécessité d'évaluer les incertitudes sur la méthode.
@@ -114,7 +125,7 @@ Que je me sois pas fait chier à tout faire marcher pour rien...
 Une fois le HI calculé, il devient possible de catégoriser chaque pixel par la région à laquelle il appartient (GS-SS, GS-SP, HCB), ainsi que par sa valeur de HI.
 On cherche donc à extraire des informations de ces ensembles de pixels ainsi consistués.
 Le nombre total de pixels étant conséquent, et parce que l'établissement des ensembles est compliqué et coûteux (il faut superposer la SST, le HI, et la \gls{chla}), les ensembles de pixels sont chacuns réduits à des histogrammes des variables d'intérêt (SST, \gls{chla}, PFT).
-Cela diminue les étapes de calcul ainsi que la quantité de données à traiter pour obtenir un diagnostique (on passe de \numproduct{~1000;~1000} pixels à \num{~100} intervalles d'histogramme).
+Cela diminue les étapes de calcul ainsi que la quantité de données à traiter pour obtenir un diagnostique (on passe de \numproduct{1000 x 1000} pixels à \num{100} intervalles d'histogramme).
 
 Les histogrammes peuvent être rendus représentatifs sans pour autant utiliser un nombre prohibitif d'intervalles, les données étant elles-mêmes stockées compressées et donc discrétisées. Par exemple pour la température, 450 intervalles permettre de couvrir toutes les valeurs (de \qty{-5}{\dC} à \qty{40}{\dC}), avec une largeur d'intervalle de \qty{0.1}{\dC} égale à l'intervalle de discrétisation des données, lui même équivalent à l'incertitude sur la mesure.
 Les intervalles pour la Chlorophylle et les autres variables biologiques sont pris de largeur logarithmique afin de couvrir les plusieurs ordres de grandeur que peuvent prendre leurs valeurs.
@@ -123,7 +134,20 @@ Les histogrammes présentent également l'avantage de pouvoir être combiné ent
 En effet, tout les histogrammes calculés sont stockés non-normalisés, en nombre de pixel par intervalle donc. Ainsi plusieurs histogrammes peuvent être sommés entre eux avant d'être normalisés pour en extraire une valeur, comme la valeur médiane de la distribution résultant par exemple.
 Ce procédé est notamment utilisé pour calculé des diagnostiques sur des périodes de temps autre que journalières, sans avoir besoin de refaire un calcul impliquant les pixels.
 
-vérification que les histogrammes sont well-behaved pour prendre des valeurs.
-passage en pdf
+Une fois les histogrammes obtenus il est nécessaire de les normaliser afin d'obtenir une densité de probabilité. On prendra soin de considérer les tailles des intervalles dans les calculs.
+On considère un histogramme qui compte \(h_{i}\) points pour le i\ieme intervalle \(\left[x_{i}; x_{i+1} \right]\).
+La largeur des intervalles est donc \(w_{i} = x_{i+1}-x_{i}\). On transforme le nombre de points en probabilité par unité de valeur \(p_{i} = h_{i} / w_{i} \), avant de le normaliser de sorte à obtenir une intégralle égale à 1:
+\begin{equation}
+  f_{i} = \frac{p_{i}}{\sum_{j}{p_{i}*w_{i}}},
+\end{equation}
+pour ainsi obtenir une approximation de la densité de probabilité \(f_{i}\).
+
+On laise scipy faire.
+
 valeurs médianes.
 valeur surplus.
+
+vérification que les histogrammes sont well-behaved pour prendre des valeurs.
+
+\biblio
+\end{document}
