@@ -2,7 +2,10 @@
 
 \usepackage{geometry}
 \usepackage[T1]{fontenc}
-\usepackage{xcharter-otf}
+\usepackage{unicode-math}
+\usepackage{realscripts}
+\setmainfont{XCharter}
+\setmathfont{XCharter-Math.otf}[math-style=upright]
 
 \usepackage[french]{babel}
 \usepackage{csquotes}
@@ -13,7 +16,7 @@
 
 \usepackage{subfiles}
 
-\usepackage[dvipsnames]{xcolor}
+% \usepackage[dvipsnames]{xcolor}
 \usepackage{siunitx}
 \usepackage[depth=4]{bookmark}
 \usepackage{graphicx}
@@ -67,17 +70,50 @@ section=section
 \DefineBibliographyExtras{french}{\restorecommand\mkbibnamefamily}
 \newcommand{\pcite}[1]{\parencite{#1}}
 
+% All citation is hyperlinked
+\DeclareFieldFormat{citehyperref}{%
+  \DeclareFieldAlias{bibhyperref}{noformat}% Avoid nested links
+  \bibhyperref{#1}}
+
+\DeclareFieldFormat{textcitehyperref}{%
+  \DeclareFieldAlias{bibhyperref}{noformat}% Avoid nested links
+  \bibhyperref{%
+    #1%
+    \ifbool{cbx:parens}
+      {\bibcloseparen\global\boolfalse{cbx:parens}}
+      {}}}
+
+\savebibmacro{cite}
+\savebibmacro{textcite}
+
+\renewbibmacro*{cite}{%
+  \printtext[citehyperref]{%
+    \restorebibmacro{cite}%
+    \usebibmacro{cite}}}
+
+\renewbibmacro*{textcite}{%
+  \ifboolexpr{
+    ( not test {\iffieldundef{prenote}} and
+      test {\ifnumequal{\value{citecount}}{1}} )
+    or
+    ( not test {\iffieldundef{postnote}} and
+      test {\ifnumequal{\value{citecount}}{\value{citetotal}}} )
+  }
+    {\DeclareFieldAlias{textcitehyperref}{noformat}}
+    {}%
+  \printtext[textcitehyperref]{%
+    \restorebibmacro{textcite}%
+    \usebibmacro{textcite}}}
+
 \sisetup{mode=text, locale=FR}
 \DeclareSIUnit\mgm{\milli\gram\per\cubic\metre}
 \DeclareSIUnit\dC{\degreeCelsius}
 
 \hypersetup{
-  colorlinks   = true,
+  colorlinks   = false,
+  hidelinks    = true,
   unicode      = true,
   linktocpage  = true,
-  urlcolor     = BlueViolet,
-  linkcolor    = RoyalBlue,
-  citecolor    = RoyalBlue,
 }
 
 \AtEndPreamble{
@@ -105,7 +141,7 @@ section=section
 % Page de garde
 % Résumé
 % Remerciements
-\include{front_matter}
+\include{tex/front_matter}
 
 \printglossary[toctitle=Glossaire]
 

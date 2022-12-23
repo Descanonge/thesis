@@ -9,14 +9,14 @@ BIB_ZOTERO := zotero_export
 BIB_CUSTOM := custom
 BIB_OUTPUT := processed
 BIB_TMP := tmp
-BIB_PARSER := parse_bib.py
+BIB_PARSER := src/parse_bib.py
 
 MAIN := index
 SUBNAMES := intro méthodes res_chl res_pft res_global conclusion
 SUBFILES = $(foreach sn,$(SUBNAMES),tex/$(sn).tex)
 
 AUXDIR_FLAGS := -auxdir="$(BUILDDIR)" -emulate-aux-dir
-LMK_FLAGS := -pdflua -recorder -quiet -logfilewarninglist
+LMK_FLAGS := -pdfxe -recorder -quiet
 
 $(foreach file,ZOTERO CUSTOM,$(eval BIB_$(file) = $(REF)/$(BIB_$(file)).bib))
 $(foreach file,TMP OUTPUT,$(eval BIB_$(file) = $(BUILDDIR)/$(BIB_$(file)).bib))
@@ -40,6 +40,6 @@ $(MAIN): $(MAIN).tex $(SUBFILES) bib
 	latexmk $(LMK_FLAGS) $(AUXDIR_FLAGS) $<
 
 clean:
-	rm -r $(BUILDDIR)
-	rm $(MAIN).fls
-	rm $(foreach sf,$(SUBFILES),$(sf).fls)
+	rm -rf $(BUILDDIR)
+	rm -f $(MAIN).fls
+	rm -f $(foreach sf,$(SUBFILES),$(sf).fls)
