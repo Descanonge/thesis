@@ -58,6 +58,12 @@ section=section
 \setsecnumdepth{subsection}
 \setcounter{tocdepth}{2}
 
+\newcommand{\sectiontoc}[1]{%
+  \phantomsection
+  \addcontentsline{toc}{section}{#1}
+  \section*{#1}
+}
+
 \graphicspath{{resources/}}
 
 \addbibresource[label=refs]{texbuild/processed.bib}
@@ -110,10 +116,9 @@ section=section
 \DeclareSIUnit\dC{\degreeCelsius}
 
 \hypersetup{
-  colorlinks   = false,
-  hidelinks    = true,
-  unicode      = true,
-  linktocpage  = true,
+  hidelinks,
+  unicode = true,
+  linktoc = section,
 }
 
 \AtEndPreamble{
@@ -147,6 +152,7 @@ section=section
 
 % TOC
 \clearpage
+\pdfbookmark[section]{\contentsname}{toc}
 \tableofcontents*
 % \newpage
 % \listoffigures

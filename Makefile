@@ -36,7 +36,7 @@ $(BIB_OUTPUT): $(BIB_ZOTERO) $(BIB_CUSTOM) $(BIB_PARSER)
 $(SUBNAMES):%: tex/%.tex $(MAIN).tex bib
 	latexmk $(LMK_FLAGS) $(AUXDIR_FLAGS) $<
 
-$(MAIN): $(MAIN).tex $(SUBFILES) bib
+$(MAIN): $(MAIN).tex $(SUBFILES) $(BIB_OUTPUT)
 	latexmk $(LMK_FLAGS) $(AUXDIR_FLAGS) $<
 
 clean:
