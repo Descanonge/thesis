@@ -2,10 +2,7 @@
 
 \usepackage{geometry}
 \usepackage[T1]{fontenc}
-\usepackage{unicode-math}
-\usepackage{realscripts}
-\setmainfont{XCharter}
-\setmathfont{XCharter-Math.otf}[math-style=upright]
+\usepackage[otfmath, math-style=upright]{XCharter}
 
 \usepackage[french]{babel}
 \usepackage{csquotes}
@@ -14,7 +11,9 @@
 
 \usepackage{microtype}
 
+\usepackage{xr}
 \usepackage{subfiles}
+\externaldocument[M-]{\subfix{index}}
 
 % \usepackage[dvipsnames]{xcolor}
 \usepackage{siunitx}
@@ -36,27 +35,54 @@ section=section
 
 \usepackage{cleveref}
 
+\ifSubfilesClassLoaded{}{\usepackage{minitoc}}
+
+
 \newcommand\Author{Clément Haëck}
 \newcommand\Email{clement.haeck@locean.ipsl.fr}
 \newcommand\Title{Impact des fronts sur le Phytoplancton dans la région du Gulf-Stream quantifié par imagerie satellitaire}
 \newcommand\Subject{biogeochemistry}
 \newcommand\Keywords{}
 
-\chapterstyle{veelo}
+\chapterstyle{ger}
 \pagestyle{ruled}
 
-% A4 297x210mm
-\settrims{0pt}{0pt}
-\settypeblocksize{197mm}{140mm}{*}
-\setulmargins{4cm}{*}{*}
-\setlrmargins{3cm}{*}{*}
-\setmarginnotes{17pt}{51pt}{\onelineskip}
-\setheadfoot{\onelineskip}{2\onelineskip}
+% A4 297x210mm (global a4paper option)
+\settrims{0pt}{0pt} % no trim needed
+% Fix width/height for comfort
+\settypeblocksize{230mm}{160mm}{*}
+% Upper/Lower margins, fix upper, lower has what's left (enough hopefully)
+\setulmargins{3cm}{*}{*}
+% Left/Right margins, set ratio so that spine is smaller than edge
+\setlrmargins{*}{*}{1.3}
+% Set header/footer size, header taller than baseline for É in sections titles
+\setheadfoot{1.1\onelineskip}{2\onelineskip}
 \setheaderspaces{*}{2\onelineskip}{*}
+% Check and apply layout
 \checkandfixthelayout
 
 \setsecnumdepth{subsection}
 \setcounter{tocdepth}{2}
+\renewcommand{\cftchaptername}{\chaptername~}
+\renewcommand{\cftappendixname}{\appendixname~}
+\ifSubfilesClassLoaded{}{\mtcsetfont{minitoc}{section}{\normalfont\small}}
+
+
+\newcommand{\maketoc}{
+  \pdfbookmark[section]{\contentsname}{toc}
+  \setlength{\baselineskip}{1.03\onelineskip}
+  \tableofcontents*
+  \setlength{\baselineskip}{\onelineskip}
+}
+
+\newcommand{\tocsubfile}{%
+  \ifSubfilesClassLoaded{%
+    \maketoc
+  }{%
+    \minitoc
+  }
+  \newpage
+}
 
 \newcommand{\sectiontoc}[1]{%
   \phantomsection
@@ -68,8 +94,8 @@ section=section
 
 \addbibresource[label=refs]{texbuild/processed.bib}
 \ExecuteBibliographyOptions{
-  hyperref=true, indexing=bib, uniquename=full,
-  sorting=nyt, sortcites=true, pluralothers=true, refsection=chapter,
+  hyperref=true, indexing=bib, uniquename=init, giveninits=true,
+  sorting=nyt, sortcites=true, pluralothers=true,% refsection=chapter,
   url=false, dashed=false, mergedate=false
 }
 % Remove small caps in family names
@@ -132,16 +158,23 @@ section=section
 
 \glsaddall
 \glsdisablehyper
-\makeglossaries
+\ifSubfilesClassLoaded{}{
+  \makeglossaries
+}
 \loadglsentries{gloss}
+
+\newcommand{\articleTitle}{Satellite data reveal earlier and stronger phytoplankton blooms over fronts in the Gulf Stream region}
+\newcommand{\articleCceTitle}{Multi-trophic planktonic responses to fronts in a coastal upwelling ecosystem}
+\newcommand{\articleReviewTitle}{Impact of submesoscale processes on biogeochemical cycles in a changing ocean}
 
 \newcommand{\biblio}{{
     \emergencystretch=1em
-    \printbibliography[heading=subbibintoc]
+    \printbibliography
   }}
 
-
 \begin{document}
+
+\ifSubfilesClassLoaded{}{\dominitoc}
 
 % Page de garde
 % Résumé
@@ -152,9 +185,7 @@ section=section
 
 % TOC
 \clearpage
-\pdfbookmark[section]{\contentsname}{toc}
-\tableofcontents*
-% \newpage
+\maketoc
 % \listoffigures
 % \newpage
 % \listoftables
@@ -164,6 +195,25 @@ section=section
 \subfile{tex/intro}
 \subfile{tex/méthodes}
 \subfile{tex/res_chl}
+\subfile{tex/res_phénologie}
 \subfile{tex/conclusion}
+
+
+\begin{appendices}
+
+\chapter{Article: \articleCceTitle}
+\label[appendix]{ax:article-cce}
+
+\chapter{Article: \articleReviewTitle}
+\label[appendix]{ax:article-review}
+
+\end{appendices}
+
+\emergencystretch=1em
+\chapter*{Bibliographie}
+\addcontentsline{toc}{chapter}{Bibliographie}
+\printbibliography[heading=none]
+
+\backmatter
 
 \end{document}

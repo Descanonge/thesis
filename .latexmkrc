@@ -1,6 +1,7 @@
 $parser = 'python src/parse_log.py "$(pplatex -i texbuild/%A.log)"';
-$success_cmd = $parser;
-$failure_cmd = $parser;
+$pplatex = 'pplatex -i texbuild/%A.log';
+$success_cmd = $pplatex;
+$failure_cmd = $pplatex;
 
 add_cus_dep('glo', 'gls', 0, 'run_makeglossaries');
 add_cus_dep('acn', 'acr', 0, 'run_makeglossaries');
@@ -21,3 +22,6 @@ sub run_makeglossaries {
 push @generated_exts, 'glo', 'gls', 'glg';
 push @generated_exts, 'acn', 'acr', 'alg';
 $clean_ext .= ' %R.ist %R.xdy';
+
+$silence_logfile_warnings = 0;
+$analyze_input_log_always = 0;

@@ -2,42 +2,66 @@
 \begin{document}
 
 \chapter{Méthodes}
-\label{chp:méthodes}
+\label{chp:methodes}
+
+\tocsubfile
 
 \section{Données}
+\label{sec:donnees}
 
 Dans cette section on décrit les données utilisées dans la suite de la thèse, ou qui ont été considérées à un point.
 
 \subsection{SST}
+\label{sec:donnees-sst}
 
 \subsubsection{MODIS}
+\label{sec:donnees-sst-modis}
+
 1km daily
 regriddé 'à la main' avec occsw depuis MODIS L2
 difficile, prend du temps, demande grosse capacité de stockage
 un seul capteur (à moins de faire soi-même un merge, ce qui est encore plus difficile), donc plus de nuages
 
-\subsubsection{GHRSST}
-bien (1km) mais inclue capteur microondes
+montrer quelques images
 
-\subsubsection{ESA CCI SST}
+\subsubsection{GHRSST}
+\label{sec:donnees-sst-ghrsst}
+bien (1km) mais inclue capteur microondes + in-situ
+
++ Chl pas dispo à 1km
+(cf \cref{sec:donnees-chl})
+
+\subsubsection{Réanalyses}
+\label{sec:donnees-sst-reanalyses}
+
+Montrer décalage
+
+\subsubsection{ESA CCI}
+\label{sec:donnees-sst-esacci}
+
 4km, seulement capteurs IR.
 interpolation L4.
 L3 disponibles mais que un capteur à la fois.
 
 grille différente que celle de la chlorophylle.
+explication regrillage (simple interpolation 2D)
 
 \subsection{Chlorophylle}
+\label{sec:donnees-chl}
 
 Globcolour processor
 distribué par ESA/CCI
 
+4km, L4 (capteurs merged, pas d'interpolation spatio-temp)
+
+à 1km c'est difficile, seulement quand on regride MODIS
+
 \subsection{Bathymétrie}
+\label{sec:donnees-bathymetrie}
 
-jsp.
-
-\subsection{FSLE}
 
 \section{Délimitations des sous-régions}
+\label{sec:delimitations-regions}
 
 Zone d'étude hétérogène, notamment en biologie.
 Il apparait 3 régimes différents discuté en intro.
@@ -88,7 +112,10 @@ Enfin ce seuil en température est utilisé pour séparer la région en deux.
 Enlever les côtes pour éviter régime cotier.
 
 \section{Heterogeneity Index}
-\subsection{Définition}
+\label{sec:HI}
+
+\subsection{Définition et implémentation}
+\label{sec:HI-definition}
 
 On a adapté un outil \parencite{liu_2016}.
 Composantes.
@@ -105,22 +132,26 @@ Coefficients de normalisation.
 \end{figure}
 
 \subsection{Sensibilité aux paramètres}
+\label{sec:HI-sensibilite}
 
 Nécessité d'évaluer les incertitudes sur la méthode.
 Pour voir si résultat significatif.
 Taille de la fenêtre glissante. Coefs de normalisation.
 
-\subsection{Exemples de fronts}
-
-Sélectionner des images ou ça marche (ou pas).
-Préférentiellement avec couverture MODIS mais pas obligé.
-
 \subsection{Influence de la résolution}
+\label{sec:HI-influence-resolution}
 
 Au moins un petit truc sur les données MODIS.
 Que je me sois pas fait chier à tout faire marcher pour rien...
 
+\subsection{Exemples de fronts}
+\label{sec:HI-exemples}
+
+Sélectionner des images ou ça marche (ou pas).
+Préférentiellement avec couverture MODIS mais pas obligé.
+
 \section{Extraction des résultats}
+\label{sec:extraction-res}
 
 Une fois le HI calculé, il devient possible de catégoriser chaque pixel par la région à laquelle il appartient (GS-SS, GS-SP, HCB), ainsi que par sa valeur de HI.
 On cherche donc à extraire des informations de ces ensembles de pixels ainsi consistués.
@@ -150,6 +181,7 @@ valeur surplus.
 vérification que les histogrammes sont well-behaved pour prendre des valeurs.
 
 \sectiontoc{Références informatiques}
+\label{sec:ref-info}
 
 J'ai été amené à utiliser durant ma thèse une myriade d'outils informatiques sans lequels ce travail n'aurait pu aboutir, ou en tout cas avec assurément beaucoup plus de difficulté.
 Il me semble important d'en citer au moins une partie ici.
@@ -162,7 +194,4 @@ pour les plots: matplotlib, cartopy, cmocean, Paul Tol,
 
 plus perso: Doom Emacas, zotero
 
-
-
-\biblio
 \end{document}

@@ -12,11 +12,11 @@ BIB_TMP := tmp
 BIB_PARSER := src/parse_bib.py
 
 MAIN := index
-SUBNAMES := intro méthodes res_chl res_pft res_global conclusion
+SUBNAMES := intro méthodes res_chl res_phénologie conclusion
 SUBFILES = $(foreach sn,$(SUBNAMES),tex/$(sn).tex)
 
 AUXDIR_FLAGS := -auxdir="$(BUILDDIR)" -emulate-aux-dir
-LMK_FLAGS := -pdfxe -recorder -quiet
+LMK_FLAGS := -lualatex -recorder -quiet
 
 $(foreach file,ZOTERO CUSTOM,$(eval BIB_$(file) = $(REF)/$(BIB_$(file)).bib))
 $(foreach file,TMP OUTPUT,$(eval BIB_$(file) = $(BUILDDIR)/$(BIB_$(file)).bib))
@@ -32,11 +32,12 @@ $(BIB_OUTPUT): $(BIB_ZOTERO) $(BIB_CUSTOM) $(BIB_PARSER)
 	cat $(BIB_ZOTERO) $(BIB_CUSTOM) > $(BIB_TMP)
 	python $(BIB_PARSER) $(BIB_TMP) $(BIB_OUTPUT)
 
-
-$(SUBNAMES):%: tex/%.tex $(MAIN).tex bib
+$(SUBNAMES):%: tex/%.tex $(MAIN).tex $(BIB_OUTPUT)
+	mkdir -p $(BUILDDIR)/tex
 	latexmk $(LMK_FLAGS) $(AUXDIR_FLAGS) $<
 
 $(MAIN): $(MAIN).tex $(SUBFILES) $(BIB_OUTPUT)
+	mkdir -p $(BUILDDIR)/tex
 	latexmk $(LMK_FLAGS) $(AUXDIR_FLAGS) $<
 
 clean:

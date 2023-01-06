@@ -35,4 +35,4 @@ for t, errs in errs_by_type.items():
         print(f"{t} {filename}{line}: {err}")
 
 if n_found != n_items:
-    print(f'Parsing missed {n_items-n_found} errors')
+    print(f'Parsing missed {n_items-n_found} items')

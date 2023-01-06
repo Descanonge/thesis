@@ -2,8 +2,11 @@
 \begin{document}
 
 \chapter{Introduction}
+\label{chp:introduction}
 
-\section{Objectifs et plan de la thèse}
+\tocsubfile
+
+\section{Préambule}
 
 Quelques pages d'introduction générale pour donner les objectifs.
 
@@ -39,16 +42,16 @@ Objectifs:
   \item
 \end{itemize}
 
-\cref{chp:méthodes}: Description des méthodes utilisées, notamment pour repérer les fronts.
-\cref{chp:res-chl}: Chloro dans la zone du Gulf Stream.
-\cref{chp:res-pft}: dans la même zone, mais pour les groupes de phyto.
-\cref{chp:global}: Étude des fronts à l'échelle globale.
-\cref{chp:conclusion}: Conclusion générale.
-Dans le reste de ce premier chapitre: introduction aux problèmatiques que l'on va rencontrer, aux concepts qu'on va utiliser, et aux méthodes pré-existantes.
 
-\section{Le phytoplancton dans le système terre}
+\section{État de l'art}
+\label{sec:etat-de-lart}
 
-\subsection{Définition générale}
+\subsection{Le phytoplancton dans le système terre}
+\label{sec:phyto-ds-sys-terre}
+
+\subsubsection{Définition générale}
+\label{sec:phyto-def-gen}
+
 définition: plancton = organisme porté par les courants.
 Phyto: ils pratiquent la photosynthèse, ils transforment le carbone dissous dans l'eau en matière organique.
 Grande variété: de taille et de type et d'espèces.
@@ -68,14 +71,15 @@ Cette dualité des sources de croissance (lumière en surface, nutriments en pro
 Or on considère généralement les courants océaniques à l'ordre 1 comme strictement horizontaux.
 Les petites et moyennes échelles ((sub-)mésoéchelles) présentent des moyens de créer des échanges verticaux (comme on le verra plus tard).
 
-\subsection{Télédétection}
+\subsubsection{Télédétection}
+\label{sec:teledetection}
 
 Le phytoplancton est complexe à étudier.
 Une observation synoptique est seulement possible par satellite.
 Ces obs se font sur la couleur de l'océan. (quelques mots sur le principe, depuis quand ça existe, révélation des fines échelles dans les 1ères images).
 Obs de la couleur présente des problèmes. Le lien avec le phytoplancton est indirect et imparfait (utilisation de la Chl-a comme proxy de biomasse). Limitation importante des observations par la couverture nuageuse. Et cela ne scanne que la composition de la surface (combien de m en vrai ?), pas accès à toute la colonne d'eau.
 
-Expliquer la méthode pour obtenir Chl-a depuis satellite. Et méthode de Roy également.
+Expliquer la méthode pour obtenir Chl-a depuis satellite. Et méthode de Roy également (rapidement).
 
 C'est pour cela que les observations in-situ toujours très utiles (pour combler les trous, ou compléter les obs sat). Vision de toute la colonne d'eau. Associé à une obs de la densité (temp + salinité qui n'est pas dispo en sat. à petite échelle).
 Accès à la composition du phytoplancton (et zoo) grâce à différents outils (cytomètre, zooscan, HPLC, -omiques).
@@ -89,10 +93,10 @@ On a pas de paramétrisation des processus bio. Est-ce que c'est seulement possi
 Les modèles climatiques sont, du coup, très incertains en ce qui concerne la bio.
 Grosses barres d'erreurs dans les projections pour le prochain siècle.
 
-
 Difficile de séparer les trois: processus dynamiques, mélange horizontal, et biologie, car ils ont les même temps caractéristiques.
 
-\section{Interactions biophysiques}
+\subsection{Interactions biophysiques}
+\label{sec:interactions-biophys}
 
 Définition par l'échelle spatiale (0.1-10km).
 
@@ -104,7 +108,8 @@ Importance de la SMS:
 3) Mal représenté dans les modèles climatiques, on doit mieux comprendre (et quantifier pour savoir à quel point c'est important)
 
 
-\subsection{Mélange horizontal}
+\subsubsection{Mélange horizontal}
+\label{sec:melange-horizontal}
 
 Une partie des fines échelles observées correspondent à l'action de l'advection par les courants de méso-échelle. L'action passive du mélange horizontal fait apparaître de fins filaments.
 Cela permet le mélange de communauté, car rapproche spatialement des parcelles d'eau de différentes origines, avec des caractéristiques physiques et des historique biologiques propres.
@@ -112,7 +117,8 @@ Cela permet le mélange de communauté, car rapproche spatialement des parcelles
 Approche lagrangienne très utile dans l'étude du phytoplancton, et dans son observation (méthode de sampling Lagrangiennes, ref ).
 
 
-\subsection{Upwelling de nutriments par les circulations agéostrophiques}
+\subsubsection{Upwelling de nutriments par les circulations agéostrophiques}
+\label{sec:upwelling-nutriments}
 
 Comme dit plus haut, les échanges verticaux sont important pour la bio.
 Or aux petites échelles on voit apparaître des vitesses verticales de grande magnitude.
@@ -131,11 +137,12 @@ aspect intermittent (local, petit spot)
 winners and losers
 
 
-\subsection{Modification de la phénologie du bloom}
+\subsubsection{Modification de la phénologie du bloom}
+\label{sec:modif-phenologie}
 
 Les gradients de densité existant (créés par mélange par courants méso ou forçages atmos) sont des réservoirs d'énergie potentielle. À un front les isopycnes sont penchées et des circulations sub-méso se créent et transforment l'énergie potentielle en énergie cinétique (tourbillons), ce faisant ramenant les isopycnes à l'horizontale.
 Ces tourbillons formés par l'instabilité de Mixed-Layer (?) s'étendent sur la hauteur de la ML. Ce sont les Mixed-Layer Eddies.
-À travers ces instabilités la sub-mesoéchelle contribue fortement à re-stratifier la couche de surface, et réduire le mélange.
+À travers ces instabilités la sub-mesoéchelle contribue fortement à re-stratifier la couche  de surface, et réduire le mélange.
 C'est un processus local et on s'attend donc à un soulèvement local de la couche de mélange au niveau des fronts.
 
 
@@ -146,11 +153,13 @@ On s'attend à un départ du bloom d'abord dans les fronts.
 exemples de détection précédentes (mahadevan 2020).
 
 
-\section{Région d'étude: Extension du Gulf Stream}
+\subsection{Région d'étude: Extension du Gulf Stream}
+\label{sec:region-detude}
 
 Notre zone d'étude: 15°N-55°N, 82°W-40°W
 
-\subsection{La physique}
+\subsubsection{La physique}
+\label{sec:gs-physique}
 
 Gyre subtropicale Atlantique Nord.
 
@@ -162,7 +171,8 @@ Au nord du jet, courant retour (slope current) avec notamment un jet sur le shel
 Entre le Gulf Stream North Wall et le shelf: slope seas. Très froid, plutôt fraîche (plus salé que sur le shelf néanmoins).
 Ce courant froid plonge. Fait partie de la circulation d'overturning de l'atlantique.
 
-\subsection{La biologie}
+\subsubsection{La biologie}
+\label{sec:gs-biologie}
 
 Gyre très pauvre en nutriment et productivité faible.
 Pourquoi ?
@@ -174,7 +184,8 @@ Eaux au nord du GS très productives.
 Important bloom (plus de détail, ref sur la phénologie, )
 
 
-\section{Détection des fronts sur images satellites}
+\subsection{Détection des fronts sur images satellites}
+\label{sec:detection-fronts}
 
 On se concentre sur la SST, mais on peut utiliser d'autres traceurs (Chloro par ex).
 
@@ -188,7 +199,8 @@ méthodes utilisant variance, entropie
 Quelques mots sur le suivi des fronts + reconstruction de fronts 'linéaire'
 qu'on utilise pas on reste en 'vue pixelisée'
 
-\subsection{Vers des fronts de densité}
+\subsubsection{Vers des fronts de densité}
+
 
 Lien entre densité et température.
 La salinité intervient aussi. La salinité par satellite est très basse résolution (SMOS) donc on a pas vraiment accès.
@@ -201,6 +213,16 @@ Dans la région Nord-Atlantique des transects sont réalisé régulièrement par
 Des résultats suggèrent que la salinité ne joue pas beaucoup (Flagg 2006, succinct).
 
 \section{Motivation et objectifs}
+\label{sec:problematique}
 
-\biblio
+\section{Plan de thèse}
+\label{sec:plan-de-these}
+
+\begin{itemize}
+  \item \cref{M-chp:methodes}
+  \item \cref{M-chp:res-chl}
+  \item \cref{M-chp:res-phenologie}
+  \item \cref{M-chp:conclusion}
+\end{itemize}
+
 \end{document}
