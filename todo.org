@@ -1,0 +1,26 @@
+#+title: Todo
+
+
+* jeu de données
+pluriel ?
+
+* TODO regrid en fr ?
+
+* to edit
+mot / phrases à améliorer entre chevrons
+#+begin_src
+<\w*>
+#+end_src
+
+* Spelling
+
+* Repeated words
+#+begin_src
+\<\(\w+\)\>\s-+\<\1\>
+\<\(\w+\)\>[[:space:]]+\<\1\>
+#+end_src
+* Double spaces
+#+begin_src
+\>\s-\s+
+\>\s-\{2,\}
+#+end_src* Administratif :admin:

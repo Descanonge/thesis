@@ -9,42 +9,106 @@
 \section{Données}
 \label{sec:donnees}
 
-Dans cette section on décrit les données utilisées dans la suite de la thèse, ou qui ont été considérées à un point.
+Dans cette section sont décrit les jeux de données utilisés pour ce projet.
+Le choix de ces données s'est avéré être une question importante et difficile dès le départ du projet.
+Nous savions qu'il allait être nécessaire de combiner plusieurs jeux de données (\gls{SST} avec \gls{chla}, puis avec des données de composition de la communauté de phytoplancton).
+Cela a donc informé le choix des données, ainsi que la création des outils nécessaires à la gestion de plusieurs sets de données.
+
+Plusieurs options ont été considérées, notamment pour la \gls{SST}.
+Elles sont reportées ci-dessous, même si elles ne sont pas utilisées pour le reste des résultats.
 
 \subsection{SST}
 \label{sec:donnees-sst}
 
-\subsubsection{MODIS}
+petite explication des difficultés lié au choix sst ?
+bonne rés, exactitude des fronts ?
+
+\subsubsection{MODIS-1km}
 \label{sec:donnees-sst-modis}
 
-1km daily
-regriddé 'à la main' avec occsw depuis MODIS L2
-difficile, prend du temps, demande grosse capacité de stockage
-un seul capteur (à moins de faire soi-même un merge, ce qui est encore plus difficile), donc plus de nuages
+Un des premiers jeu de données \gls{SST} à considérer est celui utilisé par \textcite{liu_2016}, dont l'étude consistait également à détecter des fronts de \gls{SST} et les colocaliser aux données de \gls{chla}.
+Ces variables étant rarement distribuées sur des grilles à des résolutions kilométriques, il apparaît comme nécessaire de \enquote{re-grider} des produits L2 (données d'un capteur converties en variables géophysiques, disposées à la résolution de capture).
 
-montrer quelques images
+Pour le jeu de données intitulé \verb|MODIS-1km| dans la suite, il s'agit des données provenant du capteur \gls{MODIS}, à bord du satellite Aqua, développées par \textcite{sst_modis, kilpatrick_2015}.
+Les données sont téléchargées depuis le \href{https://cmr.earthdata.nasa.gov/search/}{Common Metadata Repository (CMR)}, en sélectionnant les swaths intersectant notre région d'étude, collectés de jour, et pour les courtes longueurs d'onde infrarouges (\qty{11}{\um}).
+Pour ensuite regridder les données sur une grille kilométrique globale, j'ai repris les outils utilisés par \textcite{liu_2016}, à savoir les programmes présents dans le paquet de l'\href{https://oceandata.sci.gsfc.nasa.gov/ocssw}{OceanColor Science Software (OCSSW)}, version v7.5, qui est maintenu par l'Ocean Biology Processing Group et notamment distribué à travers l'outil \href{https://seadas.gsfc.nasa.gov/}{SeaDAS}.
+Les swaths, maintenant tous sur la même grille spatiale peuvent être moyennés par date.
 
-\subsubsection{GHRSST}
+Cela permet donc d'obtenir des données à la limite de la résolution des capteurs, mais présente un certain nombre de désavantages majeurs.
+C'est tout d'abord un travail important à réaliser: d'abord de téléchargement les fichiers L2 étant particulièrement lourds et nombreux (jusqu'à une dizaine pour une journée); ensuite de regrillage, qui à une résolution kilométrique demande une certaine puissance de calcul.
+De plus, toutes les étapes décrites jusqu'ici ne concernent qu'un seul capteur.
+Des étapes et calculs additionnels seraient nécessaires pour y combiner les données d'autres capteurs, ce qui pose des problèmes supplémentaires et se ferait non sans difficultés.
+Même pour un capteur identique (\gls{MODIS} à bord de Terra par exemple), il devient nécessaire de considérer des différences de calibrations, ainsi que de possibles artefacts lorsque l'on superpose plusieurs swaths (qui d'ailleurs ont été largement ignorés pour agréger les swaths sur une seule journée\dots).
+
+Face à ces difficultés, nous avons donc décidé dans un premier temps d'en rester à un seul capteur malgré la couverture spatiale réduite, notamment à cause des nuages.
+Il est également à noter qu'à ce niveau, peu d'actions ont été prises pour disqualifier les pixels nuageux.
+Il en résulte des pixels aux valeurs visiblement erronées mais qui n'ont pas été masqués comme nuageux.
+Cela se manifeste par exemple comme du bruit autour de nuages.
+Il est difficile de les disqualifier correctement sans un bon algorithme de détection de nuage, ce qui nécessite encore un large travail.
+Nous contournons le problème d'une manière similaire à celle de \textcite{liu_2016} en ne travaillant que sur des fenêtres de \qtyproduct{100 x 100}{\km} avec une faible couverture nuageuse (\textless\qty{70}{\percent}), ce qui élimine une partie de ces cas problématiques.
+
+TODO: avantage modis il y a l'OC aussi !
+
+Il est néanmoins possible de trouver d'autres jeux de données permettant notre étude et nécessitant moins de travail (et donc de possible erreurs), ces dernières années ayant vu apparaître des données distribuées à des résolutions élevées comme c'est le cas dans le paragraphe suivant.
+
+\subsubsection{MUR}
 \label{sec:donnees-sst-ghrsst}
-bien (1km) mais inclue capteur microondes + in-situ
+
+Le produit suivant, désigné ici \gls{MUR} est dévelopé par le \gls{GHRSST} au JPL Physical Oceanography DAAC \parencite{sst_mur}.
+Il présente les avantages d'être distribué à une résolution kilométrique et sans nuages grâce à une méthode d'interpolation par vaguelettes \parencite{chin_2017}.
+Il intègre de nombreuses sources provenant de plusieurs capteurs infrarouges et micro-ondes, ainsi que de mesures in-situ.
+La grande couverture spatiale de ce produit se fait donc par l'utilisation de mesures non-contraintes par la couverture nuageuse (c'est-à-dire micro-ondes et in-situ), mais qui présente une résolution bien plus faible.
+Le champ de \gls{SST} se retrouve donc lissé à la fois par l'interpolation et par l'inclusion de ces mesures.
+
+L'utilisation du produit suivant cherche à palier à ce problème.
+
+\subsubsection{ESA SST CCI and C3S}
+\label{sec:donnees-sst-esacci}
+
+Ce produit est distribué conjointement par l'\gls{ESA} \gls{SST} \gls{CCI} et le \gls{C3S}.
+Il agglomère les mesures de tous les capteurs infrarouges disponibles depuis 1981, ce qui comprend 11 \gls{AVHRR} à bord des satellites \gls{MetOp}[-A] et \gls{NOAA} (entre les itérations 6 et 19) et trois \gls{ATSR} à bord de \gls{ERS} 1 et 2, et Envisat.
+Cela donne au moins deux capteurs en fonctionnement simultané, et au moins trois depuis 1992 .
+Outre la bonne couverture obtenue, l'uniformité des capteurs permet d'obtenir un jeu de données stable dans le temps, pouvant servir à la détection de tendance climatiques \parencite{marchant_2019}.
+
+Les données sont distribuées à différents niveaux:
+\begin{itemize}
+  \item L2P mono-capteur pré-traité,
+  \item L3U mono-capteur grille régulière,
+  \item L3C multi-capteur (regroupé par famille d'instrument),
+  \item L4 multi-capteur analysé.
+\end{itemize}
+La grille utilisée a une résolution de \qty{0.05}{\degree} en latitude et longitude (\(\sim\qty{4}{\km}\)).
+
+Le produit L2P peut être utilisé de la même manière que pour \cref{sec:donnees-sst-modis} afin d'obtenir une résolution la plus haute possible, mais avec l'avantage de disposer de données uniformes sur un grand nombre de capteurs.
+Il est à noter que les outils à utiliser pour regriller pourrait ne pas directement fonctionner sur ces données.
+
+Les produits L3U et L3C peuvent être utilisés dans l'étude de structures fines et où la présence de nuages n'est pas <incompatible>.
+
+Enfin, le produit L4 regroupe l'ensemble des capteurs en utilisant le schéma d'intégration variationnelle \gls{NEMOVAR}, intégré dans le système \gls{OSTIA}.
+Ce produit donne ainsi un champ de \gls{SST} sans nuages, estimé par une combinaison des observations satellites et de la prévision d'un modèle numèrique d'un jour sur l'autre.
+L'absence de couverture nuageuse et la simplicité d'usage se fait au détriment du lissage inévitable des structures les plus fines.
+
+L'estimation du lissage est compliqué (dépend du std de la solution à J-1).
+On peut imaginer que moins de fronts sur zone nuageuse, ou en tout cas moins exact (cf réanalyses).
+Donc dans la suite, on prend nos résultats que si Chl clear sky.
+
+grille différente que celle de la chlorophylle.
+explication regrillage (simple interpolation 2D)
+
+montrer comparaison (même image plusieurs datasets)
 
 + Chl pas dispo à 1km
 (cf \cref{sec:donnees-chl})
+
+Sauf indication contraite, c'est le produit L4 que nous utiliserons dans toute la suite de cette thèse.
+Il permet d'accéder à des données \gls{SST} simplement, avec une résolution <améliorable> mais convenable, et stable sur une longue durée (plusieurs décennies).
+
+aieaieouie
 
 \subsubsection{Réanalyses}
 \label{sec:donnees-sst-reanalyses}
 
 Montrer décalage
-
-\subsubsection{ESA CCI}
-\label{sec:donnees-sst-esacci}
-
-4km, seulement capteurs IR.
-interpolation L4.
-L3 disponibles mais que un capteur à la fois.
-
-grille différente que celle de la chlorophylle.
-explication regrillage (simple interpolation 2D)
 
 \subsection{Chlorophylle}
 \label{sec:donnees-chl}
@@ -54,7 +118,10 @@ distribué par ESA/CCI
 
 4km, L4 (capteurs merged, pas d'interpolation spatio-temp)
 
-à 1km c'est difficile, seulement quand on regride MODIS
+à 1km c'est difficile à trouver, seulement quand on regride MODIS
+dataset: \parencite{chl_modis}
+Même processing que pour 4km normalement
+
 
 \subsection{Bathymétrie}
 \label{sec:donnees-bathymetrie}
@@ -138,12 +205,6 @@ Nécessité d'évaluer les incertitudes sur la méthode.
 Pour voir si résultat significatif.
 Taille de la fenêtre glissante. Coefs de normalisation.
 
-\subsection{Influence de la résolution}
-\label{sec:HI-influence-resolution}
-
-Au moins un petit truc sur les données MODIS.
-Que je me sois pas fait chier à tout faire marcher pour rien...
-
 \subsection{Exemples de fronts}
 \label{sec:HI-exemples}
 
@@ -193,5 +254,11 @@ les histogrammes: Xhistogram, dask-histogram, boost-histogram.
 pour les plots: matplotlib, cartopy, cmocean, Paul Tol,
 
 plus perso: Doom Emacas, zotero
+
+\ifSubfilesClassLoaded{
+  \emergencystretch=1em
+  \sectiontoc{Bibliographie}
+  \printbibliography[heading=none]
+}{}
 
 \end{document}

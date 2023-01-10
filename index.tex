@@ -1,4 +1,4 @@
-\documentclass[french, a4paper, 12pt, twoside, openright]{memoir}
+\documentclass[french, a4paper, 12pt, twoside, openright, draft]{memoir}
 
 \usepackage{geometry}
 \usepackage[T1]{fontenc}
@@ -22,16 +22,14 @@
 \usepackage{listings}
 \usepackage{hyperref}
 
-\let\printglossary\relax
-\let\theglossary\relax
-\let\endtheglossary\relax
+% \let\printglossary\relax
+% \let\theglossary\relax
+% \let\endtheglossary\relax
 \usepackage[
-xindy,
-nogroupskip,
-nonumberlist,
-toc,
-section=section
-]{glossaries}
+xindy, nogroupskip, nonumberlist,
+shortcuts, toc, section=section
+]{glossaries-extra}
+\setabbreviationstyle[acronym]{short-nolong}
 
 \usepackage{cleveref}
 
@@ -77,6 +75,8 @@ section=section
 
 \newcommand{\tocsubfile}{%
   \ifSubfilesClassLoaded{%
+    \printglossary[toctitle=Glossaire]
+    \clearpage
     \maketoc
   }{%
     \minitoc
@@ -95,7 +95,7 @@ section=section
 \addbibresource[label=refs]{texbuild/processed.bib}
 \ExecuteBibliographyOptions{
   hyperref=true, indexing=bib, uniquename=init, giveninits=true,
-  sorting=nyt, sortcites=true, pluralothers=true,% refsection=chapter,
+  sorting=nyt, sortcites=false, pluralothers=true,% refsection=chapter,
   url=false, dashed=false, mergedate=false
 }
 % Remove small caps in family names
@@ -143,6 +143,7 @@ section=section
 
 \hypersetup{
   hidelinks,
+  draft = false,
   unicode = true,
   linktoc = section,
 }
@@ -157,10 +158,7 @@ section=section
 }
 
 \glsaddall
-\glsdisablehyper
-\ifSubfilesClassLoaded{}{
-  \makeglossaries
-}
+\makeglossaries
 \loadglsentries{gloss}
 
 \newcommand{\articleTitle}{Satellite data reveal earlier and stronger phytoplankton blooms over fronts in the Gulf Stream region}
