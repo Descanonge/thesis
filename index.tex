@@ -22,14 +22,44 @@
 \usepackage{listings}
 \usepackage{hyperref}
 
-% \let\printglossary\relax
-% \let\theglossary\relax
-% \let\endtheglossary\relax
 \usepackage[
-xindy, nogroupskip, nonumberlist,
-shortcuts, toc, section=section
+xindy, shortcuts=abbr,
+nostyles, nonumberlist,
+toc, section=section,
 ]{glossaries-extra}
+\usepackage{glossary-long}
+\usepackage{glossary-tree} % needed for \setglswidth
 \setabbreviationstyle[acronym]{short-nolong}
+\setglossarystyle{long}
+
+\makeatletter
+\newcommand\setglswidth{
+  \glsfindwidesttoplevelname
+  \newlength{\gls@widest}
+  \settowidth{\gls@widest}{\glstreenamefmt{\@glswidestname\space}}
+  \multiply\gls@widest by -1%
+  \setlength{\glsdescwidth}{\textwidth}
+  \addtolength{\glsdescwidth}{\gls@widest}
+  \addtolength{\glsdescwidth}{-21pt} % We are overfull by 20.5pt otherwise, idk why
+  \message{glsdescwidth: \the\glsdescwidth\newline}
+}
+
+% Math symbols
+\newcommand{\am}{%
+  \@ifstar
+    \amStar%
+    \amNoStar%
+}
+\newcommand\amNoStar[1]{\glssymbol*{#1}}
+\newcommand\amStar[1]{\glssymbol*{#1}}
+
+\newcommand\moy[1]{\left[ #1 \right]}
+\newcommand\med[1]{\overline{#1}}
+\newcommand\tot{\text{total}}
+\newcommand\frt{\text{front}}
+\newcommand\bkg{\text{background}}
+
+\makeatother
 
 \usepackage{cleveref}
 
@@ -55,7 +85,7 @@ shortcuts, toc, section=section
 \setlrmargins{*}{*}{1.3}
 % Set header/footer size, header taller than baseline for É in sections titles
 \setheadfoot{1.1\onelineskip}{2\onelineskip}
-\setheaderspaces{*}{2\onelineskip}{*}
+\setheaderspaces{*}{\onelineskip}{*}
 % Check and apply layout
 \checkandfixthelayout
 
@@ -75,6 +105,8 @@ shortcuts, toc, section=section
 
 \newcommand{\tocsubfile}{%
   \ifSubfilesClassLoaded{%
+
+    \setglswidth
     \printglossary[toctitle=Glossaire]
     \clearpage
     \maketoc
@@ -90,7 +122,7 @@ shortcuts, toc, section=section
   \section*{#1}
 }
 
-\graphicspath{{resources/}}
+\graphicspath{{resources}}
 
 \addbibresource[label=refs]{texbuild/processed.bib}
 \ExecuteBibliographyOptions{
@@ -125,11 +157,11 @@ shortcuts, toc, section=section
 
 \renewbibmacro*{textcite}{%
   \ifboolexpr{
-    ( not test {\iffieldundef{prenote}} and
-      test {\ifnumequal{\value{citecount}}{1}} )
+    (not test {\iffieldundef{prenote}} and
+      test {\ifnumequal{\value{citecount}}{1}})
     or
-    ( not test {\iffieldundef{postnote}} and
-      test {\ifnumequal{\value{citecount}}{\value{citetotal}}} )
+    (not test {\iffieldundef{postnote}} and
+      test {\ifnumequal{\value{citecount}}{\value{citetotal}}})
   }
     {\DeclareFieldAlias{textcitehyperref}{noformat}}
     {}%

@@ -1,6 +1,8 @@
 #+title: Todo
 
 
+* je ou nous ?
+
 * jeu de données
 pluriel ?
 
@@ -24,3 +26,7 @@ mot / phrases à améliorer entre chevrons
 \>\s-\s+
 \>\s-\{2,\}
 #+end_src* Administratif :admin:
+
+#+begin_src
+ilegfgnfn ine itrl
+#+end_src

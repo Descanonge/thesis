@@ -1,4 +1,5 @@
 \documentclass[index]{subfiles}
+% chktex-file 26
 \begin{document}
 
 \chapter{Méthodes}
@@ -11,10 +12,10 @@
 
 Dans cette section sont décrit les jeux de données utilisés pour ce projet.
 Le choix de ces données s'est avéré être une question importante et difficile dès le départ du projet.
-Nous savions qu'il allait être nécessaire de combiner plusieurs jeux de données (\gls{SST} avec \gls{chla}, puis avec des données de composition de la communauté de phytoplancton).
+Nous savions qu'il allait être nécessaire de combiner plusieurs jeux de données (\ab{SST} avec \ab{chl}, puis avec des données de composition de la communauté de phytoplancton).
 Cela a donc informé le choix des données, ainsi que la création des outils nécessaires à la gestion de plusieurs sets de données.
 
-Plusieurs options ont été considérées, notamment pour la \gls{SST}.
+Plusieurs options ont été considérées, notamment pour la \ab{SST}.
 Elles sont reportées ci-dessous, même si elles ne sont pas utilisées pour le reste des résultats.
 
 \subsection{SST}
@@ -26,19 +27,19 @@ bonne rés, exactitude des fronts ?
 \subsubsection{MODIS-1km}
 \label{sec:donnees-sst-modis}
 
-Un des premiers jeu de données \gls{SST} à considérer est celui utilisé par \textcite{liu_2016}, dont l'étude consistait également à détecter des fronts de \gls{SST} et les colocaliser aux données de \gls{chla}.
+Un des premiers jeux de données \ab{SST} à considérer est celui utilisé par \textcite{liu_2016}, dont l'étude consistait également à détecter des fronts de \ab{SST} et les colocaliser aux données de \ab{chl}.
 Ces variables étant rarement distribuées sur des grilles à des résolutions kilométriques, il apparaît comme nécessaire de \enquote{re-grider} des produits L2 (données d'un capteur converties en variables géophysiques, disposées à la résolution de capture).
 
-Pour le jeu de données intitulé \verb|MODIS-1km| dans la suite, il s'agit des données provenant du capteur \gls{MODIS}, à bord du satellite Aqua, développées par \textcite{sst_modis, kilpatrick_2015}.
-Les données sont téléchargées depuis le \href{https://cmr.earthdata.nasa.gov/search/}{Common Metadata Repository (CMR)}, en sélectionnant les swaths intersectant notre région d'étude, collectés de jour, et pour les courtes longueurs d'onde infrarouges (\qty{11}{\um}).
-Pour ensuite regridder les données sur une grille kilométrique globale, j'ai repris les outils utilisés par \textcite{liu_2016}, à savoir les programmes présents dans le paquet de l'\href{https://oceandata.sci.gsfc.nasa.gov/ocssw}{OceanColor Science Software (OCSSW)}, version v7.5, qui est maintenu par l'Ocean Biology Processing Group et notamment distribué à travers l'outil \href{https://seadas.gsfc.nasa.gov/}{SeaDAS}.
+Pour le jeu de données intitulé \verb|MODIS-1km| dans la suite, il s'agit des données provenant du capteur \ab{MODIS}, à bord du satellite Aqua \textcite{kilpatrick_2015}.
+Les données sont téléchargées depuis le \href{https://cmr.earthdata.nasa.gov/search/}{Common Metadata Repository (CMR)} \parencite{sst_modis}, en sélectionnant les swaths intersectant notre région d'étude, collectés de jour, et pour les courtes longueurs d'onde infrarouges (\qty{11}{\um}).
+Pour ensuite regridder les données sur une grille kilométrique globale, j'ai repris les outils utilisés par \textcite{liu_2016}, à savoir les programmes présents dans le paquet de l'\href{https://oceandata.sci.gsfc.nasa.gov/ocssw}{\ab{OCSSW}}, version \verb|v7.5|, qui est maintenu par l'Ocean Biology Processing Group et notamment distribué à travers l'outil \href{https://seadas.gsfc.nasa.gov/}{SeaDAS}.
 Les swaths, maintenant tous sur la même grille spatiale peuvent être moyennés par date.
 
 Cela permet donc d'obtenir des données à la limite de la résolution des capteurs, mais présente un certain nombre de désavantages majeurs.
 C'est tout d'abord un travail important à réaliser: d'abord de téléchargement les fichiers L2 étant particulièrement lourds et nombreux (jusqu'à une dizaine pour une journée); ensuite de regrillage, qui à une résolution kilométrique demande une certaine puissance de calcul.
 De plus, toutes les étapes décrites jusqu'ici ne concernent qu'un seul capteur.
 Des étapes et calculs additionnels seraient nécessaires pour y combiner les données d'autres capteurs, ce qui pose des problèmes supplémentaires et se ferait non sans difficultés.
-Même pour un capteur identique (\gls{MODIS} à bord de Terra par exemple), il devient nécessaire de considérer des différences de calibrations, ainsi que de possibles artefacts lorsque l'on superpose plusieurs swaths (qui d'ailleurs ont été largement ignorés pour agréger les swaths sur une seule journée\dots).
+Même pour un capteur identique (\ab{MODIS} à bord de Terra par exemple), il devient nécessaire de considérer des différences de calibrations, ainsi que de possibles artefacts lorsque l'on superpose plusieurs swaths (qui d'ailleurs ont été largement ignorés pour agréger les swaths sur une seule journée\dots).
 
 Face à ces difficultés, nous avons donc décidé dans un premier temps d'en rester à un seul capteur malgré la couverture spatiale réduite, notamment à cause des nuages.
 Il est également à noter qu'à ce niveau, peu d'actions ont été prises pour disqualifier les pixels nuageux.
@@ -47,28 +48,29 @@ Cela se manifeste par exemple comme du bruit autour de nuages.
 Il est difficile de les disqualifier correctement sans un bon algorithme de détection de nuage, ce qui nécessite encore un large travail.
 Nous contournons le problème d'une manière similaire à celle de \textcite{liu_2016} en ne travaillant que sur des fenêtres de \qtyproduct{100 x 100}{\km} avec une faible couverture nuageuse (\textless\qty{70}{\percent}), ce qui élimine une partie de ces cas problématiques.
 
-TODO: avantage modis il y a l'OC aussi !
+Malgré le fait que l'on soit limité à un seul type de capteur, \ab{MODIS} présente l'avantage de mesurer concomitamment la \ab{SST} et la couleur de l'océan.
+Cela permet d'obtenir les valeurs de \ab{chl} aux même pixels, en utilisant le même traitement avec le jeu de données accessible au \ab{CMEMS} \parencite{chl_modis}.
 
 Il est néanmoins possible de trouver d'autres jeux de données permettant notre étude et nécessitant moins de travail (et donc de possible erreurs), ces dernières années ayant vu apparaître des données distribuées à des résolutions élevées comme c'est le cas dans le paragraphe suivant.
 
 \subsubsection{MUR}
 \label{sec:donnees-sst-ghrsst}
 
-Le produit suivant, désigné ici \gls{MUR} est dévelopé par le \gls{GHRSST} au JPL Physical Oceanography DAAC \parencite{sst_mur}.
+Le produit suivant, désigné ici \af{MUR} est développé et distribué par le \ab{GHRSST} au JPL Physical Oceanography DAAC \parencite{sst_mur}.
 Il présente les avantages d'être distribué à une résolution kilométrique et sans nuages grâce à une méthode d'interpolation par vaguelettes \parencite{chin_2017}.
 Il intègre de nombreuses sources provenant de plusieurs capteurs infrarouges et micro-ondes, ainsi que de mesures in-situ.
 La grande couverture spatiale de ce produit se fait donc par l'utilisation de mesures non-contraintes par la couverture nuageuse (c'est-à-dire micro-ondes et in-situ), mais qui présente une résolution bien plus faible.
-Le champ de \gls{SST} se retrouve donc lissé à la fois par l'interpolation et par l'inclusion de ces mesures.
+Le champ de \ab{SST} se retrouve donc lissé à la fois par l'interpolation et par l'inclusion de ces mesures.
 
 L'utilisation du produit suivant cherche à palier à ce problème.
 
-\subsubsection{ESA SST CCI and C3S}
+\subsubsection{ESA SST CCI / C3S}
 \label{sec:donnees-sst-esacci}
 
-Ce produit est distribué conjointement par l'\gls{ESA} \gls{SST} \gls{CCI} et le \gls{C3S}.
-Il agglomère les mesures de tous les capteurs infrarouges disponibles depuis 1981, ce qui comprend 11 \gls{AVHRR} à bord des satellites \gls{MetOp}[-A] et \gls{NOAA} (entre les itérations 6 et 19) et trois \gls{ATSR} à bord de \gls{ERS} 1 et 2, et Envisat.
-Cela donne au moins deux capteurs en fonctionnement simultané, et au moins trois depuis 1992 .
-Outre la bonne couverture obtenue, l'uniformité des capteurs permet d'obtenir un jeu de données stable dans le temps, pouvant servir à la détection de tendance climatiques \parencite{marchant_2019}.
+Ce produit est distribué conjointement par l'\ab{ESA} \ab{SST} \ab{CCI} et le \ab{C3S}.
+Il agglomère les mesures de tous les capteurs infrarouges disponibles depuis 1981, ce qui comprend 11 \ab{AVHRR} à bord des satellites \ab{MetOp}[-A] et \ab{NOAA} (entre les itérations 6 et 19) et trois \ab{ATSR} à bord de \ab{ERS} 1 et 2, et Envisat.
+Cela donne au moins deux capteurs en fonctionnement simultané, et au moins trois depuis 1992.
+Outre la bonne couverture obtenue, l'uniformité des capteurs permet d'obtenir un jeu de données stable dans le temps, pouvant servir à la détection de tendance climatiques \parencite{merchant_2019}.
 
 Les données sont distribuées à différents niveaux:
 \begin{itemize}
@@ -82,46 +84,54 @@ La grille utilisée a une résolution de \qty{0.05}{\degree} en latitude et long
 Le produit L2P peut être utilisé de la même manière que pour \cref{sec:donnees-sst-modis} afin d'obtenir une résolution la plus haute possible, mais avec l'avantage de disposer de données uniformes sur un grand nombre de capteurs.
 Il est à noter que les outils à utiliser pour regriller pourrait ne pas directement fonctionner sur ces données.
 
-Les produits L3U et L3C peuvent être utilisés dans l'étude de structures fines et où la présence de nuages n'est pas <incompatible>.
+Les produits L3U et L3C peuvent être utilisés dans l'étude de structures fines et où la présence de nuages n'est pas rédhibitoire.
 
-Enfin, le produit L4 regroupe l'ensemble des capteurs en utilisant le schéma d'intégration variationnelle \gls{NEMOVAR}, intégré dans le système \gls{OSTIA}.
-Ce produit donne ainsi un champ de \gls{SST} sans nuages, estimé par une combinaison des observations satellites et de la prévision d'un modèle numèrique d'un jour sur l'autre.
+Enfin, le produit L4 regroupe l'ensemble des capteurs en utilisant le schéma d'intégration variationnelle \verb|NEMOVAR|, intégré dans le système \ab{OSTIA} \parencite{good_2020}.
+Ce produit donne ainsi un champ de \ab{SST} sans nuages, estimé par une combinaison des observations satellites et de la prévision d'un modèle numérique d'un jour sur l'autre.
 L'absence de couverture nuageuse et la simplicité d'usage se fait au détriment du lissage inévitable des structures les plus fines.
 
-L'estimation du lissage est compliqué (dépend du std de la solution à J-1).
-On peut imaginer que moins de fronts sur zone nuageuse, ou en tout cas moins exact (cf réanalyses).
-Donc dans la suite, on prend nos résultats que si Chl clear sky.
-
-grille différente que celle de la chlorophylle.
-explication regrillage (simple interpolation 2D)
+Une estimation quantitative du lissage due à l'interpolation est compliqué, car la paramétrisation dépend de la variabilité du champ de température à J-1.
+On peut néanmoins imaginer que le champ de \ab{SST} produit est plus lissé dans les zones normalement nuageuses, et potentiellement plus éloigné de la réalité (voir \cref{sec:donnees-sst-reanalyses}).
+Il est tout de même possible de mitiger ces effets en ne comptabilisant dans nos résultats seulement les pixels que l'on sait non-nuageux, grâce au produit de \ab{chl} par exemple.
+À noter qu'il serait également possible d'utiliser les erreurs d'intégration associées à chaque pixel, mais cela n'a pas été exploré.
 
 montrer comparaison (même image plusieurs datasets)
 
-+ Chl pas dispo à 1km
-(cf \cref{sec:donnees-chl})
-
-Sauf indication contraite, c'est le produit L4 que nous utiliserons dans toute la suite de cette thèse.
-Il permet d'accéder à des données \gls{SST} simplement, avec une résolution <améliorable> mais convenable, et stable sur une longue durée (plusieurs décennies).
-
-aieaieouie
+Sauf indication contrainte, c'est le produit L4 que nous utiliserons dans toute la suite de cette thèse.
+Il permet d'accéder à des données \ab{SST} simplement, avec une résolution convenable, et est stable sur une longue durée (plusieurs décennies).
+Les données sont téléchargées depuis \ab{CMEMS} \parencite{sst_esacci}.
 
 \subsubsection{Réanalyses}
 \label{sec:donnees-sst-reanalyses}
+
+Une solution pour s'affranchir de la couverture nuageuse est de s'appuyer sur des produits de réanalyses.
+Tôt dans ce projet, certaines pistes de travail (par exemple le suivi temporel des fronts) nous ont poussé à tester l'utilisation de tels produits.
+
+Problème ici: c'est très vieux (pendant stage de master), donc j'ai peu de traces.
+Mais visiblement j'utilisai \verb|GLOBAL_REANALYSIS_PHY_001_030| sur CMEMS\@.
+Il n'est plus dispo ou a changé de nom. Le successeur devrait être: \url{https://data.marine.copernicus.eu/product/GLOBAL_MULTIYEAR_PHY_001_030/description}.
+C'est une réanalyse au 1/12° (ie 8~km). C'est beaucoup.
+Mais peut-être que la comparaison peut quand même valoir le cout ?
 
 Montrer décalage
 
 \subsection{Chlorophylle}
 \label{sec:donnees-chl}
 
-Globcolour processor
-distribué par ESA/CCI
+Pour le champ de \al{chl}, nous utilisons les données produites dans le cadre du projet GlobColour, développées, validées et distribuées par ACRI-ST, France \parencite{maritorena_2002}.
 
-4km, L4 (capteurs merged, pas d'interpolation spatio-temp)
+Les données sont récupérées sur \gls{CMEMS} \parencite{chl-globcolour}.
+Ce produit aggrège les données optiques de plusieurs capteurs: \ab{SeaWiFS}, \ab{MODIS} Aqua et Terra, \ab{MERIS} à bord d'Envisat, \ab{VIIRS} à bord de \ab{SNPP} et \ab{NOAA}[-20], et enfin \ab{OLCI} à bord de Sentinel-3A et -3B.
 
-à 1km c'est difficile à trouver, seulement quand on regride MODIS
-dataset: \parencite{chl_modis}
-Même processing que pour 4km normalement
+4~km, L3 (capteurs merged, pas d'interpolation spatio-temp)
 
+\subsection{Accord entre les produits}
+
++ Chl pas dispo à 1~km
+(cf \cref{sec:donnees-chl})
+
+grille différente que celle de la chlorophylle.
+Explication regrillage (simple interpolation 2D)
 
 \subsection{Bathymétrie}
 \label{sec:donnees-bathymetrie}
@@ -135,17 +145,17 @@ Il apparait 3 régimes différents discuté en intro.
 Pour limiter les comparaisons dans des zones homogènes on découpe la zone d'étude en 3 sous régions.
 
 Une première zone correspondant à la gyre subtropicale de l'Atlantique Nord est délimitée comme étant au sud de 32°N.
-Cela correspond à un saut des valeurs de \gls{chla} à cette latitude.
-Cette séparation est en accord avec la limite entre les biomes présentés par \cite{sarmiento_2004}.
+Cela correspond à un saut des valeurs de \al{chl} à cette latitude.
+Cette séparation est en accord avec la limite entre les biomes présentés par \textcite{sarmiento_2004}.
 Cette zone correspond donc à la gyre stratifiée de façon permanente (GS-PS) [GLS ?].
 
-On sépare ensuite la région restante au nord de 32°N en prenant comme limite le front nord du jet du Gulf Stream (le `North wall'). Cette séparation donne donc au sud, une zone peu productive, la gyre subtropicale stratifié de façon saisonière (GS-SS) [GLS ?]; et au nord des eaux plus froides, plus fraîches, et plus productives correspondan au régime de fort bloom (High-Chlorophyll-Bloom) \pcite{sarmiento_2004} ou à des eaux subpolaires \pcite{bock_2022}.
+On sépare ensuite la région restante au nord de 32°N en prenant comme limite le front nord du jet du Gulf Stream (le `North wall'). Cette séparation donne donc au sud, une zone peu productive, la gyre subtropicale stratifié de façon saisonnière (GS-SS) [GLS ?]; et au nord des eaux plus froides, plus fraîches, et plus productives correspondant au régime de fort bloom (High-Chlorophyll-Bloom) \pcite{sarmiento_2004} ou à des eaux subpolaires \pcite{bock_2022}.
 
 La délimitation entre ces deux zones suit le front nord du jet du Gulf Stream et est donc dynamique. Elle est déterminée pour chaque jour, à partir de l'image en température, de la manière suivante.
-Après exploration des données au long de l'année, il apparaît que la SST est un marqueur relativement fiable et robuste, et que la limite qui nous intéresse ici est facilement repérable dans les valeurs de SST.
-En effet, nous regardons la distribution des valeurs de SST au nord de 32°N, sur laquelle apparaît clairement un pic dans les valeurs élevées correspondant au jet.
+Après exploration des données au long de l'année, il apparaît que la \ab{SST} est un marqueur relativement fiable et robuste, et que la limite qui nous intéresse ici est facilement repérable dans les valeurs de \ab{SST}.
+En effet, nous regardons la distribution des valeurs de \ab{SST} au nord de 32°N, sur laquelle apparaît clairement un pic dans les valeurs élevées correspondant au jet.
 Il est aisé de repérer le pic et le fitter par une Gaussienne. La largeur de pic obtenue est utilisée pour repérer un seuil de température en soustrayant à la température moyenne du pic deux fois son écart-type.
-La valeur de seuil journalière obtenue est filtrée temporellement par un filtre médian d'une fenêtre de 8 jours afin d'éviter les anomalies de détection.
+La valeur de seuil journalière obtenue est filtrée temporellement par un filtre médian d'une fenêtre de 8~jours afin d'éviter les anomalies de détection.
 Enfin ce seuil en température est utilisé pour séparer la région en deux.
 
 \begin{figure}
@@ -154,7 +164,7 @@ Enfin ce seuil en température est utilisé pour séparer la région en deux.
 \end{figure}
 
 \begin{figure}
-  Histograme de SST. Fit gaussien. Flèche qui dénote sigma (la largeur du pic).
+  Histogramme de \ab{SST}. Fit gaussien. Flèche qui dénote sigma (la largeur du pic).
   Barre verticale pour le seuil.
   Super-imposer en léger l'histograme <32°N.
   \caption{Détermination du seuil en température correspondant au front nord du Gulf Stream.}
@@ -193,7 +203,7 @@ Coefficients de normalisation.
 
 \begin{figure}
   \centering
-  \includegraphics{méthodes/bimodality.pdf}
+  \includegraphics[width=\textwidth]{méthodes/bimodality.pdf}
   \caption[Calcul de la bimodalité]{Calcul de la bimodalité à partir de la distribution des valeurs de températures.}
   \label{fig:bimodality}
 \end{figure}
@@ -214,37 +224,71 @@ Préférentiellement avec couverture MODIS mais pas obligé.
 \section{Extraction des résultats}
 \label{sec:extraction-res}
 
-Une fois le HI calculé, il devient possible de catégoriser chaque pixel par la région à laquelle il appartient (GS-SS, GS-SP, HCB), ainsi que par sa valeur de HI.
+\subsection{Utilisation d'histogrammes}
+\label{sec:extraction-hist}
+
+Une fois le HI calculé, il devient possible de catégoriser chaque pixel par la région à laquelle il appartient (GS-SS, GS-SP, HCB), ainsi que par sa valeur de HI\@.
 On cherche donc à extraire des informations de ces ensembles de pixels ainsi consistués.
-Le nombre total de pixels étant conséquent, et parce que l'établissement des ensembles est compliqué et coûteux (il faut superposer la SST, le HI, et la \gls{chla}), les ensembles de pixels sont chacuns réduits à des histogrammes des variables d'intérêt (SST, \gls{chla}, PFT).
-Cela diminue les étapes de calcul ainsi que la quantité de données à traiter pour obtenir un diagnostique (on passe de \numproduct{1000 x 1000} pixels à \num{100} intervalles d'histogramme).
+Le nombre total de pixels étant conséquent, et parce que l'établissement des ensembles est compliqué et coûteux (il faut superposer la \ab{SST}, le \ab{HI}, et la \ab{chl}), les ensembles de pixels sont chacun réduits à des histogrammes des variables d'intérêt (\ab{SST}, \ab{chl}, \ab{PFT}).
+Cela diminue les étapes de calcul ainsi que la quantité de données à traiter pour obtenir un diagnostic (on passe de \numproduct{1000 x 1000} pixels à \num{100} intervalles d'histogramme).
 
-Les histogrammes peuvent être rendus représentatifs sans pour autant utiliser un nombre prohibitif d'intervalles, les données étant elles-mêmes stockées compressées et donc discrétisées. Par exemple pour la température, 450 intervalles permettre de couvrir toutes les valeurs (de \qty{-5}{\dC} à \qty{40}{\dC}), avec une largeur d'intervalle de \qty{0.1}{\dC} égale à l'intervalle de discrétisation des données, lui même équivalent à l'incertitude sur la mesure.
-Les intervalles pour la Chlorophylle et les autres variables biologiques sont pris de largeur logarithmique afin de couvrir les plusieurs ordres de grandeur que peuvent prendre leurs valeurs.
+Les histogrammes peuvent être rendus représentatifs sans pour autant utiliser un nombre prohibitif d'intervalles, d'autant plus que les données (\ab{chl} et \ab{SST}) sont déjà stockées compressées avec pertes. Pour la température par exemple, 450 intervalles permettre de couvrir toutes les valeurs (de \qty{-5}{\dC} à \qty{40}{\dC}), avec une largeur d'intervalle de \qty{0.1}{\dC} égale à l'intervalle de discrétisation des données, lui-même équivalent à l'incertitude sur la mesure.
+Les intervalles pour la \ab{chl} et les autres variables biologiques sont pris de largeur logarithmique afin de couvrir les plusieurs ordres de grandeur que peuvent prendre leurs valeurs.
 
-Les histogrammes présentent également l'avantage de pouvoir être combiné entre eux.
-En effet, tout les histogrammes calculés sont stockés non-normalisés, en nombre de pixel par intervalle donc. Ainsi plusieurs histogrammes peuvent être sommés entre eux avant d'être normalisés pour en extraire une valeur, comme la valeur médiane de la distribution résultant par exemple.
-Ce procédé est notamment utilisé pour calculé des diagnostiques sur des périodes de temps autre que journalières, sans avoir besoin de refaire un calcul impliquant les pixels.
+Les histogrammes présentent également l'avantage de pouvoir être combinés entre eux.
+En effet, tous les histogrammes calculés sont stockés non-normalisés, en nombre de pixel par intervalles donc. Ainsi plusieurs histogrammes peuvent être sommés entre eux avant d'être normalisés pour en extraire une valeur, comme la valeur médiane de la distribution résultant par exemple.
+Ce procédé est notamment utilisé pour calculer des diagnostics sur des périodes de temps autre que journalières, sans avoir besoin de refaire un calcul coûteux impliquant les pixels.
+Dans la suite on considère un histogramme qui compte \(h_i\) points (d'une variable quelconque \(x\)) pour le i\ieme{} intervalle \(\left[x_i; x_{i+1} \right]\).
 
-Une fois les histogrammes obtenus il est nécessaire de les normaliser afin d'obtenir une densité de probabilité. On prendra soin de considérer les tailles des intervalles dans les calculs.
-On considère un histogramme qui compte \(h_{i}\) points pour le i\ieme intervalle \(\left[x_{i}; x_{i+1} \right]\).
-La largeur des intervalles est donc \(w_{i} = x_{i+1}-x_{i}\). On transforme le nombre de points en probabilité par unité de valeur \(p_{i} = h_{i} / w_{i} \), avant de le normaliser de sorte à obtenir une intégralle égale à 1:
+Pour un histogramme donné (par ex.\ pour une région à une date et un type de front donné), on extrait facilement le nombre de pixel total
 \begin{equation}
-  f_{i} = \frac{p_{i}}{\sum_{j}{p_{i}*w_{i}}},
+  N = \sum_i h_i,
 \end{equation}
-pour ainsi obtenir une approximation de la densité de probabilité \(f_{i}\).
+ou une approximation de la valeur moyenne
+\begin{equation}
+  \bar{x} = \frac{\sum_i h_i x_i} {N}.
+\end{equation}
 
-On laise scipy faire.
+Pour d'autres valeurs à extraire il est nécessaire de normaliser les histogrammes afin d'obtenir une densité de probabilité. On prendra soin de considérer les tailles des intervalles dans les calculs.
+La largeur des intervalles est \(w_i = x_{i+1}-x_i\). On transforme le nombre de points en probabilité par unité de valeur \(p_i = h_i / w_i \), avant de le normaliser de sorte à obtenir une intégrale égale à 1:
+\begin{equation}
+  f_i = \frac{p_i} {\sum_j p_j w_j},
+\end{equation}
+pour ainsi obtenir une approximation de la densité de probabilité \(f\).
 
-valeurs médianes.
-valeur surplus.
+On peut extraire de cette distribution notamment la médiane, ainsi que des percentiles divers en trouvant la valeur de \(x\) pour laquelle la somme cumulée de la densité de probabilité est égale au percentile recherché (0.5 dans le cas de la médiane).
+On délègue ce travail aux fonctions de l'objet \verb|rv_histogram|\footnote{
+  \href{https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.rv_histogram.html}
+  {\texttt{scipy.stats.rv\_histogram}},
+  see~\cite{virtanen_2020}
+}
+du paquet SciPy.
 
-vérification que les histogrammes sont well-behaved pour prendre des valeurs.
+Vérification que les histogrammes sont well-behaved pour prendre des valeurs.
+
+\subsection{Quantification de l'effet des fronts}
+\label{sec:extraction-surplus}
+
+Afin de comparer les valeurs de diverse variables à l'intérieur et à l'extérieur des fronts, nous définissons deux métriques.
+La première est l'excès \(E\) de \ab{chl} (\enquote{excess} dans \cref{M-sec:article-bg}), qui compare localement les valeurs dans les fronts et le background. On le définit simplement comme la différence relative entre la médiane de \ab{chl} dans et hors des fronts:
+\begin{equation}
+  E = \frac{\med{\am{chl}}_\frt - \med{\am{chl}}_\bkg}
+  {\med{\am{chl}}_\bkg} .
+\end{equation}
+Le calcul est fait pour les fronts faibles et forts de la même manière, le background désignant les pixels de \ab{HI} faible (\(\am{HI} < 5\)).
+L'excès est calculé dans des bandes de latitudes larges de \ang{5}, afin de minimiser l'influence des gradients de grande échelle.
+
+Cette métrique ne tient compte que de la distribution des valeurs de \ab{chl}, et ne représente pas la quantité totale présente ou la proportion de fronts dans une zone donnée.
+Ainsi on définit le surplus \(S\) de \ab{chl} dans toute une région comme la différence relative entre la moyenne de \ab{chl} dans tout un biome et dans la moyenne dans le background:
+\begin{equation}
+  S = \frac{\moy{\am{chl}}_\tot - \moy{\am{chl}}_\bkg}
+  {\moy{\am{chl}}_\bkg} .
+\end{equation}
 
 \sectiontoc{Références informatiques}
 \label{sec:ref-info}
 
-J'ai été amené à utiliser durant ma thèse une myriade d'outils informatiques sans lequels ce travail n'aurait pu aboutir, ou en tout cas avec assurément beaucoup plus de difficulté.
+J'ai été amené à utiliser durant ma thèse une myriade d'outils informatiques sans lesquels ce travail n'aurait pu aboutir, ou en tout cas avec assurément beaucoup plus de difficulté.
 Il me semble important d'en citer au moins une partie ici.
 La reproducibilité de mon travail étant déjà garantie par la mise à disposition de mes codes (accompagnés d'une courte documentation) sur un dépôt public (url gitlab) associé à un doi (doi zenodo article), il s'agit ici plutôt de [rendre hommage] aux contributeurs qui ont participé à l'élaboration de ces outils.
 
@@ -253,12 +297,12 @@ les utiles en géosciences: Xarray, Dask.
 les histogrammes: Xhistogram, dask-histogram, boost-histogram.
 pour les plots: matplotlib, cartopy, cmocean, Paul Tol,
 
-plus perso: Doom Emacas, zotero
+plus perso: Doom Emacs, zotero
 
 \ifSubfilesClassLoaded{
   \emergencystretch=1em
   \sectiontoc{Bibliographie}
   \printbibliography[heading=none]
-}{}
+} {}
 
 \end{document}
