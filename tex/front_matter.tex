@@ -28,7 +28,7 @@
   \vspace{3cm}
 
   Thèse de doctorat\\
-  Spécialité : Cycles biogéochimiques et changements environnementaux globaux
+  Spécialité: Cycles biogéochimiques et changements environnementaux globaux
 
   \vspace{1cm}
 
@@ -41,7 +41,7 @@
   \vspace{2cm}
 \end{center}
 
-\par\noindent Présentée et soutenue publiquement le 31 février 2023,\\
+\par\noindent Présentée et soutenue publiquement le 30 avril 2023,\\
 devant un jury composé de:
 
 \begin{center}
@@ -59,15 +59,17 @@ devant un jury composé de:
 
 \frontmatter
 
-\section{Résumé}
+\unsection{Résumé}
 Résumé
 
 \clearpage
 \section*{Remerciements}
+\label{sec:thanks}
 Remerciements \dots
 
 \clearpage
 \section{Publications et productions}
+\label{sec:productions}
 
 \begin{itemize}
         \item Article CHL
@@ -76,19 +78,26 @@ Remerciements \dots
 
 Lors de mon travail de thèse, j'ai été amené à écrire des outils qu'il m'a parru utile de rendre publiques et accesibles.
 appuyer sur l'importance de l'open source et de faciliter la reproducibilité.
-Tous les codes utilisés sont disponibles ici: \url{https://gitlab.in2p3.fr/clement.haeck/submeso-color}.
+Tous les codes utilisés sont disponibles sur un dépôt public\footnote{
+  \url{https://gitlab.in2p3.fr/clement.haeck/submeso-color}
+}, et sur le répertoire Zenodo (\href%
+{https://doi.org/10.5281/zenodo.7470199}%
+{\textsc{DOI}: \texttt{10.5281/zenodo.7470199}}).
 
-ajouter zenodo article
 \medskip
 
 Certains outils sont distribués à part:
 \begin{itemize}
-  \item \emph{FileFinder}: un paquet python qui permet entre autres de trouver des fichiers grâce à la structure de leur nom de fichier (\url{https://github.com/Descanonge/filefinder}).
-  \item \emph{XArray-Histogram}: un paquet python qui permet de calculer des histogrammes depuins des données gérées par XArray (\url{https://github.com/Descanonge/xarray-histogram}).
-  \item \emph{Tol-Colors}: un paquet python qui donne accès à des jeux de couleurs adaptés aux personnes daltoniennes. Les jeux de couleurs existaient déjà, je les ai seulement rendus accessibles sur Pypi (\url{https://github.com/Descanonge/tol_colors}).
-  \item \emph{Dateloop}: un script bash permettant de générer des ensembles de dates (\url{https://github.com/Descanonge/dateloop}).
+  \item \package{FileFinder}{\github{Descanonge/filefinder}}:
+        un paquet python qui permet entre autres de trouver des fichiers grâce à la structure de leur nom de fichier.
+  \item \package{Xarray-Histogram}{\github{Descanonge/xarray-histogram}}:
+        un paquet python qui permet de calculer des histogrammes depuins des données gérées par Xarray.
+  \item \package{Tol-Colors}{\github{Descanonge/tol_colors}}:
+        un paquet python qui donne accès à des jeux de couleurs adaptés aux personnes atteintes de daltonisme. Les jeux de couleurs existaient déjà, je les ai seulement rendus accessibles sur PyPi.
+  \item \package{Dateloop}{\github{Descanonge/dateloop}}:
+        un script bash permettant de générer des ensembles de dates.
 \end{itemize}
 \medskip
 
-J'ai également participé à un projet open-source visant à rendre accessible au paquet python \emph{XArray} les conventions de métadonnées CF (\url{https://github.com/xarray-contrib/cf-xarray}).
-J'ai ajouté le support pour les variables drapeau utilisant un masque binaire.
+J'ai également participé à un projet open-source (\href{github{xarray-contrib/cf-xarray}}{CF-Xarray}) visant à rendre accessible au paquet python XArray les conventions de métadonnées CF.\@
+J'y ai ajouté le support pour les variables drapeaux utilisant un masque binaire.

@@ -144,7 +144,7 @@ Zone d'étude hétérogène, notamment en biologie.
 Il apparait 3 régimes différents discuté en intro.
 Pour limiter les comparaisons dans des zones homogènes on découpe la zone d'étude en 3 sous régions.
 
-Une première zone correspondant à la gyre subtropicale de l'Atlantique Nord est délimitée comme étant au sud de 32°N.
+Une première zone correspondant à la gyre subtropicale de l'Atlantique Nord est délimitée comme étant au sud de \ang{32}N.
 Cela correspond à un saut des valeurs de \al{chl} à cette latitude.
 Cette séparation est en accord avec la limite entre les biomes présentés par \textcite{sarmiento_2004}.
 Cette zone correspond donc à la gyre stratifiée de façon permanente (GS-PS) [GLS ?].
@@ -203,7 +203,7 @@ Coefficients de normalisation.
 
 \begin{figure}
   \centering
-  \includegraphics[width=\textwidth]{méthodes/bimodality.pdf}
+  % \includegraphics[width=\textwidth]{méthodes/bimodality.pdf}
   \caption[Calcul de la bimodalité]{Calcul de la bimodalité à partir de la distribution des valeurs de températures.}
   \label{fig:bimodality}
 \end{figure}
@@ -257,12 +257,12 @@ La largeur des intervalles est \(w_i = x_{i+1}-x_i\). On transforme le nombre de
 pour ainsi obtenir une approximation de la densité de probabilité \(f\).
 
 On peut extraire de cette distribution notamment la médiane, ainsi que des percentiles divers en trouvant la valeur de \(x\) pour laquelle la somme cumulée de la densité de probabilité est égale au percentile recherché (0.5 dans le cas de la médiane).
-On délègue ce travail aux fonctions de l'objet \verb|rv_histogram|\footnote{
-  \href{https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.rv_histogram.html}
-  {\texttt{scipy.stats.rv\_histogram}},
-  see~\cite{virtanen_2020}
-}
-du paquet SciPy.
+On délègue ce travail au paquet SciPy dont l'objet \href{%
+  https://docs.scipy.org/%
+  doc/scipy/reference/generated/%
+  scipy.stats.rv_histogram.html%
+}{\texttt{scipy.stats.rv\_histogram}}
+permet d'effectuer ces calculs de manière triviale.
 
 Vérification que les histogrammes sont well-behaved pour prendre des valeurs.
 
@@ -279,29 +279,45 @@ Le calcul est fait pour les fronts faibles et forts de la même manière, le bac
 L'excès est calculé dans des bandes de latitudes larges de \ang{5}, afin de minimiser l'influence des gradients de grande échelle.
 
 Cette métrique ne tient compte que de la distribution des valeurs de \ab{chl}, et ne représente pas la quantité totale présente ou la proportion de fronts dans une zone donnée.
-Ainsi on définit le surplus \(S\) de \ab{chl} dans toute une région comme la différence relative entre la moyenne de \ab{chl} dans tout un biome et dans la moyenne dans le background:
+Ainsi on définit le surplus \(S\) de \ab{chl} (\enquote{biome surplus}) dans toute un biome comme la différence relative entre la moyenne de \ab{chl} dans tout un biome et dans la moyenne dans le background:
 \begin{equation}
   S = \frac{\moy{\am{chl}}_\tot - \moy{\am{chl}}_\bkg}
   {\moy{\am{chl}}_\bkg} .
 \end{equation}
 
-\sectiontoc{Références informatiques}
+\unsection{Références informatiques}
 \label{sec:ref-info}
 
-J'ai été amené à utiliser durant ma thèse une myriade d'outils informatiques sans lesquels ce travail n'aurait pu aboutir, ou en tout cas avec assurément beaucoup plus de difficulté.
+J'ai été amené à utiliser durant ma thèse de nombreux outils informatiques sans lesquels ce travail n'aurait pu aboutir, ou en tout cas avec assurément beaucoup plus de difficultés.
 Il me semble important d'en citer au moins une partie ici.
-La reproducibilité de mon travail étant déjà garantie par la mise à disposition de mes codes (accompagnés d'une courte documentation) sur un dépôt public (url gitlab) associé à un doi (doi zenodo article), il s'agit ici plutôt de [rendre hommage] aux contributeurs qui ont participé à l'élaboration de ces outils.
+La reproducibilité de mon travail est déjà garantie par la mise à disposition de mes codes (accompagnés d'une courte documentation) sur un dépôt public\footnote{%
+  \url{https://gitlab.in2p3.fr/clement.haeck/submeso-color}
+}
+et dont une version est également déposée sur le répertoire Zenodo\footnote{%
+  \href{https://doi.org/10.5281/zenodo.7470199}%
+  {\textsc{DOI}: \texttt{10.5281/zenodo.7470199}}
+}.
+Il s'agit ici plutôt de créditer les contributeurs qui ont participé à l'élaboration de ces outils.
 
-les plus-à-présenter: Python, IPython, numpy, scipy
-les utiles en géosciences: Xarray, Dask.
-les histogrammes: Xhistogram, dask-histogram, boost-histogram.
-pour les plots: matplotlib, cartopy, cmocean, Paul Tol,
+Bien évidemment beaucoup des calculs reposent sur des librairies qui ne sont plus à présenter: \href{https://numpy.org}{NumPy}, \href{https://scipy.org}{SciPy}, et \href{https://pandas.pydata.org}{pandas}.
+Cependant il est plus commun (en géosciences en tout cas) d'interfacer avec la librairie \href{https://xarray.dev}{Xarray}.
+Les outils de \href{https://www.dask.org}{Dask} sont également presque indispensables pour gérer les quantités importantes de données que sont les notres.
 
-plus perso: Doom Emacs, zotero
+Il convient de citer plusieurs paquets permettant le calcul efficace d'histogrammes:
+\href{\github{xgcm/xhistogram}}{xhistogram} qui implémente ses fonctionalités à partir de fonctions NumPy et Dask \enquote*{élémentaires}, et
+\href{\github{dask-contrib/dask-histogram}}{dask-histogram} qui s'appuie sur la librairie C Boost\footnote{
+  Bindings python: \url{\github{scikit-hep/boost-histogram}}}.
+
+Plusieurs paquets sont utilisés pour réaliser les figures, bien évidemment \href{https://matplotlib.org}{Matplotlib},
+\href{https://scitools.org.uk/cartopy/docs/latest/}{Cartopy} pour les cartes,
+mais également \href{https://matplotlib.org/cmocean/}{cmocean} qui fourni des palettes de couleurs, notamment pour un usage en océanographie. Ces dernières présentent les avantages (majeurs) d'être linéairement perceptibles, adaptés à une conversion en nuance de gris pour impression, et robustes à plusieurs types de daltonisme.
+Similairement, les coleurs utilisées dans les figures sont le fruit du travail de Paul Tol\footnote{voir \url{https://personal.sron.nl/~pault/}}, distribué pour Python par mes soins (voir \refunsection{M-sec:productions}).
+
+Enfin il me parait approprié de citer les outils \href{\github{ipython/ipython}}{IPython} avec lequel j'execute tous mes scripts, \href{\github{mamba-org/mamba}}{Mamba} et le projet \href{https://conda-forge.org}{Conda-Forge} lesquels me permettent de gérer les environments Python, et enfin le travail épatant derrière le framework de configuration \href{\github{doomemacs/doomemacs}}{Doom Emacs} sur lequel tous les scripts et ce manuscript (entre autres) ont été écrits.
 
 \ifSubfilesClassLoaded{
   \emergencystretch=1em
-  \sectiontoc{Bibliographie}
+  \unsection{Bibliographie}
   \printbibliography[heading=none]
 } {}
 
