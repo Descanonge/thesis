@@ -16,7 +16,7 @@ SUBNAMES := intro méthodes res_chl res_phénologie conclusion
 SUBFILES = $(foreach sn,$(SUBNAMES),tex/$(sn).tex)
 
 AUXDIR_FLAGS := -auxdir="$(BUILDDIR)" -emulate-aux-dir
-LMK_FLAGS := -lualatex -recorder -quiet
+LMK_FLAGS := -lualatex -interaction=batchmode -recorder -quiet
 
 $(foreach file,ZOTERO CUSTOM,$(eval BIB_$(file) = $(REF)/$(BIB_$(file)).bib))
 $(foreach file,TMP OUTPUT,$(eval BIB_$(file) = $(BUILDDIR)/$(BIB_$(file)).bib))

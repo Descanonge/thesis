@@ -1,64 +1,4 @@
 
-\pagenumbering{Alph}
-\newgeometry{left=1.5cm, right=1.5cm, top=2cm, bottom=3cm}
-
-\begin{titlingpage}
-
-\begin{center}
-  \includegraphics[height=3em]{Logos/sorbonne.pdf}
-  \hfill
-  \includegraphics[height=3em]{Logos/locean.png}
-  \hfill
-  \includegraphics[height=3em]{Logos/ipsl.png}
-  \hfill
-  \includegraphics[height=3em]{Logos/chanel_enspsl.png}
-
-  \vspace{1cm}
-
-  {\LARGE Sorbonne Université}\\[2ex]
-  École Doctorale 129 Sciences de l'Environnement\\
-  \emph{Laboratoire d'Océanographie et du Climat: Expérimentations et Approches Numériques}
-
-  \vspace{3cm}
-
-  \par\noindent\rule[0.7em]{\textwidth}{2pt}
-  {\bfseries\Large \Title}\\
-  \par\noindent\rule{\textwidth}{2pt}
-
-  \vspace{3cm}
-
-  Thèse de doctorat\\
-  Spécialité: Cycles biogéochimiques et changements environnementaux globaux
-
-  \vspace{1cm}
-
-  {\normalsize par Clément Haëck}
-
-  \vspace{1cm}
-
-  Dirigée par Marina Lévy et Laurent Bopp
-
-  \vspace{2cm}
-\end{center}
-
-\par\noindent Présentée et soutenue publiquement le 30 avril 2023,\\
-devant un jury composé de:
-
-\begin{center}
-\begin{tabular}{llr<{\raggedleft}}
-  Prénom NOM & Titre & Rapporteur \\
-  Prénom NOM & Titre & Rapporteur \\
-  Prénom NOM & Titre & Président \\
-  Marina LÉVY & DR CNRS & Directrice de thèse \\
-  Laurent BOPP & DR CNRS & Co-directeur de thèse \\
-\end{tabular}
-\end{center}
-
-\end{titlingpage}
-\restoregeometry
-
-\frontmatter
-
 \unsection{Résumé}
 Résumé
 
@@ -76,28 +16,25 @@ Remerciements \dots
 \end{itemize}
 \medskip
 
-Lors de mon travail de thèse, j'ai été amené à écrire des outils qu'il m'a parru utile de rendre publiques et accesibles.
-appuyer sur l'importance de l'open source et de faciliter la reproducibilité.
+Lors de mon travail de thèse, j'ai été amené à écrire des outils qu'il m'a parru utile de rendre publics et accessibles.
+<appuyer sur l'importance de l'open source et de faciliter la reproducibilité.>
 Tous les codes utilisés sont disponibles sur un dépôt public\footnote{
-  \url{https://gitlab.in2p3.fr/clement.haeck/submeso-color}
-}, et sur le répertoire Zenodo (\href%
-{https://doi.org/10.5281/zenodo.7470199}%
-{\textsc{DOI}: \texttt{10.5281/zenodo.7470199}}).
-
+  \url{\glsentryurl{gitlab}}
+}, et sur un répertoire Zenodo (\glsDOI{zenodo}).
 \medskip
 
 Certains outils sont distribués à part:
 \begin{itemize}
-  \item \package{FileFinder}{\github{Descanonge/filefinder}}:
+  \item \package{filefinder}:
         un paquet python qui permet entre autres de trouver des fichiers grâce à la structure de leur nom de fichier.
-  \item \package{Xarray-Histogram}{\github{Descanonge/xarray-histogram}}:
+  \item \package{xarray-histogram}:
         un paquet python qui permet de calculer des histogrammes depuins des données gérées par Xarray.
-  \item \package{Tol-Colors}{\github{Descanonge/tol_colors}}:
+  \item \package{tol-colors}:
         un paquet python qui donne accès à des jeux de couleurs adaptés aux personnes atteintes de daltonisme. Les jeux de couleurs existaient déjà, je les ai seulement rendus accessibles sur PyPi.
-  \item \package{Dateloop}{\github{Descanonge/dateloop}}:
+  \item \package{dateloop}:
         un script bash permettant de générer des ensembles de dates.
 \end{itemize}
 \medskip
 
-J'ai également participé à un projet open-source (\href{github{xarray-contrib/cf-xarray}}{CF-Xarray}) visant à rendre accessible au paquet python XArray les conventions de métadonnées CF.\@
+J'ai également participé à un projet open-source (\glshref{cf-xarray}) visant à rendre accessible au paquet python XArray les conventions de métadonnées CF.\@
 J'y ai ajouté le support pour les variables drapeaux utilisant un masque binaire.

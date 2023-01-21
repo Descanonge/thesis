@@ -78,7 +78,8 @@ toc, section=section,
 \chapterstyle{ger}
 \pagestyle{ruled}
 \setsecnumdepth{subsubsection}
-\counterwithout{section}{chapter}
+\renewcommand{\thesection}{\arabic{section}} % No chapter number in section
+\renewcommand{\thechapter}{\Roman{chapter}}
 
 %% Page Layout
 % A4 297x210mm (global a4paper option)
@@ -89,8 +90,8 @@ toc, section=section,
 \setulmargins{3cm}{*}{*}
 % Left/Right margins, set ratio so that spine is smaller than edge
 \setlrmargins{*}{*}{1.3}
-% Set header/footer size, header taller than baseline for É in sections titles
-\setheadfoot{1.1\onelineskip}{1\onelineskip}
+% Set header size and foot skip, header taller than baseline for É in sections titles
+\setheadfoot{1.1\onelineskip}{2\onelineskip}
 \setheaderspaces{*}{\onelineskip}{*}
 % Check and apply layout
 \checkandfixthelayout
@@ -138,6 +139,10 @@ toc, section=section,
 \newcommand\refunsection[1]{%
   section~\frquote{\titleref{#1}} \cpageref{#1}}
 
+% Cross-chapter references
+\newcommand{\chapref}[2]{\cref{M-#1}, \cref*{M-#2}}
+\input{tex/cross_refs.tex}
+
 \graphicspath{{resources}}
 
 %%%%%%%%%%%%%
@@ -150,16 +155,16 @@ toc, section=section,
 }
 % Remove small caps in family names
 \DefineBibliographyExtras{french}{\restorecommand\mkbibnamefamily}
-\newcommand{\pcite}[1]{\parencite{#1}}
 
 % Citation commands where whole name/year is hyperlink
 \input{tex/bib_funcs}
 
 %%%%%%%%%%%%
 %% SI CONFIG
-\sisetup{mode=text, locale=FR}
+\sisetup{mode=math, locale=FR}
 \DeclareSIUnit\mgm{\milli\gram\per\cubic\metre}
 \DeclareSIUnit\dC{\degreeCelsius}
+\newcommand\resol[2]{\qty[parse-numbers=false]{\slashfrac{#1}{#2}}{\degree}}
 
 %%%%%%%%%%%%%%%
 %% HYPER CONFIG
@@ -169,6 +174,7 @@ toc, section=section,
   unicode = true,
   linktoc = section,
 }
+\hyperbaseurl{https://}
 
 \AtEndPreamble{
   \hypersetup{
@@ -179,10 +185,29 @@ toc, section=section,
   }
 }
 
+\glsaddkey{url}{none}%
+{\glsentryurl}{\Glsentryurl}%
+{\glsurl}{\Glsurl}{\GLSurl}
+\glsaddkey{doi}{none}%
+{\glsentrydoi}{\Glsentrydoi}%
+{\glsdoi}{\Glsdoi}{\GLSdoi}
+\newcommand\newlink[4][]{\newglossaryentry{#2}{type=links, name={#3}, url={#4}, #1}}
+\newcommand\glshref[1]{\href{\glsentryurl{#1}}{\glsentryname{#1}}}
+\newcommand\glsitem[1]{\glsentryname{#1}: \url{\glsentryurl{#1}}}
+\newcommand\glsDOI[1]{\href{doi.org/\glsentrydoi{#1}}{\textsc{DOI}: \texttt{\glsentrydoi{#1}}}}
+
+% For personnal packages in front_matter
+\newcommand\package[1]{%
+  \href{\glsentryurl{#1}}{\emph{\glsentryname{#1}}}\footnote{%
+    \glsentryname{#1}: \url{\glsentryurl{#1}}}}
+
+
 % Create glossaries
 \glsaddall
+\newignoredglossary{links}
 \makeglossaries
 \loadglsentries{gloss}
+\loadglsentries[links]{links}
 
 % Some titles of articles
 \newcommand{\articleTitle}{Satellite data reveal earlier and stronger phytoplankton blooms over fronts in the Gulf Stream region}
@@ -196,12 +221,8 @@ toc, section=section,
 \newcommand\frt{\text{front}}
 \newcommand\bkg{\text{background}}
 
-\newcommand\github[1]{https://github.com/#1}
-
-% For personnal packages in front_matter
-\newcommand\package[2]{%
-  \href{#2}{\emph{#1}}\footnote{%
-    #1: \url{#2}}}
+% For datasets
+\newcommand\dataset[1]{\nameref{#1} (\cref{#1})}
 
 
 %%%%%%%%%%%%%%%%
@@ -210,11 +231,14 @@ toc, section=section,
 \begin{document}
 \ifSubfilesClassLoaded{}{\dominitoc}
 
+\include{tex/front_page}
+
+\frontmatter
 \include{tex/front_matter}
 
-\printglossary[toctitle=Glossaire]
-
 % TOC
+\setglswidth
+\printglossary[toctitle=Glossaire]
 \clearpage
 \maketoc
 % \listoffigures
@@ -230,9 +254,9 @@ toc, section=section,
 \subfile{tex/conclusion}
 
 \begin{appendices}
-\chapter{Article: \articleCceTitle}
+\chapter[Article: \articleCceTitle][Article]{Article: \articleCceTitle}
 \label[appendix]{ax:article-cce}
-\chapter{Article: \articleReviewTitle}
+\chapter[Article: \articleReviewTitle][Article]{Article: \articleReviewTitle}
 \label[appendix]{ax:article-review}
 \end{appendices}
 
@@ -240,6 +264,7 @@ toc, section=section,
 \chapter*{Bibliographie}
 \addcontentsline{toc}{chapter}{Bibliographie}
 \printbibliography[heading=none]
+\markboth{Bibliographie}{Bibliographie}
 
 \backmatter
 
