@@ -1,0 +1,54 @@
+
+\setabbreviationstyle[acronym]{short-nolong}
+\setglossarystyle{long}
+
+\makeatletter
+% Automatically set glossary width to maximum available
+% minus largest 'short' from all entries
+\newcommand\setglswidth{
+  \glsfindwidesttoplevelname
+  \newlength{\gls@widest}
+  \settowidth{\gls@widest}{\glstreenamefmt{\@glswidestname\space}}
+  \multiply\gls@widest by -1%
+  \setlength{\glsdescwidth}{\textwidth}
+  \addtolength{\glsdescwidth}{\gls@widest}
+  \addtolength{\glsdescwidth}{-21pt} % We are overfull by 20.5pt otherwise, idk why
+  \message{glsdescwidth: \the\glsdescwidth\newline}
+}
+
+% Math symbols
+\newcommand{\am}{%
+  \@ifstar
+    \amStar%
+    \amNoStar%
+}
+\newcommand\amNoStar[1]{\glssymbol*{#1}}
+\newcommand\amStar[1]{\glssymbol*{#1}}
+\makeatother
+
+% Add glossary for links
+\glsaddkey{url}{none}%
+  {\glsentryurl}{\Glsentryurl}{\glsurl}{\Glsurl}{\GLSurl}
+\glsaddkey{doi}{none}%
+  {\glsentrydoi}{\Glsentrydoi}{\glsdoi}{\Glsdoi}{\GLSdoi}
+\newcommand\newlink[4][]{\newglossaryentry{#2}{type=links, name={#3}, url={#4}, #1}}
+\newcommand\glshref[1]{\href{\glsentryurl{#1}}{\glsentryname{#1}}}
+\newcommand\glsitem[1]{\glsentryname{#1}: \url{\glsentryurl{#1}}}
+\newcommand\glsDOI[1]{\href{doi.org/\glsentrydoi{#1}}{\textsc{doi}: \texttt{\glsentrydoi{#1}}}}
+
+% Add glossary for (math) symbols
+\newcommand\newsymbol[4][]{\newglossaryentry{#2}{type=symbols, name={#3}, description={#3}, symbol=\ensuremath{#4}, #1}}
+
+% For personnal packages in front_matter
+\newcommand\package[1]{%
+  \href{\glsentryurl{#1}}{\emph{\glsentryname{#1}}}\footnote{%
+    \glsentryname{#1}: \url{\glsentryurl{#1}}}}
+
+% Create glossaries
+\glsaddall
+\newignoredglossary{links}
+\newignoredglossary{symbols}
+\makeglossaries
+\loadglsentries{glossaries/acronyms}
+\loadglsentries[links]{glossaries/links}
+\loadglsentries[symbols]{glossaries/symbols}

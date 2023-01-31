@@ -25,6 +25,7 @@
 \usepackage{graphicx}
 \usepackage{listings}
 \usepackage{hyperref}
+\usepackage{amsmath}
 
 %%%%%%%%%%%%%%%%%%%%
 %% GLOSSARIES CONFIG
@@ -35,32 +36,7 @@ toc, section=section,
 ]{glossaries-extra}
 \usepackage{glossary-long}
 \usepackage{glossary-tree} % needed for \setglswidth
-\setabbreviationstyle[acronym]{short-nolong}
-\setglossarystyle{long}
-
-\makeatletter
-% Automatically set glossary width to maximum available
-% minus largest 'short' from all entries
-\newcommand\setglswidth{
-  \glsfindwidesttoplevelname
-  \newlength{\gls@widest}
-  \settowidth{\gls@widest}{\glstreenamefmt{\@glswidestname\space}}
-  \multiply\gls@widest by -1%
-  \setlength{\glsdescwidth}{\textwidth}
-  \addtolength{\glsdescwidth}{\gls@widest}
-  \addtolength{\glsdescwidth}{-21pt} % We are overfull by 20.5pt otherwise, idk why
-  \message{glsdescwidth: \the\glsdescwidth\newline}
-}
-
-% Math symbols
-\newcommand{\am}{%
-  \@ifstar
-    \amStar%
-    \amNoStar%
-}
-\newcommand\amNoStar[1]{\glssymbol*{#1}}
-\newcommand\amStar[1]{\glssymbol*{#1}}
-\makeatother
+\input{src/gls_setup.tex}
 
 \usepackage{cleveref}
 
@@ -116,13 +92,26 @@ toc, section=section,
   \setlength{\baselineskip}{\onelineskip}
 }
 
+\ifSubfilesClassLoaded{%
+  \renewcommand{\printtoctitle}[1]{\section*{#1}}
+  \renewcommand{\aftertoctitle}{}
+  \renewcommand{\tocheadstart}{}
+}{}
+
+\makeatletter
+\newcommand*{\curtitle}{\@currentlabelname}
+\makeatother
+
 % Create toc for a subfile
 \newcommand{\tocsubfile}{%
   \ifSubfilesClassLoaded{%
+    \renewcommand{\contentsname}{Sommaire}
+    \maketoc
+    \clearpage
     \setglswidth
     \printglossary[toctitle=Glossaire]
     \clearpage
-    \maketoc
+    \chaptermark{\curtitle}
   }{%
     \minitoc
   }
@@ -135,35 +124,32 @@ toc, section=section,
   \addcontentsline{toc}{section}{#1}
   \section*{#1}
 }
+% Unumbered subsection with an entry in the TOC
+\newcommand{\unsubsection}[1]{%
+  \phantomsection
+  \addcontentsline{toc}{subsection}{#1}
+  \section*{#1}
+}
 % Reference by name/page for those sections
 \newcommand\refunsection[1]{%
   section~\frquote{\titleref{#1}} \cpageref{#1}}
 
 % Cross-chapter references
 \newcommand{\chapref}[2]{\cref{M-#1}, \cref*{M-#2}}
-\input{tex/cross_refs.tex}
+\input{src/cross_refs.tex}
 
 \graphicspath{{resources}}
 
 %%%%%%%%%%%%%
 %% BIB CONFIG
-\addbibresource[label=refs]{texbuild/processed.bib}
-\ExecuteBibliographyOptions{
-  hyperref=true, indexing=bib, uniquename=init, giveninits=true,
-  sorting=nyt, sortcites=false, pluralothers=true,% refsection=chapter,
-  url=false, dashed=false, mergedate=false
-}
-% Remove small caps in family names
-\DefineBibliographyExtras{french}{\restorecommand\mkbibnamefamily}
-
-% Citation commands where whole name/year is hyperlink
-\input{tex/bib_funcs}
+\input{src/bib_setup}
 
 %%%%%%%%%%%%
 %% SI CONFIG
-\sisetup{mode=math, locale=FR}
+\sisetup{mode=math, locale=FR, product-units=single}
 \DeclareSIUnit\mgm{\milli\gram\per\cubic\metre}
 \DeclareSIUnit\dC{\degreeCelsius}
+\DeclareSIUnit\pixel{px}
 \newcommand\resol[2]{\qty[parse-numbers=false]{\slashfrac{#1}{#2}}{\degree}}
 
 %%%%%%%%%%%%%%%
@@ -185,38 +171,18 @@ toc, section=section,
   }
 }
 
-\glsaddkey{url}{none}%
-{\glsentryurl}{\Glsentryurl}%
-{\glsurl}{\Glsurl}{\GLSurl}
-\glsaddkey{doi}{none}%
-{\glsentrydoi}{\Glsentrydoi}%
-{\glsdoi}{\Glsdoi}{\GLSdoi}
-\newcommand\newlink[4][]{\newglossaryentry{#2}{type=links, name={#3}, url={#4}, #1}}
-\newcommand\glshref[1]{\href{\glsentryurl{#1}}{\glsentryname{#1}}}
-\newcommand\glsitem[1]{\glsentryname{#1}: \url{\glsentryurl{#1}}}
-\newcommand\glsDOI[1]{\href{doi.org/\glsentrydoi{#1}}{\textsc{DOI}: \texttt{\glsentrydoi{#1}}}}
-
-% For personnal packages in front_matter
-\newcommand\package[1]{%
-  \href{\glsentryurl{#1}}{\emph{\glsentryname{#1}}}\footnote{%
-    \glsentryname{#1}: \url{\glsentryurl{#1}}}}
-
-
-% Create glossaries
-\glsaddall
-\newignoredglossary{links}
-\makeglossaries
-\loadglsentries{tex/gloss}
-\loadglsentries[links]{tex/links}
 
 % Some titles of articles
 \newcommand{\articleTitle}{Satellite data reveal earlier and stronger phytoplankton blooms over fronts in the Gulf Stream region}
 \newcommand{\articleCceTitle}{Multi-trophic planktonic responses to fronts in a coastal upwelling ecosystem}
 \newcommand{\articleReviewTitle}{Impact of submesoscale processes on biogeochemical cycles in a changing ocean}
 
-% Maths commands
-\newcommand\moy[1]{\left[ #1 \right]}
+%%%%%%%%%%%%%%%%
+% MATHS COMMANDS
+\newcommand\moy[1]{\left[#1\right]}
 \newcommand\med[1]{\overline{#1}}
+\newcommand\norm[2][]{\left\lVert#2\right\rVert_{#1}}
+
 \newcommand\tot{\text{total}}
 \newcommand\frt{\text{front}}
 \newcommand\bkg{\text{background}}
@@ -261,10 +227,7 @@ toc, section=section,
 \end{appendices}
 
 \emergencystretch=1em
-\chapter*{Bibliographie}
-\addcontentsline{toc}{chapter}{Bibliographie}
-\printbibliography[heading=none]
-\markboth{Bibliographie}{Bibliographie}
+\printbibliography[heading=bibintoc, nottype=dataset]
 
 \backmatter
 

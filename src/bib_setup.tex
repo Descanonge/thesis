@@ -1,0 +1,97 @@
+
+\addbibresource[label=refs]{references/zotero_export.bib}
+\addbibresource[label=custom]{references/custom.bib}
+\ExecuteBibliographyOptions{
+  hyperref=true, indexing=bib, uniquename=init, giveninits=true,
+  sorting=dataset, sortcites=false, pluralothers=true,% refsection=chapter,
+  url=false, dashed=false, mergedate=false
+}
+
+% Bib setup is quite lengthy
+% Change entries
+\DeclareSourcemap{
+  \maps{
+    \map{ % Remove url from all entries
+      \step[fieldset=url, null]
+    }
+    \map{ % Only keep short title for datasets
+      \pernottype{dataset}
+      \step[fieldset=shorttitle, null]
+    }
+  }
+}
+
+% Setup bibliography headings
+\defbibheading{bibintoc}[\bibname]{%
+  \chapter*{#1}%
+  \addcontentsline{toc}{chapter}{#1}%
+  \markboth{#1}{#1}}
+\defbibheading{subbibintoc}[\bibname]{\unsection{#1}}
+\defbibheading{subsubbibintoc}[\bibname]{\unsubsection{#1}}
+
+% Remove small caps in family names
+\DefineBibliographyExtras{french}{\restorecommand\mkbibnamefamily}
+
+% New bibliography format for dataset entries
+\DeclareBibliographyDriver{dataset}{%
+  \usebibmacro{begentry}
+  \printfield{shorttitle} -- \printfield{title} % chktex 8
+  \newunit\newblock%
+  \printnames{author}%
+  \newunit%
+  \printlist{publisher}%
+  \newunit%
+  \printfield{year}%
+  \newunit\newblock%
+  \printfield{doi}
+  \usebibmacro{finentry}
+}
+
+% We sort first by label, which should only
+% be present on dataset entries.
+\DeclareSortingTemplate{dataset}{
+  \sort{
+    \field{shorttitle}
+    \field{sortname}
+    \field{author}
+    \field{year}
+    \field{title}
+  }
+}
+
+% Citations that are fully hyperlinked
+
+% All citation is hyperlinked
+\DeclareFieldFormat{citehyperref}{%
+  \DeclareFieldAlias{bibhyperref}{noformat}% Avoid nested links
+  \bibhyperref{#1}}
+
+\DeclareFieldFormat{textcitehyperref}{%
+  \DeclareFieldAlias{bibhyperref}{noformat}% Avoid nested links
+  \bibhyperref{%
+    #1%
+    \ifbool{cbx:parens}
+      {\bibcloseparen\global\boolfalse{cbx:parens}}
+      {}}}
+
+\savebibmacro{cite}
+\savebibmacro{textcite}
+
+\renewbibmacro*{cite}{%
+  \printtext[citehyperref]{%
+    \restorebibmacro{cite}%
+    \usebibmacro{cite}}}
+
+\renewbibmacro*{textcite}{%
+  \ifboolexpr{
+    (not test {\iffieldundef{prenote}} and
+      test {\ifnumequal{\value{citecount}}{1}})
+    or
+    (not test {\iffieldundef{postnote}} and
+      test {\ifnumequal{\value{citecount}}{\value{citetotal}}})
+  }
+    {\DeclareFieldAlias{textcitehyperref}{noformat}}
+    {}%
+  \printtext[textcitehyperref]{%
+    \restorebibmacro{textcite}%
+    \usebibmacro{textcite}}}

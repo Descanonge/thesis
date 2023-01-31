@@ -1,46 +1,30 @@
 
 PROJECT := thesis
 
-BUILDDIR := texbuild
+BUILD_DIR := texbuild
 RES := resources
 REF := references
 
-BIB_ZOTERO := zotero_export
-BIB_CUSTOM := custom
-BIB_OUTPUT := processed
-BIB_TMP := tmp
-BIB_PARSER := src/parse_bib.py
-
 MAIN := index
-SUBNAMES := intro méthodes res_chl res_phénologie conclusion
-SUBFILES = $(foreach sn,$(SUBNAMES),tex/$(sn).tex)
+SUB_NAMES := intro méthodes res_chl res_phénologie conclusion
+SUB_FILES = $(foreach sn,$(SUB_NAMES),tex/$(sn).tex)
 
-AUXDIR_FLAGS := -auxdir="$(BUILDDIR)" -emulate-aux-dir
+AUXDIR_FLAGS := -auxdir="$(BUILD_DIR)" -emulate-aux-dir
 LMK_FLAGS := -lualatex -interaction=batchmode -recorder -quiet
 
-$(foreach file,ZOTERO CUSTOM,$(eval BIB_$(file) = $(REF)/$(BIB_$(file)).bib))
-$(foreach file,TMP OUTPUT,$(eval BIB_$(file) = $(BUILDDIR)/$(BIB_$(file)).bib))
-
-.PHONY: all clean $(MAIN) $(SUBNAMES)
+.PHONY: all clean $(MAIN) $(SUB_NAMES)
 
 all: index
 
-bib: $(BIB_OUTPUT)
-
-$(BIB_OUTPUT): $(BIB_ZOTERO) $(BIB_CUSTOM) $(BIB_PARSER)
-	mkdir -p $(BUILDDIR)
-	cat $(BIB_ZOTERO) $(BIB_CUSTOM) > $(BIB_TMP)
-	python $(BIB_PARSER) $(BIB_TMP) $(BIB_OUTPUT)
-
-$(SUBNAMES):%: tex/%.tex $(MAIN).tex $(BIB_OUTPUT)
-	mkdir -p $(BUILDDIR)/tex
+$(SUB_NAMES):%: tex/%.tex
+	mkdir -p $(BUILD_DIR)/tex
 	latexmk $(LMK_FLAGS) $(AUXDIR_FLAGS) $<
 
-$(MAIN): $(MAIN).tex $(SUBFILES) $(BIB_OUTPUT)
-	mkdir -p $(BUILDDIR)/tex
+$(MAIN): $(MAIN).tex
+	mkdir -p $(BUILD_DIR)/tex
 	latexmk $(LMK_FLAGS) $(AUXDIR_FLAGS) $<
 
 clean:
-	rm -rf $(BUILDDIR)
+	rm -rf $(BUILD_DIR)
 	rm -f $(MAIN).fls
-	rm -f $(foreach sf,$(SUBFILES),$(sf).fls)
+	rm -f $(foreach sf,$(SUB_NAMES),tex/$(sf).fls)
