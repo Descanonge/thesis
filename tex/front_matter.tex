@@ -19,22 +19,29 @@ Remerciements \dots
 Lors de mon travail de thèse, j'ai été amené à écrire des outils qu'il m'a parru utile de rendre publics et accessibles.
 <appuyer sur l'importance de l'open source et de faciliter la reproducibilité.>
 Tous les codes utilisés sont disponibles sur un dépôt public\footnote{
-  \url{\glsentryurl{gitlab}}
-}, et sur un répertoire Zenodo (\glsDOI{zenodo}).
+  \glsurl{gitlab}
+}, et sur un répertoire Zenodo (\glsurl{zenodo}).
 \medskip
 
 Certains outils sont distribués à part:
 \begin{itemize}
-  \item \package{filefinder}:
-        un paquet python qui permet entre autres de trouver des fichiers grâce à la structure de leur nom de fichier.
-  \item \package{xarray-histogram}:
+  \item \citesoft{filefinder}:
+        un paquet python qui permet, entre autres, de trouver des fichiers grâce à la structure de leur nom de fichier.
+        <Expliquer que j'utilise ça pour toutes mes bases de données.>
+  \item \citesoft{xarray-histogram}:
         un paquet python qui permet de calculer des histogrammes depuins des données gérées par Xarray.
-  \item \package{tol-colors}:
-        un paquet python qui donne accès à des jeux de couleurs adaptés aux personnes atteintes de daltonisme. Les jeux de couleurs existaient déjà, je les ai seulement rendus accessibles sur PyPi.
-  \item \package{dateloop}:
+  \item \citesoft{tol-colors}:
+        un paquet python qui donne accès à des jeux de couleurs adaptés aux personnes atteintes de daltonisme. Les jeux de couleurs ont été développés par Paul Tol\footnote{voir~\glsurl{paultol}}, je les ai seulement rendus accessibles sur PyPi, et plus facilement modifiables.
+  \item \citesoft{dateloop}:
         un script bash permettant de générer des ensembles de dates.
 \end{itemize}
 \medskip
 
-J'ai également participé à un projet open-source (\glshref{cf-xarray}) visant à rendre accessible au paquet python XArray les conventions de métadonnées CF.\@
+J'ai également participé à un projet open-source (\citesoft{cf-xarray}~\href{https://github.com/xarray-contrib/cf-xarray/pull/354}{\#354}) visant à rendre accessible au paquet python XArray les conventions de métadonnées CF.\@
 J'y ai ajouté le support pour les variables drapeaux utilisant un masque binaire.
+
+{
+  \raggedright
+  \emergencystretch=\textwidth
+  \printbibliography[heading=none, type=software, keyword=personnal]
+}

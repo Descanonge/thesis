@@ -1,25 +1,38 @@
 
-\addbibresource[label=refs]{references/zotero_export.bib}
-\addbibresource[label=custom]{references/custom.bib}
+\addbibresource{references/software.bib}
+\addbibresource{references/zotero_export.bib}
+\addbibresource{references/custom.bib}
 \ExecuteBibliographyOptions{
-  hyperref=true, indexing=bib, uniquename=init, giveninits=true,
-  sorting=dataset, sortcites=false, pluralothers=true,% refsection=chapter,
-  url=false, dashed=false, mergedate=false
+  abbreviate = true,
+  dashed = false,
+  doi = true,
+  eprint = false,
+  hyperref = true,
+  indexing = bib,
+  isbn = false,
+  giveninits = true,
+  maxnames = 100,
+  maxcitenames = 1,
+  mergedate = false,
+  pluralothers = true,
+  % refsection = chapter,
+  sorting = nyt,
+  sortcites = false,
+  uniquename = init,
+  url = false,
 }
 
-% Bib setup is quite lengthy
-% Change entries
-\DeclareSourcemap{
-  \maps{
-    \map{ % Remove url from all entries
-      \step[fieldset=url, null]
-    }
-    \map{ % Only keep short title for datasets
-      \pernottype{dataset}
-      \step[fieldset=shorttitle, null]
-    }
-  }
+% Add filter for 'normal entries'
+\defbibfilter{normal}{%
+  not type=software
+  and not type=dataset
 }
+
+\newcommand{\bibnameDataset}{Références données}
+
+% Sort dataset, software and rest separately
+\DeclarePresort[dataset]{dd}
+\DeclarePresort[software]{ss}
 
 % Setup bibliography headings
 \defbibheading{bibintoc}[\bibname]{%
@@ -34,8 +47,8 @@
 
 % New bibliography format for dataset entries
 \DeclareBibliographyDriver{dataset}{%
-  \usebibmacro{begentry}
-  \printfield{shorttitle} -- \printfield{title} % chktex 8
+  \usebibmacro{begentry}%
+  \printfield{shorttitle} -- \printfield{title}% chktex 8
   \newunit\newblock%
   \printnames{author}%
   \newunit%
@@ -43,23 +56,58 @@
   \newunit%
   \printfield{year}%
   \newunit\newblock%
-  \printfield{doi}
-  \usebibmacro{finentry}
+  \printfield{doi}%
+  \usebibmacro{finentry}%
 }
 
-% We sort first by label, which should only
-% be present on dataset entries.
-\DeclareSortingTemplate{dataset}{
-  \sort{
-    \field{shorttitle}
-    \field{sortname}
-    \field{author}
-    \field{year}
-    \field{title}
+% New bibliography format for software entries
+\DeclareBibliographyDriver{software}{%
+  \usebibmacro{begentry}%
+  \printfield{shorttitle} -- \printfield{title}% chktex 8
+  \setunit{\addspace}%
+  \printfield{type}%
+  \setunit{,\addspace}%
+  \printfield{version}%
+  \newunit\newblock%
+  \printnames{author}%
+  \newunit%
+  \printlist{publisher}%
+  \newunit\newblock
+  \printfield{doi}%
+  \newunit%
+  \printfield{url}%
+  \usebibmacro{finentry}%
+}
+
+\DeclareSourcemap{
+  \maps{
+    \map{
+      \pertype{software}
+      % Set sortkey to shorttitle so that software is sorted by name
+      \step[fieldsource=shorttitle]
+      \step[fieldset=sortkey, origfieldval]
+      % Alias pypi (which is not supported by data model) to doi
+      \step[fieldsource=pypi, fieldtarget=doi]
+    }
   }
 }
 
-% Citations that are fully hyperlinked
+\DeclareFieldFormat[software]{type}{\mkbibparens{#1}}
+\DeclareFieldFormat[software]{url}{\mkbibacro{url}\addcolon~\url{#1}}
+\DeclareFieldFormat[software]{doi}{\mkbibacro{pypi}\addcolon~\href{https://pypi.org/project/#1}{#1}}
+
+% Add abbreviation for version
+\DefineBibliographyStrings{french} {%
+  version = {ver\adddot},%
+}
+
+% Citation command for software
+% (too much hassle to rewrite textcite or cite)
+\DeclareCiteCommand{citesoft}{}{%
+  \printfield[citehyperref]{shorttitle}%
+}{, }{}
+
+% Citations commands that are fully hyperlinked
 
 % All citation is hyperlinked
 \DeclareFieldFormat{citehyperref}{%

@@ -1,4 +1,13 @@
-\documentclass[french, a4paper, 12pt, twoside, openright, draft]{memoir}
+\documentclass[
+12pt,
+a4paper,
+french,
+openright,
+twoside,
+hyperfootnotes=false, % put here otherwise option clash
+draft,
+]
+{memoir}
 
 \usepackage{geometry}
 \usepackage[T1]{fontenc}
@@ -32,7 +41,7 @@
 \usepackage[
 xindy, shortcuts=abbr,
 nostyles, nonumberlist,
-toc, section=section,
+toc, section=section, symbols,
 ]{glossaries-extra}
 \usepackage{glossary-long}
 \usepackage{glossary-tree} % needed for \setglswidth
@@ -131,8 +140,10 @@ toc, section=section,
   \section*{#1}
 }
 % Reference by name/page for those sections
+\makeatletter
 \newcommand\refunsection[1]{%
-  section~\frquote{\titleref{#1}} \cpageref{#1}}
+  \cref@section@name~\frquote{\titleref{#1}} \cpageref{#1}}
+\makeatother
 
 % Cross-chapter references
 \newcommand{\chapref}[2]{\cref{M-#1}, \cref*{M-#2}}
@@ -160,7 +171,6 @@ toc, section=section,
   unicode = true,
   linktoc = section,
 }
-\hyperbaseurl{https://}
 
 \AtEndPreamble{
   \hypersetup{
@@ -226,8 +236,11 @@ toc, section=section,
 \label[appendix]{ax:article-review}
 \end{appendices}
 
-\emergencystretch=1em
-\printbibliography[heading=bibintoc, nottype=dataset]
+{
+  \defcounter{biburlnumpenalty}{0}
+  \emergencystretch=1em
+  \printbibliography[heading=bibintoc, filter=normal]
+}
 
 \backmatter
 

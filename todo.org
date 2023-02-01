@@ -16,6 +16,10 @@ mot / phrases à améliorer entre chevrons
 
 * Spelling
 
+* Remove datasets from bibliography ?
+ou dans une sous-section
+ou fullcitenote ? alors changer le format pour avoir Titre - Auteur - Publication - année - lien
+
 * Repeated words
 #+begin_src
 \<\(\w+\)\>\s-+\<\1\>
@@ -26,7 +30,3 @@ mot / phrases à améliorer entre chevrons
 \>\s-\s+
 \>\s-\{2,\}
 #+end_src* Administratif :admin:
-
-#+begin_src
-ilegfgnfn ine itrl
-#+end_src

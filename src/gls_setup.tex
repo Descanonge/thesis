@@ -1,11 +1,12 @@
 
-\setabbreviationstyle[acronym]{short-nolong}
+\makeglossaries
+
 \setglossarystyle{long}
 
 \makeatletter
 % Automatically set glossary width to maximum available
 % minus largest 'short' from all entries
-\newcommand\setglswidth{
+\newcommand{\setglswidth}{%
   \glsfindwidesttoplevelname
   \newlength{\gls@widest}
   \settowidth{\gls@widest}{\glstreenamefmt{\@glswidestname\space}}
@@ -15,40 +16,72 @@
   \addtolength{\glsdescwidth}{-21pt} % We are overfull by 20.5pt otherwise, idk why
   \message{glsdescwidth: \the\glsdescwidth\newline}
 }
-
-% Math symbols
-\newcommand{\am}{%
-  \@ifstar
-    \amStar%
-    \amNoStar%
-}
-\newcommand\amNoStar[1]{\glssymbol*{#1}}
-\newcommand\amStar[1]{\glssymbol*{#1}}
 \makeatother
 
-% Add glossary for links
-\glsaddkey{url}{none}%
-  {\glsentryurl}{\Glsentryurl}{\glsurl}{\Glsurl}{\GLSurl}
-\glsaddkey{doi}{none}%
-  {\glsentrydoi}{\Glsentrydoi}{\glsdoi}{\Glsdoi}{\GLSdoi}
-\newcommand\newlink[4][]{\newglossaryentry{#2}{type=links, name={#3}, url={#4}, #1}}
-\newcommand\glshref[1]{\href{\glsentryurl{#1}}{\glsentryname{#1}}}
-\newcommand\glsitem[1]{\glsentryname{#1}: \url{\glsentryurl{#1}}}
-\newcommand\glsDOI[1]{\href{doi.org/\glsentrydoi{#1}}{\textsc{doi}: \texttt{\glsentrydoi{#1}}}}
-
-% Add glossary for (math) symbols
-\newcommand\newsymbol[4][]{\newglossaryentry{#2}{type=symbols, name={#3}, description={#3}, symbol=\ensuremath{#4}, #1}}
-
-% For personnal packages in front_matter
-\newcommand\package[1]{%
-  \href{\glsentryurl{#1}}{\emph{\glsentryname{#1}}}\footnote{%
-    \glsentryname{#1}: \url{\glsentryurl{#1}}}}
-
-% Create glossaries
-\glsaddall
-\newignoredglossary{links}
-\newignoredglossary{symbols}
-\makeglossaries
+%% Acronyms glossary
+\setabbreviationstyle[acronym]{short-nolong}
 \loadglsentries{glossaries/acronyms}
-\loadglsentries[links]{glossaries/links}
-\loadglsentries[symbols]{glossaries/symbols}
+
+%% Symbols glossary
+\newignoredglossary{symbol}
+\setabbreviationstyle[symbol]{nolong-short}
+\glssetcategoryattribute{symbol}{nohyper}{true}
+
+\newcommand{\newsymbol}[4][]{%
+  \newabbreviation[#1, category=symbol,
+  sort={#2}, symbol={#3}
+  ]{#2}{\(#3\)}{#4}
+}
+\newcommand{\am}[1]{\glssymbol{#1}}
+
+\loadglsentries[symbol]{glossaries/symbols}
+
+%% Links glossary
+% This allows to define URLs that can be used in the document
+\newignoredglossary{link}
+\glssetcategoryattribute{link}{nohyper}{true}
+\glssetcategoryattribute{link}{regular}{true}
+
+% Add keys
+\glsaddkey{url}{none}{\glsentryurl}{\Glsentryurl}%
+{\glsurlorg}{\Glsurlorg}{\GLSurlorg}
+\glsaddkey{doi}{none}{\glsentrydoi}{\Glsentrydoi}%
+{\glsdoiorg}{\Glsdoiorg}{\GLSdoiorg}
+
+\newcommand{\newlink}[4][]{%
+  \newglossaryentry{#2}{type=link, category=link,%
+    name={#3}, url={#4}, #1}%
+}
+\newcommand{\newdoi}[4][]{%
+  \newglossaryentry{#2}{type=link, category=link,%
+    name={#3}, url={https://doi.org/#4}, doi={#4}, #1}%
+}
+
+\newcommand{\glshref}[2][]{%
+  \href{\glsentryurl{#2}}{%
+    \ifstrempty{#1}{\glsentryname{#2}}{#1}%
+  }%
+}
+\newcommand{\glsurl}[1]{%
+  \ifglsfieldeq{#1}{doi}{none}%
+  {%
+    \url{\glsentryurl{#1}}%
+  }{%
+    \textsc{doi}:~\href{\glsentryurl{#1}}{\texttt{\glsentrydoi{#1}}}%
+  }%
+}
+
+\loadglsentries[link]{glossaries/links}
+
+%% Other abbreviations
+\newignoredglossary{other}
+\glssetcategoryattribute{other}{nohyper}{true}
+\setabbreviationstyle[other]{long}
+
+\newcommand{\newabbreviationOther}[4][]{%
+  \newglossaryentry{#2}{type=other, category=other,%
+    name={#3}, short={#3}, long={#4}, #1}%
+}
+\newcommand{\newalias}[2]{\newglossaryentry{#1}{name={#1}, alias=#2}}
+
+\loadglsentries[other]{glossaries/other}
