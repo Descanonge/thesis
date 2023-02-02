@@ -22,22 +22,96 @@
 \setabbreviationstyle[acronym]{short-nolong}
 \loadglsentries{glossaries/acronyms}
 
+
 %% Symbols glossary
 \newignoredglossary{symbol}
-\setabbreviationstyle[symbol]{nolong-short}
-\glssetcategoryattribute{symbol}{nohyper}{true}
 
+% Custom style for Math symbols
+% When an abbreviation is added, we should have
+%   short = \(<command>\)
+%   long = description
+%   symbol = <command>
+% This is achieved with \newsymbol
+% The style only display short (so put in math mode).
+% To input the symbol when already in math mode use \am{<label>}
+% If needed the full format display <long>~\(<command>\)
+\newabbreviationstyle{short-symbol}%
+{%
+  \GlsXtrUseAbbrStyleSetup{nolong-short}%
+  \renewcommand*{\CustomAbbreviationFields}{%
+    name={\the\glslabeltok},%
+    sort={\the\glslabeltok},%
+    first={\the\glsshorttok},%
+    firstplural={\the\glsshorttok},%
+    text={\the\glsshorttok},%
+    plural={\the\glsshorttok},%
+    description={\the\glslongtok}}%
+  \renewcommand*{\GlsXtrPostNewAbbreviation}{%
+    \glssetattribute{\the\glslabeltok}{regular}{true}%
+    \glssetattribute{\the\glslabeltok}{nohyper}{true}%
+  }%
+}
+{%
+  \GlsXtrUseAbbrStyleFmts{nolong-short}%
+  \renewcommand*{\glsfirstlongfont}[1]{\glsfirstlongdefaultfont{##1}}%
+  \renewcommand*{\glslongfont}[1]{\glslongdefaultfont{##1}}%
+  \renewcommand*{\glsxtrinlinefullformat}[2]{%
+    \protect\glsfirstlongfont{\glsaccesslong{##1}%
+      \ifglsxtrinsertinside##2\fi}%
+    \ifglsxtrinsertinside\else##2\fi~%
+    \glsaccessshort{##1}%
+  }%
+  \renewcommand*{\glsxtrinlinefullplformat}[2]{%
+    \protect\glsfirstlongfont{\glsaccesslongpl{##1}%
+     \ifglsxtrinsertinside##2\fi}%
+    \ifglsxtrinsertinside\else##2\fi~%
+    \glsaccessshortpl{##1}%
+  }%
+  \renewcommand*{\Glsxtrinlinefullformat}[2]{%
+    \protect\glsfirstlongfont{\Glsaccesslong{##1}%
+      \ifglsxtrinsertinside##2\fi}%
+    \ifglsxtrinsertinside\else##2\fi~%
+    \glsaccessshort{##1}%
+  }%
+  \renewcommand*{\Glsxtrinlinefullplformat}[2]{%
+    \protect\glsfirstlongfont{\Glsaccesslongpl{##1}%
+       \ifglsxtrinsertinside##2\fi}%
+     \ifglsxtrinsertinside\else##2\fi~%
+    \glsaccessshort{##1}%
+  }%
+  \renewcommand*{\glsxtrfullformat}[2]{%
+    \glsaccessshort{##1}\ifglsxtrinsertinside##2\fi%
+    \ifglsxtrinsertinside\else##2\fi
+  }%
+  \renewcommand*{\glsxtrfullplformat}[2]{%
+    \glsaccessshort{##1}\ifglsxtrinsertinside##2\fi%
+    \ifglsxtrinsertinside\else##2\fi
+  }%
+  \renewcommand*{\Glsxtrfullformat}[2]{%
+    \glsaccessshort{##1}\ifglsxtrinsertinside##2\fi%
+    \ifglsxtrinsertinside\else##2\fi
+  }%
+  \renewcommand*{\Glsxtrfullplformat}[2]{%
+    \glsaccessshort{##1}\ifglsxtrinsertinside##2\fi%
+    \ifglsxtrinsertinside\else##2\fi
+  }%
+}
+
+\setabbreviationstyle[symbol]{short-symbol}
+
+% \newsymbol[<options>]{<label>}{<symbol>}{<long>}
 \newcommand{\newsymbol}[4][]{%
   \newabbreviation[#1, category=symbol,
   sort={#2}, symbol={#3}
   ]{#2}{\(#3\)}{#4}
 }
-\newcommand{\am}[1]{\glssymbol{#1}}
+\newcommand{\am}[1]{\glsentrysymbol{#1}}
 
 \loadglsentries[symbol]{glossaries/symbols}
 
 %% Links glossary
 % This allows to define URLs that can be used in the document
+% Should be used with \glsurl, \glsentryurl et \glshref
 \newignoredglossary{link}
 \glssetcategoryattribute{link}{nohyper}{true}
 \glssetcategoryattribute{link}{regular}{true}
@@ -85,3 +159,5 @@
 \newcommand{\newalias}[2]{\newglossaryentry{#1}{name={#1}, alias=#2}}
 
 \loadglsentries[other]{glossaries/other}
+
+\glsaddall

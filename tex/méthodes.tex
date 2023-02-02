@@ -203,14 +203,17 @@ Enlever les côtes pour éviter régime cotier.
 \section{Heterogeneity Index}
 \label{sec:HI}
 
-nécessité de classer pixels des fronts (et non fronts), pour chaque image/jour.
-comme vu en intro, plusieurs possibilité, on va se concentrer sur ce qui a été fait pour la submeso.
-On reprend l'outil de Liu levine, dont on va donner la définition ici, ainsi que les modifs qu'on y a apporté.
+Comme précisé en introduction, pour quantifier l'effets des fronts sur le phytoplancton il est nécessaire de détecter les fronts, \ab{ie} classer chaque pixel comme appartenant à un front ou non (\ab{cad} à l'arrière"-plan ou \enquote{background}).
+La méthode retenue ici suit celle présentée par \textcite{liu_2016} --- qui par son utilisation d'une fenêtre glissante s'apparente elle même à celle de \textcite{cayula_1992}.
+Cette section défini cette méthode et notre implémentation, tout en indiquant les différences avec celle de \textcite{liu_2016}.
 
 \subsection{Définition et implémentation}
 \label{sec:HI-definition}
 
-On rapelle qu'on veut quantifier bimodalité, mais aussi l'écart"-type (équivalent au gradient) et le coefficient d'assymétrie (\enquote{skewness}).
+La méthode de \textcite{liu_2016} cherche à quantifier plusieurs variables dont les fortes valeurs sont associées à la présence de fronts et autres structures de fine échelle.
+<SUR QUEL CHAMP ?>
+Ces variables sont calculées dans une fenêtre dont la taille reflète la taille des structures à détecter.
+Ces variables sont la bimodalité, l'écart"-type (qui reflète d'ailleurs le gradient du champ), et le coefficient d'asymétrie (\enquote{skewness}).
 On calcule toutes ces composantes dans une fenêtre glissante dont la taille permet de limiter la taille caractéristique des structures à chercher.
 
 On sélectionne une taille de fenêtre d'ordre de grandeur une dizaine de kilomètres de large.
@@ -223,18 +226,18 @@ Pour chaque pixel la valeur du HI sera calculé d'après une boite centrée sur 
 
 Pour chaque position de la boite, on regarde pour les \(N\) valeurs de SST définies \(s_i\) (cad sans nuages) différentes composantes.
 
-L'écart"-type \ab{std} défini comme:
+L'écart"-type~\ab{std} est défini comme:
 \begin{equation}
   \am{std} = \sqrt{\frac{1}{N-1} \sum_i {\left(s_i - \moy{s} \right)}^2},
 \end{equation}
 avec \(\moy{s}\) la moyenne des valeurs de \ab{SST}.
 
-Le coefficient d'asymétrie \ab{skew} est calculé comme le moment d'ordre trois d'une variable centrée réduite:
+Le coefficient d'asymétrie~\ab{skew} est calculé comme le moment d'ordre trois d'une variable centrée réduite:
 \begin{equation}
   \am{skew} = \frac{\sum_i {\left(s_i - \moy{s}\right)}^3} {N \sigma^3}.
 \end{equation}
 
-Enfin, on cherche à quantifier la bimodalité de la distribution des valeurs de \ab{SST}.
+Enfin, on cherche à quantifier la bimodalité~\ab{bimod} de la distribution des valeurs de \ab{SST}.
 On calcule histogramme.
 On calcule la norme \(\mathbb{L}^2\) entre:
 \begin{equation}
@@ -316,7 +319,7 @@ Vérification que les histogrammes sont well-behaved pour prendre des valeurs.
 \label{sec:extraction-surplus}
 
 Afin de comparer les valeurs de diverse variables à l'intérieur et à l'extérieur des fronts, nous définissons deux métriques.
-La première est l'excès \ab{exces} de \ab{chl} (\enquote{excess} dans l'article \chapref{sec:article-bg}{chp:res-chl}), qui compare localement les valeurs dans les fronts et le background. On le définit simplement comme la différence relative entre la médiane de \ab{chl} dans et hors des fronts:
+La première est l'excès~\ab{exces} de \ab{chl} (\enquote{excess} dans l'article \chapref{sec:article-bg}{chp:res-chl}), qui compare localement les valeurs dans les fronts et le background. On le définit simplement comme la différence relative entre la médiane de \ab{chl} dans et hors des fronts:
 \begin{equation}
   \am{exces} = \frac{\med{\am{chl}}_\frt - \med{\am{chl}}_\bkg}
   {\med{\am{chl}}_\bkg} .
@@ -325,7 +328,7 @@ Le calcul est fait pour les fronts faibles et forts de la même manière, le bac
 L'excès est calculé dans des bandes de latitudes larges de \ang{5}, afin de minimiser l'influence des gradients de grande échelle.
 
 Cette métrique ne tient compte que de la distribution des valeurs de \ab{chl}, et ne représente pas la quantité totale présente ou la proportion de fronts dans une zone donnée.
-Ainsi on définit le surplus \ab{surplus} de \ab{chl} (\enquote{biome surplus} dans l'article \chapref{sec:article-bg}{chp:res-chl}) dans toute un biome comme la différence relative entre la moyenne de \ab{chl} dans tout un biome et la moyenne dans le background:
+Ainsi on définit le surplus~\ab{surplus} de \ab{chl} (\enquote{biome surplus} dans l'article \chapref{sec:article-bg}{chp:res-chl}) dans toute un biome comme la différence relative entre la moyenne de \ab{chl} dans tout un biome et la moyenne dans le background:
 \begin{equation}
   \am{surplus} = \frac{\moy{\am{chl}}_\tot - \moy{\am{chl}}_\bkg}
   {\moy{\am{chl}}_\bkg} .
