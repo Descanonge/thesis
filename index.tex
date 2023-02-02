@@ -36,6 +36,13 @@ draft,
 \usepackage{hyperref}
 \usepackage{amsmath}
 
+
+\useshorthands*{"}
+% Hard hyphen, no breaks (but word after is breakable)
+\defineshorthand{"~}{\babelhyphen{nobreak}}
+% Hard hyphen, breakable (word after also breakable)
+\defineshorthand{"-}{\babelhyphen{hard}}
+
 %%%%%%%%%%%%%%%%%%%%
 %% GLOSSARIES CONFIG
 \usepackage[

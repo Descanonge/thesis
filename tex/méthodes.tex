@@ -7,6 +7,8 @@
 
 \tocsubfile
 
+C'est un petit"~test.
+
 \section{Données}
 \label{sec:donnees}
 
@@ -16,7 +18,7 @@ Nous savions qu'il allait être nécessaire de combiner plusieurs jeux de donné
 Cela a donc informé le choix des données, ainsi que la création des outils nécessaires à la gestion de plusieurs sets de données.
 
 Plusieurs options ont été considérées, notamment pour la \ab{SST}.
-Elles sont reportées ci-dessous, même si elles ne sont pas utilisées pour le reste des résultats.
+Elles sont reportées ci"-dessous, même si elles ne sont pas utilisées pour le reste des résultats.
 
 \subsection{SST}
 \label{sec:donnees-sst}
@@ -58,8 +60,8 @@ Il est néanmoins possible de trouver d'autres jeux de données permettant notre
 
 Le produit suivant, désigné ici \af{MUR} est développé et distribué par le \ab{GHRSST} au JPL Physical Oceanography DAAC\footfullcite{sst_mur}.
 Il présente les avantages d'être distribué à une résolution kilométrique et sans nuages grâce à une méthode d'interpolation par vaguelettes \parencite{chin_2017}.
-Il intègre de nombreuses sources provenant de plusieurs capteurs infrarouges et micro-ondes, ainsi que de mesures in-situ.
-La grande couverture spatiale de ce produit se fait donc par l'utilisation de mesures non-contraintes par la couverture nuageuse (\ab{cad} micro-ondes et in-situ), mais qui présente une résolution bien plus faible.
+Il intègre de nombreuses sources provenant de plusieurs capteurs infrarouges et micro"-ondes, ainsi que de mesures in-situ.
+La grande couverture spatiale de ce produit se fait donc par l'utilisation de mesures non"-contraintes par la couverture nuageuse (\ab{cad} micro-ondes et in-situ), mais qui présente une résolution bien plus faible.
 Le champ de \ab{SST} se retrouve donc lissé à la fois par l'interpolation et par l'inclusion de ces mesures.
 
 L'utilisation du produit suivant cherche à palier à ce problème.
@@ -68,7 +70,7 @@ L'utilisation du produit suivant cherche à palier à ce problème.
 \label{sec:donnees-sst-esacci}
 
 Ce produit est distribué conjointement par l'\ab{ESA} \ab{SST} \ab{CCI} et le \ab{C3S}.
-Il agglomère les mesures de tous les capteurs infrarouges disponibles depuis 1981, ce qui comprend 11 \ab{AVHRR} à bord des satellites \ab{MetOp}[-A] et \ab{NOAA} (entre les itérations 6 et 19) et trois \ab{ATSR} à bord de \ab{ERS} 1 et 2, et Envisat.
+Il agglomère les mesures de tous les capteurs infrarouges disponibles depuis 1981, ce qui comprend 11 \ab{AVHRR} à bord des satellites \ab{MetOp}["~A] et \ab{NOAA} (entre les itérations 6 et 19) et trois \ab{ATSR} à bord de \ab{ERS} 1 et 2, et Envisat.
 Cela donne au moins deux capteurs en fonctionnement simultané, et au moins trois depuis 1992.
 Outre la bonne couverture obtenue, l'uniformité des capteurs permet d'obtenir un jeu de données stable dans le temps, pouvant servir à la détection de tendance climatiques \parencite{merchant_2019}.
 
@@ -90,7 +92,7 @@ Enfin, le produit L4 regroupe l'ensemble des capteurs en utilisant le schéma d'
 Ce produit donne ainsi un champ de \ab{SST} sans nuages, estimé par une combinaison des observations satellites et de la prévision d'un modèle numérique d'un jour sur l'autre.
 L'absence de couverture nuageuse et la simplicité d'usage se fait au détriment du lissage inévitable des structures les plus fines.
 
-Une estimation quantitative du lissage due à l'interpolation est compliqué, car la paramétrisation dépend de la variabilité du champ de température à J-1.
+Une estimation quantitative du lissage due à l'interpolation est compliqué, car la paramétrisation dépend de la variabilité du champ de température à J"~1.
 On peut néanmoins imaginer que le champ de \ab{SST} produit est plus lissé dans les zones normalement nuageuses, et potentiellement plus éloigné de la réalité (voir \cref{sec:donnees-sst-reanalyses}).
 Il est tout de même possible de mitiger ces effets en ne comptabilisant dans nos résultats seulement
 À noter qu'il serait également possible d'utiliser les erreurs d'intégration associées à chaque pixel, mais cela n'a pas été exploré.
@@ -119,7 +121,7 @@ Tôt dans ce projet, certaines pistes de travail (\ab{par-ex} le suivi temporel 
 \subsection{Chlorophylle}
 \label{sec:donnees-chl}
 
-Pour le champ de \al{chl}, nous utilisons les données produites dans le cadre du projet GlobColour, développées, validées et distribuées par ACRI-ST, France \parencite{maritorena_2002}.
+Pour le champ de \al{chl}, nous utilisons les données produites dans le cadre du projet GlobColour, développées, validées et distribuées par ACRI"~ST, France \parencite{maritorena_2002}.
 La version \enquote{MultiYear}, au niveau L3 est utilisée.
 On obtient des données à une résolution de \qty{4}{\km}, journalière, avec des nuages.
 Les données sont récupérées sur \gls{CMEMS}\footfullcite{chl_globcolour}.
@@ -136,7 +138,7 @@ Cela motive à utiliser un produit \ab{SST} de résolution légèrement moindre 
 Cela renforce notre choix pour les données \dataset{sec:donnees-sst-esacci}, en défaveur du set \dataset{sec:donnees-sst-mur}.
 
 Les deux jeux choisis pour la \ab{SST} et \ab{chl} ont des résolutions spatiales similaires mais néanmoins légèrement différentes.
-Les deux grilles sont plate-carrées (régulières en latitude et longitude) mais le champ de \ab{chl} est défini sur une grille \href{https://epsg.io/32662}{\texttt{EPSG:32662}} de résolution~\resol{1}{24} (\qty{\approx 4.6}{\km}); et le champ de \ab{SST} sur une grille \href{https://epsg.io/4326}{\texttt{EPSG:4326}} de résolution~\resol{1}{20} (\qty{\approx 5.6}{\km}).
+Les deux grilles sont plate"-carrées (régulières en latitude et longitude) mais le champ de \ab{chl} est défini sur une grille \glshref{epsg-chl} de résolution~\resol{1}{24}~(\qty{\approx 4.6}{\km}); et le champ de \ab{SST} sur une grille \glshref{epsg-sst} de résolution~\resol{1}{20}~(\qty{\approx 5.6}{\km}).
 
 Sachant que les produits de composition du phytoplancton dont nous disposions (pas décrits ici) sont définis sur la même grille que la Chlorophylle, nous adaptons la \ab{SST} cette grille par une simple interpolation bi-linéaire.
 
@@ -144,8 +146,8 @@ Sachant que les produits de composition du phytoplancton dont nous disposions (p
 \label{sec:donnees-bathymetrie}
 
 Nous utilisons les données de bathymétrie ETOPO1\footfullcite{etopo1}, fournies par \ab{NOAA}.
-Les données sont distribuées sur une grille plate-carrée à une résolution d'une minute d'arc~(\resol{1}{60}), soit trois fois trop pour nous.
-Nous sous-échantillonons les données en appliquant une moyenne à chaque groupe de 3\texttimes 3 pixel, puis en interpolant le résultat sur la même grille que le reste des données de la même manière que pour la \ab{SST}.
+Les données sont distribuées sur une grille plate"-carrée à une résolution d'une minute d'arc~(\resol{1}{60}), soit trois fois trop pour nous.
+Nous sous"-échantillonons les données en appliquant une moyenne à chaque groupe de 3\texttimes 3 pixel, puis en interpolant le résultat sur la même grille que le reste des données de la même manière que pour la \ab{SST}.
 
 \section{Délimitations des sous-régions}
 \label{sec:delimitations-regions}
@@ -153,11 +155,10 @@ Nous sous-échantillonons les données en appliquant une moyenne à chaque group
 Zone d'étude hétérogène, notamment en biologie.
 Il apparait 3 régimes différents discuté en intro.
 Pour limiter les comparaisons dans des zones homogènes on découpe la zone d'étude en 3 sous régions.
-
 Une première zone correspondant à la gyre subtropicale de l'Atlantique Nord est délimitée comme étant au sud de \ang{32}N.
 Cela correspond à un saut des valeurs de \al{chl} à cette latitude.
 Cette séparation est en accord avec la limite entre les biomes présentés par \textcite{sarmiento_2004}.
-Cette zone correspond donc à la gyre stratifiée de façon permanente (GS-PS) [GLS ?].
+Cette zone correspond donc à la gyre stratifiée de façon permanente (GS"~PS) [GLS ?].
 
 On sépare ensuite la région restante au nord de \ang{32}N en prenant comme limite le front nord du jet du Gulf Stream (le \enquote{North wall}). Cette séparation donne donc au sud, une zone peu productive, la gyre subtropicale stratifié de façon saisonnière (GS-SS) [GLS ?]; et au nord des eaux plus froides, plus fraîches, et plus productives correspondant au régime de fort bloom (High-Chlorophyll-Bloom) \parencite{sarmiento_2004} ou à des eaux subpolaires \parencite{bock_2022}.
 
@@ -165,7 +166,7 @@ La délimitation entre ces deux zones suit le front nord du jet du Gulf Stream e
 Après exploration des données au long de l'année, il apparaît que la \ab{SST} est un marqueur relativement fiable et robuste, et que la limite qui nous intéresse ici est facilement repérable dans les valeurs de \ab{SST}.
 En effet, nous regardons la distribution des valeurs de \ab{SST} au nord de \ang{32}N, sur laquelle apparaît clairement un pic dans les valeurs élevées correspondant au jet.
 Il est aisé de repérer le pic et le fitter par une Gaussienne.
-La largeur de pic obtenue est utilisée pour repérer un seuil de température en soustrayant à la température moyenne du pic deux fois son écart-type.
+La largeur de pic obtenue est utilisée pour repérer un seuil de température en soustrayant à la température moyenne du pic deux fois son écart"-type.
 La valeur de seuil journalière obtenue est filtrée temporellement par un filtre médian d'une fenêtre de 8~jours afin d'éviter les anomalies de détection.
 Enfin ce seuil en température est utilisé pour séparer la région en deux.
 
@@ -209,7 +210,7 @@ On reprend l'outil de Liu levine, dont on va donner la définition ici, ainsi qu
 \subsection{Définition et implémentation}
 \label{sec:HI-definition}
 
-On rapelle qu'on veut quantifier bimodalité, mais aussi l'écart-type (équivalent au gradient) et le coefficient d'assymétrie (\enquote{skewness}).
+On rapelle qu'on veut quantifier bimodalité, mais aussi l'écart"-type (équivalent au gradient) et le coefficient d'assymétrie (\enquote{skewness}).
 On calcule toutes ces composantes dans une fenêtre glissante dont la taille permet de limiter la taille caractéristique des structures à chercher.
 
 On sélectionne une taille de fenêtre d'ordre de grandeur une dizaine de kilomètres de large.
@@ -222,7 +223,7 @@ Pour chaque pixel la valeur du HI sera calculé d'après une boite centrée sur 
 
 Pour chaque position de la boite, on regarde pour les \(N\) valeurs de SST définies \(s_i\) (cad sans nuages) différentes composantes.
 
-L'écart-type \ab{std} défini comme:
+L'écart"-type \ab{std} défini comme:
 \begin{equation}
   \am{std} = \sqrt{\frac{1}{N-1} \sum_i {\left(s_i - \moy{s} \right)}^2},
 \end{equation}
@@ -286,7 +287,7 @@ Les histogrammes peuvent être rendus représentatifs sans pour autant utiliser 
 Les intervalles pour la \ab{chl} et les autres variables biologiques sont pris de largeur logarithmique afin de couvrir les plusieurs ordres de grandeur que peuvent prendre leurs valeurs.
 
 Les histogrammes présentent également l'avantage de pouvoir facilement être combinés entre eux.
-En effet, tous les histogrammes calculés sont stockés non-normalisés, c'est-à-dire en nombre de pixel par intervalle. Ainsi plusieurs histogrammes peuvent être sommés entre eux avant d'être normalisés pour en extraire une valeur, comme la valeur médiane de la distribution résultante par example.
+En effet, tous les histogrammes calculés sont stockés non"-normalisés, c'est-à-dire en nombre de pixel par intervalle. Ainsi plusieurs histogrammes peuvent être sommés entre eux avant d'être normalisés pour en extraire une valeur, comme la valeur médiane de la distribution résultante par example.
 Ce procédé est notamment utilisé pour calculer des diagnostics sur des périodes de temps autres que journalières, sans avoir besoin de refaire un calcul coûteux impliquant les pixels.
 Dans la suite on considère un histogramme qui compte \(h_i\) valeurs d'une variable quelconque \(x\), pour le i\ieme{} intervalle \(\left[x_i; x_{i+1} \right]\).
 
