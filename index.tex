@@ -11,7 +11,7 @@ draft,
 
 \usepackage{geometry}
 \usepackage[T1]{fontenc}
-\usepackage[otfmath, math-style=upright]{XCharter}
+\usepackage[otfmath]{XCharter}
 
 \usepackage[french]{babel}
 \usepackage{csquotes}
@@ -86,7 +86,7 @@ toc, section=section, symbols,
 \setheadfoot{1.1\onelineskip}{2\onelineskip}
 \setheaderspaces{*}{\onelineskip}{*}
 % Check and apply layout
-\checkandfixthelayout
+\checkandfixthelayout%
 
 %%%%%%%%%%%%%
 %% TOC CONFIG
@@ -122,27 +122,27 @@ toc, section=section, symbols,
 \newcommand{\tocsubfile}{%
   \ifSubfilesClassLoaded{%
     \renewcommand{\contentsname}{Sommaire}
-    \maketoc
+    \maketoc%
     \clearpage
-    \setglswidth
+    \setglswidth%
     \printglossary[toctitle=Glossaire]
     \clearpage
     \chaptermark{\curtitle}
   }{%
-    \minitoc
+    \minitoc%
   }
   \newpage
 }
 
 % Unumbered section with an entry in the TOC
 \newcommand{\unsection}[1]{%
-  \phantomsection
+  \phantomsection%
   \addcontentsline{toc}{section}{#1}
   \section*{#1}
 }
 % Unumbered subsection with an entry in the TOC
 \newcommand{\unsubsection}[1]{%
-  \phantomsection
+  \phantomsection%
   \addcontentsline{toc}{subsection}{#1}
   \section*{#1}
 }
@@ -167,7 +167,8 @@ toc, section=section, symbols,
 \sisetup{mode=math, locale=FR, product-units=single}
 \DeclareSIUnit\mgm{\milli\gram\per\cubic\metre}
 \DeclareSIUnit\dC{\degreeCelsius}
-\DeclareSIUnit\pixel{px}
+\DeclareSIUnit\pixel{\text{px}}
+\DeclareSIUnit\pixels{\text{pixels}}
 \newcommand\resol[2]{\qty[parse-numbers=false]{\slashfrac{#1}{#2}}{\degree}}
 
 %%%%%%%%%%%%%%%
@@ -198,7 +199,13 @@ toc, section=section, symbols,
 % MATHS COMMANDS
 \newcommand\moy[1]{\left[#1\right]}
 \newcommand\med[1]{\overline{#1}}
-\newcommand\norm[2][]{\left\lVert#2\right\rVert_{#1}}
+\newcommand\norm[1]{\operatorname{norm}\paren{#1}}
+\DeclareMathOperator{\std}{std}
+
+\newcommand\pct[2][]{\qty[#1]{#2}{\percent}}
+
+\newcommand\norme[2][]{\left\lVert#2\right\rVert_{#1}}
+\newcommand\paren[1]{\left(#1\right)}
 
 \newcommand\tot{\text{total}}
 \newcommand\frt{\text{front}}
@@ -220,15 +227,15 @@ toc, section=section, symbols,
 \include{tex/front_matter}
 
 % TOC
-\setglswidth
+\setglswidth%
 \printglossary[toctitle=Glossaire]
 \clearpage
-\maketoc
-% \listoffigures
-% \newpage
+\maketoc%
+\listoffigures
+\newpage
 % \listoftables
 
-\mainmatter
+\mainmatter%
 
 \subfile{tex/intro}
 \subfile{tex/méthodes}
@@ -241,14 +248,26 @@ toc, section=section, symbols,
 \label[appendix]{ax:article-cce}
 \chapter[Article: \articleReviewTitle][Article]{Article: \articleReviewTitle}
 \label[appendix]{ax:article-review}
+
+\renewcommand{\thesection}{\Alph{chapter}.\arabic{section}} % No chapter number in section
+\chapter{Autres}
+\label[appendix]{ax:autres}
+\include{tex/annexes_autres}
 \end{appendices}
 
 {
-  \defcounter{biburlnumpenalty}{0}
   \emergencystretch=1em
   \printbibliography[heading=bibintoc, filter=normal]
+  {
+    \raggedright%
+    \printbibliography[
+    heading=subbibintoc,
+    type=software,
+    notkeyword=personnal,
+    title=\bibnameSoftware]
+  }
 }
 
-\backmatter
+\backmatter%
 
 \end{document}

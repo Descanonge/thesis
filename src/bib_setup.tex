@@ -29,6 +29,7 @@
 }
 
 \newcommand{\bibnameDataset}{Références données}
+\newcommand{\bibnameSoftware}{Logiciels}
 
 % Sort dataset, software and rest separately
 \DeclarePresort[dataset]{dd}
@@ -109,7 +110,6 @@
 
 % Citations commands that are fully hyperlinked
 
-% All citation is hyperlinked
 \DeclareFieldFormat{citehyperref}{%
   \DeclareFieldAlias{bibhyperref}{noformat}% Avoid nested links
   \bibhyperref{#1}}
@@ -119,11 +119,16 @@
   \bibhyperref{%
     #1%
     \ifbool{cbx:parens}
-      {\bibcloseparen\global\boolfalse{cbx:parens}}
-      {}}}
+    {\bibcloseparen\global\boolfalse{cbx:parens}}
+    {}}}
+
+\DeclareFieldFormat{citeyearhyperref}{%
+  \DeclareFieldAlias{bibhyperref}{noformat}%
+  \bibhyperref{#1}}
 
 \savebibmacro{cite}
 \savebibmacro{textcite}
+\savebibmacro{citeyear}
 
 \renewbibmacro*{cite}{%
   \printtext[citehyperref]{%
@@ -137,9 +142,14 @@
     or
     (not test {\iffieldundef{postnote}} and
       test {\ifnumequal{\value{citecount}}{\value{citetotal}}})
-  }
+  }%
     {\DeclareFieldAlias{textcitehyperref}{noformat}}
     {}%
   \printtext[textcitehyperref]{%
     \restorebibmacro{textcite}%
     \usebibmacro{textcite}}}
+
+% \renewbibmacro*{citeyear}{%
+%   \printtext[citeyearhyperref]{%
+%     \restorebibmacro{citeyear}%
+%     \usebibmacro{citeyear}}}

@@ -19,6 +19,8 @@ mot / phrases à améliorer entre chevrons
 * Remove datasets from bibliography ?
 ou dans une sous-section
 ou fullcitenote ? alors changer le format pour avoir Titre - Auteur - Publication - année - lien
+* Define refcontext in methods ref info
+so that only refs from the section are printed in biblio
 
 * Repeated words
 #+begin_src

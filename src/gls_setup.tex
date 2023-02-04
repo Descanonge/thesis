@@ -150,13 +150,22 @@
 %% Other abbreviations
 \newignoredglossary{other}
 \glssetcategoryattribute{other}{nohyper}{true}
-\setabbreviationstyle[other]{long}
+\glssetcategoryattribute{initialism}{discardperiod}{true}
+\setabbreviationstyle[other]{short}
+\setabbreviationstyle[initialism]{short}
 
 \newcommand{\newabbreviationOther}[4][]{%
   \newglossaryentry{#2}{type=other, category=other,%
     name={#3}, short={#3}, long={#4}, #1}%
 }
 \newcommand{\newalias}[2]{\newglossaryentry{#1}{name={#1}, alias=#2}}
+
+% Discard period if enddot key is defined
+% Only need that to avoid double dots.
+% Inter word/sentence are equal, we use frenchspacing
+\glsxtrprovidestoragekey{enddot}{}{}
+\renewcommand*\glsxtrifcustomdiscardperiod[2]{%
+  \glsxtrifkeydefined{enddot}{#1}{#2}}
 
 \loadglsentries[other]{glossaries/other}
 
