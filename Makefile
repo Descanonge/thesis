@@ -5,7 +5,7 @@ BUILD_DIR := texbuild
 RES := resources
 REF := references
 
-MAIN := index
+MAIN := master
 SUB_NAMES := intro méthodes res_chl res_phénologie conclusion
 SUB_FILES = $(foreach sn,$(SUB_NAMES),tex/$(sn).tex)
 
@@ -14,7 +14,7 @@ LMK_FLAGS := -lualatex -interaction=batchmode -recorder -quiet
 
 .PHONY: all clean $(MAIN) $(SUB_NAMES)
 
-all: index
+all: $(MAIN)
 
 $(SUB_NAMES):%: tex/%.tex
 	mkdir -p $(BUILD_DIR)/tex

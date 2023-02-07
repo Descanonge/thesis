@@ -1,4 +1,4 @@
-\documentclass[index]{subfiles}
+\documentclass[master]{subfiles}
 \begin{document}
 
 \chapter{Méthodes}
@@ -26,7 +26,7 @@ petite explication des difficultés lié au choix sst ?
 bonne rés, exactitude des fronts ?
 
 \subsubsection{MODIS-1km}
-\label{sec:donnees-sst-modis}
+\declareDataset{sst_modis}
 
 Un des premiers jeux de données \ab{sst} à considérer est celui utilisé par \textcite{liu_2016}, dont l'étude consistait également à détecter des fronts de \ab{sst} et les colocaliser aux données de \ab{chl}.
 Ces variables étant rarement distribuées sur des grilles à des résolutions kilométriques, il apparaît comme nécessaire de \enquote{re-grider} des produits L2 (données d'un capteur converties en variables géophysiques, disposées à la résolution de capture).
@@ -55,7 +55,7 @@ Cela permet d'obtenir les valeurs de \ab{chl} aux même pixels, en utilisant le 
 Il est néanmoins possible de trouver d'autres jeux de données permettant notre étude et nécessitant moins de travail (et donc de possible erreurs), ces dernières années ayant vu apparaître des données distribuées à des résolutions élevées comme c'est le cas dans le paragraphe suivant.
 
 \subsubsection{MUR}
-\label{sec:donnees-sst-mur}
+\declareDataset{sst_mur}
 
 Le produit suivant, désigné ici \af{mur} est développé et distribué par le \ab{ghrsst} au JPL Physical Oceanography DAAC\footfullcite{sst_mur}.
 Il présente les avantages d'être distribué à une résolution kilométrique et sans nuages grâce à une méthode d'interpolation par vaguelettes \parencite{chin_2017}.
@@ -66,10 +66,10 @@ Le champ de \ab{sst} se retrouve donc lissé à la fois par l'interpolation et p
 L'utilisation du produit suivant cherche à palier à ce problème.
 
 \subsubsection{ESA SST CCI / C3S}
-\label{sec:donnees-sst-esacci}
+\declareDataset{sst_esacci}
 
 Ce produit est distribué conjointement par l'\ab{esa} \ab{sst} \ab{cci} et le \ab{c3s}.
-Il agglomère les mesures de tous les capteurs infrarouges disponibles depuis 1981, ce qui comprend 11 \ab{avhrr} à bord des satellites \ab{metop}["~A] et \ab{noaa} (entre les itérations 6 et 19) et trois \ab{atsr} à bord de \ab{ers} 1 et 2, et Envisat.
+Il agglomère les mesures de tous les capteurs infrarouges disponibles depuis 1981, ce qui comprend 11 \ab{avhrr} à bord des satellites \ab{metop}["~A] et \ab{noaa} (entre les itérations 6 et 19) et trois \ab{atsr} à bord de \ab{ers}~1 et~2, et Envisat.
 Cela donne au moins deux capteurs en fonctionnement simultané, et au moins trois depuis 1992.
 Outre la bonne couverture obtenue, l'uniformité des capteurs permet d'obtenir un jeu de données stable dans le temps, pouvant servir à la détection de tendance climatiques \parencite{merchant_2019}.
 
@@ -80,9 +80,9 @@ Les données sont distribuées à différents niveaux:
   \item L3C multi-capteur (regroupé par famille d'instrument),
   \item L4 multi-capteur analysé.
 \end{itemize}
-La grille utilisée a une résolution de \resol{1}{20} en latitude et longitude (\qty{\approx5.6}{\km}).
+La grille utilisée a une résolution de \resol{1}{20} en latitude et longitude (soit~\qty{\approx5.6}{\km}).
 
-Le produit L2P peut être utilisé de la même manière que pour les données \dataset{sec:donnees-sst-modis} afin d'obtenir une résolution la plus haute possible, mais avec l'avantage de disposer de données uniformes sur un grand nombre de capteurs.
+Le produit L2P peut être utilisé de la même manière que pour les données \dataname{sst_modis}~(\datasect{sst_modis}) afin d'obtenir une résolution la plus haute possible, mais avec l'avantage de disposer de données uniformes sur un grand nombre de capteurs.
 Il est à noter que les outils à utiliser pour regriller pourrait ne pas directement fonctionner sur ces données.
 
 Les produits L3U et L3C peuvent être utilisés dans l'étude de structures fines et où la présence de nuages n'est pas rédhibitoire.
@@ -119,6 +119,8 @@ Tôt dans ce projet, certaines pistes de travail (\ab{par-ex} le suivi temporel 
 
 \subsection{Chlorophylle-\emph{a}}
 \label{sec:donnees-chl}
+\declareDataset{chl_modis}
+\declareDataset{chl_globcolour}
 
 Pour le champ de \al{chl}, nous utilisons les données produites dans le cadre du projet GlobColour, développées, validées et distribuées par ACRI"~ST, France \parencite{maritorena_2002}.
 La version \enquote{MultiYear}, au niveau L3 est utilisée.
@@ -134,7 +136,7 @@ Les algorithmes pour le passage en \ab{chl} sont ajustés pour chaque capteurs, 
 
 Il est à noter qu'il est difficile de trouver des produits de \al{chl} à des résolutions supérieures à \qty{4}{\km}, en tout cas au niveau global.
 Cela motive à utiliser un produit \ab{sst} de résolution légèrement moindre afin d'éviter une étape supplémentaire de downsampling une fois les fronts repérés sur le champ de \ab{sst}.
-Cela renforce notre choix pour les données \dataset{sec:donnees-sst-esacci}, en défaveur du set \dataset{sec:donnees-sst-mur}.
+Cela renforce notre choix pour les données \dataname{sst_esacci}, en défaveur du set \dataname{sst_mur}.
 
 Les deux jeux choisis pour la \ab{sst} et \ab{chl} ont des résolutions spatiales similaires mais néanmoins légèrement différentes.
 Les deux grilles sont plate"-carrées (régulières en latitude et longitude) mais le champ de \ab{chl} est défini sur une grille \glshref{epsg-chl} de résolution~\resol{1}{24}~(\qty{\approx4.6}{\km}); et le champ de \ab{sst} sur une grille \glshref{epsg-sst} de résolution~\resol{1}{20}~(\qty{\approx5.6}{\km}).
@@ -143,6 +145,7 @@ Sachant que les produits de composition du phytoplancton dont nous disposions (n
 
 \subsection{Bathymétrie}
 \label{sec:donnees-bathymetrie}
+\declareDataset{etopo1}
 
 Nous utilisons les données de bathymétrie ETOPO1\footfullcite{etopo1}, fournies par \ab{noaa}.
 Les données sont distribuées sur une grille plate"-carrée à une résolution d'une minute d'arc~(\resol{1}{60}), soit trois fois trop pour nous.
@@ -151,33 +154,45 @@ Nous sous"-échantillonons les données en appliquant une moyenne à chaque grou
 \section{Délimitations des sous-régions d'étude}
 \label{sec:delimitations-regions}
 
-Comme précisé en introduction (\cref{M-sec:region-detude}) notre région d'étude est fortement hétérogène, aussi bien concernant les propriétés physiques que biologiques.
-Il est donc nécessaire de séparer notre zone d'étude en (sous-)régions plus petites afin d'extraire des résultats sur des régions plus homogènes.
+Comme détaillé plus en profondeur en introduction (\chapref{sec:region-detude}{chp:introduction}) notre région d'étude est fortement hétérogène, aussi bien concernant les propriétés physiques que biologiques.
+Il est ainsi nécessaire de séparer notre zone d'étude en (sous-)régions afin d'extraire des résultats sur des zones homogènes.
+Nous définissons donc trois biomes.
+Le biome \ab{sb-perm}, le plus au sud, correspond à un régime largement oligotrophe.
+Le biome \ab{sp}, le plus au nord, comprend les eaux froides et productives au nord du Gulf Stream.
+Enfin le biome \ab{sb-sais}, entre les deux précédents, présente un régime intermédiaire: oligotrophe mais avec une production plus élevée permise par une couche de mélange profonde en hiver.
+Dans cette section, nous décrivons plus précisement la méthode utilisée pour définir ces biomes spatialement.
 
 \begin{figure}
   Snapshot SST et Chl avec contour des régions
   \caption[Séparation de la région d'étude en sous-régions]{
-    Séparation de la région d'étude en sous-régions.
+    Résultat de la séparation de la région d'étude en trois sous-régions.
   }
   \label{fig:separation-regions}
 \end{figure}
 
-Il apparait 3 régimes différents discuté en intro.
-Pour limiter les comparaisons dans des zones homogènes on découpe la zone d'étude en 3 sous régions.
-Une première zone correspondant à la gyre subtropicale de l'Atlantique Nord est délimitée comme étant au sud de \ang{32}N.
-Cela correspond à un saut des valeurs de \al{chl} à cette latitude.
+La séparation entre les deux biomes subtropicaux est faite par une limite zonale fixée à \ang{32}N (trait noir pointillé \cref{fig:separation-regions}).
+Cette limite correspond à un saut visible des valeurs de \ab{chl} à cette latitude qui ne varie que peu au cours de l'année, ainsi qu'à l'isocontour \qty{0.1}{\mgm} de la moyenne annuelle de \ab{chl}.
 Cette séparation est en accord avec la limite entre les biomes présentés par \textcite{sarmiento_2004}.
-Cette zone correspond donc à la gyre stratifiée de façon permanente (GS"~PS) [GLS ?].
 
-On sépare ensuite la région restante au nord de \ang{32}N en prenant comme limite le front nord du jet du Gulf Stream (le \enquote{North wall}). Cette séparation donne donc au sud, une zone peu productive, la gyre subtropicale stratifié de façon saisonnière (GS-SS) [GLS ?]; et au nord des eaux plus froides, plus fraîches, et plus productives correspondant au régime de fort bloom (High-Chlorophyll-Bloom) \parencite{sarmiento_2004} ou à des eaux subpolaires \parencite{bock_2022}.
+On sépare ensuite le reste de la région au nord de \ang{32}N en prenant comme limite le front nord du jet du Gulf Stream (le \enquote{North wall}).
+Cette délimitation est donc dynamique et déterminée chaque jour à partir de l'image de température de la manière suivante.
+En effet, il apparaît que la distribution de la \ab{sst} (au nord de \ang{32}N) suffit à repérer de manière fiable et robuste une température seuil permettant de séparer les deux biomes (trait noir plein \cref{fig:separation-regions}).
+Sur cette distribution apparaît clairement un pic dans des valeurs élevées correspondant au jet.
+Il est aisé de repérer le pic et l'ajuster par une gaussienne.
+À partir de là, la température seuil entre les biommes est prise comme la base froide de ce pic, \ab{cad} plus précisemment en soustrayant la température moyenne du pic  deux fois son écart"-type (\cref{fig:temp-seuil-distrib}).
+La valeur journalière de ce seuil est filtrée temporellement par un filtre médian glissant (avec une fenêtre de largeur 8~jours) afin d'éviter d'éventuelles anomalies de détection.
 
-La délimitation entre ces deux zones suit le front nord du jet du Gulf Stream et est donc dynamique. Elle est déterminée pour chaque jour, à partir de l'image en température, de la manière suivante.
-Après exploration des données au long de l'année, il apparaît que la \ab{sst} est un marqueur relativement fiable et robuste, et que la limite qui nous intéresse ici est facilement repérable dans les valeurs de \ab{sst}.
-En effet, nous regardons la distribution des valeurs de \ab{sst} au nord de \ang{32}N, sur laquelle apparaît clairement un pic dans les valeurs élevées correspondant au jet.
-Il est aisé de repérer le pic et le fitter par une Gaussienne.
-La largeur de pic obtenue est utilisée pour repérer un seuil de température en soustrayant à la température moyenne du pic deux fois son écart"-type.
-La valeur de seuil journalière obtenue est filtrée temporellement par un filtre médian d'une fenêtre de 8~jours afin d'éviter les anomalies de détection.
-Enfin ce seuil en température est utilisé pour séparer la région en deux.
+\begin{figure}
+  % \includegraphics[width=\textwidth]{zones.pdf}
+  Histogramme des valeurs de SST, avec fit gaussien et threshold.
+  \caption[Délimitation des biomes subtropical permanent et subpolaire par température seuil]{
+    Détermination de la température de seuil séparant les biomes subtropical permanent et subpolaire.
+    Sur la distribution des valeurs en température au nord de \ang{32}N (trait plein noir), le pic (ici autour de \tC{18}) correspond aux eaux du jet. Il est ajusté par un fit gaussien (en rouge).
+    La température de seuil entre les deux biomes est <prise> comme la température moyenne du pic moins deux fois son écart"-type.
+    Cela correspond à la limite nord du Gulf Stream.
+  }
+  \label{fig:temp-seuil-distrib}
+\end{figure}
 
 \begin{figure}
   \caption{Figure de Sarmiento 2004 ?}
@@ -187,18 +202,20 @@ Enfin ce seuil en température est utilisé pour séparer la région en deux.
 \begin{figure}
   Superposition de tous les contours de seuil pour une année.
   Tracé moyen ?
-  \caption{Variation de la délimitation entre les zones GS-SS et HCB.}
+  \caption{Variation de la délimitation}
   \label{fig:var-delim}
 \end{figure}
 
+Par ailleurs, il est également nécessaire d'éviter de considérer les pixels trop près des côtes dans notre étude.
+De manière générale la \ab{chl} y suit régime côtier, visible par des valeurs très élevées (\qty{>10}{\mgm}).
+Ensuite, nous cherchons à éviter deux zones qui ne correspondent pas aux biomes définis plus haut.
+Le jet du Gulf Stream prend forme au sud de notre zone, le long de la côte de Floride. On trouve donc à ces latitudes (\ang{\approx28}N) sur le plateau continental de forts courants qu'on ne retrouve pas dans le reste du biome \ab{sb-perm}.
+Plus au nord dans l'anse Nord-Est Américaine de l'Atlantique (\enquote{Mid-Atlantic Bight}), on trouve une séparation nette entre les eaux au nord du Gulf Stream (la \enquote{slope sea}), et les eaux sur le plateau continental.
+Un jet marque cette séparation le long du talus continental \parencite{flagg_2006}.
 
-\begin{figure}
-  % \includegraphics[width=\textwidth]{zones.pdf}
-  \caption{Délimitations des zones.}
-  \label{fig:zone-delimitation}
-\end{figure}
-
-Enlever les côtes pour éviter régime cotier.
+Dans les deux cas, imposer une limite haute à la bathymétrie sur notre région d'étude permet de supprimer ces zones problématiques.
+Ainsi, pour calculer nos résultats, nous ne considérons que les pixels où la profondeur n'excède pas \qty{1500}{\m}.
+Nous utilisons pour cela les données de bathymétrie \dataname{etopo1} (voir~\datasect{etopo1}).
 
 \section{Heterogeneity Index (HI)}
 \label{sec:HI}

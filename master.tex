@@ -26,7 +26,7 @@ draft,
 
 \usepackage{xr}
 \usepackage{subfiles}
-\externaldocument[M-]{\subfix{index}}
+\externaldocument[M-]{\subfix{master}}
 
 % \usepackage[dvipsnames]{xcolor}
 \usepackage{siunitx}
@@ -35,7 +35,7 @@ draft,
 \usepackage{listings}
 \usepackage{hyperref}
 \usepackage{amsmath}
-
+\usepackage{pgfkeys}
 
 \useshorthands*{"}
 % Hard hyphen, no breaks (but word after is breakable)
@@ -54,7 +54,7 @@ toc, section=section, symbols,
 \usepackage{glossary-tree} % needed for \setglswidth
 \input{src/gls_setup.tex}
 
-\usepackage{cleveref}
+\usepackage[nameinlink]{cleveref}
 
 \ifSubfilesClassLoaded{}{\usepackage{minitoc}}
 
@@ -101,7 +101,7 @@ toc, section=section, symbols,
   \mtcsetdepth{minitoc}{3}}
 
 % Create toc
-\newcommand{\maketoc}{
+\newcommand{\maketoc}{%
   \pdfbookmark[section]{\contentsname}{toc}
   \setlength{\baselineskip}{1.03\onelineskip}
   \tableofcontents*
@@ -112,7 +112,15 @@ toc, section=section, symbols,
   \renewcommand{\printtoctitle}[1]{\section*{#1}}
   \renewcommand{\aftertoctitle}{}
   \renewcommand{\tocheadstart}{}
-}{}
+}{
+  % \renewcommand{\printtoftitle}[1]{\section*{#1}}
+  % \renewcommand{\tofmark}{\markboth{}}
+}
+
+\bookmarksetup{numbered}
+\AtBeginDocument{%
+  \bookmark[named=FirstPage, level=section]{Page de garde}%
+}
 
 \makeatletter
 \newcommand*{\curtitle}{\@currentlabelname}
@@ -153,7 +161,8 @@ toc, section=section, symbols,
 \makeatother
 
 % Cross-chapter references
-\newcommand{\chapref}[2]{\cref{M-#1}, \cref*{M-#2}}
+\newcommand{\chapref}[2]{%
+  \cref*{M-#1}, \cref*{M-#2}}
 \input{src/cross_refs_names.tex}
 
 \graphicspath{{resources}}
@@ -170,6 +179,8 @@ toc, section=section, symbols,
 \DeclareSIUnit\pixel{\text{px}}
 \DeclareSIUnit\pixels{\text{pixels}}
 \newcommand\resol[2]{\qty[parse-numbers=false]{\slashfrac{#1}{#2}}{\degree}}
+\newcommand\pct[2][]{\qty[#1]{#2}{\percent}}
+\newcommand\tC[1]{\qty{#1}{\degreeCelsius}}
 
 %%%%%%%%%%%%%%%
 %% HYPER CONFIG
@@ -202,8 +213,6 @@ toc, section=section, symbols,
 \newcommand\norm[1]{\operatorname{norm}\paren{#1}}
 \DeclareMathOperator{\std}{std}
 
-\newcommand\pct[2][]{\qty[#1]{#2}{\percent}}
-
 \newcommand\norme[2][]{\left\lVert#2\right\rVert_{#1}}
 \newcommand\paren[1]{\left(#1\right)}
 
@@ -212,12 +221,17 @@ toc, section=section, symbols,
 \newcommand\bkg{\text{background}}
 
 % For datasets
-\newcommand\dataset[1]{\nameref{#1} (\cref{#1})}
-
+% Set the label for the section describing the dataset
+% in the methods chapter. The (given) label is the same
+% as in the bibliography
+\newcommand\declareDataset[1]{\label{sec:donnees-#1}}
+% Use that same label to refer to the section
+\newcommand\datasect[1]{\cref{sec:donnees-#1}}
+\newcommand\dataname[1]{%
+  \hyperref[sec:donnees-#1]{\citefield{#1}[citefield]{shorttitle}}}
 
 %%%%%%%%%%%%%%%%
 % BEGIN DOCUMENT
-
 \begin{document}
 \ifSubfilesClassLoaded{}{\dominitoc}
 
@@ -229,10 +243,14 @@ toc, section=section, symbols,
 % TOC
 \setglswidth%
 \printglossary[toctitle=Glossaire]
+
 \clearpage
 \maketoc%
-\listoffigures
-\newpage
+
+% \clearpage
+% \listoffigures
+
+% \clearpage
 % \listoftables
 
 \mainmatter%
@@ -255,19 +273,20 @@ toc, section=section, symbols,
 \include{tex/annexes_autres}
 \end{appendices}
 
-{
+{%
   \emergencystretch=1em
   \printbibliography[heading=bibintoc, filter=normal]
-  {
+  {%
     \raggedright%
     \printbibliography[
     heading=subbibintoc,
     type=software,
     notkeyword=personnal,
     title=\bibnameSoftware]
-  }
+  }%
 }
 
 \backmatter%
 
 \end{document}
+

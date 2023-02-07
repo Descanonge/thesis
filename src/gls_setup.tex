@@ -1,5 +1,5 @@
 
-\makeglossaries
+\makeglossaries%
 
 \setglossarystyle{long}
 
@@ -7,12 +7,12 @@
 % Automatically set glossary width to maximum available
 % minus largest 'short' from all entries
 \newcommand{\setglswidth}{%
-  \glsfindwidesttoplevelname
-  \newlength{\gls@widest}
-  \settowidth{\gls@widest}{\glstreenamefmt{\@glswidestname\space}}
+  \glsfindwidesttoplevelname%
+  \newlength{\gls@widest}%
+  \settowidth{\gls@widest}{\glstreenamefmt{\@glswidestname\space}}%
   \multiply\gls@widest by -1%
-  \setlength{\glsdescwidth}{\textwidth}
-  \addtolength{\glsdescwidth}{\gls@widest}
+  \setlength{\glsdescwidth}{\textwidth}%
+  \addtolength{\glsdescwidth}{\gls@widest}%
   \addtolength{\glsdescwidth}{-21pt} % We are overfull by 20.5pt otherwise, idk why
   \message{glsdescwidth: \the\glsdescwidth\newline}
 }
@@ -153,6 +153,7 @@
 \glssetcategoryattribute{initialism}{discardperiod}{true}
 \setabbreviationstyle[other]{short}
 \setabbreviationstyle[initialism]{short}
+\setabbreviationstyle[biomes]{long}
 
 \newcommand{\newabbreviationOther}[4][]{%
   \newglossaryentry{#2}{type=other, category=other,%
@@ -169,4 +170,4 @@
 
 \loadglsentries[other]{glossaries/other}
 
-\glsaddall
+\glsaddall%

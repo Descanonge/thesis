@@ -45,33 +45,36 @@
 
 @dataset{chl_globcolour,
   title = {Global {{Ocean Colour}} ({{Copernicus-GlobColour}}), {{Bio-Geo-Chemical}}, {{L3}} (Daily) from {{Satellite Observations}} (1997-Ongoing)},
-  shorttitle = {Chl-{\emph{a}} {{GlobColour}}},
+  shorttitle = {{{GlobColour}}},
   author = {{European Union-Copernicus Marine Service}},
   date = {2022},
   publisher = {{Mercator Ocean International}},
   doi = {10.48670/MOI-00280},
   url = {https://resources.marine.copernicus.eu/product-detail/OCEANCOLOUR_GLO_BGC_L3_MY_009_103/INFORMATION},
-  langid = {english}
+  langid = {english},
+  variable = {Chl-\emph{a}}
 }
 
 @dataset{chl_modis,
   title = {Moderate-Resolution {{Imaging Spectroradiometer}} ({{MODIS}}) {{Aqua Ocean Color Data}}; 2018 {{Reprocessing}}},
-  shorttitle = {Chl-{\emph{a}} {{MODIS}}},
+  shorttitle = {{{MODIS}}},
   author = {{NASA Goddard Space Flight Center, Ocean Ecology Laboratory, Ocean Biology Processing Group}},
   date = {2018},
   publisher = {{NASA OB.DAAC, Greenbelt, MD, USA}},
   doi = {10.5067/ORBVIEW-2/SEAWIFS/L2/OC/2018},
-  url = {https://oceancolor.gsfc.nasa.gov/data/10.5067/ORBVIEW-2/SEAWIFS/L2/OC/2018}
+  url = {https://oceancolor.gsfc.nasa.gov/data/10.5067/ORBVIEW-2/SEAWIFS/L2/OC/2018},
+  variable = {Chl-\emph{a}}
 }
 
 @dataset{etopo1,
   title = {{{ETOPO1}} 1 {{Arc-Minute Global Relief Model}}},
-  shorttitle = {Bathymétrie {{ETOPO}}},
+  shorttitle = {{{ETOPO}}},
   author = {{NOAA National Geophysical Data Center}},
   date = {2009},
   publisher = {{NOAA National Centers for Environmental Information}},
   doi = {10.7289/V5C8276M},
-  url = {https://data.nodc.noaa.gov/cgi-bin/iso?id=gov.noaa.ngdc.mgg.dem:316}
+  url = {https://data.nodc.noaa.gov/cgi-bin/iso?id=gov.noaa.ngdc.mgg.dem:316},
+  variable = {Bathymétrie}
 }
 
 @article{fiedler_2019,
@@ -87,6 +90,20 @@
   url = {https://onlinelibrary.wiley.com/doi/abs/10.1002/qj.3644},
   langid = {english},
   annotation = {\_eprint: https://onlinelibrary.wiley.com/doi/pdf/10.1002/qj.3644}
+}
+
+@article{flagg_2006,
+  title = {A Study of the Currents of the Outer Shelf and Upper Slope from a Decade of Shipboard {{ADCP}} Observations in the {{Middle Atlantic Bight}}},
+  author = {Flagg, Charles N. and Dunn, Maureen and Wang, Dong-Ping and Rossby, H. Thomas and Benway, Robert L.},
+  date = {2006},
+  journaltitle = {Journal of Geophysical Research: Oceans},
+  volume = {111},
+  number = {C6},
+  issn = {2156-2202},
+  doi = {10.1029/2005JC003116},
+  url = {https://onlinelibrary.wiley.com/doi/abs/10.1029/2005JC003116},
+  langid = {english},
+  annotation = {\_eprint: https://onlinelibrary.wiley.com/doi/pdf/10.1029/2005JC003116}
 }
 
 @article{garnesson_2019,
@@ -226,33 +243,36 @@
 
 @dataset{sst_esacci,
   title = {{{ESA SST CCI}} and {{C3S}} Reprocessed Sea Surface Temperature Analyses},
-  shorttitle = {{{SST ESA-CCI}} / {{C3S}}},
+  shorttitle = {{{ESA-CCI}} / {{C3S}}},
   author = {{Meteorological Office UK}},
   date = {2019},
   publisher = {{MOi for Copernicus Marine Service}},
   doi = {10.48670/MOI-00169},
   url = {https://resources.marine.copernicus.eu/product-detail/SST_GLO_SST_L4_REP_OBSERVATIONS_010_024/INFORMATION},
-  langid = {english}
+  langid = {english},
+  variable = {SST}
 }
 
 @dataset{sst_modis,
   title = {{{MODIS Aqua L2P}} Swath {{SST}} Data Set. {{Ver}}. 2019.0},
-  shorttitle = {{{SST MODIS}}},
+  shorttitle = {{{MODIS}}},
   author = {{JPL/OBPG/RSMAS}},
   date = {2020},
   publisher = {{PO.DAAC, CA, USA}},
   doi = {10.5067/GHMDA-2PJ19},
-  url = {https://podaac.jpl.nasa.gov/dataset/MODIS_A-JPL-L2P-v2019.0}
+  url = {https://podaac.jpl.nasa.gov/dataset/MODIS_A-JPL-L2P-v2019.0},
+  variable = {SST}
 }
 
 @dataset{sst_mur,
   title = {{{GHRSST Level}} 4 {{MUR Global Foundation Sea Surface Temperature Analysis}}. {{Ver}}. 4.1},
-  shorttitle = {{{SST MUR}}},
+  shorttitle = {{{MUR}}},
   author = {{JPL MUR MEaSUREs Project}},
   date = {2015},
   publisher = {{PO.DAAC, CA, USA}},
   doi = {10.5067/GHGMR-4FJ04},
-  url = {http://podaac.jpl.nasa.gov/dataset/MUR-JPL-L4-GLOB-v4.1}
+  url = {http://podaac.jpl.nasa.gov/dataset/MUR-JPL-L4-GLOB-v4.1},
+  variable = {SST}
 }
 
 @article{thyng_2016,

@@ -21,6 +21,8 @@ ou dans une sous-section
 ou fullcitenote ? alors changer le format pour avoir Titre - Auteur - Publication - année - lien
 * Define refcontext in methods ref info
 so that only refs from the section are printed in biblio
+* Add 'variable' field to accepted fields
+or something idk
 
 * Repeated words
 #+begin_src
