@@ -49,6 +49,7 @@
 % New bibliography format for dataset entries
 \DeclareBibliographyDriver{dataset}{%
   \usebibmacro{begentry}%
+  \printlist{datavar}
   \printfield{shorttitle} -- \printfield{title}% chktex 8
   \newunit\newblock%
   \printnames{author}%
@@ -64,17 +65,17 @@
 % New bibliography format for software entries
 \DeclareBibliographyDriver{software}{%
   \usebibmacro{begentry}%
-  \printfield{variable} \printfield{shorttitle} -- \printfield{title}% chktex 8
+  \printfield{shorttitle} -- \printfield{title}% chktex 8
   \setunit{\addspace}%
   \printfield{type}%
   \setunit{,\addspace}%
   \printfield{version}%
-  \newunit\newblock%
+  \newunit\newblock{}
   \printnames{author}%
   \newunit%
   \printlist{publisher}%
-  \newunit\newblock
-  \printfield{doi}%
+  \newunit\newblock{}
+  \printfield{pypi}%
   \newunit%
   \printfield{url}%
   \usebibmacro{finentry}%
@@ -82,20 +83,30 @@
 
 \DeclareSourcemap{
   \maps{
+    % Adapt nyt sorting for dataset (datavar, ,shortitle)
+    \map{
+      \pertype{dataset}
+      % Set sortname to datavar
+      \step[fieldsource=datavar]
+      \step[fieldset=sortname, origfieldval]
+      % Set sortyear to a constant (no incidence on sorting)
+      \step[fieldset=sortyear, fieldvalue=0]
+      % Set sorttitle to shorttitle
+      \step[fieldsource=shorttitle]
+      \step[fieldset=sorttitle, origfieldval]
+    }
+    % Sort software by their shorttitle (ie software name)
     \map{
       \pertype{software}
-      % Set sortkey to shorttitle so that software is sorted by name
       \step[fieldsource=shorttitle]
-      \step[fieldset=sortkey, origfieldval]
-      % Alias pypi (which is not supported by data model) to doi
-      \step[fieldsource=pypi, fieldtarget=doi]
+      \step[fieldset=sortname, origfieldval]
     }
   }
 }
 
 \DeclareFieldFormat[software]{type}{\mkbibparens{#1}}
 \DeclareFieldFormat[software]{url}{\mkbibacro{url}\addcolon~\url{#1}}
-\DeclareFieldFormat[software]{doi}{\mkbibacro{pypi}\addcolon~\href{https://pypi.org/project/#1}{#1}}
+\DeclareFieldFormat[software]{pypi}{\mkbibacro{pypi}\addcolon~\href{https://pypi.org/project/#1}{#1}}
 
 % Add abbreviation for version
 \DefineBibliographyStrings{french} {%

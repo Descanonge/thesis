@@ -1,3 +1,13 @@
+
+% Add fields to the bibliography datamodel
+% Formatting and sorting is done in preamble in bib_setup.tex
+\begin{filecontents*}[overwrite]{biblatex-dm.cfg}
+\DeclareDatamodelFields[type=list,datatype=literal,label=true,nullok=true]{datavar}
+\DeclareDatamodelEntryfields[dataset]{datavar}
+\DeclareDatamodelFields[type=field,datatype=verbatim,nullok=true]{pypi}
+\DeclareDatamodelEntryfields[software]{pypi}
+\end{filecontents*}
+
 \documentclass[
 12pt,
 a4paper,
