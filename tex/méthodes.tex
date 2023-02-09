@@ -15,8 +15,8 @@ Cela a donc informé le choix des données, ainsi que la création des outils n�
 Plusieurs options ont été considérées, notamment pour la \ab{sst}.
 Elles sont reportées ci"-dessous, même si elles ne sont pas utilisées pour le reste des résultats.
 
-<ref vers section de la biblio pour les datasets>
-
+Au long de ce chapitre (et ailleurs dans ce manuscript) les articles publiés correspondant aux jeux de données sont bien évidemment cités, mais sont également précisés les accès par lesquels nous avons obtenus les données.
+Ces derniers sont cités en note de bas de page, et listés dans la \creftitle{bib:data} de la bibliographie~(\cpageref{bib:data}).
 
 \subsection{Sea Surface Temperature (SST)}
 \label{sec:donnees-sst}
@@ -232,9 +232,9 @@ Ces variables sont la bimodalité (à l'instar de la méthode de \textcite{cayul
 Pour limiter la taille des structures détectées, on limite le calcul de ces variables sur une fenêtre de taille appropriée, \ab{cad} pour nous de l'ordre de grandeur d'une dizaine de kilomètres.
 Pour chaque pixel, la valeur des composantes citées précédemment est donc calculée sur la distribution de \ab{sst} à l'intérieur d'une fenêtre glissante, centrée sur ce pixel et dont les tailles possibles sont:
 \begin{itemize}
-        \item \(3 \times 3 = \qty{9}{\pixels}\) soit~\qty{17}{\km} de côté,
-        \item \(5 \times 5 = \qty{25}{\pixels}\) soit~\qty{28}{\km} de côté,
-        \item \(7 \times 7 = \qty{49}{\pixels}\) soit~\qty{39}{\km} de côté.
+        \item \(3 \times 3 =\qty{9}{\pixels}\) soit~\qty{17}{\km} de côté,
+        \item \(5 \times 5 =\qty{25}{\pixels}\) soit~\qty{28}{\km} de côté,
+        \item \(7 \times 7 =\qty{49}{\pixels}\) soit~\qty{39}{\km} de côté.
 \end{itemize}
 D'une part une fenêtre de taille trop limitée ne permet pas de calculer convenablement certaines des variables statistiques dont nous avons besoin, et c'est pourquoi nous ne considérons pas de fenêtres plus petites.
 D'autre part une fenêtre trop large entraînera la détection de structures trop grandes, et nous nous limiterons donc aux tailles présentées ci-dessus.
@@ -267,9 +267,14 @@ Cela présuppose que lorsque les températures sont uni"-modales (\ab{cad} quand
 \end{figure}
 
 De manière plus précise on commence par calculer l'histogramme~\(h_i\) des valeurs de \ab{sst} dans la fenêtre, en utilisant des intervalles de largeur fixe de~\qty{0.1}{\dC} et compris entre les valeurs minimales et maximales dans la fênetre.
-Les données de \ab{sst} étant stockées compressées par la technique de troncation binaire (voir \cref{ax:compression-troncation} pour plus de détails) avec un facteur d'échelle de~\qty{0.01}{\dC}, nos intervalles ont une largeur précisement égale à dix fois l'écart minimal possible entre deux valeurs de température.
+Les données de \ab{sst} étant stockées compressées par \enquote{linear packing}\footnotemark\ avec un facteur d'échelle de~\qty{0.01}{\dC}, nos intervalles ont une largeur précisement égale à dix fois l'écart minimal possible entre deux valeurs de température.
 Pour éviter que trop de valeurs tombent sur les bords des intervalles et que l'histogramme soit pollué par des erreurs numériques, on décale les intervalles de~\qty[parse-numbers=false]{0.01/2}{\dC}.
 Par ailleurs, le nombre d'intervalles étant dépendant de la largeur de la distribution de \ab{sst}, dans les cas où il est inférieur ou égal à quatre, la bimodalité est automatiquement assignée nulle (\(B=0\)).
+\footnotetext{%
+  Cette technique de compression avec pertes ---~utilisée notamment par l'outil \citesoft{nco}\footnotemark{}~--- consiste à discrétiser des valeurs flottantes sur des entiers après une transformation linéaire.
+  Par exemple, en prenant pour stockage des entiers non"-signés sur 16~bits~(\texttt{NC\_SHORT}) on peut évidement représenter des valeurs entières entre 0 et \(2^{16}-1 =\num{65535}\); mais en multipliant ces valeurs entières par un facteur de, disons,~\num{0.005} on peut représenter des valeurs entre 0 et~\num{327.675}.
+  On a gagné en volume par rapport à un stockage typique de~32 ou~64~bits, mais en perdant évidemment en précision puisque nos valeurs sont maintenant discrétisées avec un intervalle de~\num{0.005}.}
+\footnotetext{voir le guide utilisateur: \glsurl{nco-packed}}
 
 Par ailleurs on définit une distribution gaussienne~\(g_i\) sur les même intervalles en utilisant les statistiques calculées précédemment:
 \begin{equation}
@@ -403,7 +408,7 @@ Il me semble important d'en citer au moins une partie ici.
 La reproductibilité de mon travail est déjà garantie par la mise à disposition de mes codes (accompagnés d'une courte documentation et de tout le nécessaire pour reproduire les résultats) sur un dépôt public\footnote{%
   Dépot Gitlab: \glsurl{gitlab}}
 et dont une version est également déposée sur un répertoire Zenodo\footnote{\glsurl{zenodo}}.
-Il s'agit ici plutôt de créditer les nombreux contributeurs qui ont participé à l'élaboration de ces outils.
+Il s'agit ici plutôt de créditer les nombreux contributeurs qui ont participé à l'élaboration de ces outils. Les outils mentionnés ici (et ailleurs dans ce manuscript) sont listés dans la \creftitle{bib:software} de la bibliographie~(\cpageref{bib:software}).
 
 Bien évidemment beaucoup des calculs reposent sur des librairies qui ne sont plus à présenter: \citesoft{numpy}, \citesoft{scipy}, et \citesoft{pandas}.
 Cependant il est plus commun (en géosciences en tout cas) d'interfacer avec la librairie \citesoft{xarray}.
@@ -416,6 +421,6 @@ Il convient de citer plusieurs paquets permettant le calcul efficace d'histogram
 Plusieurs paquets sont utilisés pour réaliser les figures, bien évidemment \citesoft{matplotlib},
 \citesoft{cartopy} pour les cartes,
 mais également \citesoft{cmocean} qui fourni des palettes de couleurs, notamment pour un usage en océanographie. Ces dernières présentent les avantages (majeurs) d'être linéairement perceptibles, adaptés à une conversion en nuance de gris pour impression, et robustes à plusieurs types de daltonisme.
-Similairement, les couleurs utilisées dans les figures sont le fruit du travail de Paul Tol\footnote{voir~\glsurl{paultol}}, distribué pour Python par mes soins (voir \refunsection{sec:productions}).
+Similairement, les couleurs utilisées dans les figures sont le fruit du travail de Paul Tol\footnote{voir~\glsurl{paultol}}, distribué pour Python par mes soins (voir~\creftitle{sec:productions}).
 
 Enfin il me parait approprié de citer les outils \citesoft{ipython} avec lequel j'execute tous mes scripts, \citesoft{mamba} et le projet \citesoft{conda-forge} lesquels me permettent de gérer les environments Python, et enfin le travail épatant derrière le framework de configuration \citesoft{doom} sur lequel tous les scripts et ce manuscript (entre autres) ont été écrits.

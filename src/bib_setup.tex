@@ -32,13 +32,8 @@
 \DeclarePresort[dataset]{dd}
 \DeclarePresort[software]{ss}
 
-% Setup bibliography headings
-\defbibheading{bibintoc}[\bibname]{%
-  \chapter*{#1}%
-  \mtcaddchapter[#1]
-  \markboth{#1}{#1}}
-\defbibheading{subbibintoc}[\bibname]{\unsection{#1}}
-\defbibheading{subsubbibintoc}[\bibname]{\unsubsection{#1}}
+\newcommand\bibsoftwareTitle{Logiciels}
+\newcommand\bibdataTitle{Données}
 
 % Remove small caps in family names
 \DefineBibliographyExtras{french}{\restorecommand\mkbibnamefamily}

@@ -16,9 +16,6 @@ mot / phrases à améliorer entre chevrons
 
 * Spelling
 
-* vérifier les références vers annexes
-* voir si on peut faire plus clean pour le résumé et autres sections du front matter
-
 * Repeated words
 #+begin_src
 \<\(\w+\)\>\s-+\<\1\>

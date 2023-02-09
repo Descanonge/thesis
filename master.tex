@@ -1,242 +1,21 @@
 
-\RequirePackage{silence}
-\WarningFilter{latex}{Overwriting file}
-\WarningFilter{minitoc}{W0024}
+\input{src/preamble}
 
-% Add fields to the bibliography datamodel
-% Formatting and sorting is done in preamble in bib_setup.tex
-\begin{filecontents*}[overwrite]{biblatex-dm.cfg}
-\DeclareDatamodelFields[type=list,datatype=literal,label=true,nullok=true]{datavar}
-\DeclareDatamodelEntryfields[dataset]{datavar}
-\DeclareDatamodelFields[type=field,datatype=verbatim,nullok=true]{pypi}
-\DeclareDatamodelEntryfields[software]{pypi}
-\end{filecontents*}
-
-\documentclass[
-12pt,
-a4paper,
-french,
-openright,
-twoside,
-hyperfootnotes=false, % put here otherwise option clash
-draft,
-]
-{memoir}
-
-\usepackage{geometry}
-\usepackage[T1]{fontenc}
-\usepackage[otfmath]{XCharter}
-
-\usepackage[french]{babel}
-\usepackage{csquotes}
-\frenchsetup{
-  ItemLabels=\textendash,
-  ThinColonSpace
-}
-
-\usepackage[style=authoryear-comp]{biblatex}
-
-\usepackage{microtype}
-
-% \usepackage[dvipsnames]{xcolor}
-\usepackage{siunitx}
-\usepackage[depth=4]{bookmark}
-\usepackage{graphicx}
-\usepackage{listings}
-\usepackage{hyperref}
-\usepackage{amsmath}
-
-\useshorthands*{"}
-% Hard hyphen, no breaks (but word after is breakable)
-\defineshorthand{"~}{\babelhyphen{nobreak}}
-% Hard hyphen, breakable (word after also breakable)
-\defineshorthand{"-}{\babelhyphen{hard}}
-
-%%%%%%%%%%%%%%%%%%%%
-%% GLOSSARIES CONFIG
-\usepackage[
-xindy, shortcuts=abbr,
-nostyles, nonumberlist,
-toc, section=section, symbols,
-]{glossaries-extra}
-\usepackage{glossary-long}
-\usepackage{glossary-tree} % needed for \setglswidth
-\input{src/gls_setup.tex}
-
-\usepackage[nameinlink]{cleveref}
-
-\usepackage{minitoc}
-
-% Metadata
-\newcommand\Author{Clément Haëck}
-\newcommand\Email{clement.haeck@locean.ipsl.fr}
-\newcommand\Title{Impact des fronts sur le Phytoplancton dans la région du Gulf-Stream quantifié par imagerie satellitaire}
-\newcommand\Subject{biogeochemistry}
-\newcommand\Keywords{}
-
-%%%%%%%%%%%%%%
-%% PAGE CONFIG
-\chapterstyle{ger}
-\pagestyle{ruled}
-\setsecnumdepth{subsubsection}
-\renewcommand{\thesection}{\arabic{section}} % No chapter number in section
-\renewcommand{\thechapter}{\Roman{chapter}}
-
-%% Page Layout
-% A4 297x210mm (global a4paper option)
-\settrims{0pt}{0pt} % no trim needed
-% Fix width/height for comfort
-\settypeblocksize{230mm}{160mm}{*}
-% Upper/Lower margins, fix upper, lower has what's left (enough hopefully)
-\setulmargins{3cm}{*}{*}
-% Left/Right margins, set ratio so that spine is smaller than edge
-\setlrmargins{*}{*}{1.3}
-% Set header size and foot skip, header taller than baseline for É in sections titles
-\setheadfoot{1.1\onelineskip}{2\onelineskip}
-\setheaderspaces{*}{\onelineskip}{*}
-% Check and apply layout
-\checkandfixthelayout%
-
-%%%%%%%%%%%%%
-%% TOC CONFIG
-%% Section numbering and toc options
-\renewcommand{\cftchaptername}{\chaptername~}
-\renewcommand{\cftappendixname}{\appendixname~}
-\setcounter{lofdepth}{1}
-\setcounter{tocdepth}{2}
-\mtcsetdepth{minitoc}{3}
-\mtcsetfont{minitoc}{section}{\normalfont\small}
-
-\renewcommand\lofheadstart{}
-\renewcommand\printloftitle[1]{\section*{#1}}
-\renewcommand\afterloftitle{\thispagestyle{ruled}}
-\renewcommand\lofmark{\markboth{}{\listfigurename}}
-\setlength{\cftfigureindent}{2.5em}
-
-% New chapter but add it to lof
-% Lifted from memoir.cls \@chapter
-\makeatletter
-\newcommand\chapterlof[1]{
-  \chapter{#1}
-  \ifanappendix%
-    \addcontentsline{lof}{appendix}{%
-      \protect\chapternumberline{\thechapter}\f@rtoc}%
-  \else
-    \addcontentsline{lof}{chapter}{%
-      \protect\chapternumberline{\thechapter}\f@rtoc}%
-  \fi
-}
-\makeatother
-
-\bookmarksetup{numbered}
-\AtBeginDocument{%
-  \bookmark[named=FirstPage, level=section]{Page de garde}%
-}
-
-% Unumbered section with an entry in the TOC
-\newcommand{\unsection}[1]{%
-  \phantomsection%
-  \addcontentsline{toc}{section}{#1}
-  \section*{#1}
-}
-% Unumbered subsection with an entry in the TOC
-\newcommand{\unsubsection}[1]{%
-  \phantomsection%
-  \addcontentsline{toc}{subsection}{#1}
-  \section*{#1}
-}
-% Reference by name/page for those sections
-\makeatletter
-\newcommand\refunsection[1]{%
-  \cref@section@name~\frquote{\titleref{#1}} \cpageref{#1}}
-\makeatother
-
-% Cross-chapter references {<label>}{<chap. label>}
-\newcommand{\chapref}[2]{\cref*{#1}, \cref*{#2}}
-\input{src/cross_refs_names.tex}
-
-\changecaptionwidth%
-\captionwidth{0.9\textwidth}
-
-\graphicspath{{resources}}
-
-%%%%%%%%%%%%%
-%% BIB CONFIG
-\input{src/bib_setup}
-
-%%%%%%%%%%%%
-%% SI CONFIG
-\sisetup{mode=math, locale=FR, product-units=single}
-\DeclareSIUnit\mgm{\milli\gram\per\cubic\metre}
-\DeclareSIUnit\dC{\degreeCelsius}
-\DeclareSIUnit\pixel{\text{px}}
-\DeclareSIUnit\pixels{\text{pixels}}
-\newcommand\resol[2]{\qty[parse-numbers=false]{\slashfrac{#1}{#2}}{\degree}}
-\newcommand\pct[2][]{\qty[#1]{#2}{\percent}}
-\newcommand\tC[1]{\qty{#1}{\degreeCelsius}}
-
-%%%%%%%%%%%%%%%
-%% HYPER CONFIG
-\hypersetup{
-  hidelinks,
-  draft = false,
-  unicode = true,
-  linktoc = section,
-}
-
-\AtEndPreamble{
-  \hypersetup{
-    pdftitle={\Title},
-    pdfauthor={\Author, \Email},
-    pdfsubject={\Subject},
-    pdfkeywords={\Keywords}
-  }
-}
-
-
-% Some titles of articles
-\newcommand{\articleTitle}{Satellite data reveal earlier and stronger phytoplankton blooms over fronts in the Gulf Stream region}
-\newcommand{\articleCceTitle}{Multi-trophic planktonic responses to fronts in a coastal upwelling ecosystem}
-\newcommand{\articleReviewTitle}{Impact of submesoscale processes on biogeochemical cycles in a changing ocean}
-
-%%%%%%%%%%%%%%%%
-% MATHS COMMANDS
-\newcommand\moy[1]{\left[#1\right]}
-\newcommand\med[1]{\overline{#1}}
-\newcommand\norm[1]{\operatorname{norm}\paren{#1}}
-\DeclareMathOperator{\std}{std}
-
-\newcommand\norme[2][]{\left\lVert#2\right\rVert_{#1}}
-\newcommand\paren[1]{\left(#1\right)}
-
-\newcommand\tot{\text{total}}
-\newcommand\frt{\text{front}}
-\newcommand\bkg{\text{background}}
-
-% For datasets
-% Set the label for the section describing the dataset
-% in the methods chapter. The (given) label is the same
-% as in the bibliography
-\newcommand\declareDataset[1]{\label{sec:donnees-#1}}
-% Use that same label to refer to the section
-\newcommand\datasect[1]{\cref{sec:donnees-#1}}
-\newcommand\dataname[1]{%
-  \hyperref[sec:donnees-#1]{\citefield{#1}[citefield]{shorttitle}}}
-
-%%%%%%%%%%%%%%%%
-% BEGIN DOCUMENT
 \begin{document}
 \dominitoc
 
+%%% Cover page
 \include{tex/front_page}
 
+%%% Front matter
 \frontmatter
 \include{tex/front_matter}
 
-% TOC
+%%% Glossary
 \setglswidth%
 \printglossary[toctitle=Glossaire]
 
+%%% TOC
 \clearpage
 {
   \setlength{\baselineskip}{1.03\onelineskip}
@@ -247,12 +26,14 @@ toc, section=section, symbols,
 
 \clearpage
 
+%%% LOF
 \listoffigures*
 % phantomsection already called by \listoffigures
 \addcontentsline{toc}{section}{\listfigurename}
 
 \clearpage
 
+%%% Mainmatter
 \mainmatter%
 
 \include{tex/intro}
@@ -261,7 +42,10 @@ toc, section=section, symbols,
 \include{tex/res_phénologie}
 \include{tex/conclusion}
 
+%%% Appendices
 \begin{appendices}
+  \changeappendixmark%
+
 \chapter[Article: \articleCceTitle][Article]{Article: \articleCceTitle}
 \label[appendix]{ax:article-cce}
 \chapter[Article: \articleReviewTitle][Article]{Article: \articleReviewTitle}
@@ -273,14 +57,26 @@ toc, section=section, symbols,
 \include{tex/annexes_autres}
 \end{appendices}
 
+%%% Bibliography
 {
   \emergencystretch=1em
-  \printbibliography[heading=bibintoc, filter=normal]
+  \chapter*{\bibname}
+  \mtcaddchapter[\bibname]
+  \markboth{\bibname}{}
+  \label{bib}
+  \printbibliography[heading=none, filter=normal]
+
+  \unsection{\bibdataTitle}
+  \markright{\bibdataTitle}
+  \label{bib:data}
+  \printbibliography[heading=none, type=dataset]
+
   {
+    \unsection{\bibsoftwareTitle}
+    \markright{\bibsoftwareTitle}
+    \label{bib:software}
     \raggedright%
-    \printbibliography[heading=subbibintoc, type=dataset, title=Données]
-    \printbibliography[heading=subbibintoc, type=software,
-    notkeyword=personnal, title=Logiciels]
+    \printbibliography[heading=none, type=software]
   }
 }
 

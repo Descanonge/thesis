@@ -8,7 +8,16 @@
     '("chapref" TeX-arg-ref TeX-arg-ref)
     '("resol" "N over" "M")
     '("dataset" [TeX-arg-ref 0 "sec:donnees-"]))
-   (LaTeX-section-list-add-locally '("unsection" 2))
-   (LaTeX-section-list-add-locally '("unsubsection" 3))
+   (LaTeX-section-list-add-locally '(("chapterlof" 1)
+                                     ("unsection" 2)
+                                     ("unsubsection" 3)))
+
+   (when (and (featurep 'font-latex)
+              (eq TeX-install-font-lock 'font-latex-setup))
+     (font-latex-add-keywords '(("chapterlof"   "{")) 'sectioning-1)
+     (font-latex-add-keywords '(("unsection"    "{")) 'sectioning-2)
+     (font-latex-add-keywords '(("unsubsection" "{")) 'sectioning-3)
+     )
+
    LaTeX-dialect)
  )
