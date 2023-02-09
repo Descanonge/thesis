@@ -1,23 +1,22 @@
-\documentclass[master]{subfiles}
-\begin{document}
 
-\chapter{Méthodes}
+\chapterlof{Méthodes}
 \label{chp:methodes}
 
-\tocsubfile%
-
-C'est un petit"~test.
+\minitoc%
 
 \section{Données}
 \label{sec:donnees}
 
 Dans cette section sont décrit les jeux de données utilisés pour ce projet.
 Le choix de ces données s'est avéré être une question importante et difficile dès le départ du projet.
-Nous savions qu'il allait être nécessaire de combiner plusieurs jeux de données (\ab{sst} avec \ab{chl}, puis avec des données de composition de la communauté de phytoplancton).
+Nous savions qu'il allait être nécessaire de combiner plusieurs jeux de données: la \ab{sst} avec la \ab{chl}, puis avec des données de composition de la communauté de phytoplancton.
 Cela a donc informé le choix des données, ainsi que la création des outils nécessaires à la gestion de plusieurs sets de données.
 
 Plusieurs options ont été considérées, notamment pour la \ab{sst}.
 Elles sont reportées ci"-dessous, même si elles ne sont pas utilisées pour le reste des résultats.
+
+<ref vers section de la biblio pour les datasets>
+
 
 \subsection{Sea Surface Temperature (SST)}
 \label{sec:donnees-sst}
@@ -268,7 +267,7 @@ Cela présuppose que lorsque les températures sont uni"-modales (\ab{cad} quand
 \end{figure}
 
 De manière plus précise on commence par calculer l'histogramme~\(h_i\) des valeurs de \ab{sst} dans la fenêtre, en utilisant des intervalles de largeur fixe de~\qty{0.1}{\dC} et compris entre les valeurs minimales et maximales dans la fênetre.
-Les données de \ab{sst} étant stockées compressées par la technique de troncation binaire (voir \cref{M-ax:compression-troncation} pour plus de détails) avec un facteur d'échelle de~\qty{0.01}{\dC}, nos intervalles ont une largeur précisement égale à dix fois l'écart minimal possible entre deux valeurs de température.
+Les données de \ab{sst} étant stockées compressées par la technique de troncation binaire (voir \cref{ax:compression-troncation} pour plus de détails) avec un facteur d'échelle de~\qty{0.01}{\dC}, nos intervalles ont une largeur précisement égale à dix fois l'écart minimal possible entre deux valeurs de température.
 Pour éviter que trop de valeurs tombent sur les bords des intervalles et que l'histogramme soit pollué par des erreurs numériques, on décale les intervalles de~\qty[parse-numbers=false]{0.01/2}{\dC}.
 Par ailleurs, le nombre d'intervalles étant dépendant de la largeur de la distribution de \ab{sst}, dans les cas où il est inférieur ou égal à quatre, la bimodalité est automatiquement assignée nulle (\(B=0\)).
 
@@ -417,23 +416,6 @@ Il convient de citer plusieurs paquets permettant le calcul efficace d'histogram
 Plusieurs paquets sont utilisés pour réaliser les figures, bien évidemment \citesoft{matplotlib},
 \citesoft{cartopy} pour les cartes,
 mais également \citesoft{cmocean} qui fourni des palettes de couleurs, notamment pour un usage en océanographie. Ces dernières présentent les avantages (majeurs) d'être linéairement perceptibles, adaptés à une conversion en nuance de gris pour impression, et robustes à plusieurs types de daltonisme.
-Similairement, les couleurs utilisées dans les figures sont le fruit du travail de Paul Tol\footnote{voir~\glsurl{paultol}}, distribué pour Python par mes soins (voir \refunsection{M-sec:productions}).
+Similairement, les couleurs utilisées dans les figures sont le fruit du travail de Paul Tol\footnote{voir~\glsurl{paultol}}, distribué pour Python par mes soins (voir \refunsection{sec:productions}).
 
 Enfin il me parait approprié de citer les outils \citesoft{ipython} avec lequel j'execute tous mes scripts, \citesoft{mamba} et le projet \citesoft{conda-forge} lesquels me permettent de gérer les environments Python, et enfin le travail épatant derrière le framework de configuration \citesoft{doom} sur lequel tous les scripts et ce manuscript (entre autres) ont été écrits.
-
-{
-  \raggedright% for URLs
-  \emergencystretch=1em
-  \printbibliography[heading=none, type=software, notkeyword=personnal]
-}
-
-\ifSubfilesClassLoaded{
-  \emergencystretch=1em
-  \printbibliography[heading=subbibintoc, filter=normal]
-  \printbibliography[heading=subsubbibintoc, type=dataset, title=\bibnameDataset]
-}{
-  \emergencystretch=1em
-  \printbibliography[heading=subbibintoc, type=dataset, title=\bibnameDataset]
-}
-
-\end{document}

@@ -12,13 +12,20 @@ SUB_FILES = $(foreach sn,$(SUB_NAMES),tex/$(sn).tex)
 AUXDIR_FLAGS := -auxdir="$(BUILD_DIR)" -emulate-aux-dir
 LMK_FLAGS := -lualatex -interaction=batchmode -recorder -quiet
 
+# Always put those in the \includeonly
+INCLUDE_DEF := tex/front_page, tex/front_matter, tex/annexes_autres
+
 .PHONY: all clean $(MAIN) $(SUB_NAMES)
 
 all: $(MAIN)
 
 $(SUB_NAMES):%: tex/%.tex
 	mkdir -p $(BUILD_DIR)/tex
-	latexmk $(LMK_FLAGS) $(AUXDIR_FLAGS) $<
+	latexmk $(LMK_FLAGS) $(AUXDIR_FLAGS) \
+		-jobname="$*" \
+		-usepretex="\includeonly{\
+		$(INCLUDE_DEF), tex/$*}" \
+		$(MAIN).tex
 
 $(MAIN): $(MAIN).tex
 	mkdir -p $(BUILD_DIR)/tex

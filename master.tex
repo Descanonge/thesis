@@ -1,4 +1,8 @@
 
+\RequirePackage{silence}
+\WarningFilter{latex}{Overwriting file}
+\WarningFilter{minitoc}{W0024}
+
 % Add fields to the bibliography datamodel
 % Formatting and sorting is done in preamble in bib_setup.tex
 \begin{filecontents*}[overwrite]{biblatex-dm.cfg}
@@ -34,10 +38,6 @@ draft,
 
 \usepackage{microtype}
 
-\usepackage{xr}
-\usepackage{subfiles}
-\externaldocument[M-]{\subfix{master}}
-
 % \usepackage[dvipsnames]{xcolor}
 \usepackage{siunitx}
 \usepackage[depth=4]{bookmark}
@@ -45,7 +45,6 @@ draft,
 \usepackage{listings}
 \usepackage{hyperref}
 \usepackage{amsmath}
-\usepackage{pgfkeys}
 
 \useshorthands*{"}
 % Hard hyphen, no breaks (but word after is breakable)
@@ -66,7 +65,7 @@ toc, section=section, symbols,
 
 \usepackage[nameinlink]{cleveref}
 
-\ifSubfilesClassLoaded{}{\usepackage{minitoc}}
+\usepackage{minitoc}
 
 % Metadata
 \newcommand\Author{Clément Haëck}
@@ -103,53 +102,35 @@ toc, section=section, symbols,
 %% Section numbering and toc options
 \renewcommand{\cftchaptername}{\chaptername~}
 \renewcommand{\cftappendixname}{\appendixname~}
-\ifSubfilesClassLoaded{%
-  \setcounter{tocdepth}{3}
-}{%
-  \setcounter{tocdepth}{2}
-  \mtcsetfont{minitoc}{section}{\normalfont\small}
-  \mtcsetdepth{minitoc}{3}}
+\setcounter{lofdepth}{1}
+\setcounter{tocdepth}{2}
+\mtcsetdepth{minitoc}{3}
+\mtcsetfont{minitoc}{section}{\normalfont\small}
 
-% Create toc
-\newcommand{\maketoc}{%
-  \pdfbookmark[section]{\contentsname}{toc}
-  \setlength{\baselineskip}{1.03\onelineskip}
-  \tableofcontents*
-  \setlength{\baselineskip}{\onelineskip}
-}
+\renewcommand\lofheadstart{}
+\renewcommand\printloftitle[1]{\section*{#1}}
+\renewcommand\afterloftitle{\thispagestyle{ruled}}
+\renewcommand\lofmark{\markboth{}{\listfigurename}}
+\setlength{\cftfigureindent}{2.5em}
 
-\ifSubfilesClassLoaded{%
-  \renewcommand{\printtoctitle}[1]{\section*{#1}}
-  \renewcommand{\aftertoctitle}{}
-  \renewcommand{\tocheadstart}{}
-}{
-  % \renewcommand{\printtoftitle}[1]{\section*{#1}}
-  % \renewcommand{\tofmark}{\markboth{}}
+% New chapter but add it to lof
+% Lifted from memoir.cls \@chapter
+\makeatletter
+\newcommand\chapterlof[1]{
+  \chapter{#1}
+  \ifanappendix%
+    \addcontentsline{lof}{appendix}{%
+      \protect\chapternumberline{\thechapter}\f@rtoc}%
+  \else
+    \addcontentsline{lof}{chapter}{%
+      \protect\chapternumberline{\thechapter}\f@rtoc}%
+  \fi
 }
+\makeatother
 
 \bookmarksetup{numbered}
 \AtBeginDocument{%
   \bookmark[named=FirstPage, level=section]{Page de garde}%
-}
-
-\makeatletter
-\newcommand*{\curtitle}{\@currentlabelname}
-\makeatother
-
-% Create toc for a subfile
-\newcommand{\tocsubfile}{%
-  \ifSubfilesClassLoaded{%
-    \renewcommand{\contentsname}{Sommaire}
-    \maketoc%
-    \clearpage
-    \setglswidth%
-    \printglossary[toctitle=Glossaire]
-    \clearpage
-    \chaptermark{\curtitle}
-  }{%
-    \minitoc%
-  }
-  \newpage
 }
 
 % Unumbered section with an entry in the TOC
@@ -170,10 +151,12 @@ toc, section=section, symbols,
   \cref@section@name~\frquote{\titleref{#1}} \cpageref{#1}}
 \makeatother
 
-% Cross-chapter references
-\newcommand{\chapref}[2]{%
-  \cref*{M-#1}, \cref*{M-#2}}
+% Cross-chapter references {<label>}{<chap. label>}
+\newcommand{\chapref}[2]{\cref*{#1}, \cref*{#2}}
 \input{src/cross_refs_names.tex}
+
+\changecaptionwidth%
+\captionwidth{0.9\textwidth}
 
 \graphicspath{{resources}}
 
@@ -243,7 +226,7 @@ toc, section=section, symbols,
 %%%%%%%%%%%%%%%%
 % BEGIN DOCUMENT
 \begin{document}
-\ifSubfilesClassLoaded{}{\dominitoc}
+\dominitoc
 
 \include{tex/front_page}
 
@@ -255,21 +238,28 @@ toc, section=section, symbols,
 \printglossary[toctitle=Glossaire]
 
 \clearpage
-\maketoc%
+{
+  \setlength{\baselineskip}{1.03\onelineskip}
+  \tableofcontents*
+  % phantomsection already called by \tableofcontents
+  \addcontentsline{toc}{section}{\contentsname}
+}
 
-% \clearpage
-% \listoffigures
+\clearpage
 
-% \clearpage
-% \listoftables
+\listoffigures*
+% phantomsection already called by \listoffigures
+\addcontentsline{toc}{section}{\listfigurename}
+
+\clearpage
 
 \mainmatter%
 
-\subfile{tex/intro}
-\subfile{tex/méthodes}
-\subfile{tex/res_chl}
-\subfile{tex/res_phénologie}
-\subfile{tex/conclusion}
+\include{tex/intro}
+\include{tex/méthodes}
+\include{tex/res_chl}
+\include{tex/res_phénologie}
+\include{tex/conclusion}
 
 \begin{appendices}
 \chapter[Article: \articleCceTitle][Article]{Article: \articleCceTitle}
@@ -278,22 +268,20 @@ toc, section=section, symbols,
 \label[appendix]{ax:article-review}
 
 \renewcommand{\thesection}{\Alph{chapter}.\arabic{section}} % No chapter number in section
-\chapter{Autres}
+\chapterlof{Autres}
 \label[appendix]{ax:autres}
 \include{tex/annexes_autres}
 \end{appendices}
 
-{%
+{
   \emergencystretch=1em
   \printbibliography[heading=bibintoc, filter=normal]
-  {%
+  {
     \raggedright%
-    \printbibliography[
-    heading=subbibintoc,
-    type=software,
-    notkeyword=personnal,
-    title=\bibnameSoftware]
-  }%
+    \printbibliography[heading=subbibintoc, type=dataset, title=Données]
+    \printbibliography[heading=subbibintoc, type=software,
+    notkeyword=personnal, title=Logiciels]
+  }
 }
 
 \backmatter%

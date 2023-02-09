@@ -4,8 +4,6 @@
  "thesis"
  (lambda ()
    (TeX-add-symbols
-    '("maketoc" 0)
-    '("tocsubfile" 0)
     '("refunsection" TeX-arg-ref)
     '("chapref" TeX-arg-ref TeX-arg-ref)
     '("resol" "N over" "M")
