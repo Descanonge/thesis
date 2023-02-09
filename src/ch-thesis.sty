@@ -1,52 +1,18 @@
+\NeedsTeXFormat{LaTeX2e} %chktex 44
+\ProvidesPackage{src/ch-thesis}[2023/02/09 CH Thèse]
 
-\RequirePackage{silence}
-\WarningFilter{latex}{Writing or overwriting file}
-\WarningFilter{minitoc(hints)}{W0024}
-
-% Add fields to the bibliography datamodel
-% Formatting and sorting is done in preamble in bib_setup.tex
-\begin{filecontents*}[overwrite]{biblatex-dm.cfg}
-\DeclareDatamodelFields[type=list,datatype=literal,label=true,nullok=true]{datavar}
-\DeclareDatamodelEntryfields[dataset]{datavar}
-\DeclareDatamodelFields[type=field,datatype=verbatim,nullok=true]{pypi}
-\DeclareDatamodelEntryfields[software]{pypi}
-\end{filecontents*}
-
-%%% Document class
-\documentclass[
-12pt,
-a4paper,
-french,
-openright,
-twoside,
-hyperfootnotes=false, % put here otherwise option clash
-draft,
-]
-{memoir}
-
-\usepackage{geometry}
-\usepackage[T1]{fontenc}
-\usepackage[otfmath]{XCharter}
+\RequirePackage{geometry}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[otfmath]{XCharter}
+\RequirePackage{microtype}
 
 %%% Localization
-\usepackage[french]{babel}
-\usepackage{csquotes}
+\RequirePackage[french]{babel}
+\RequirePackage{csquotes}
 \frenchsetup{
   ItemLabels=\textendash,
   ThinColonSpace
 }
-
-\usepackage[style=authoryear-comp]{biblatex}
-
-\usepackage{microtype}
-
-% \usepackage[dvipsnames]{xcolor}
-\usepackage{siunitx}
-\usepackage[depth=4]{bookmark}
-\usepackage{graphicx}
-\usepackage{listings}
-\usepackage{hyperref}
-\usepackage{amsmath}
 
 %%% Shorthands
 \useshorthands*{"}
@@ -55,21 +21,49 @@ draft,
 % Hard hyphen, breakable (word after also breakable)
 \defineshorthand{"-}{\babelhyphen{hard}}
 
-%%%%%%%%%%%%%%
-%%% Glossaries
-\usepackage[
-xindy, shortcuts=abbr,
-nostyles, nonumberlist,
-toc, section=section, symbols,
-]{glossaries-extra}
-\usepackage{glossary-long}
-\usepackage{glossary-tree} % needed for \setglswidth
-\input{src/gls_setup.tex}
+\RequirePackage{src/bib-setup}
+\RequirePackage{src/gls-setup}
 
-%%% Cleveref
-\usepackage[nameinlink]{cleveref}
+\RequirePackage{graphicx}
+\graphicspath{{resources}}
 
-\usepackage{minitoc}
+\RequirePackage{listings}
+\RequirePackage{amsmath}
+
+%%% SIunits
+\RequirePackage{siunitx}
+\sisetup{mode=math, locale=FR, product-units=single}
+\DeclareSIUnit\mgm{\milli\gram\per\cubic\metre}
+\DeclareSIUnit\dC{\degreeCelsius}
+\DeclareSIUnit\pixel{\text{px}}
+\DeclareSIUnit\pixels{\text{pixels}}
+\newcommand\resol[2]{\qty[parse-numbers=false]{\slashfrac{#1}{#2}}{\degree}}
+\newcommand\pct[2][]{\qty[#1]{#2}{\percent}}
+\newcommand\tC[1]{\qty{#1}{\degreeCelsius}}
+
+%%% Hyperref
+\RequirePackage{hyperref}
+\hypersetup{
+  hidelinks,
+  draft = false,
+  unicode = true,
+  linktoc = section,
+}
+\AtEndPreamble{
+  \hypersetup{
+    pdftitle={\Title},
+    pdfauthor={\Author, \Email},
+    pdfsubject={\Subject},
+    pdfkeywords={\Keywords}
+  }
+}
+
+\RequirePackage{src/cref-setup}
+
+
+%%% Bookmarks
+\RequirePackage[depth=4]{bookmark}
+\bookmarksetup{numbered}
 
 %%% Metadata
 \newcommand\Author{Clément Haëck}
@@ -78,7 +72,6 @@ toc, section=section, symbols,
 \newcommand\Subject{biogeochemistry}
 \newcommand\Keywords{}
 
-%%%%%%%%%%%%%%
 %%% Page style
 \chapterstyle{ger}
 \pagestyle{ruled}
@@ -102,9 +95,9 @@ toc, section=section, symbols,
 \checkandfixthelayout%
 
 
-%%%%%%%%%%%%%%%%%%%%%%
 %%% TOC, contents, lof
 %% Section numbering and toc options
+\RequirePackage{minitoc}
 \renewcommand{\cftchaptername}{\chaptername~}
 \renewcommand{\cftappendixname}{\appendixname~}
 \setcounter{lofdepth}{1}
@@ -120,7 +113,6 @@ toc, section=section, symbols,
 
 % New chapter but add it to lof
 % Lifted from memoir.cls \@chapter
-\makeatletter
 \newcommand\chapterlof[1]{
   \chapter{#1}
   \ifanappendix%
@@ -130,13 +122,6 @@ toc, section=section, symbols,
     \addcontentsline{lof}{chapter}{%
       \protect\chapternumberline{\thechapter}\f@rtoc}%
   \fi
-}
-\makeatother
-
-%%% Bookmarks
-\bookmarksetup{numbered}
-\AtBeginDocument{%
-  \bookmark[named=FirstPage, level=section]{Page de garde}%
 }
 
 %%% Unumbered Sections
@@ -150,13 +135,6 @@ toc, section=section, symbols,
   \refstepcounter{unsection}
 }
 
-% Reference by name/page for those sections
-\newcommand\creftitle[1]{\namecref{#1}~\enquote{\titleref{#1}}}
-
-% Cross-chapter references {<label>}{<chap. label>}
-\newcommand{\chapref}[2]{\cref*{#1}, \cref*{#2}}
-\input{src/cross_refs_names.tex}
-
 %%% Appendix
 % Add 'Annexe' in header
 \newcommand\changeappendixmark{%
@@ -167,39 +145,6 @@ toc, section=section, symbols,
 %%% Caption width
 \changecaptionwidth%
 \captionwidth{0.9\textwidth}
-
-\graphicspath{{resources}}
-
-%%% Biblatex
-\input{src/bib_setup}
-
-%%% SIunits
-\sisetup{mode=math, locale=FR, product-units=single}
-\DeclareSIUnit\mgm{\milli\gram\per\cubic\metre}
-\DeclareSIUnit\dC{\degreeCelsius}
-\DeclareSIUnit\pixel{\text{px}}
-\DeclareSIUnit\pixels{\text{pixels}}
-\newcommand\resol[2]{\qty[parse-numbers=false]{\slashfrac{#1}{#2}}{\degree}}
-\newcommand\pct[2][]{\qty[#1]{#2}{\percent}}
-\newcommand\tC[1]{\qty{#1}{\degreeCelsius}}
-
-%%% Hyperref
-\hypersetup{
-  hidelinks,
-  draft = false,
-  unicode = true,
-  linktoc = section,
-}
-
-\AtEndPreamble{
-  \hypersetup{
-    pdftitle={\Title},
-    pdfauthor={\Author, \Email},
-    pdfsubject={\Subject},
-    pdfkeywords={\Keywords}
-  }
-}
-
 
 %%% Article titles
 % Some titles of articles

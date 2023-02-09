@@ -1,5 +1,34 @@
 
-\input{src/preamble}
+\RequirePackage{silence}
+\WarningFilter{latex}{Writing or overwriting file}
+\WarningFilter{minitoc(hints)}{W0024}
+
+% Add fields to the bibliography datamodel
+% Formatting and sorting is done in preamble in bib_setup.tex
+\begin{filecontents*}[overwrite]{biblatex-dm.cfg}
+\DeclareDatamodelFields[type=list, datatype=literal, label=true, nullok=true]{datavar}
+\DeclareDatamodelEntryfields[dataset]{datavar}
+\DeclareDatamodelFields[type=field, datatype=verbatim, nullok=true]{pypi}
+\DeclareDatamodelEntryfields[software]{pypi}
+\end{filecontents*}
+
+%%% Document class
+\documentclass[
+12pt,
+a4paper,
+french,
+openright,
+twoside,
+hyperfootnotes=false, % put here otherwise option clash
+draft,
+]
+{memoir}
+
+\usepackage{src/ch-thesis}
+
+\AtBeginDocument{%
+  \bookmark[named=FirstPage, level=section]{Page de garde}%
+}
 
 \begin{document}
 \dominitoc

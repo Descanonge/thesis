@@ -1,9 +1,18 @@
+\NeedsTeXFormat{LaTeX2e} %chktex 44
+\ProvidesPackage{src/gls-setup}
+
+\RequirePackage[
+xindy, shortcuts=abbr,
+nostyles, nonumberlist,
+toc, section=section, symbols,
+]{glossaries-extra}
+\RequirePackage{glossary-long}
+\RequirePackage{glossary-tree} % needed for \setglswidth
 
 \makeglossaries%
 
 \setglossarystyle{long}
 
-\makeatletter
 % Automatically set glossary width to maximum available
 % minus largest 'short' from all entries
 \newcommand{\setglswidth}{%
@@ -16,7 +25,6 @@
   \addtolength{\glsdescwidth}{-21pt} % We are overfull by 20.5pt otherwise, idk why
   \message{glsdescwidth: \the\glsdescwidth\newline}
 }
-\makeatother
 
 %% Acronyms glossary
 \setabbreviationstyle[acronym]{short-nolong}
