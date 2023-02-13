@@ -1,7 +1,7 @@
 ;;; .auctex-style Custom project style
 
 (TeX-add-style-hook
- "thesis"
+ "src/ch-thesis"
  (lambda ()
    (TeX-add-symbols
     '("refunsection" TeX-arg-ref)

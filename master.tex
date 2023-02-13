@@ -73,7 +73,7 @@ draft,
 
 %%% Appendices
 \begin{appendices}
-  \changeappendixmark%
+\changeappendixmark%
 
 \chapter[Article: \articleCceTitle][Article]{Article: \articleCceTitle}
 \label[appendix]{ax:article-cce}
@@ -84,6 +84,7 @@ draft,
 \chapterlof{Autres}
 \label[appendix]{ax:autres}
 \include{tex/annexes_autres}
+
 \end{appendices}
 
 %%% Bibliography
@@ -91,6 +92,7 @@ draft,
 \mtcaddchapter[\bibname]
 \markboth{\bibname}{}
 \label{bib}
+
 {
   \emergencystretch=1em
   \printbibliography[heading=none, filter=normal]
@@ -99,6 +101,7 @@ draft,
 \unsection{\bibdataTitle}
 \markright{\bibdataTitle}
 \label{bib:data}
+
 {
   \emergencystretch=1em
   \printbibliography[heading=none, type=dataset]
@@ -135,8 +138,6 @@ Enfin il me parait approprié de citer les outils \citesoft{ipython} avec lequel
   \raggedright%
   \printbibliography[heading=none, type=software]
 }
-
-\backmatter%
 
 \end{document}
 

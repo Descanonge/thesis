@@ -5,6 +5,9 @@
 \minitoc%
 \clearpage
 
+<petite introduction>
+ + décrire plan.
+
 \section{Données}
 \label{sec:donnees}
 
@@ -17,7 +20,7 @@ Plusieurs options ont été considérées, notamment pour la \ab{sst}.
 Elles sont reportées ci"-dessous, même si elles ne sont pas utilisées pour le reste des résultats.
 
 Au long de ce chapitre (et ailleurs dans ce manuscript) les articles publiés correspondant aux jeux de données sont bien évidemment cités, mais sont également précisés les accès par lesquels nous avons obtenus les données.
-Ces derniers sont cités en note de bas de page, et listés dans la \creftitle{bib:data} de la bibliographie~(\cpageref{bib:data}).
+Ces derniers sont cités en note de bas de page et listés dans la \creftitle{bib:data} de la bibliographie~(\cpageref{bib:data}).
 
 \subsection{Sea Surface Temperature (SST)}
 \label{sec:donnees-sst}
@@ -154,7 +157,7 @@ Nous sous"-échantillonons les données en appliquant une moyenne à chaque grou
 \section{Délimitations des sous-régions d'étude}
 \label{sec:delimitations-regions}
 
-Comme détaillé plus en profondeur en introduction (\chapref{sec:region-detude}{chp:introduction}) notre région d'étude est fortement hétérogène, aussi bien concernant les propriétés physiques que biologiques.
+Comme détaillé plus en profondeur en introduction (\cref{sec:region-detude}, \cref*{chp:introduction}) notre région d'étude est fortement hétérogène, aussi bien concernant les propriétés physiques que biologiques.
 Il est ainsi nécessaire de séparer notre zone d'étude en (sous-)régions afin d'extraire des résultats sur des zones homogènes.
 Nous définissons donc trois biomes.
 Le biome \ab{sb-perm}, le plus au sud, correspond à un régime largement oligotrophe.
@@ -386,7 +389,7 @@ Vérification que les histogrammes sont well-behaved pour prendre des valeurs.
 \label{sec:extraction-surplus}
 
 Afin de comparer les valeurs de diverse variables à l'intérieur et à l'extérieur des fronts, nous définissons deux métriques.
-La première est l'excès~\ab{exces} de \ab{chl} (\enquote{excess} dans l'article \chapref{sec:article-bg}{chp:res-chl}), qui compare localement les valeurs dans les fronts et le background. On le définit simplement comme la différence relative entre la médiane de \ab{chl} dans et hors des fronts:
+La première est l'excès~\ab{exces} de \ab{chl} (\enquote{excess} dans l'article \cref{sec:article-bg}, \cref*{chp:res-chl}), qui compare localement les valeurs dans les fronts et le background. On le définit simplement comme la différence relative entre la médiane de \ab{chl} dans et hors des fronts:
 \begin{equation}
   \am{exces} = \frac{\med{\am{chl}}_\frt - \med{\am{chl}}_\bkg}
   {\med{\am{chl}}_\bkg} .
@@ -395,7 +398,7 @@ Le calcul est fait pour les fronts faibles et forts de la même manière, le bac
 L'excès est calculé dans des bandes de latitudes larges de~\ang{5}, afin de minimiser l'influence des gradients de grande échelle.
 
 Cette métrique ne tient compte que de la distribution des valeurs de \ab{chl}, et ne représente pas la quantité totale présente ou la proportion de fronts dans une zone donnée.
-Ainsi on définit le surplus~\ab{surplus} de \ab{chl} (\enquote{biome surplus} dans l'article \chapref{sec:article-bg}{chp:res-chl}) dans toute un biome comme la différence relative entre la moyenne de \ab{chl} dans tout un biome et la moyenne dans le background:
+Ainsi on définit le surplus~\ab{surplus} de \ab{chl} (\enquote{biome surplus} dans l'article \cref{sec:article-bg}, \cref*{chp:res-chl}) dans toute un biome comme la différence relative entre la moyenne de \ab{chl} dans tout un biome et la moyenne dans le background:
 \begin{equation}
   \am{surplus} = \frac{\moy{\am{chl}}_\tot - \moy{\am{chl}}_\bkg}
   {\moy{\am{chl}}_\bkg} .
