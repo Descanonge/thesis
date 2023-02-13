@@ -1,6 +1,7 @@
 \NeedsTeXFormat{LaTeX2e} %chktex 44
 \ProvidesPackage{src/gls-setup}
 
+%%% Glossaries package
 \RequirePackage[
 xindy, shortcuts=abbr,
 nostyles, nonumberlist,
@@ -13,6 +14,7 @@ toc, section=section, symbols,
 
 \setglossarystyle{long}
 
+%%% Glossary width
 % Automatically set glossary width to maximum available
 % minus largest 'short' from all entries
 \newcommand{\setglswidth}{%
@@ -26,12 +28,14 @@ toc, section=section, symbols,
   \message{glsdescwidth: \the\glsdescwidth\newline}
 }
 
+
+%%% Acronyms
 %% Acronyms glossary
 \setabbreviationstyle[acronym]{short-nolong}
 \loadglsentries{glossaries/acronyms}
 
 
-%% Symbols glossary
+%%% Symbols
 \newignoredglossary{symbol}
 
 % Custom style for Math symbols
@@ -117,7 +121,7 @@ toc, section=section, symbols,
 
 \loadglsentries[symbol]{glossaries/symbols}
 
-%% Links glossary
+%%% Links
 % This allows to define URLs that can be used in the document
 % Should be used with \glsurl, \glsentryurl et \glshref
 \newignoredglossary{link}
@@ -155,27 +159,33 @@ toc, section=section, symbols,
 
 \loadglsentries[link]{glossaries/links}
 
-%% Other abbreviations
+%%% Other abbreviations
 \newignoredglossary{other}
-\glssetcategoryattribute{other}{nohyper}{true}
-\glssetcategoryattribute{initialism}{discardperiod}{true}
 \setabbreviationstyle[other]{short}
-\setabbreviationstyle[initialism]{short}
 \setabbreviationstyle[biomes]{long}
+
+% Discard period if enddot key is true.
+% Only need that to avoid double dots.
+% Inter word/sentence are equal, we use frenchspacing
+\glsxtrprovidestoragekey{enddot}{false}{\glsenddot}
+\renewcommand*\glsxtrpostlinkhook{%
+  \GlsXtrIfFieldEqStr*{enddot}{\glslabel}{true}%
+  {\glsxtrifperiod{\glsxtrpostlinkendsentence}{\glsxtrpostlink}}%
+  {\glsxtrpostlink}}
+
+\newcommand\GlsPreventDiscardPeriod[2]{% <type><category>
+  \glsforeachincategory[#1]{#2}{\@gls@type}{\@gls@label}{%
+    \GlsXtrSetField{\@gls@label}{enddot}{false}}}
 
 \newcommand{\newabbreviationOther}[4][]{%
   \newglossaryentry{#2}{type=other, category=other,%
-    name={#3}, short={#3}, long={#4}, #1}%
-}
+    name={#3}, short={#3}, long={#4}, #1}}
 \newcommand{\newalias}[2]{\newglossaryentry{#1}{name={#1}, alias=#2}}
 
-% Discard period if enddot key is defined
-% Only need that to avoid double dots.
-% Inter word/sentence are equal, we use frenchspacing
-\glsxtrprovidestoragekey{enddot}{}{}
-\renewcommand*\glsxtrifcustomdiscardperiod[2]{%
-  \glsxtrifkeydefined{enddot}{#1}{#2}}
-
 \loadglsentries[other]{glossaries/other}
+
+% If style is long, no need to discard period
+% We overwrite the enddot value
+\GlsPreventDiscardPeriod{other}{biomes}
 
 \glsaddall%
