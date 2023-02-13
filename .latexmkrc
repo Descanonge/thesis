@@ -1,7 +1,7 @@
 $parser = 'python src/parse_log.py "$(pplatex -i texbuild/%A.log)"';
-$pplatex = 'pplatex -i texbuild/%A.log';
-$success_cmd = $pplatex;
-$failure_cmd = $pplatex;
+
+$success_cmd = 'src/parse_log.sh texbuild/%A.log';
+$failure_cmd = 'src/parse_log.sh texbuild/%A.log';
 
 add_cus_dep('glo', 'gls', 0, 'run_makeglossaries');
 add_cus_dep('acn', 'acr', 0, 'run_makeglossaries');
