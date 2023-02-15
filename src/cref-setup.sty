@@ -1,10 +1,12 @@
 \NeedsTeXFormat{LaTeX2e} %chktex 44
 \ProvidesPackage{src/cref-setup}
 
-\RequirePackage[nameinlink]{cleveref}
+\RequirePackage[french, nameinlink]{cleveref}
 
-% Reference by name/page for those sections
-\newcommand\creftitle[1]{\namecref{#1}~\enquote{\titleref{#1}}}
+\newcommand*\reftitle[1]{% {label}
+  \enquote{\titleref{#1}}}
+\newcommand*\creftitle[1]{% {label}
+  \namecref{#1}~\reftitle{#1}}
 
 \crefname{equation}{éq.}{éq.}%
 \Crefname{equation}{Équation}{Équations}%

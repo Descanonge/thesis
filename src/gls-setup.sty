@@ -17,16 +17,15 @@ toc, section=section, symbols,
 %%% Glossary width
 % Automatically set glossary width to maximum available
 % minus largest 'short' from all entries
-\newcommand{\setglswidth}{%
+\newcommand*\setglswidth{%
   \glsfindwidesttoplevelname%
   \newlength{\gls@widest}%
   \settowidth{\gls@widest}{\glstreenamefmt{\@glswidestname\space}}%
-  \multiply\gls@widest by -1%
+  \multiply\gls@widest by -1
   \setlength{\glsdescwidth}{\textwidth}%
   \addtolength{\glsdescwidth}{\gls@widest}%
-  \addtolength{\glsdescwidth}{-21pt} % We are overfull by 20.5pt otherwise, idk why
-  \message{glsdescwidth: \the\glsdescwidth\newline}
-}
+  \addtolength{\glsdescwidth}{-21pt}% We are overfull by 20.5pt otherwise, idk why
+  \message{glsdescwidth: \the\glsdescwidth\newline}}
 
 
 %%% Acronyms
@@ -50,7 +49,7 @@ toc, section=section, symbols,
 \newabbreviationstyle{short-symbol}%
 {%
   \GlsXtrUseAbbrStyleSetup{nolong-short}%
-  \renewcommand*{\CustomAbbreviationFields}{%
+  \renewcommand*\CustomAbbreviationFields{%
     name={\the\glslabeltok},%
     sort={\the\glslabeltok},%
     first={\the\glsshorttok},%
@@ -58,66 +57,55 @@ toc, section=section, symbols,
     text={\the\glsshorttok},%
     plural={\the\glsshorttok},%
     description={\the\glslongtok}}%
-  \renewcommand*{\GlsXtrPostNewAbbreviation}{%
+  \renewcommand*\GlsXtrPostNewAbbreviation{%
     \glssetattribute{\the\glslabeltok}{regular}{true}%
-    \glssetattribute{\the\glslabeltok}{nohyper}{true}%
-  }%
-}
+    \glssetattribute{\the\glslabeltok}{nohyper}{true}}}%
 {%
   \GlsXtrUseAbbrStyleFmts{nolong-short}%
-  \renewcommand*{\glsfirstlongfont}[1]{\glsfirstlongdefaultfont{##1}}%
-  \renewcommand*{\glslongfont}[1]{\glslongdefaultfont{##1}}%
-  \renewcommand*{\glsxtrinlinefullformat}[2]{%
+  \renewcommand*\glsfirstlongfont[1]{\glsfirstlongdefaultfont{##1}}%
+  \renewcommand*\glslongfont[1]{\glslongdefaultfont{##1}}%
+  \renewcommand*\glsxtrinlinefullformat[2]{%
     \protect\glsfirstlongfont{\glsaccesslong{##1}%
       \ifglsxtrinsertinside##2\fi}%
     \ifglsxtrinsertinside\else##2\fi~%
-    \glsaccessshort{##1}%
-  }%
-  \renewcommand*{\glsxtrinlinefullplformat}[2]{%
+    \glsaccessshort{##1}}%
+  \renewcommand*\glsxtrinlinefullplformat[2]{%
     \protect\glsfirstlongfont{\glsaccesslongpl{##1}%
      \ifglsxtrinsertinside##2\fi}%
     \ifglsxtrinsertinside\else##2\fi~%
-    \glsaccessshortpl{##1}%
-  }%
-  \renewcommand*{\Glsxtrinlinefullformat}[2]{%
+    \glsaccessshortpl{##1}}%
+  \renewcommand*\Glsxtrinlinefullformat[2]{%
     \protect\glsfirstlongfont{\Glsaccesslong{##1}%
       \ifglsxtrinsertinside##2\fi}%
     \ifglsxtrinsertinside\else##2\fi~%
-    \glsaccessshort{##1}%
-  }%
-  \renewcommand*{\Glsxtrinlinefullplformat}[2]{%
+    \glsaccessshort{##1}}%
+  \renewcommand*\Glsxtrinlinefullplformat[2]{%
     \protect\glsfirstlongfont{\Glsaccesslongpl{##1}%
        \ifglsxtrinsertinside##2\fi}%
      \ifglsxtrinsertinside\else##2\fi~%
-    \glsaccessshort{##1}%
-  }%
-  \renewcommand*{\glsxtrfullformat}[2]{%
+    \glsaccessshort{##1}}%
+  \renewcommand*\glsxtrfullformat[2]{%
     \glsaccessshort{##1}\ifglsxtrinsertinside##2\fi%
-    \ifglsxtrinsertinside\else##2\fi
-  }%
-  \renewcommand*{\glsxtrfullplformat}[2]{%
+    \ifglsxtrinsertinside\else##2\fi}%
+  \renewcommand*\glsxtrfullplformat[2]{%
     \glsaccessshort{##1}\ifglsxtrinsertinside##2\fi%
-    \ifglsxtrinsertinside\else##2\fi
-  }%
-  \renewcommand*{\Glsxtrfullformat}[2]{%
+    \ifglsxtrinsertinside\else##2\fi}%
+  \renewcommand*\Glsxtrfullformat[2]{%
     \glsaccessshort{##1}\ifglsxtrinsertinside##2\fi%
-    \ifglsxtrinsertinside\else##2\fi
-  }%
-  \renewcommand*{\Glsxtrfullplformat}[2]{%
+    \ifglsxtrinsertinside\else##2\fi}%
+  \renewcommand*\Glsxtrfullplformat[2]{%
     \glsaccessshort{##1}\ifglsxtrinsertinside##2\fi%
-    \ifglsxtrinsertinside\else##2\fi
-  }%
-}
+    \ifglsxtrinsertinside\else##2\fi}}
 
 \setabbreviationstyle[symbol]{short-symbol}
 
-% \newsymbol[<options>]{<label>}{<symbol>}{<long>}
-\newcommand{\newsymbol}[4][]{%
+\newcommand\newsymbol[4][]{% [options]{label}{symbol (math mode compat)}{long}
   \newabbreviation[#1, category=symbol,
-  sort={#2}, symbol={#3}
-  ]{#2}{\(#3\)}{#4}
-}
-\newcommand{\am}[1]{\glsentrysymbol{#1}}
+  sort={#2}, symbol={#3}%
+  ]{#2}{\(#3\)}{#4}}
+% Insert symbol (which should be valid in math mode)
+\newcommand*\am[1]{% {label}
+  \glsentrysymbol{#1}}
 
 \loadglsentries[symbol]{glossaries/symbols}
 
@@ -134,28 +122,26 @@ toc, section=section, symbols,
 \glsaddkey{doi}{none}{\glsentrydoi}{\Glsentrydoi}%
 {\glsdoiorg}{\Glsdoiorg}{\GLSdoiorg}
 
-\newcommand{\newlink}[4][]{%
-  \newglossaryentry{#2}{type=link, category=link,%
-    name={#3}, url={#4}, #1}%
-}
-\newcommand{\newdoi}[4][]{%
-  \newglossaryentry{#2}{type=link, category=link,%
-    name={#3}, url={https://doi.org/#4}, doi={#4}, #1}%
-}
+\newcommand\newlink[4][]{% [options]{label}{name}{url}
+  \newglossaryentry{#2}{type=link, category=link,
+    name={#3}, url={#4}, #1}}
+\newcommand\newdoi[4][]{% [options]{label}{name}{doi}
+  \newglossaryentry{#2}{type=link, category=link,
+    name={#3}, url={https://doi.org/#4}, doi={#4}, #1}}
 
-\newcommand{\glshref}[2][]{%
+\newcommand*\glshref[2][]{% [text (default is entry name)]{label}
   \href{\glsentryurl{#2}}{%
-    \ifstrempty{#1}{\glsentryname{#2}}{#1}%
-  }%
-}
-\newcommand{\glsurl}[1]{%
+    \ifstrempty{#1}{\glsentryname{#2}}{#1}}}
+
+% Produce simple url text for url entries
+% and nice `doi: doi url' for doi entries.
+\newcommand*\glsurl[1]{% {label}
   \ifglsfieldeq{#1}{doi}{none}%
   {%
     \url{\glsentryurl{#1}}%
   }{%
     \textsc{doi}:~\href{\glsentryurl{#1}}{\texttt{\glsentrydoi{#1}}}%
-  }%
-}
+  }}
 
 \loadglsentries[link]{glossaries/links}
 
@@ -173,14 +159,16 @@ toc, section=section, symbols,
   {\glsxtrifperiod{\glsxtrpostlinkendsentence}{\glsxtrpostlink}}%
   {\glsxtrpostlink}}
 
-\newcommand\GlsPreventDiscardPeriod[2]{% <type><category>
+% Set enddot field to false for all entries in this category
+\newcommand\GlsPreventDiscardPeriod[2]{% {type}{category}
   \glsforeachincategory[#1]{#2}{\@gls@type}{\@gls@label}{%
     \GlsXtrSetField{\@gls@label}{enddot}{false}}}
 
-\newcommand{\newabbreviationOther}[4][]{%
+\newcommand\newabbreviationOther[4][]{% [options]{label}{short}{long}
   \newglossaryentry{#2}{type=other, category=other,%
     name={#3}, short={#3}, long={#4}, #1}}
-\newcommand{\newalias}[2]{\newglossaryentry{#1}{name={#1}, alias=#2}}
+\newcommand\newalias[2]{% {label}{target label}
+  \newglossaryentry{#1}{name={#1}, alias=#2}}
 
 \loadglsentries[other]{glossaries/other}
 

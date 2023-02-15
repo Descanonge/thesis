@@ -23,21 +23,20 @@
   sorting = nyt,
   sortcites = false,
   uniquename = init,
-  url = false,
+  url = false
 }
 
 % Add filter for 'normal entries'
 \defbibfilter{normal}{%
   not type=software
-  and not type=dataset
-}
+  and not type=dataset}
 
 % Sort dataset, software and rest separately
 \DeclarePresort[dataset]{dd}
 \DeclarePresort[software]{ss}
 
-\newcommand\bibsoftwareTitle{Logiciels}
-\newcommand\bibdataTitle{Données}
+\newcommand*\bibsoftwareTitle{Logiciels}
+\newcommand*\bibdataTitle{Données}
 
 % Remove small caps in family names
 \DefineBibliographyExtras{french}{\restorecommand\mkbibnamefamily}
@@ -55,8 +54,7 @@
   \printfield{year}%
   \newunit\newblock%
   \printfield{doi}%
-  \usebibmacro{finentry}%
-}
+  \usebibmacro{finentry}}
 
 % New bibliography format for software entries
 \DeclareBibliographyDriver{software}{%
@@ -74,8 +72,7 @@
   \printfield{pypi}%
   \newunit%
   \printfield{url}%
-  \usebibmacro{finentry}%
-}
+  \usebibmacro{finentry}}
 
 \DeclareSourcemap{
   \maps{
@@ -105,9 +102,8 @@
 \DeclareFieldFormat[software]{pypi}{\mkbibacro{pypi}\addcolon~\href{https://pypi.org/project/#1}{#1}}
 
 % Add abbreviation for version
-\DefineBibliographyStrings{french} {%
-  version = {ver\adddot},%
-}
+\DefineBibliographyStrings{french}{%
+  version = {ver\adddot}}
 
 % Citation command for software
 % (too much hassle to rewrite textcite or cite)
@@ -116,6 +112,7 @@
 }{, }{}
 
 
+%%% Hyperlink cite macros
 % Citations commands that are fully hyperlinked
 
 \DeclareFieldFormat{citehyperref}{%

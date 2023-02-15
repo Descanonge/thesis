@@ -14,6 +14,8 @@
   ThinColonSpace
 }
 
+\newcommand\encadra[1]{ ---~#1~---}
+
 %%% Shorthands
 \useshorthands*{"}
 % Hard hyphen, no breaks (but word after is breakable)
@@ -36,9 +38,18 @@
 \DeclareSIUnit\dC{\degreeCelsius}
 \DeclareSIUnit\pixel{\text{px}}
 \DeclareSIUnit\pixels{\text{pixels}}
-\newcommand\resol[2]{\qty[parse-numbers=false]{\slashfrac{#1}{#2}}{\degree}}
-\newcommand\pct[2][]{\qty[#1]{#2}{\percent}}
-\newcommand\tC[1]{\qty{#1}{\degreeCelsius}}
+
+% Nice inline fraction with degree sign
+\newcommand*\resol[2]{% {top}{bottom} of fraction
+  \qty[parse-numbers=false]{\slashfrac{#1}{#2}}{\degree}}
+
+% Quick percent value
+\newcommand*\pct[2][]{% [options]{number}
+  \qty[#1]{#2}{\percent}}
+
+% Quick temperature value
+\newcommand*\tC[2][]{% [options]{number}
+  \qty[#1]{#2}{\degreeCelsius}}
 
 %%% Hyperref
 \RequirePackage{hyperref}
@@ -66,18 +77,30 @@
 \bookmarksetup{numbered}
 
 %%% Metadata
-\newcommand\Author{Clément Haëck}
-\newcommand\Email{clement.haeck@locean.ipsl.fr}
-\newcommand\Title{Impact des fronts sur le Phytoplancton dans la région du Gulf-Stream quantifié par imagerie satellitaire}
-\newcommand\Subject{biogeochemistry}
-\newcommand\Keywords{}
+\newcommand*\Author{Clément Haëck}
+\newcommand*\Email{clement.haeck@locean.ipsl.fr}
+\newcommand*\Title{Impact des fronts sur le Phytoplancton dans la région du Gulf-Stream quantifié par imagerie satellitaire}
+\newcommand*\Subject{biogeochemistry}
+\newcommand*\Keywords{}
 
 %%% Page style
 \chapterstyle{ger}
 \pagestyle{ruled}
+
+\raggedbottom%
+
 \setsecnumdepth{subsubsection}
-\renewcommand{\thesection}{\arabic{section}} % No chapter number in section
-\renewcommand{\thechapter}{\Roman{chapter}}
+\renewcommand\thesection{\arabic{section}} % No chapter number in section
+\renewcommand\thechapter{\Roman{chapter}}
+
+% Figure number with middle dot
+% \mainmatter reset things so we have to hack a bit
+\renewcommand\@memmain@floats{%
+  \counterwithin{figure}{chapter}
+  \counterwithin{table}{chapter}
+  \def\thefigure{\thechapter\textperiodcentered\arabic{section}}
+  \def\thetable{\thechapter\textperiodcentered\arabic{table}}
+}
 
 %% Page Layout
 % A4 297x210mm (global a4paper option)
@@ -89,7 +112,7 @@
 % Left/Right margins, set ratio so that spine is smaller than edge
 \setlrmargins{*}{*}{1.3}
 % Set header size and foot skip, header taller than baseline for É in sections titles
-\setheadfoot{1.1\onelineskip}{2\onelineskip}
+\setheadfoot{2.\onelineskip}{2\onelineskip}
 \setheaderspaces{*}{\onelineskip}{*}
 % Check and apply layout
 \checkandfixthelayout%
@@ -97,14 +120,15 @@
 
 %%% TOC, contents, lof
 %% Section numbering and toc options
-\RequirePackage{minitoc}
-\renewcommand{\cftchaptername}{\chaptername~}
-\renewcommand{\cftappendixname}{\appendixname~}
+\renewcommand\cftchaptername{\chaptername~}
+\renewcommand\cftappendixname{\appendixname~}
 \setcounter{lofdepth}{1}
 \setcounter{tocdepth}{2}
+\RequirePackage{minitoc}
 \mtcsetdepth{minitoc}{3}
 \mtcsetfont{minitoc}{section}{\normalfont\small}
 
+% Remove chapter typesetting stuff (we want a simple section instead)
 \renewcommand\lofheadstart{}
 \renewcommand\printloftitle[1]{\section*{#1}}
 \renewcommand\afterloftitle{\thispagestyle{ruled}}
@@ -113,32 +137,30 @@
 
 % New chapter but add it to lof
 % Lifted from memoir.cls \@chapter
-\newcommand\chapterlof[1]{
-  \chapter{#1}
+\newcommand*\chapterlof[2][]{% [options]{Name}
+  \chapter[#1]{#2}
   \ifanappendix%
     \addcontentsline{lof}{appendix}{%
       \protect\chapternumberline{\thechapter}\f@rtoc}%
-  \else
+  \else%
     \addcontentsline{lof}{chapter}{%
       \protect\chapternumberline{\thechapter}\f@rtoc}%
-  \fi
-}
+  \fi}
 
 %%% Unumbered Sections
 % Unumbered section with an entry in the TOC
 \newcounter{unsection}[chapter]
 \crefalias{unsection}{section}
-\newcommand{\unsection}[1]{%
+\newcommand*\unsection[1]{% {name}
   \phantomsection%
-  \addcontentsline{toc}{section}{#1}
-  \refstepcounter{unsection}
-  \section*{#1}
-}
+  \addcontentsline{toc}{section}{#1}%
+  \refstepcounter{unsection}%
+  \section*{#1}}
 
 %%% Appendix
 % Add 'Annexe' in header
-\newcommand\changeappendixmark{%
-  \renewcommand{\chaptermark}[1]{%
+\newcommand*\changeappendixmark{%
+  \renewcommand\chaptermark[1]{%
     \markboth{\memUChead{%
         \appendixname\ \thechapter\ --\ ##1}}{}}}
 
@@ -148,29 +170,51 @@
 
 %%% Article titles
 % Some titles of articles
-\newcommand{\articleTitle}{Satellite data reveal earlier and stronger phytoplankton blooms over fronts in the Gulf Stream region}
-\newcommand{\articleCceTitle}{Multi-trophic planktonic responses to fronts in a coastal upwelling ecosystem}
-\newcommand{\articleReviewTitle}{Impact of submesoscale processes on biogeochemical cycles in a changing ocean}
+\newcommand*\articleTitle{Satellite data reveal earlier and stronger phytoplankton blooms over fronts in the Gulf Stream region}
+\newcommand*\articleCceTitle{Multi-trophic planktonic responses to fronts in a coastal upwelling ecosystem}
+\newcommand*\articleReviewTitle{Impact of submesoscale processes on biogeochemical cycles in a changing ocean}
 
 %%% Maths commands
-\newcommand\moy[1]{\left[#1\right]}
-\newcommand\med[1]{\overline{#1}}
-\newcommand\norm[1]{\operatorname{norm}\paren{#1}}
+
+% Some operators
 \DeclareMathOperator{\std}{std}
+\newcommand*\moy[1]{\left[#1\right]}
+\newcommand*\med[1]{\overline{#1}}
+\newcommand*\norm[1]{\operatorname{norm}\paren{#1}}
+\newcommand*\paren[1]{\left(#1\right)}
+\newcommand*\norme[2][]{% [norme subscript, default none]{argument}
+  \left\lVert#2\right\rVert_{#1}}
 
-\newcommand\norme[2][]{\left\lVert#2\right\rVert_{#1}}
-\newcommand\paren[1]{\left(#1\right)}
-
-\newcommand\tot{\text{total}}
-\newcommand\frt{\text{front}}
-\newcommand\bkg{\text{background}}
+% Quick text stuff
+\newcommand*\tot{\text{total}}
+\newcommand*\frt{\text{front}}
+\newcommand*\bkg{\text{background}}
 
 %%% Datasets commands
 % Set the label for the section describing the dataset
 % in the methods chapter. The (given) label is the same
 % as in the bibliography
-\newcommand\declareDataset[1]{\label{sec:donnees-#1}}
+\newcommand*\declareDataset[1]{% {biblio label}
+  \label{sec:donnees-#1}}
 % Use that same label to refer to the section
-\newcommand\datasect[1]{\cref{sec:donnees-#1}}
-\newcommand\dataname[1]{%
+\newcommand*\datasect[1]{% {biblio label}
+  \cref{sec:donnees-#1}}
+\newcommand*\dataname[1]{% {biblio label}
   \hyperref[sec:donnees-#1]{\citefield{#1}[citefield]{shorttitle}}}
+
+%%% Framed environments
+\usepackage[dvipsnames]{xcolor}
+
+\colorlet{shadecolor-note}{Cerulean!15!white}
+
+\newenvironment{note}{%
+  \def\FrameCommand{%
+    \fboxsep=\FrameSep \vrule width 1pt \colorbox{shadecolor-note}}% chktex 1
+  \MakeFramed{\parindent=0pt\textbf{Note}\\[3pt]
+    \advance\hsize -\width \FrameRestore}}% chktex 1
+{\endMakeFramed}
+
+
+%%% Captions
+\newcommand\captionT[2]{% {Title}{text}
+  \caption[#1]{\emph{#1}. #2}}
