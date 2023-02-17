@@ -35,18 +35,19 @@ Brièvement ces autres paramètres sont (entre autres) la disponibilité des aut
 ou encore la couverture spatio-temporelle.
 
 \begin{note}
-  Bien que notre zone d'étude s'étende à des (relativement) hautes latitudes~(\ang{\approx55}N), nous ne considérons pas les différences de distances zonales et méridionales.
+  Bien que notre zone d'étude s'étende à de (relativement) hautes latitudes~(\ang{\approx55}N), nous ne considérons pas les différences de distances zonales et méridionales.
   Nous faisons donc une correspondance simple entre fraction de degré et kilomètre, quelque soit la distance considérée.
 \end{note}
 
 \subsubsection{MODIS-1km}
 \declareDataset{sst_modis}
+\declareDataset{chl_modis}
 
 Un des premiers jeux de données \ab{sst} à considérer est celui utilisé par \textcite{liu_2016}, dont l'étude consistait également à détecter des fronts de \ab{sst} et les colocaliser aux données de \ab{chl}.
 Ces variables étant rarement distribuées sur des grilles à des résolutions kilométriques, il apparaît comme nécessaire de \enquote{re-grider} nous même des produits L2 ---~\al{cad} des données d'un seul capteur converties en variables géophysiques, et disposées à la résolution de capture.
 
-Pour le jeu de données intitulé \verb|MODIS-1km| dans la suite, il s'agit des données provenant du capteur \ab{modis} à bord du satellite Aqua \parencite{kilpatrick_2015}.
-Les données sont téléchargées depuis le \href{https://cmr.earthdata.nasa.gov/search/}{Common Metadata Repository (CMR)}\footfullcite{sst_modis}, en sélectionnant les swaths intersectant notre région d'étude, collectés de jour, et pour les courtes longueurs d'onde infrarouges (\qty{11}{\um}).
+Pour le jeu de données qu'on désignera par MODIS-1km dans la suite, il s'agit des données provenant du capteur \ab{modis} à bord du satellite Aqua \parencite{kilpatrick_2015}.
+Les données sont téléchargées au niveau L2 depuis le \href{https://cmr.earthdata.nasa.gov/search/}{Common Metadata Repository (CMR)}\footfullcite{sst_modis}, en sélectionnant les swaths intersectant notre région d'étude, collectés de jour, et pour les courtes longueurs d'onde infrarouges (\qty{11}{\um}).
 Pour ensuite regridder les données sur une grille kilométrique globale, j'ai repris les outils utilisés par \textcite{liu_2016}, à savoir les programmes présents dans le paquet de l'\href{https://oceandata.sci.gsfc.nasa.gov/ocssw}{\ab{ocssw}}, version \verb|v7.5|, qui est maintenu par l'Ocean Biology Processing Group et notamment distribué à travers l'outil \href{https://seadas.gsfc.nasa.gov/}{SeaDAS}.
 Les swaths, maintenant tous sur la même grille spatiale peuvent être moyennés par date.
 
@@ -64,7 +65,7 @@ Il est difficile de les disqualifier correctement sans un bon algorithme de dét
 Nous contournons le problème d'une manière similaire à celle de \textcite{liu_2016} en ne travaillant que sur des fenêtres de~\qtyproduct{100 x 100}{\km} avec une faible couverture nuageuse (\textless\qty{70}{\percent}), ce qui élimine une partie de ces cas problématiques.
 
 Malgré le fait que l'on soit limité à un seul type de capteur, \ab{modis} présente l'avantage de mesurer concomitamment la \ab{sst} et la couleur de l'océan.
-Cela permet d'obtenir les valeurs de \ab{chl} aux même pixels, en utilisant le même traitement avec le jeu de données accessible au \ab{cmems} \parencite{chl_modis}.
+Cela permet d'obtenir les valeurs de \ab{chl} aux même pixels, en utilisant le même traitement avec le jeu de données accessible au \ab{cmems}\footfullcite{chl_modis}.
 
 Il est néanmoins possible de trouver d'autres jeux de données permettant notre étude et nécessitant moins de travail (et donc de possible erreurs), ces dernières années ayant vu apparaître des données distribuées à des résolutions élevées comme c'est le cas dans le paragraphe suivant.
 
@@ -126,15 +127,16 @@ Tôt dans ce projet, certaines pistes de travail (\ab{par-ex} le suivi temporel 
 % C'est une réanalyse au 1/12° (ie 8~km). C'est beaucoup.
 % Mais peut-être que la comparaison peut quand même valoir le cout ?
 
-% \begin{figure}
-%   <figure décalage réanalyses>
-%   \caption{Décalage entre réanalyses et observations satellites}
-%   \label{fig:decalage-reanalyses}
-% \end{figure}
+\begin{figure}
+  \includegraphics[width=\textwidth]{comparaison_sst.pdf}
+  \captionT{Décalage entre réanalyses et observations satellites}{%
+    Lol.
+  }
+  \label{fig:decalage-reanalyses}
+\end{figure}
 
 \subsection{Chlorophylle-\emph{a}}
 \label{sec:donnees-chl}
-\declareDataset{chl_modis}
 \declareDataset{chl_globcolour}
 
 Pour le champ de \al{chl}, nous utilisons les données produites dans le cadre du projet GlobColour, développées, validées et distribuées par ACRI"~ST, France \parencite{maritorena_2002}.
@@ -167,9 +169,11 @@ Les données sont distribuées sur une grille plate"-carrée à une résolution 
 Nous sous"-échantillonons les données en appliquant une moyenne à chaque groupe de 3\texttimes3 pixel, puis en interpolant le résultat sur la même grille que le reste des données de la même manière que pour la \ab{sst}.
 
 \begin{figure}
+  \centering
+  \includegraphics[width=0.6\textwidth]{bathymétrie.pdf}
   \captionT{Bathymétrie de la zone d'étude}{%
-    Bathymétrie de la zone d'étude.
-    L'isobath~\qty{-1500}{\m} est indiqué en rouge.}
+    L'isobath~\qty{-1500}{\m}, indiqué en rouge (les Bahamas sont exclues par visibilité), permet de repérer le talus continental et d'ignorer le plateau dans nos résultats.
+  }
   \label{fig:bathymetrie}
 \end{figure}
 
@@ -185,9 +189,10 @@ Enfin le biome \ab{st-sais}, entre les deux précédents, présente un régime i
 Dans cette section, nous décrivons plus précisement la méthode utilisée pour définir ces biomes spatialement.
 
 \begin{figure}
+  \centering
   \includegraphics[width=1\textwidth]{régions.pdf}
-  \captionT{Séparation de la région d'étude en sous-régions}{
-    Résultat de la séparation de la région d'étude en trois sous-régions.
+  \captionT{Résultat de la séparation de la zone d'étude en sous-régions}{%
+    Lol.
   }
   \label{fig:separation-regions}
 \end{figure}
@@ -207,9 +212,9 @@ La valeur journalière de ce seuil est filtrée temporellement par un filtre mé
 \begin{figure}
   \centering
   \includegraphics[width=0.7\textwidth]{zone_separation.pdf}
-  \captionT{Délimitation des biomes subtropical permanent et subpolaire par température seuil}{
+  \captionT{Délimitation des biomes subtropical permanent et subpolaire par température seuil}{%
     % <reformuler, il y a deux titres>
-    Détermination de la température de seuil séparant les biomes subtropical permanent et subpolaire pour le 22 avril 2007.
+    Détermination de la température de seuil séparant les biomes subtropical permanent et subpolaire pour le \frenchdate{2007}{04}{22}.
     Sur la distribution des valeurs en température au nord de~\ang{32}N (en noir), le pic \encadra{ici autour de~\tC{18}} correspond aux eaux du jet. Il est ajusté par un fit gaussien (en rouge) dans un intervalle de~\tC{5} de large.
     La température de seuil (en bleu) entre les deux biomes est définie comme la température moyenne du pic (trait fin pointillé) moins deux fois son écart"-type.
     Cela correspond à la limite nord du Gulf Stream.
@@ -218,14 +223,16 @@ La valeur journalière de ce seuil est filtrée temporellement par un filtre mé
 \end{figure}
 
 \begin{figure}
-  \caption{Figure de Sarmiento 2004 ?}
+  \captionT{Figure de Sarmiento 2004 ?}{%
+  }
   \label{fig:sarmiento}
 \end{figure}
 
 \begin{figure}
   Superposition de tous les contours de seuil pour une année.
   Tracé moyen ?
-  \caption{Variation de la délimitation}
+  \captionT{Variation de la délimitation}{%
+  }
   \label{fig:var-delim}
 \end{figure}
 

@@ -3,7 +3,14 @@
 
 \RequirePackage{geometry}
 \RequirePackage[T1]{fontenc}
+\RequirePackage{fontspec}
 \RequirePackage[otfmath]{XCharter}
+\RequirePackage[defaultsans]{opensans}
+\setmonofont{RobotoMono-Regular}[
+Scale = MatchLowercase,
+ScaleAgain = 0.96
+]
+
 \RequirePackage{microtype}
 
 %%% Localization
@@ -68,6 +75,8 @@
   }
 }
 
+\RequirePackage[all]{hypcap}
+
 \RequirePackage{src/cref-setup}
 
 \RequirePackage{src/gls-setup}
@@ -117,6 +126,13 @@
 % Check and apply layout
 \checkandfixthelayout%
 
+%%% Sections styles
+\renewcommand*\chaptitlefont{\normalfont\HUGE\bfseries\sffamily}
+\renewcommand*\chapnumfont{\normalfont\huge\bfseries\sffamily}
+\renewcommand*\chapnamefont{\normalfont\huge\bfseries\sffamily}
+\setsecheadstyle{\Large\bfseries\sffamily}
+\setsubsecheadstyle{\large\bfseries\sffamily}
+\setsubsubsecheadstyle{\bfseries\sffamily}
 
 %%% TOC, contents, lof
 %% Section numbering and toc options
@@ -210,7 +226,7 @@
 \newenvironment{note}{%
   \def\FrameCommand{%
     \fboxsep=\FrameSep \vrule width 1pt \colorbox{shadecolor-note}}% chktex 1
-  \MakeFramed{\parindent=0pt\textbf{Note}\\[3pt]
+  \MakeFramed{\parindent=0pt\textbf{\sffamily Note}\\[3pt]
     \advance\hsize -\width \FrameRestore}}% chktex 1
 {\endMakeFramed}
 
