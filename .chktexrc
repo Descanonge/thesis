@@ -1,9 +1,17 @@
 
 
+CmdLine {
+        -n 8
+}
+
 Silent {
        \iffinal
 }
 
 Linker {
        \resol \pct \tC
+}
+
+UserWarnRegex {
+       (?!#7:Maybe! replace! space! by! !~)\s\([a-h]\)
 }

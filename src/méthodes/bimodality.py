@@ -33,12 +33,12 @@ ax.plot(bins[:-1], h, ds='steps-mid', color='k')
 ax.plot(x, g, color='red')
 ax.fill_between(x, g, f_interp(x), alpha=0.3, color='red')
 
-ax.set_xlabel(r'Température [\unit{\degreeCelsius}]')
+ax.set_xlabel(r'Température [°C]')
 ax.set_ylabel(r'Fréquence [N/A]')
 
 an_pos = (x[380], g[380])
 an_text = AnchoredText(
-    "fit Gaussien", loc="upper right",
+    "fit gaussien", loc="upper right",
     pad=0.1, borderpad=0.2
 )
 an_text.patch.set_edgecolor('none')
@@ -50,4 +50,4 @@ ax.annotate("", an_pos, xycoords="data",
                 connectionstyle='angle,angleA=-90,angleB=45,rad=2'
             ))
 
-fig.savefig("./resources/méthodes/bimodality.pdf", backend='pgf')
+fig.savefig("./resources/méthodes/bimodality.pdf")

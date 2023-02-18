@@ -14,6 +14,8 @@ mot / phrases à améliorer entre chevrons
 <\w*>
 #+end_src
 
+* DeclareDocumentCommand
+
 * Spelling
 
 * Repeated words

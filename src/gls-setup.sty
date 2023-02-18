@@ -167,8 +167,6 @@ toc, section=section, symbols,
 \newcommand\newabbreviationOther[4][]{% [options]{label}{short}{long}
   \newglossaryentry{#2}{type=other, category=other,%
     name={#3}, short={#3}, long={#4}, #1}}
-\newcommand\newalias[2]{% {label}{target label}
-  \newglossaryentry{#1}{name={#1}, alias=#2}}
 
 \loadglsentries[other]{glossaries/other}
 
@@ -177,3 +175,9 @@ toc, section=section, symbols,
 \GlsPreventDiscardPeriod{other}{biomes}
 
 \glsaddall%
+
+% Symbol exceptions that should appear in the glossary
+% (but are not hyperlinked in text)
+\glsadd{chl}
+\glsadd{hi}
+\glsadd{sst}

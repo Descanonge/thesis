@@ -1,6 +1,7 @@
 \NeedsTeXFormat{LaTeX2e} %chktex 44
 \ProvidesPackage{src/ch-thesis}[2023/02/09 CH Thèse]
 
+\RequirePackage{xparse}
 \RequirePackage{geometry}
 \RequirePackage[T1]{fontenc}
 \RequirePackage{fontspec}
@@ -14,12 +15,18 @@ ScaleAgain = 0.96
 \RequirePackage{microtype}
 
 %%% Localization
-\RequirePackage[french]{babel}
+\RequirePackage[english,main=french]{babel}
 \RequirePackage{csquotes}
 \frenchsetup{
   ItemLabels=\textendash,
   ThinColonSpace
 }
+\newcommand*\eng[1]{\foreignlanguage{english}{#1}}
+\newcommand*\engquote[1]{\foreignquote{english}{#1}}
+\NewDocumentCommand\guil{ s m }{%
+  \IfBooleanTF{#1}%
+  {\enquote*{#2}}%
+  {\enquote{#2}}}
 
 \newcommand\encadra[1]{ ---~#1~---}
 
@@ -107,7 +114,7 @@ ScaleAgain = 0.96
 \renewcommand\@memmain@floats{%
   \counterwithin{figure}{chapter}
   \counterwithin{table}{chapter}
-  \def\thefigure{\thechapter\textperiodcentered\arabic{section}}
+  \def\thefigure{\thechapter\textperiodcentered\arabic{figure}}
   \def\thetable{\thechapter\textperiodcentered\arabic{table}}
 }
 
@@ -197,6 +204,7 @@ ScaleAgain = 0.96
 \newcommand*\moy[1]{\left[#1\right]}
 \newcommand*\med[1]{\overline{#1}}
 \newcommand*\norm[1]{\operatorname{norm}\paren{#1}}
+\newcommand*\abs[1]{\left|#1\right|}
 \newcommand*\paren[1]{\left(#1\right)}
 \newcommand*\norme[2][]{% [norme subscript, default none]{argument}
   \left\lVert#2\right\rVert_{#1}}
