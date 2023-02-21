@@ -15,7 +15,7 @@ and \authorArticle[2]{Laurent}{Bopp}
 <lien>
 
 % \begin{keypoints}
-% \item Over SST fronts in the Gulf Stream region al{chl} is enhanced by up to a factor two and the bloom onsets earlier by up to two weeks.
+% \item Over \as{sst} fronts in the Gulf Stream region al{chl} is enhanced by up to a factor two and the bloom onsets earlier by up to two weeks.
 % \item The enhancement intensity increases significantly with the strength of the front.
 % \item The net contribution of fronts to al{chl} enhancement over the Gulf Stream region is less than 5\%.
 % \end{keypoints}
@@ -24,8 +24,8 @@ and \authorArticle[2]{Laurent}{Bopp}
 Fronts affect phytoplankton growth and phenology by locally reducing stratification and increasing vertical nutrient supply.
 Biomass peaks at fronts have been observed in-situ and linked to local nutrient upwelling, and reduced stratification over fronts has been shown to induce earlier blooms in numerical models.
 However observation of these biophysical interactions through satellite imagery have been scarce, despite the opportunity to quantify them at synoptic scales.
-Here we used twenty years of SST and al{chl} satellite data in a large region surrounding the Gulf Stream to quantify the impact of fronts on phytoplankton in contrasting regimes, from oligotrophy to bloom, and throughout the year.
-We computed an heterogeneity index HI from SST, and used it to sort fronts into weak and strong fronts based on HI thresholds.
+Here we used twenty years of \as{sst} and al{chl} satellite data in a large region surrounding the Gulf Stream to quantify the impact of fronts on phytoplankton in contrasting regimes, from oligotrophy to bloom, and throughout the year.
+We computed an heterogeneity index HI from \as{sst}, and used it to sort fronts into weak and strong fronts based on HI thresholds.
 We observed that the localization of strong fronts corresponded to western boundary current fronts, and weak fronts to more ephemeral submesoscale fronts.
 We compared al{chl} distributions over strong fronts, weak fronts and outside of fronts.
 We assessed three metrics, the local enhancement of al{chl} over fronts, the global enhancement of \al{chl} due to fronts at the scale of the region, and the lag in spring bloom onset due to fronts.
@@ -66,7 +66,7 @@ The role of submesoscales has been assessed with three different methods.
 \citet{guo_2019} combined ocean color data with altimetry and drifting floats, and estimated that, over subtropical gyres of the global ocean, the respective contributions of mesoscales and submesoscales to high \as{chl} anomalies were comparable in magnitude.
 \citet{keerthi_2022} proposed an approach based on deconvolution of local \as{chl} time series into different timescales; they observed that sub-seasonal time scales contributed roughly 30\% of the total satellite \as{chl} variance and were associated with small (\textless\ 100km) spacial scales.
 Finally, the most quantitative approach was proposed by \citet{liu_2016}, which they applied to the North Pacific Subtropical Gyre.
-They detected sea-surface temperature (SST) fronts by computing an index that measures the local heterogeneity of the SST field from satellite SST data.
+They detected sea-surface temperature (\as{sst}) fronts by computing an index that measures the local heterogeneity of the \as{sst} field from satellite \as{sst} data.
 This allowed them to compare satellite \as{chl} values over areas impacted by fronts (characterized by a large value of the heterogeneity index) with values over areas that were not impacted.
 They found that the increase in \as{chl} over the fronts was negligible in summer but reached almost 40\% in winter.
 
@@ -85,13 +85,13 @@ In between, there is a moderately productive regime, with maximum productivity i
 Another feature that makes this study area particularly relevant is that it has different types of fronts.
 On the one hand, there are two strong persistent fronts, the Gulf Stream and the shelf-break front, which are held in place by topography and atmospheric circulation, and which are both associated with strong and deep-reaching vertical circulations \citep{flagg_2006, liao_2022}.
 But there are also more ephemeral and weaker fronts, created by mesoscale strain that are continuously forming at more random locations \citep{drushka_2019, sanchez-rios_2020}.
-We use satellite data of \as{chl} and SST, and extend on the approach of \citet{liu_2016}, to distinguish between persistent and ephemeral fronts.
+We use satellite data of \as{chl} and \as{sst}, and extend on the approach of \citet{liu_2016}, to distinguish between persistent and ephemeral fronts.
 We evaluate the impact of both types of fronts on \as{chl} on the basis of three indicators, the excess (or deficit) \as{chl} over fronts at the local scale of the front, the surplus \as{chl} attributable to fronts at the scale of regional biomes, and the change in the timing of the \as{chl} spring bloom over fronts.
 
 
 \section{Methods and data}
 
-Our approach combines daily satellite SST data, which are used to detect fronts and sort them by their strength, with daily satellite surface \as{chl}, from which we derive anomalies over fronts.
+Our approach combines daily satellite \as{sst} data, which are used to detect fronts and sort them by their strength, with daily satellite surface \as{chl}, from which we derive anomalies over fronts.
 Our region of interest is the North Atlantic from 15°N to 55°N, and from 40°W to the North American shelf break (Fig.~\ref{fig:zone-separation}).
 This region covers three biomes, a more oligotrophic one in the south, a more productive one in the north where a spring bloom occurs, and an intermediate biome between the two, described below.
 We will refer to them in the following as permanent subtropical biome (PSB), seasonal subtropical biome (SSB) and subpolar biome (PB), moving from south to north.
@@ -101,10 +101,10 @@ They are separated from south to north by a fixed boundary at 32°N and by a var
 
 For \as{chl}, we used the L3 product distributed by ACRI-ST over the period 2000--2020, generated by Copernicus-GlobColour, constructed with data from different sensors (SeaWIFS, MODIS Aqua \& Terra, MERIS, VIIRS-SNPP \& JPSS1, OLCI-S3A \& S3B) merged and reprocessed, available daily at 4km resolution \citep{chl}.
 
-For SST, we used the European Space Agency Sea Surface Temperature Climate Change Initiative analysis product version 2.1 \citep{merchant_2019, good_2020, sst}, also available daily at 4km resolution over the period 2000--2020.
-This product combines data from all available infrared sensors ((A)ATSR, SLSTR, and AVHRR sensors), ensuring good resolution where data are available, unlike other SST products which also include microwave and in-situ measurements, resulting in considerable smoothing of the SST field. %chktex 36
-Where SST data is not available, spatial interpolation is performed to obtain a cloud free product which, at the cost of resolution on finer features, provides complete synoptic coverage of our large study area.
-This interpolation tends to provide an underestimate of the detection of fronts, as the SST field is smoother over cloud-covered areas \citep{merchant_2019}.
+For \as{sst}, we used the European Space Agency Sea Surface Temperature Climate Change Initiative analysis product version 2.1 \citep{merchant_2019, good_2020, sst}, also available daily at 4km resolution over the period 2000--2020.
+This product combines data from all available infrared sensors ((A)ATSR, SLSTR, and AVHRR sensors), ensuring good resolution where data are available, unlike other \as{sst} products which also include microwave and in-situ measurements, resulting in considerable smoothing of the \as{sst} field. %chktex 36
+Where \as{sst} data is not available, spatial interpolation is performed to obtain a cloud free product which, at the cost of resolution on finer features, provides complete synoptic coverage of our large study area.
+This interpolation tends to provide an underestimate of the detection of fronts, as the \as{sst} field is smoother over cloud-covered areas \citep{merchant_2019}.
 However, the combination of several sensors allows to reduce these areas to a minimum.
 Furthermore, we have only considered cloud-free pixels for our analysis, which ensures that cloudy areas are not taken into account in our quantification.
 
@@ -128,8 +128,8 @@ To the north of the Gulf Stream is the Slope sea which extends to the shelf-brea
 Aligned with the shelf break, a persistent front with an intensified surface jet separates the shelf waters (excluded from this study) from the slope sea.
 This highly productive subpolar biome, known as subpolar waters \citep{sarmiento_2004} and high-chlorophyll-bloom \citep{bock_2022}, is characterized by a strong spring bloom whose onset is tied to the spring stratification of the mixed-layer.
 
-The position of the north wall of the Gulf stream, that delimits the subpolar and seasonal subtropical biomes (black meandering contour in Fig.~\ref{fig:zone-separation}a-b), is determined at each daily time step by thresholding the daily SST map.
-The daily threshold values (black vertical line in Fig.~\ref{fig:zone-separation}c) are determined from the daily SST distributions above 32°N (blue line, continued by the yellow line in Fig.~\ref{fig:zone-separation}c).
+The position of the north wall of the Gulf stream, that delimits the subpolar and seasonal subtropical biomes (black meandering contour in Fig.~\ref{fig:zone-separation}a-b), is determined at each daily time step by thresholding the daily \as{sst} map.
+The daily threshold values (black vertical line in Fig.~\ref{fig:zone-separation}c) are determined from the daily \as{sst} distributions above 32°N (blue line, continued by the yellow line in Fig.~\ref{fig:zone-separation}c).
 Indeed, the Gulf Stream is easily identifiable in this distribution as it is manifested by a temperature peak (yellow line in Fig.~\ref{fig:zone-separation}c).
 To detect the start of this peak, which marks our boundary, we fit the peak with a Gaussian, and define the threshold temperature as the mean minus twice the standard deviation.
 Then, the threshold temperature time series is median filtered over an 8-day window to eliminate spurious detection anomalies.
@@ -141,8 +141,8 @@ With the above delimitation of biomes, the two atmospherically and topographical
   \includegraphics[width=12cm]{zone_separation.pdf}
   \caption{
     Delimitation of the three biomes in the Gulf stream extension region: the Permanent Subtropical Biome (PSB, south of the dashed line at 32°N), the Seasonal Subtropical Biome (SSB, between 32°N and the meandering Gulf stream northern wall on that day marked with the black contour), and the Subpolar Biome (PB, north of the Gulf stream northern wall).
-    (a) SST and (b) \as{chl} snapshots on the 22 April 2007 (with data masked by clouds in white), (c) SST and (d) \as{chl}  distribution within each biome for the same day (PB:\@blue, SSB:\@yellow, PSB:\@red).
-    The black line in (c) shows the SST threshold value detected to delimit the Gulf Stream northern wall (see methods section).
+    (a) \as{sst} and (b) \as{chl} snapshots on the 22 April 2007 (with data masked by clouds in white), (c) \as{sst} and (d) \as{chl}  distribution within each biome for the same day (PB:\@blue, SSB:\@yellow, PSB:\@red).
+    The black line in (c) shows the \as{sst} threshold value detected to delimit the Gulf Stream northern wall (see methods section).
     The x-axis of the distributions correspond to the x-axis scale of the corresponding color bars.
     The red line follows the 1500m isobath.
     Data on the continental shelf (< 1500m) is not considered here and have been masked.
@@ -153,30 +153,30 @@ With the above delimitation of biomes, the two atmospherically and topographical
 \subsection{Front detection}
 
 Our front detection method aims to sort the domain into pixels that are located (or not) over fronts, at each daily time step.
-We follow the approach of \citet{liu_2016} that builds upon the well established Cayula-Cornillon algorithm \citep{cayula_1992, belkin_2009}, and identify pixels as belonging to fronts when the region in the vicinity of the pixel is characterized by high SST heterogeneity.
-More precisely, on each pixel and for each time step, we compute an Heterogeneity Index (HI) which quantifies the heterogeneity of the SST in a square window comprising a few pixels (\(7 \times 7\)) centered on the pixel of interest.
-Thus HI measures the SST heterogeneity at spatial scales less than 30km.
-The HI is defined as the weighted sum of the skewness \(\gamma\), standard deviation \(\sigma\), and bimodality \(B\) of SST within the window (\(\mathrm{HI} = a \left( b \gamma + c \sigma + d B \right)\), with a, b, c, d constant normalization coefficients).
+We follow the approach of \citet{liu_2016} that builds upon the well established Cayula-Cornillon algorithm \citep{cayula_1992, belkin_2009}, and identify pixels as belonging to fronts when the region in the vicinity of the pixel is characterized by high \as{sst} heterogeneity.
+More precisely, on each pixel and for each time step, we compute an Heterogeneity Index (HI) which quantifies the heterogeneity of the \as{sst} in a square window comprising a few pixels (\(7 \times 7\)) centered on the pixel of interest.
+Thus HI measures the \as{sst} heterogeneity at spatial scales less than 30km.
+The HI is defined as the weighted sum of the skewness \(\gamma\), standard deviation \(\sigma\), and bimodality \(B\) of \as{sst} within the window (\(\mathrm{HI} = a \left( b \gamma + c \sigma + d B \right)\), with a, b, c, d constant normalization coefficients).
 
 We have adapted the original formulation of \citet{liu_2016} with minor modification in the computation of bimodality and in the relative weighing of each component which are described below.
-We computed the bimodality as the L2 norm of the difference between the SST histogram (with bins of 0.1°C) and a Gaussian fit of the histogram.
-We chose this method because it was simpler to implement and more robust than that of \citet{liu_2016} which computed the normalized absolute difference between a polynomial fit of order 5 of the SST histogram and a Gaussian fit of the histogram, the polynomial fit often being poorly constrained.
+We computed the bimodality as the L2 norm of the difference between the \as{sst} histogram (with bins of 0.1°C) and a Gaussian fit of the histogram.
+We chose this method because it was simpler to implement and more robust than that of \citet{liu_2016} which computed the normalized absolute difference between a polynomial fit of order 5 of the \as{sst} histogram and a Gaussian fit of the histogram, the polynomial fit often being poorly constrained.
 We normalized each component by its variance (b, c and d being defined as the inverse of the standard deviation of each component computed over one year), as opposed to \citet{liu_2016} who normalized the coefficients by their annual maximum.
 This avoided putting too much weight on extrema.
 Finally we normalized HI (coefficient a) such that 95\% of values are below an arbitrary value of 9.5.
 For simplicity, the normalization coefficients were computed for year 2007 and used over the entire time series.
 We performed sensitivity tests on the different parameters used to compute HI, namely the number of pixels in the rolling window and the choice of normalization coefficients.
-An example of the resulting HI over a single front is given on Fig.~\ref{fig:zoom}; elevated HI values are located along the curved SST gradient to the north east of the window.
+An example of the resulting HI over a single front is given on Fig.~\ref{fig:zoom}; elevated HI values are located along the curved \as{sst} gradient to the north east of the window.
 
 At each time step, we sorted the pixels into those belonging to strong fronts (defined as \(\mathrm{HI} > 10\)), those belonging to weak fronts (defined as \(5 < \mathrm{HI} < 10\)), and those that do not belong to fronts (when \(\mathrm{HI} < 5\), and called them ``background'' in the following).
-Sorting fronts by range of HI enabled us to roughly separate the quasi-permanent fronts, which are associated with the strongest SST gradients (strong fronts), from the more ephemeral ones, associated with weaker gradients (weak fronts).
+Sorting fronts by range of HI enabled us to roughly separate the quasi-permanent fronts, which are associated with the strongest \as{sst} gradients (strong fronts), from the more ephemeral ones, associated with weaker gradients (weak fronts).
 The choice of the two HI threshold is somehow arbitrary, but it is supported by the HI distributions presented below.
 
 
 \begin{figure*}
   \includegraphics[width=12cm]{front_example.pdf}
   \caption{
-    The SST, \as{chl}, and heterogeneity index (HI) of a front on the 7 July 2007.
+    The \as{sst}, \as{chl}, and heterogeneity index (HI) of a front on the 7 July 2007.
     The plain and dashed contours correspond to HI values of 5 and 10.
     This front is categorized as weak.
     \as{chl} are elevated inside the front.
@@ -215,7 +215,7 @@ Finally, we averaged the yearly values of lag L in onset days over the 20 years 
 
 Our definition of weak fronts and strong fronts is primarily based on thresholds, derived from the HI distributions (Fig.~\ref{fig:chl-vs-hi}, red dashed line).
 In each biome, the majority of HI values are below 5, and as mentioned before, we used this threshold to distinguish pixels in the background from those over fronts (when \(\mathrm{HI} > 5\)).
-Secondly, the number of points in the HI distribution decreases sharply as the HI value increases above 5, reflecting the fact that fronts with stronger SST gradients are much less frequent than fronts with weaker gradients, as one would expect.
+Secondly, the number of points in the HI distribution decreases sharply as the HI value increases above 5, reflecting the fact that fronts with stronger \as{sst} gradients are much less frequent than fronts with weaker gradients, as one would expect.
 We used the HI threshold of 10 to distinguish weak fronts from strong fronts.
 This separation is imperfect, as seen for instance in Fig.~\ref{fig:zoom} where a few pixels with HI values larger than 10 appear at the core of an otherwise weak front.
 
@@ -408,15 +408,15 @@ Nevertheless, for individual years, delays larger than one months could occur.
 
 \section{Discussion}
 
-Our analyses of surface satellite data over the Gulf Stream extension region, based on the computation of an heterogeneity index HI, allowed us to show a substantial local increase of \as{chl} concentrations over SST fronts compared to background levels, to detect earlier blooms by one to two weeks over fronts, and to quantify that the global effect of fronts on \as{chl} concentration at the scale of the region was less than 5\%.
+Our analyses of surface satellite data over the Gulf Stream extension region, based on the computation of an heterogeneity index HI, allowed us to show a substantial local increase of \as{chl} concentrations over \as{sst} fronts compared to background levels, to detect earlier blooms by one to two weeks over fronts, and to quantify that the global effect of fronts on \as{chl} concentration at the scale of the region was less than 5\%.
 The background levels in this region are very contrasted seasonally and geographically, with a productive and highly seasonal subpolar biome North of the Gulf Stream, a more steady oligotrophic permanent subtropical biome to the South, and an intermediate situation in between the two, where a seasonal subtropical biome prevails.
 The main results above hold for these three contrasted biomes, although with different intensities, which also depend on the strength of HI.\@
 
 \subsection{Caveats}
 
-The level 4 SST product used in this study has the advantage to be readily available on download platforms (here CMEMS) at a reasonably high spatial resolution (4km), avoiding the need to regrid as was done in \citet{liu_2016} who used 1km resolution L2 MODIS-aqua data.
+The level 4 \as{sst} product used in this study has the advantage to be readily available on download platforms (here CMEMS) at a reasonably high spatial resolution (4km), avoiding the need to regrid as was done in \citet{liu_2016} who used 1km resolution L2 MODIS-aqua data.
 It also has an excellent spatial coverage (e.g.\ Fig.~\ref{fig:zone-separation}) as it includes merged data from several sensors, but there is a trade-off between coverage and resolution.
-We have performed initial tests to investigate the differences in using 1km and 4km resolution SST data, which convinced us that the use of 4km resolution data was appropriate (not shown), particularly since the heterogeneity index HI is computed here over boxes of 30km \texttimes\ 30km.
+We have performed initial tests to investigate the differences in using 1km and 4km resolution \as{sst} data, which convinced us that the use of 4km resolution data was appropriate (not shown), particularly since the heterogeneity index HI is computed here over boxes of 30km \texttimes\ 30km.
 Nevertheless a more in-depth study of the sensitivity of our results to the resolution of the satellite products could be carried out in the future.
 
 Another caveat of this level 4 product is that the spatial interpolation performed to merge data from several sensors smooths out the finer features, particularly when some of the data are obstructed by clouds.
@@ -462,7 +462,7 @@ The above results are suggestive that the heterogeneity index could be used as a
 The localization and frequency of strong and weak fronts is consistent with this hypothesis.
 Weak fronts are much more frequent than strong fronts, as we expect from ephemeral sub-mesoscale fronts compared with permanent fronts (Fig.~\ref{fig:frt-occurrence}).
 In addition, the localization of strong fronts coincide with the position of the Gulf Stream.
-Another element that supports this hypothesis is the scale over which the HI is computed (30km) which gives a strong weight to SST heterogeneities associated with large contrasts which is the case across the Gulf Stream.
+Another element that supports this hypothesis is the scale over which the HI is computed (30km) which gives a strong weight to \as{sst} heterogeneities associated with large contrasts which is the case across the Gulf Stream.
 Of course, more direct evidence linking the penetration of fronts with the intensity of the heterogeneity index would be needed to confirm the association.
 
 \subsection{Biome-scale impact of fronts on \as{chl}}
@@ -496,7 +496,7 @@ It should also be noted that it is inherently difficult to pinpoint the precise 
 
 The Gulf stream extension region is a region of strong biological contrasts and particularly strong frontal activity of the world's ocean, undergoing rapid warming which strongly affect fisheries \citep{pershing_2015, neto_2021}.
 Quantifying the impact of fronts on phytoplankton there is thus particularly relevant, and we expected to detect a large impact.
-The use of 20 years of satellite data of SST to detect fronts and of surface \as{chl} to compute anomalies over the front allowed us to provide a robust assessment of this impact.
+The use of 20 years of satellite data of \as{sst} to detect fronts and of surface \as{chl} to compute anomalies over the front allowed us to provide a robust assessment of this impact.
 We found three main results.
 First, that the regional increase in surface phytoplankton due to fronts much weaker than we expected, 5\% at most; second that nutrient supplies at fronts enhanced the spring bloom two to three three times more than they enhanced oligotrophic regions; and third, that the spring bloom onset was earlier over fronts by one to two weeks, which we already knew from models \citep{karleskind_2011, mahadevan_2012} but for which we had no direct evidence nor sound quantification.
 
