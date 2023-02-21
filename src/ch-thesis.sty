@@ -95,7 +95,7 @@ ScaleAgain = 0.96
 %%% Metadata
 \newcommand*\Author{Clément Haëck}
 \newcommand*\Email{clement.haeck@locean.ipsl.fr}
-\newcommand*\Title{Impact des fronts sur le Phytoplancton dans la région du Gulf-Stream quantifié par imagerie satellitaire}
+\newcommand*\Title{Impact des fronts sur le Phytoplancton dans la région du Gulf Stream quantifié par imagerie satellitaire}
 \newcommand*\Subject{biogeochemistry}
 \newcommand*\Keywords{}
 
@@ -242,3 +242,9 @@ ScaleAgain = 0.96
 %%% Captions
 \newcommand\captionT[2]{% {Title}{text}
   \caption[#1]{\emph{#1}. #2}}
+
+
+%%% Article
+\newcommand\authorArticle[3][1]{% [affil]{prénom}{nom}
+  \bname{#2}\ \bname{#3}\textsuperscript{#1}}
+\newcommand\affil[2][1]{\textsuperscript{#1}{#2}}
