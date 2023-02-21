@@ -1,4 +1,4 @@
-
+!
 \chapterlof{Méthodes}
 \label{chp:methodes}
 \graphicspath{{resources/méthodes}}
@@ -395,8 +395,9 @@ On peut donc enfin calculer le \ab{hi} avec:
 \end{equation}
 
 On obtient donc finalement un indice capable de quantifier l'hétérogénéité du champ de température à une échelle donnée, ce qui nous permet d'identifier des structures fines dans ce même champ~(\cref{fig:exemple-composantes,fig:exemples-fronts}).
-
-<définir les limites de 5 et 10>
+Il reste toutefois à définir une méthode pour classifier chaque pixel comme appartenant, ou non, à un front.
+Nous allons même plus loin et séparons les pixels en trois catégories: les pixels appartenant à un front fort (\(\am{hi} > 5\)), à un front faible (\(5 < \am{hi} < 10\)), ou à aucun front (\(\am{hi} < 5\), aussi dénotés \engquote{background}).
+La pertinence des valeurs de seuils entre les catégories est discutée dans la suite du manuscript.
 
 \begin{figure}
   \centering
@@ -478,12 +479,11 @@ pour ainsi obtenir une approximation de la densité de probabilité \(f\).
 On peut extraire de cette distribution notamment la médiane, ainsi que des percentiles divers en trouvant la valeur de \(x\) pour laquelle la somme cumulée de la densité de probabilité est égale au percentile recherché (0.5 dans le cas de la médiane).
 On délègue ce travail au paquet SciPy dont l'objet \glshref{rv_histogram} permet d'effectuer ces calculs de manière triviale.
 
-<Vérification que les histogrammes sont well-behaved pour prendre des valeurs.>
+Il est à noter que l'interprétation de certaines métriques n'ont de sens que si la distribution de la variable concernée est convenable (uni-modale \ab{par-ex}).
+Cette vérification est reportée dans la \cref{sec:complements-chl},~\cref*{chp:res-chl}.
 
-\subsection{Quantification de l'effet des fronts}
-\label{sec:extraction-surplus}
-
-QUANTITÉS de variables
+\subsection{Quantification de l'effet des fronts: différences de valeurs et retard du bloom}
+\label{sec:extraction-surplus-lag}
 
 Afin de comparer les valeurs de diverse variables à l'intérieur et à l'extérieur des fronts, nous définissons deux métriques.
 La première est l'excès~\ab{exces} de \ab{chl} (\guil{excess} dans l'article \cref{sec:article-bg}, \cref*{chp:res-chl}), qui compare localement les valeurs dans les fronts et le background. On le définit simplement comme la différence relative entre la médiane de \ab{chl} dans et hors des fronts:
@@ -491,16 +491,15 @@ La première est l'excès~\ab{exces} de \ab{chl} (\guil{excess} dans l'article \
   \am{exces} = \frac{\med{\am{chl}}_\frt - \med{\am{chl}}_\bkg}
   {\med{\am{chl}}_\bkg} .
 \end{equation}
-Le calcul est fait pour les fronts faibles et forts de la même manière, le background désignant les pixels de \ab{hi} faible (\(\am{hi} < 5\)).
+Le calcul est fait pour les fronts faibles et forts de la même manière, le background désignant toujours les pixels de \ab{hi} faible (\(\am{hi} < 5\)).
 L'excès est calculé dans des bandes de latitudes larges de~\ang{5}, afin de minimiser l'influence des gradients de grande échelle.
 
-Cette métrique ne tient compte que de la distribution des valeurs de \ab{chl}, et ne représente pas la quantité totale présente ou la proportion de fronts dans une zone donnée.
-Ainsi on définit le surplus~\ab{surplus} de \ab{chl} (\guil{biome surplus} dans l'article \cref{sec:article-bg}, \cref*{chp:res-chl}) dans toute un biome comme la différence relative entre la moyenne de \ab{chl} dans tout un biome et la moyenne dans le background:
+Cette métrique ne tient compte que de la distribution des valeurs de \ab{chl}. Elle ignore la proportion de fronts dans une zone donnée, et ne représente pas la quantité totale de \ab{chl} présente dans un biome.
+On définit donc une deuxième métrique, le surplus~\ab{surplus} de \ab{chl} dans tout un biome (\guil{biome surplus} dans l'article \cref{sec:article-bg}, \cref*{chp:res-chl}) comme la différence relative entre la moyenne de \ab{chl} dans tout le biome et la moyenne dans le background:
 \begin{equation}
   \am{surplus} = \frac{\moy{\am{chl}}_\tot - \moy{\am{chl}}_\bkg}
   {\moy{\am{chl}}_\bkg} .
 \end{equation}
 
-\subsection{lag bloom}
-Lag pour le biome
-LOL
+<bloom lag>
+J'ai oublié d'inclure la méthode pour détecter le bloom... Dans mon plan c'était dans les compléments de l'article, mais ça a mieux sa place ici. Je le rajouterai plus tard.
