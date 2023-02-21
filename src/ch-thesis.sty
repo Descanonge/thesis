@@ -21,7 +21,7 @@ ScaleAgain = 0.96
   ItemLabels=\textendash,
   ThinColonSpace
 }
-\addto\extrasenglish{\sisetup{locale = EN}}
+\addto\extrasenglish{\sisetup{locale = US}}
 \addto\extrasfrench{\sisetup{locale = FR}}
 
 \newcommand*\eng[1]{\foreignlanguage{english}{#1}}
@@ -52,9 +52,10 @@ ScaleAgain = 0.96
 \RequirePackage{siunitx}
 \sisetup{
   mode=math,
-  locale=FR,
   range-phrase=--,
-  product-units=single}
+  product-units=single,
+  uncertainty-mode=separate,
+}
 \DeclareSIUnit\mgm{\milli\gram\per\cubic\metre}
 \DeclareSIUnit\dC{\degreeCelsius}
 \DeclareSIUnit\pixel{\text{px}}
@@ -255,3 +256,11 @@ ScaleAgain = 0.96
 \newcommand\authorArticle[3][1]{% [affil]{prénom}{nom}
   \bname{#2}\ \bname{#3}\textsuperscript{#1}}
 \newcommand\affil[2][1]{\textsuperscript{#1}{#2}}
+
+\setparaheadstyle{\bfseries\raggedright}
+\setsubparaheadstyle{\itshape\raggedright}
+
+\newenvironment{articleBlock}[1]% {name}
+{\paragraph{#1.}}{}
+\newenvironment{articleSubBlock}[1]% {name}
+{\subparagraph{#1.}}{}

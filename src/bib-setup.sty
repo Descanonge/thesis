@@ -15,16 +15,20 @@
   indexing = bib,
   isbn = false,
   giveninits = true,
-  maxnames = 100,
-  maxcitenames = 1,
+  maxnames = 10,
+  maxcitenames = 2,
+  mincitenames = 1,
   mergedate = false,
-  pluralothers = true,
+  pluralothers = false,
   % refsection = chapter,
   sorting = nyt,
-  sortcites = false,
+  sortcites = false, % watch out, I rely on this (for footnotes for ex.)
   uniquename = init,
   url = false
 }
+
+% Space between items with different starting letter
+\setlength\bibinitsep{\baselineskip}
 
 % Add filter for 'normal entries'
 \defbibfilter{normal}{%
