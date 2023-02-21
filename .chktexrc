@@ -5,7 +5,7 @@ CmdLine {
 }
 
 Silent {
-       \iffinal
+       \pm
 }
 
 Linker {

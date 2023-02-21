@@ -21,6 +21,9 @@ ScaleAgain = 0.96
   ItemLabels=\textendash,
   ThinColonSpace
 }
+\addto\extrasenglish{\sisetup{locale = EN}}
+\addto\extrasfrench{\sisetup{locale = FR}}
+
 \newcommand*\eng[1]{\foreignlanguage{english}{#1}}
 \newcommand*\engquote[1]{\foreignquote{english}{#1}}
 \NewDocumentCommand\guil{ s m }{%
@@ -47,7 +50,11 @@ ScaleAgain = 0.96
 
 %%% SIunits
 \RequirePackage{siunitx}
-\sisetup{mode=math, locale=FR, product-units=single}
+\sisetup{
+  mode=math,
+  locale=FR,
+  range-phrase=--,
+  product-units=single}
 \DeclareSIUnit\mgm{\milli\gram\per\cubic\metre}
 \DeclareSIUnit\dC{\degreeCelsius}
 \DeclareSIUnit\pixel{\text{px}}
