@@ -15,15 +15,19 @@
   indexing = bib,
   isbn = false,
   giveninits = true,
-  maxnames = 10,
+  maxbibnames = 6,
+  minbibnames = 6,
   maxcitenames = 2,
   mincitenames = 1,
+  maxsortnames = 2,
+  minsortnames = 1,
   mergedate = false,
   pluralothers = false,
   % refsection = chapter,
   sorting = nyt,
   sortcites = false, % watch out, I rely on this (for footnotes for ex.)
-  uniquename = init,
+  uniquename = mininit,
+  uniquelist = minyear,
   url = false
 }
 
@@ -43,11 +47,46 @@
 \newcommand*\bibdataTitle{Données}
 
 % Remove small caps in family names
-\DefineBibliographyExtras{french}{\restorecommand\mkbibnamefamily}
+\AtBeginDocument{\renewcommand*\mkbibnamefamily[1]{#1}}
+% \renewcommand*\mkbibnamefamily[1]{\bname{##1}}%
+
+\savebibmacro{cite}
+\savebibmacro{textcite}
+\savebibmacro{citeyear}
+
+% No extra date
+\renewbibmacro*{date+extradate}{}%
+
+% Customize bibliography: Start by the 'label', ie the
+% citation as it appears in the text
+\renewbibmacro*{begentry}{%
+  {
+    % We are in bibliography but we want maxCITEnames
+    \c@maxnames\blx@maxcitenames\relax
+    \c@minnames\blx@mincitenames\relax
+    % reset some variables to avoid cite to merge
+    \global\undef\cbx@lasthash
+    \global\undef\cbx@lastyear
+    \DeclareFieldAlias{bibhyperref}{noformat}%
+    \printtext[bold]{%
+      \restorebibmacro{cite}%
+      \usebibmacro{cite}\addspace:\space}%
+  }
+  \c@maxnames\blx@maxbibnames\relax%
+  \c@minnames\blx@minbibnames\relax%
+}
+
+% Change default name format
+\DeclareNameAlias{default}{family-given}
+\DeclareNameAlias{sortname}{family-given}
+\DeclareNameAlias{citename}{family-given}
+% Remove comma and put in parens
+\renewcommand*\revsdnamepunct{}
+\renewcommand*\mkbibnamegiven[1]{\mkbibparens{#1}}
 
 % New bibliography format for dataset entries
 \DeclareBibliographyDriver{dataset}{%
-  \usebibmacro{begentry}%
+  % \usebibmacro{begentry}% only for regular entries
   \printlist{datavar}
   \printfield{shorttitle} -- \printfield{title}% chktex 8
   \newunit\newblock%
@@ -62,7 +101,7 @@
 
 % New bibliography format for software entries
 \DeclareBibliographyDriver{software}{%
-  \usebibmacro{begentry}%
+  % \usebibmacro{begentry}% only for regular entries
   \printfield{shorttitle} -- \printfield{title}% chktex 8
   \setunit{\addspace}%
   \printfield{type}%
@@ -134,10 +173,6 @@
 \DeclareFieldFormat{citeyearhyperref}{%
   \DeclareFieldAlias{bibhyperref}{noformat}%
   \bibhyperref{#1}}
-
-\savebibmacro{cite}
-\savebibmacro{textcite}
-\savebibmacro{citeyear}
 
 \renewbibmacro*{cite}{%
   \printtext[citehyperref]{%
