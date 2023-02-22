@@ -84,11 +84,17 @@
 \renewcommand*\revsdnamepunct{}
 \renewcommand*\mkbibnamegiven[1]{\mkbibparens{#1}}
 
+\newbibmacro*{label:dataset}{%
+  \printlist{datavar}
+  \printfield{shorttitle}\addspace:\space}
+\newbibmacro*{label:software}{%
+  \printfield{shorttitle}\addspace:\space}
+
 % New bibliography format for dataset entries
 \DeclareBibliographyDriver{dataset}{%
   % \usebibmacro{begentry}% only for regular entries
-  \printlist{datavar}
-  \printfield{shorttitle} -- \printfield{title}% chktex 8
+  \printtext[bold]{\usebibmacro{label:dataset}}%
+  \printfield{title}%
   \newunit\newblock%
   \printnames{author}%
   \newunit%
@@ -102,7 +108,8 @@
 % New bibliography format for software entries
 \DeclareBibliographyDriver{software}{%
   % \usebibmacro{begentry}% only for regular entries
-  \printfield{shorttitle} -- \printfield{title}% chktex 8
+  \printtext[bold]{\usebibmacro{label:software}}%
+  \printfield{title}%
   \setunit{\addspace}%
   \printfield{type}%
   \setunit{,\addspace}%
