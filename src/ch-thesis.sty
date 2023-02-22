@@ -150,11 +150,22 @@ ScaleAgain = 0.96
 \setsubsubsecheadstyle{\bfseries\sffamily}
 
 %%% TOC, contents, lof
-%% Section numbering and toc options
+% Section numbering and toc options
 \renewcommand\cftchaptername{\chaptername~}
 \renewcommand\cftappendixname{\appendixname~}
 \setcounter{lofdepth}{1}
 \setcounter{tocdepth}{2}
+\setlength{\cftchapterindent}{0pt}
+\setlength{\cftchapternumwidth}{1.5em}
+\setlength{\cftsectionindent}{1.5em}
+\setlength{\cftsectionnumwidth}{1.5em}
+\setlength{\cftsubsectionindent}{3em}
+\setlength{\cftsubsectionnumwidth}{2.2em}
+\setlength{\cftsubsubsectionindent}{5.2em}
+\setlength{\cftsubsubsectionnumwidth}{2.8em}
+\setlength{\cftfigureindent}{0em}
+\setlength{\cftfigurenumwidth}{3em}
+
 \RequirePackage{minitoc}
 \mtcsetdepth{minitoc}{3}
 \mtcsetfont{minitoc}{section}{\normalfont\small}
