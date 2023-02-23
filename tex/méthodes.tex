@@ -7,7 +7,7 @@
 \clearpage
 
 Maintenant que les objectifs de ce projet ont été précisés, nous détaillons dans ce chapitre l'ensemble des outils nécessaire à leur accomplissement.
-Nous décrivons dans les sections qui suivent les données utilisées, puis les méthodes utilisées pour séparer notre zone d'étude en sous-régions, pour repérer les fronts en utilisant le \engquote{\al{hi}}~(\as{hi}), et pour extraire nos résultats.
+Nous décrivons dans les sections qui suivent les données utilisées, puis les méthodes utilisées pour séparer notre zone d'étude en sous"-régions, pour repérer les fronts en utilisant le \engquote{\al{hi}}~(\as{hi}), et pour extraire nos résultats.
 
 \section{Données}
 \label{sec:donnees}
@@ -28,14 +28,15 @@ Ces derniers sont cités en note de bas de page et listés dans la section~\reft
 
 Nous commencons par la température de surface que nous allons notamment utiliser comme proxy de la densité pour repérer les fronts.
 Malgré que de nombreux produits de \ab{sst} soient disponibles, il n'en demeure pas moins difficile de trouver un produit qui satisfasse les exigences inhérentes à notre étude.
-Étant donné que nous voulons repérer des structures de \guil{fine échelle} la résolution est peut être l’exigence qui apparaît comme première.
+Étant donné que nous voulons repérer des structures de fine échelle la résolution est peut être l’exigence qui apparaît comme première.
 Cependant, et comme nous allons le voir plus en détail, d'autres paramètres rentrent en compte et il est nécessaire de faire des compromis dans ce domaine.
 Brièvement ces autres paramètres sont (entre autres) la disponibilité des autres variables à une résolution similaire, la facilité d'obtention\footnote{%
-  j'entends le téléchargement des données mais aussi et surtout les traitements supplémentaires nécessaires, comme le repérage des pixels nuageux \ab{par-ex}},
-ou encore la couverture spatio-temporelle.
+  Par facilité d'obtention j'entends le téléchargement des données mais aussi et surtout les traitements supplémentaires nécessaires, comme le repérage des pixels nuageux \ab{par-ex}},
+ou encore la couverture spatio"-temporelle.
 
+% Éventuellement à déplacer à une mention antérieure des résolutions
 \begin{note}
-  Bien que notre zone d'étude s'étende à de (relativement) hautes latitudes~(\ang{\approx55}N), nous ne considérons pas les différences de distances zonales et méridionales.
+  Bien que notre zone d'étude s'étende à de (relativement) hautes latitudes~(\latlon{\approx55N}), nous ne considérons pas les différences de distances zonales et méridionales.
   Nous faisons donc une correspondance simple entre fraction de degré et kilomètres, quelque soit la distance considérée, notamment pour la taille des pixels et des fenêtres.
 \end{note}
 
@@ -44,27 +45,38 @@ ou encore la couverture spatio-temporelle.
 \declareDataset{chl_modis}
 
 Un des premiers jeu de données \ab{sst} à considérer est celui utilisé par \textcite{liu_2016}, dont l'étude consistait également à détecter des fronts de \ab{sst} et les colocaliser aux données de \ab{chl}.
-Ces variables étant rarement distribuées sur des grilles à des résolutions kilométriques, il apparaît comme nécessaire de projeter sur grille régulière nous même des produits L2 ---~\al{cad} des données d'un seul capteur, converties en variables géophysiques, et disposées à la résolution de capture.
+Ces variables étant rarement distribuées sur des grilles à des résolutions kilométriques, il apparaît comme nécessaire de projeter sur grille régulière nous même des produits~L2 \encadra*{\al{cad} des données d'un seul capteur, converties en variables géophysiques, et disposées à la résolution de capture}.
 
-Pour le jeu de données qu'on désignera par \dataname{sst_modis} dans la suite, il s'agit de données provenant du capteur \ab{modis}, à bord du satellite Aqua \parencite{kilpatrick_2015}.
-Les données sont téléchargées au niveau L2 depuis le \href{https://cmr.earthdata.nasa.gov/search/}{Common Metadata Repository (CMR)}\footfullcite{sst_modis} en sélectionnant les \eng{swaths} intersectant notre région d'étude, collectés de jour, et pour les courtes longueurs d'onde infrarouges (\qty{11}{\um}).
-Pour ensuite projeter les données sur une grille kilométrique globale, j'ai repris les outils utilisés par \citeauthor{liu_2016}, à savoir les programmes présents dans le paquet de l'\href{https://oceandata.sci.gsfc.nasa.gov/ocssw}{\ab{ocssw}}, version \verb|v7.5|, qui est maintenu par l'Ocean Biology Processing Group et notamment distribué à travers l'outil \href{https://seadas.gsfc.nasa.gov/}{SeaDAS}.
+% Éventuellement à déplacer à une mention antérieure des niveaux
+\begin{note}
+  Tout au long de ce manuscript nous utilisons les dénominations des \guil*{niveaux} de données tels que typiquement utilisés par les distributeurs, et qui correspondent de manière générale à:
+  \begin{itemize}
+    \item L1:,
+    \item L2:,
+    \item L3:,
+    \item L4:.
+  \end{itemize}
+\end{note}
+
+Pour le jeu de données qu'on désignera par \dataname{sst_modis} dans la suite, il s'agit de données provenant du capteur \ab{modis}, à bord du satellite Aqua~(\cite{kilpatrick_2015}).
+Les données sont téléchargées au niveau~L2 depuis le \href{https://cmr.earthdata.nasa.gov/search/}{Common Metadata Repository (CMR)}\footfullcite{sst_modis} en sélectionnant les \eng{swaths} intersectant notre région d'étude, collectés de jour, et pour les courtes longueurs d'onde infrarouges~(\qty{11}{\um}).
+Pour ensuite projeter les données sur une grille kilométrique globale, j'ai repris les outils utilisés par \citeauthor{liu_2016}, à savoir les programmes présents dans le paquet de l'\href{https://oceandata.sci.gsfc.nasa.gov/ocssw}{\ab{ocssw}}, version~\verb|v7.5|, qui est maintenu par l'Ocean Biology Processing Group et notamment distribué à travers l'outil \href{https://seadas.gsfc.nasa.gov/}{SeaDAS}.
 Les \eng{swaths}, maintenant tous sur la même grille spatiale peuvent être moyennés par date.
 
 Cela permet donc d'obtenir des données à la limite de la résolution des capteurs, mais présente un certain nombre de désavantages majeurs.
-C'est tout d'abord un travail important à réaliser: d'abord de téléchargement, les fichiers L2 étant particulièrement lourds et nombreux (jusqu'à une dizaine pour une journée); ensuite de projection, qui à une résolution kilométrique demande une certaine puissance de calcul.
+C'est tout d'abord un travail important à réaliser: d'abord de téléchargement, les fichiers~L2 étant particulièrement lourds et nombreux (jusqu'à une dizaine pour une journée); ensuite de projection, qui à une résolution kilométrique demande une certaine puissance de calcul.
 De plus, toutes les étapes décrites jusqu'ici ne concernent qu'un seul capteur.
 Des étapes et calculs additionnels seraient nécessaires pour y combiner les données d'autres capteurs, ce qui pose des problèmes supplémentaires et se ferait non sans difficultés.
-Même pour un capteur identique (\ab{modis} à bord de Terra \ab{par-ex}), il devient nécessaire de considérer des différences de calibrations, ainsi que de possibles artefacts lorsque l'on superpose plusieurs swaths (que nous avons d'ailleur largement ignorés pour agréger les swaths sur une seule journée\dots).
+Même pour un capteur identique (\ab{modis} à bord de Terra \ab{par-ex}), il devient nécessaire de considérer des différences de calibrations, ainsi que de possibles artefacts lorsque l'on superpose plusieurs \eng{swaths} (que nous avons d'ailleurs largement ignorés pour agréger les \eng{swaths} sur une seule journée\dots).
 
 Face à ces difficultés, nous avons donc décidé dans un premier temps d'en rester à un seul capteur malgré la couverture spatiale réduite.
 Il est également à noter qu'à ce niveau, peu d'actions ont été prises pour disqualifier les pixels nuageux.
 Il en résulte des pixels aux valeurs visiblement erronées mais qui n'ont pas été masqués comme nuageux.
 Cela se manifeste par exemple comme du bruit autour de nuages.
 Il est difficile de les disqualifier correctement sans un bon algorithme de détection de nuage, ce qui nécessite un travail supplémentaire important.
-Nous contournons le problème d'une manière similaire à celle de \textcite{liu_2016} en ne travaillant que sur des fenêtres de~\qtyproduct{100 x 100}{\km} avec une faible couverture nuageuse (\textless\qty{70}{\percent}), ce qui élimine une partie de ces cas problématiques.
+Nous contournons le problème d'une manière similaire à celle de \textcite{liu_2016} en ne travaillant que sur des fenêtres de~\qtyproduct{100 x 100}{\km} avec une faible couverture nuageuse~(\pct{<70}), ce qui élimine une partie de ces cas problématiques.
 
-Malgré le fait que l'on soit limité à un seul type de capteur, \ab{modis} présente l'avantage de mesurer concomitamment la \ab{sst} et la couleur de l'océan.
+Malgré le fait que l'on soit limité à un seul capteur, \ab{modis} présente l'avantage de mesurer concomitamment la \ab{sst} et la couleur de l'océan.
 Cela permet d'obtenir les valeurs de \ab{chl} aux même pixels, en utilisant le même traitement pour le jeu de données, accessible au \ab{cmems}\footfullcite{chl_modis}.
 
 Il est néanmoins possible de trouver d'autres jeux de données permettant notre étude et nécessitant moins de travail (et autant d'éventuelles erreurs), ces dernières années ayant vu apparaître des données distribuées à des résolutions élevées.
@@ -72,10 +84,10 @@ Il est néanmoins possible de trouver d'autres jeux de données permettant notre
 \subsubsection{MUR}
 \declareDataset{sst_mur}
 
-Le produit suivant, désigné ici \af{mur} est développé et distribué par le \ab{ghrsst} au JPL Physical Oceanography DAAC\footfullcite{sst_mur}.
-Il présente les avantages d'être distribué à une résolution kilométrique et sans nuages grâce à une méthode d'interpolation par vaguelettes \parencite{chin_2017}.
-Il intègre de nombreuses sources provenant de plusieurs capteurs infrarouges et micro"-ondes, ainsi que de mesures in-situ.
-La grande couverture spatiale de ce produit se fait donc par l'utilisation de mesures non"-contraintes par la couverture nuageuse (\ab{cad} micro-ondes et in-situ), mais qui présentent une résolution bien plus faible.
+Le produit suivant, désigné ici \af{mur} est développé et distribué par le \ab{ghrsst} au JPL~\eng{Physical Oceanography}~\ab{daac}\footfullcite{sst_mur}.
+Il présente les avantages d'être distribué à une résolution kilométrique et sans nuages grâce à une méthode d'interpolation par vaguelettes~(\cite{chin_2017}).
+Il intègre de nombreuses sources provenant de plusieurs capteurs infrarouges et micro"-ondes, ainsi que de mesures in"-situ.
+La grande couverture spatiale de ce produit se fait donc par l'utilisation de mesures non"-contraintes par la couverture nuageuse (\ab{cad} micro"-ondes et in"-situ), mais qui présentent une résolution bien plus faible.
 Le champ de \ab{sst} se retrouve donc lissé à la fois par l'interpolation et par l'inclusion de ces mesures.
 L'utilisation du produit suivant cherche à palier à ce problème.
 
@@ -83,9 +95,9 @@ L'utilisation du produit suivant cherche à palier à ce problème.
 \declareDataset{sst_esacci}
 
 Ce produit est distribué conjointement par l'\ab{esa} \ab{sst} \ab{cci} et le \ab{c3s}.
-Il agglomère les mesures de tous les capteurs infrarouges disponibles depuis 1981, ce qui comprend 11 \ab{avhrr} à bord des satellites \ab{metop}["~A] et \ab{noaa} (entre les itérations 6 et 19) et trois \ab{atsr} à bord de \ab{ers}~1 et~2, et Envisat.
-Cela donne au moins deux capteurs en fonctionnement simultané, et au moins trois depuis 1992.
-Outre la bonne couverture obtenue, l'uniformité des capteurs permet d'obtenir un jeu de données stable dans le temps, pouvant servir à la détection de tendances climatiques \parencite{merchant_2019}.
+Il agglomère les mesures de tous les capteurs infrarouges disponibles depuis~1981, ce qui comprend 11~\ab{avhrr} à bord des satellites \ab{metop}["~A] et \ab{noaa} (entre les itérations 6 et~19) et trois \ab{atsr} à bord de \ab{ers} 1 et~2, et Envisat.
+Cela donne au moins deux capteurs en fonctionnement simultané, et au moins trois depuis~1992.
+Outre la bonne couverture obtenue, l'uniformité des capteurs permet d'obtenir un jeu de données stable dans le temps, pouvant servir à la détection de tendances climatiques~(\cite{merchant_2019}).
 
 Les données sont distribuées à différents niveaux, dont nous allons préciser le passage de l'un à l'autre dans la suite:
 \begin{itemize}
@@ -94,27 +106,25 @@ Les données sont distribuées à différents niveaux, dont nous allons précise
   \item L3C (multi-capteurs regroupés par famille d'instrument),
   \item et L4 (tous les capteurs, combinés par interpolation).
 \end{itemize}
-La grille utilisée à partir du produit L3U
 
-Le produit L2P est similaire aux données brutes utilisées pour le set \datasect{sst_modis},
-mais avec l'avantage de disposer de données standardisées sur un grand nombre de capteurs.
-Ces données sont projetées capteur par capteur sur une grille régulière, à une résolution de~\resol{1}{20}, soit~\qty{\approx5}{\km}, ce qui donne le produit L3U.
+Le produit~L2P est similaire aux données brutes utilisées pour le set \datasect{sst_modis}, mais avec l'avantage de disposer de données standardisées sur un grand nombre de capteurs.
+Ces données sont projetées capteur par capteur sur une grille régulière, à une résolution de~\resol{1}{20}, soit~\qty{\approx5}{\km}, ce qui donne le produit~L3U.
 Il est à noter que nous pourrions faire ce processus nous même, mais les outils que nous utilisons ne sont pas garantis de fonctionner directement sur ces données.
 
-Les données sont regroupées par famille de d'instrument pour le produit L3C. Une légère perte de précision est attendue, mais les produits L3U et L3C peuvent néanmoins tous deux être utilisés dans l'étude de structures fines et où la présence de nuages n'est pas rédhibitoire \parencite{merchant_2019}.
+Les données sont regroupées par famille de d'instrument pour le produit~L3C. Une légère perte de précision est attendue, mais les produits L3U et~L3C peuvent néanmoins tous deux être utilisés dans l'étude de structures fines et où la présence de nuages n'est pas rédhibitoire~(\cite{merchant_2019}).
 
-Enfin, le produit L4 regroupe l'ensemble des capteurs en utilisant le schéma d'intégration variationnelle \verb|NEMOVAR| intégré dans le système \ab{ostia} \parencite{good_2020}.
+Enfin, le produit~L4 regroupe l'ensemble des capteurs en utilisant le schéma d'intégration variationnelle \verb|NEMOVAR| intégré dans le système \ab{ostia}~(\cite{good_2020}).
 Ce produit donne ainsi un champ de \ab{sst} sans nuages, estimé par une combinaison des observations satellites, et de la prévision d'un modèle numérique d'un jour sur l'autre.
 L'absence de couverture nuageuse et la simplicité d'usage se fait au détriment du lissage inévitable des structures les plus fines.
 
 Une estimation quantitative du lissage due à l'interpolation est compliqué, car la paramétrisation de cette dernière dépend de la variabilité du champ de température à J"~1.
-On peut néanmoins imaginer que le champ de \ab{sst} produit est plus lissé dans les zones normalement nuageuses, et de plus potentiellement plus éloigné de la réalité (voir \cref{sec:donnees-sst_reanalyses}).
-Il est tout de même possible de mitiger ces effets en ne comptabilisant dans nos statistiques seulement les pixels non-nuageux, ce que nous faisons pour tous les résultats présentés.
+On peut néanmoins imaginer que le champ de \ab{sst} produit est plus lissé dans les zones normalement nuageuses, et de plus potentiellement plus éloigné de la réalité~(voir \cref{sec:donnees-sst_reanalyses}).
+Il est tout de même possible de mitiger ces effets en ne comptabilisant dans nos statistiques seulement les pixels non"-nuageux, ce que nous faisons pour tous les résultats présentés.
 Nous utilisons pour cela les données de \ab{chl} qui identifient les pixels nuageux.
 % À noter qu'il serait également possible d'utiliser les erreurs d'intégration associées à chaque pixel, mais cela n'a pas été exploré.
 % -> c'est pas vraiment possible, les erreurs d'inté sont données avec une résolution très faible
 
-Sauf indication contraire, c'est le produit L4 que nous utiliserons pour le champ de \ab{sst} dans toute la suite de cette thèse.
+Sauf indication contraire, c'est le produit~L4 que nous utiliserons pour le champ de \ab{sst} dans toute la suite de cette thèse.
 Il permet d'accéder à des données \ab{sst} simplement, avec une résolution convenable, et est stable sur une longue durée (plusieurs décennies).
 Les données sont téléchargées depuis \ab{cmems}\footfullcite{sst_esacci}.
 
@@ -136,7 +146,7 @@ Outre la résolution assez faible de ce produit, on notera des différences impo
   \includegraphics[width=\textwidth]{comparaison_sst.pdf}
   \captionT{Comparaison entre produits SST}{%
     Zoom sur une même fenêtre, le \frenchdate{2007}{04}{22}, de la \as{sst} pour quatres produits considérés: \dataname{sst_esacci}~(a), \dataname{sst_reanalyses}~(b), \dataname{sst_mur}~(c), et \dataname{sst_modis}~(d).
-    Les données \dataname{sst_mur}, malgré leur haute résolution présentent des zones très lissées, par exemple dans la zone~\ang{68}W--\ang{64}W;~\ang{40}N--\ang{42}N.
+    Les données \dataname{sst_mur}, malgré leur haute résolution présentent des zones très lissées, par exemple dans la zone~\latlonRange{68W; 64W}; \latlonRange{40N; 42N}.
     Les données \dataname{sst_esacci} semblent en revanche capturer avec régularité les structures visibles sur les données plus brutes de \dataname{sst_modis}, excepté les plus fines évidemment.
   }
   \label{fig:comparaison-sst}
@@ -146,14 +156,14 @@ Outre la résolution assez faible de ce produit, on notera des différences impo
 \label{sec:donnees-chl}
 \declareDataset{chl_globcolour}
 
-Pour le champ de \al{chl}, nous utilisons les données produites dans le cadre du projet GlobColour, développées, validées et distribuées par ACRI"~ST, France \parencite{maritorena_2002}.
+Pour le champ de \al{chl}, nous utilisons les données produites dans le cadre du projet GlobColour, développées, validées et distribuées par ACRI"~ST, France~(\cite{maritorena_2002}).
 La version \guil{MultiYear}, au niveau L3 est utilisée.
 On obtient des données à une résolution de~\resol{1}{24} (soit~\qty{\approx4}{\km}), journalière, avec des nuages.
 Les données sont récupérées sur \ab{cmems}\footfullcite{chl_globcolour}.
 
 Ce produit aggrège les données optiques de plusieurs capteurs: \ab{seawifs}, \ab{modis} Aqua et Terra, \ab{meris} à bord d'Envisat, \ab{viirs} à bord de \ab{snpp} et \ab{noaa}[-20], et enfin \ab{olci} à bord de Sentinel-3A et -3B.
 Les données de reflectance de chaque capteur sont transformées en concentration de \ab{chl} avant d'être fusionnées en seul produit.
-Les algorithmes pour le passage en \ab{chl} sont ajustés indépendamment pour chacun des capteurs, ce qui permet d'obtenir un produit cohérent et stable \parencite{garnesson_2019}.
+Les algorithmes pour le passage en \ab{chl} sont ajustés indépendamment pour chacun des capteurs, ce qui permet d'obtenir un produit cohérent et stable~(\cite{garnesson_2019}).
 
 
 \subsection{Accord entre les produits}
@@ -165,7 +175,7 @@ Cela renforce notre choix pour les données \dataname{sst_esacci}, en défaveur 
 Les deux jeux choisis pour la \ab{sst} et \ab{chl} ont des résolutions spatiales similaires mais néanmoins légèrement différentes.
 Les deux grilles sont plate"-carrées (régulières en latitude et longitude) mais le champ de \ab{chl} est défini sur une grille \glshref{epsg-chl} de résolution~\resol{1}{24}~(\qty{\approx4.6}{\km}); et le champ de \ab{sst} sur une grille \glshref{epsg-sst} de résolution~\resol{1}{20}~(\qty{\approx5.6}{\km}).
 
-Sachant que les produits de composition du phytoplancton dont nous disposions (non décrits ici) sont définis sur la même grille que la Chlorophylle, nous adaptons la \ab{sst} sur la grille de la \ab{chl} par une simple interpolation bi-linéaire.
+Sachant que les produits de composition du phytoplancton dont nous disposions (non décrits ici) sont définis sur la même grille que la Chlorophylle, nous adaptons la \ab{sst} sur la grille de la \ab{chl} par une simple interpolation bi"-linéaire.
 
 \subsection{Bathymétrie}
 \label{sec:donnees-bathymetrie}
@@ -187,7 +197,7 @@ Nous sous"-échantillonnons les données en appliquant une moyenne à chaque gro
 \section{Délimitations des biomes, ou sous-régions d'étude}
 \label{sec:delimitations-regions}
 
-Comme détaillé plus en profondeur en introduction (\cref{sec:region-detude}, \cref*{chp:introduction}) notre région d'étude est fortement hétérogène, aussi bien concernant les propriétés physiques que biologiques.
+Comme détaillé plus en profondeur en introduction~(\cref{sec:region-detude}, \cref*{chp:introduction}) notre région d'étude est fortement hétérogène, aussi bien concernant les propriétés physiques que biologiques.
 Il est ainsi nécessaire de séparer notre zone d'étude en (sous-)régions afin d'extraire des résultats sur des zones homogènes.
 Nous définissons donc trois biomes.
 Le biome \ab{st-perm}, le plus au sud, correspond à un régime largement oligotrophe.
@@ -197,7 +207,7 @@ Dans cette section, nous décrivons plus précisement la méthode utilisée pour
 
 \subsection{Séparation des biomes}
 
-La séparation entre les deux biomes subtropicaux est faite par une limite zonale fixée à~\ang{32}N (trait noir pointillé \cref{fig:regions}).
+La séparation entre les deux biomes subtropicaux est faite par une limite zonale fixée à~\latlon{32N} (trait noir pointillé \cref{fig:regions}).
 Cette limite correspond approximativement à un saut visible des valeurs de \ab{chl} à cette latitude (isocontour~\qty{0.1}{\mgm} de la moyenne annuelle de \ab{chl}) qui ne varie que peu au cours de l'année.
 Cette séparation est en accord avec la limite entre les biomes tels que délimités par \textcite{sarmiento_2004}~(\cref{fig:sarmiento}).
 
@@ -205,7 +215,7 @@ Cette séparation est en accord avec la limite entre les biomes tels que délimi
   \centering
   \includegraphics[width=1\textwidth]{régions.pdf}
   \captionT{Résultat de la séparation de la zone d'étude en biomes}{%
-    La zone est découpée en trois biomes: le biome \al{st-perm}~(PSB) au sud de du trait pointillé à~\ang{32}N; le biome \al{st-sais}~(SSB) entre~\ang{32}N et la limite~(sinueuse) nord du Gulf Stream dénotée par le contour noir; et le biome \al{sp}~(SP) au nord du Gulf Stream.
+    La zone est découpée en trois biomes: le biome \al{st-perm}~(PSB) au sud de du trait pointillé à~\latlon{32N}; le biome \al{st-sais}~(SSB) entre~\latlon{32N} et la limite~(sinueuse) nord du Gulf Stream dénotée par le contour noir; et le biome \al{sp}~(SP) au nord du Gulf Stream.
 
     Clichés de \ab{sst}~(a) et \ab{chl}~(b) au \frenchdate{2007}{04}{22}, et les distributions de \ab{sst}~(c) et {d}~\ab{chl} pour chacuns des biomes, le même jour (\al{sp}: bleu, \al{st-sais}: jaune, \al{st-perm}: rouge).
     La ligne noire verticale sur~(c) marque la température détectée comme seuil de la limite nord du Gulf Stream.
@@ -223,15 +233,15 @@ Cette séparation est en accord avec la limite entre les biomes tels que délimi
     Les biomes de notre zone d'étude correspondent dans la nomenclature de cet article à: \al{sp}~(``SP'', jaune); \al{st-sais}~(``ST-SS'', bleu); et \al{st-perm}~(``ST-PS'', rose).
 
     \foreignblockquote{english}{Biome classification scheme calculated using mixed layer depths obtained from observed density and from upwelling calculated from the wind stress divergence using observed winds.
-    The equatorially influenced biome covers the area between~\ang{5}N and~\ang{5}N, and is colored a dirty light blue in areas where upwelling occurs (labeled~``Eq-U'' on the color bar) and dark pink in areas where downwelling occurs (labeled~``Eq-D'').
+    The equatorially influenced biome covers the area between~\latlon{5N} and~\latlon{5N}, and is colored a dirty light blue in areas where upwelling occurs (labeled~``Eq-U'' on the color bar) and dark pink in areas where downwelling occurs (labeled~``Eq-D'').
     Outside of this band, the region labeled~``Ice''~(red) is the marginal sea ice biome, the region labeled~``SP''~(yellow) is the subpolar biome, the region labeled~``LL-U''~(light blue) is the low-latitude upwelling biome , the region labeled~``ST-SS''~(dark blue) is the seasonally mixed subtropical gyre biome, and the region labeled~``ST-PS''~(pink) is the permanently stratified subtropical gyre biome.}
   }
 \label{fig:sarmiento}
 \end{figure}
 
-On sépare ensuite le reste de la région au nord de~\ang{32}N en prenant comme limite le front nord du jet du Gulf Stream (le \engquote{North wall}).
+On sépare ensuite le reste de la région au nord de~\latlon{32N} en prenant comme limite le front nord du jet du Gulf Stream (le \engquote{North wall}).
 Cette délimitation est donc dynamique et déterminée chaque jour à partir de l'image de température.
-En effet, il apparaît que la distribution de la \ab{sst} (au nord de~\ang{32}N) suffit à repérer de manière fiable et robuste une température seuil permettant de séparer les deux biomes (contour sinueux noir plein \cref{fig:regions}).
+En effet, il apparaît que la distribution de la \ab{sst} (au nord de~\latlon{32N}) suffit à repérer de manière fiable et robuste une température seuil permettant de séparer les deux biomes (contour sinueux noir plein \cref{fig:regions}).
 Sur cette distribution apparaît clairement un pic dans des valeurs élevées correspondant au eaux du jet.
 Il est aisé de repérer le pic et l'ajuster par une gaussienne.
 À partir de là, la température seuil entre les biomes est prise comme la base froide de ce pic, \ab{cad} plus précisemment en soustrayant à la température moyenne du pic deux fois son écart"-type (\cref{fig:temp-seuil-distrib}).
@@ -241,7 +251,7 @@ La valeur journalière de ce seuil est filtrée temporellement par un filtre mé
   \centering
   \includegraphics[width=0.7\textwidth]{zone_separation.pdf}
   \captionT{Délimitation des biomes subtropical permanent et subpolaire par température seuil}{%
-    Sur la distribution des valeurs en température au nord de~\ang{32}N (en noir) pour le \frenchdate{2007}{04}{22}, le pic \encadra{ici autour de~\tC{18}} correspond aux eaux du jet. Il est ajusté par un fit gaussien (en rouge) dans un intervalle de~\tC{5} de large.
+    Sur la distribution des valeurs en température au nord de~\latlon{32N} (en noir) pour le \frenchdate{2007}{04}{22}, le pic \encadra{ici autour de~\tC{18}} correspond aux eaux du jet. Il est ajusté par un fit gaussien (en rouge) dans un intervalle de~\tC{5} de large.
     La température de seuil (en bleu) entre les deux biomes est définie comme la température moyenne du pic (trait fin pointillé) moins deux fois son écart"-type.
     Cela correspond à la limite nord du Gulf Stream.
   }
@@ -252,7 +262,7 @@ La valeur journalière de ce seuil est filtrée temporellement par un filtre mé
   \includegraphics[width=\textwidth]{separation_evol_month.pdf}
   \captionT{Variation temporelle de la délimitation entre biomes}{%
     La position limite entre les biomes \al{st-sais} et \al{sp} n'évolue que peu au cours de l'année vis à vis des larges méandres du Gulf Stream.
-    Néanmoins en été, la limite est moins marquée après le détachement du jet (\ang{75}W--\ang{70}W).
+    Néanmoins en été, la limite est moins marquée après le détachement du jet (\latlonRange{75W; 70W}).
 
     L'isotherme séparant les deux biomes est tracé le 15 de chaque mois pour l'année 2007.
     La couleur de chaque contour correspond au jour de l'année comme dénoté par la barre de couleur dans l'inset.
@@ -266,9 +276,9 @@ La valeur journalière de ce seuil est filtrée temporellement par un filtre mé
 Par ailleurs, il est également nécessaire d'éviter de considérer les pixels trop près des côtes dans notre étude.
 De manière générale la \ab{chl} y suit un régime côtier, visible par des valeurs très élevées (\qty{>10}{\mgm}).
 Ensuite, nous cherchons à éviter deux zones qui ne correspondent pas aux biomes définis plus haut.
-Premièrement, le jet du Gulf Stream prend forme au sud de notre zone, le long de la côte de Floride. On trouve donc sur le plateau continental à ces latitudes (\ang{\approx28}N) de forts courants qu'on ne retrouve pas dans le reste du biome \ab{st-perm}.
+Premièrement, le jet du Gulf Stream prend forme au sud de notre zone, le long de la côte de Floride. On trouve donc sur le plateau continental à ces latitudes (\latlon{\approx28N}) de forts courants qu'on ne retrouve pas dans le reste du biome \ab{st-perm}.
 Deuxièmement, plus au nord dans l'anse Nord-Est Américaine de l'Atlantique (\engquote{Mid-Atlantic Bight}), on trouve une séparation nette entre les eaux au nord du Gulf Stream (la \engquote{slope sea}), et les eaux sur le plateau continental.
-Un jet marque cette séparation le long du talus continental \parencite{flagg_2006}.
+Un jet marque cette séparation le long du talus continental~(\cite{flagg_2006}).
 
 Dans les deux cas, imposer une limite haute à la bathymétrie sur notre région d'étude permet de supprimer ces zones problématiques.
 Ainsi, pour calculer nos résultats, nous ne considérons que les pixels où la profondeur n'excède pas~\qty{1500}{\m}.
@@ -295,7 +305,7 @@ Ainsi, pour chaque pixel, la valeur de chaque composante est calculée sur la di
         \item \(5 \times 5 =\qty{25}{\pixels}\) soit~\qty{28}{\km} de côté,
         \item \(7 \times 7 =\qty{49}{\pixels}\) soit~\qty{39}{\km} de côté.
 \end{itemize}
-Parce qu'une fenêtre plus large entraînerait la détection de structures trop grandes pour notre étude, nous nous limiterons aux tailles présentées ci-dessus.
+Parce qu'une fenêtre plus large entraînerait la détection de structures trop grandes pour notre étude, nous nous limiterons aux tailles présentées ci"-dessus.
 Néanmoins une fenêtre trop petite limite le nombre de pixels disponibles pour calculer les valeurs statistique dont nous avons besoin convenablement.
 Un compromis est à définir.
 
@@ -479,7 +489,7 @@ pour ainsi obtenir une approximation de la densité de probabilité \(f\).
 On peut extraire de cette distribution notamment la médiane, ainsi que des percentiles divers en trouvant la valeur de \(x\) pour laquelle la somme cumulée de la densité de probabilité est égale au percentile recherché (0.5 dans le cas de la médiane).
 On délègue ce travail au paquet SciPy dont l'objet \glshref{rv_histogram} permet d'effectuer ces calculs de manière triviale.
 
-Il est à noter que l'interprétation de certaines métriques n'ont de sens que si la distribution de la variable concernée est convenable (uni-modale \ab{par-ex}).
+Il est à noter que l'interprétation de certaines métriques n'ont de sens que si la distribution de la variable concernée est convenable (uni"-modale \ab{par-ex}).
 Cette vérification est reportée dans la \cref{sec:complements-chl},~\cref*{chp:res-chl}.
 
 \subsection{Quantification de l'effet des fronts: différences de valeurs et retard du bloom}

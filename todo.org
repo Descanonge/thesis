@@ -1,30 +1,158 @@
 #+title: Todo
 
 
-* je ou nous ?
+* Jury potentiel
+** Dates
+Envoi du manuscript fin mars. Dernière semaine de mars ? -> vendredi 31 mars.
+Envoi du rapport, 1 mois plus tard (fin avril). À vérifier avec l'ED.
+Soutenance, 1 mois plus tard (fin mai). À vérifier avec l'ED
+** TODO Envoyer mail ED pour confirmer jury
+** TODO Envoyer mail demande au jury
+donner les dates (envoi manuscript, envoi rapport)
++doodle pour la date de soutenance
+** Liste
+*** Daniele Iudicone
+Affiliation ?
+Équivalence ?
+Rapporteur ?
+*** Fabrizio d'Ortenzio
+LOV
+Dr CNRS
+Rapporteur ?
+*** Aida Alvera-Azcárate
+Affiliation ?
+Équivalence ?
+Rapportrice ?
+*** Marie Isabelle Pujol
+CLS
+Équivalence ?
+Rapportrice ?
+*** Sakina-Dorothée Ayata
+LOCEAN
+Maîtresse de conférences HDR
+Rapportrice X
+*** Lars Stemmer
+Affiliation
+Équivalence ?
+Président du jury ?
+*** Hubert Loisel
+LOG ?
+Équivalence ?
+Rapporteur ?
+*** Roy El Hourany
+LOG ?
+Maître de conférences ?
 
-* jeu de données
-pluriel ?
+* Administratif
+** TODO Valider l'enseignement :(
 
-* TODO regrid en fr ?
+* Inbox
+** je ou nous ?
+** NewDocumentCommand
+on peut peut-être améliorer notre préambule
+** Réanalyses -> renommer Mercator
+** Ajouter figure comparaison Chl GlobColour / MODIS
 
-* to edit
-mot / phrases à améliorer entre chevrons
+* Recommendations de style
+** GLS
+On se dit que pas de \ab ?
+Ou alors \ab est fixé. (soit tout le temps court soit tout le temps long, pas de first-use)
+*** Titres et Captions
+Ne pas mettre de commandes dans les titres de section.
+Dans les titres de caption, utiliser glsentryshort
+Dans les captions, open bar (a priori).
+** Figures
+Toujours centrées.
+Utiliser captionT{titre}{caption}. Le titre sera mis dans la ToF et ajouté en emph au début de la caption.
+** Citations
+*** Articles
+use \textcite and (\cite)
+\parencite (voir même \autocite) est généralement préféré, mais:
+- je suis à peu près sur de conserver ce schéma
+- au pire, ça se modifie sans trop de soucis avec Emacs
+- a priori, je n'ai pas de différence de style entre \cite et \parencite
+Et surtout, je trouve ça beaucoup plus clair dans le texte. Ça devrait m'aider à repérer les ~ manquants.
+*** Datasets
+use \footfullcite
+*** Software
+use \citesoft
+** Punctuations
+*** parenthèses
+*** tirets en incise
+use \encadra{}, ça utilise des tirets cadratins.
+Si la phrase se termine par un tiret, alors utiliser \encadra*{}.
+*** Tirets
+Pour mettre un tiret dans un mot préférer "-. Cela permet d'avoir un mot breakable (y compris au tiret).
+Pour mettre un tiret non-breakable, utiliser "~. Utile pour les acronymes notamment.
+*** citations (quotations)
+utiliser \guil{} pour des guillements français.
+\guil*{} pour des guillements anglais (pour signaler un manque d'exactitude, les guillements des doigts quoi).
+** Insertions d'anglais
+Pour insérer des mots anglais préférer utiliser \eng{}. Cela change les options de biblatex et autres paquets compatibles. C'est surtout utile pour adapter le setup d'hyphenation.
+
+Pour signaler une traduction de l'anglais utiliser \engquote{} (met l'expression entre guillemets).
+
+** Non breaking spaces
+Attention si l'élement est multiple.
+les équations 2 et~3.
+le truc~T de longueur 2~ou plus.
+
+*** (cross-)references
+refname~\ref,
+avant une ref ou une citation, seulement si entre parenthèses:
+On voit tel résultat~(\cite{whatev_2000}).
+On voit tel résultat~(\cref{fig:whatev}).
+Mais: On voit sur la \crefname{fig:whatev}.
+*** Au milieu des noms
+Donald~E. Knuth. Machin Van~der~Truk.
+Utiliser \bname pour ça.
+*** Entre un nombre et son unité
+3~jours.
+*** Nombre dans une phrase
+~\num, ~\ang, ~\qty,...
+Même entre parenthèses: telles valeurs~(\qty{})
+*** mathematical symbol à côté de son nom
+l'écart"-type~\ab{std}
+tel truc~\(T\)
+Cela vaut pour les abbréviations \al{hi}~(\as{hi})
+Autres cas: produits~L2
+*** Symbole à côté de préposition
+de~x, from 0 to~1, increase by~2.
+Attention encore aux compositions: de u~et~v.
+*** Équations en phrases
+est égal à~2, moins que~x, pour tout~i.
+*** numbers, quantities
+~\num, ~\qty
+*** Quand des cas sont énumérés
+Sont graphés la sst~(a) et la chl~(b).
+Ces cas sont (1)~isolés, (2)~rares.
+
+** Énumérations
+Préférer comme une phrase, avec des virgules (ou point-virgules), et un point final.
+Le et final peut être omis pour plus de lisibilité si les items s'alignent.
+\item a,
+\item b,
+\item (et) c.
+
+
+* Vérifications à faire
+** Spelling
+** Regexps
 #+begin_src
-<\w*>
-#+end_src
-
-* DeclareDocumentCommand
-
-* Spelling
-
-* Repeated words
-#+begin_src
+Repeated words
 \<\(\w+\)\>\s-+\<\1\>
-\<\(\w+\)\>[[:space:]]+\<\1\>
-#+end_src
-* Double spaces
-#+begin_src
-\>\s-\s+
+
+Double espaces (ceux là normalement c'est pas grave)
 \>\s-\{2,\}
-#+end_src* Administratif :admin:
+
+Espaces avant/après énumérations
+\s-?([a-z])\s-?
+
+Tirets normaux
+[[[[:alpha:]]]]-[[[[:alpha:]]]]
+
+Espaces avant commandes. Ajouter à l'option Linker de ChkTeX ce qu'il faut.
+\parencite
+\parenref
+
+#+end_src

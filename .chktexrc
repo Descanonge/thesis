@@ -13,5 +13,8 @@ Linker {
 }
 
 UserWarnRegex {
-       (?!#7:Maybe! replace! space! by! !~)\s\([a-h]\)
+}
+
+WipeArg {
+    \latlon:[]{} \latlonRange:[]{}
 }

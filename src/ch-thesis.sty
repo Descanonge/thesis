@@ -24,14 +24,23 @@ ScaleAgain = 0.96
 \addto\extrasenglish{\sisetup{locale = US}}
 \addto\extrasfrench{\sisetup{locale = FR}}
 
+% Insérer du texte anglais, sans et avec guillements
 \newcommand*\eng[1]{\foreignlanguage{english}{#1}}
 \newcommand*\engquote[1]{\foreignquote{english}{#1}}
+
+% Guillements à la française ou à l'anglaise (*).
 \NewDocumentCommand\guil{ s m }{%
   \IfBooleanTF{#1}%
   {\enquote*{#2}}%
   {\enquote{#2}}}
 
-\newcommand\encadra[1]{ ---~#1~---}
+% Tirets (cadratins) d'incise
+% Utiliser * si la phrase se termine par un tiret
+% (il n'est alors pas inséré)
+\NewDocumentCommand\encadra{ s m }{%
+  \IfBooleanTF{#1}%
+  { ---~#2}%
+  { ---~#2~---}}
 
 %%% Shorthands
 \useshorthands*{"}
@@ -72,6 +81,29 @@ ScaleAgain = 0.96
 % Quick temperature value
 \newcommand*\tC[2][]{% [options]{number}
   \qty[#1]{#2}{\degreeCelsius}}
+
+%%% Lat/Lon commands
+\ExplSyntaxOn
+
+% Command for typesetting latitude or longitude value
+% Input should be a number to send to \ang followed by one of NSWE.
+\msg_new:nnn {ch-thesis} {latlon-invalid-end} {\\latlon\ argument\ should\ end\ with\ [NSWE]\ (found\ `#1')}
+\NewDocumentCommand \latlon { o m } {
+  \tl_set:Nx \l_tmpa_tl {\tl_item:nn{#2}{-1}}
+  \tl_if_in:noTF {NSWE} {\l_tmpa_tl} {}
+  {\msg_warning:nnx {ch-thesis} {latlon-invalid-end} {\l_tmpa_tl}}
+  \ang [#1] { \tl_range:nnn {#2} {1} {-2} } \tl_use:N \l_tmpa_tl
+}
+
+% Typesetting a box in lat/lon range (like 16°N-32°N)
+% Argument is split by ';' then sent to \latlon
+\NewDocumentCommand \latlonRange { o m } {
+  \seq_set_split:Nnn \l_tmpa_seq {;} {#2}
+  \seq_set_map:NNn \l_tmpb_seq \l_tmpa_seq { \latlon [#1] {##1} }
+  \seq_use:Nn \l_tmpb_seq {--}
+}
+
+\ExplSyntaxOff
 
 %%% Hyperref
 \RequirePackage{hyperref}

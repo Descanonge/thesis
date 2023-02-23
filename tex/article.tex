@@ -17,22 +17,22 @@ and \authorArticle[2]{Laurent}{Bopp}
 }
 
 % \begin{keypoints}
-% \item Over \as{sst} fronts in the Gulf Stream region al{chl} is enhanced by up to a factor two and the bloom onsets earlier by up to two weeks.
+% \item Over \as{sst} fronts in the Gulf Stream region \al{chl} is enhanced by up to a factor two and the bloom onsets earlier by up to two weeks.
 % \item The enhancement intensity increases significantly with the strength of the front.
-% \item The net contribution of fronts to al{chl} enhancement over the Gulf Stream region is less than 5\%.
+% \item The net contribution of fronts to \al{chl} enhancement over the Gulf Stream region is less than 5\%.
 % \end{keypoints}
 
 \begin{articleBlock}{Abstract}
   Fronts affect phytoplankton growth and phenology by locally reducing stratification and increasing vertical nutrient supply.
   Biomass peaks at fronts have been observed in-situ and linked to local nutrient upwelling, and reduced stratification over fronts has been shown to induce earlier blooms in numerical models.
   However observation of these biophysical interactions through satellite imagery have been scarce, despite the opportunity to quantify them at synoptic scales.
-  Here we used twenty years of \as{sst} and al{chl} satellite data in a large region surrounding the Gulf Stream to quantify the impact of fronts on phytoplankton in contrasting regimes, from oligotrophy to bloom, and throughout the year.
+  Here we used twenty years of \as{sst} and \al{chl} satellite data in a large region surrounding the Gulf Stream to quantify the impact of fronts on phytoplankton in contrasting regimes, from oligotrophy to bloom, and throughout the year.
   We computed an heterogeneity index \as{hi} from \as{sst}, and used it to sort fronts into weak and strong fronts based on \as{hi} thresholds.
   We observed that the localization of strong fronts corresponded to western boundary current fronts, and weak fronts to more ephemeral submesoscale fronts.
-  We compared al{chl} distributions over strong fronts, weak fronts and outside of fronts.
-  We assessed three metrics, the local enhancement of al{chl} over fronts, the global enhancement of \al{chl} due to fronts at the scale of the region, and the lag in spring bloom onset due to fronts.
-  We found that weak fronts lead to a local enhancement of al{chl} weaker than strong fronts, but because they are also more frequent they contribute equally to the regional \al{chl} budget.
-  We also find the the local enhancement of al{chl} was two to three times larger for the spring bloom than in the oligotrophic subtropical gyre.
+  We compared \al{chl} distributions over strong fronts, weak fronts and outside of fronts.
+  We assessed three metrics, the local enhancement of \al{chl} over fronts, the global enhancement of \al{chl} due to fronts at the scale of the region, and the lag in spring bloom onset due to fronts.
+  We found that weak fronts lead to a local enhancement of \al{chl} weaker than strong fronts, but because they are also more frequent they contribute equally to the regional \al{chl} budget.
+  We also find the the local enhancement of \al{chl} was two to three times larger for the spring bloom than in the oligotrophic subtropical gyre.
   We also provide observational evidence that blooms start earlier over fronts, by one to two weeks.
   Nevertheless our results suggest that the spectacular impact of fronts at the local scale may be misleading, considering their impact on a regional scale budget remains limited.
 \end{articleBlock}
@@ -40,7 +40,7 @@ and \authorArticle[2]{Laurent}{Bopp}
 
 \begin{articleBlock}{Plain Language Summary}
   Phytoplankton vary in abundance in the ocean over of large regions, and with the seasons, but also because of small-scale heterogeneities in surface temperature, called fronts, where phytoplankton growth can be favoured.
-  Here, using satellite imagery, we found that fronts enhance phytoplankton much more where it is already growing well, but despite large local increases the  enhancement for the region is modest~(\pct{5}). We also found that blooms start by one to two weeks earlier over fronts.
+  Here, using satellite imagery, we found that fronts enhance phytoplankton much more where it is already growing well, but despite large local increases the  enhancement for the region is modest (\pct{5}). We also found that blooms start by one to two weeks earlier over fronts.
 \end{articleBlock}
 
 
@@ -62,7 +62,7 @@ In addition, in highly seasonal regimes where productivity is slowed in winter d
 
 Despite numerous local observations and a strong theoretical basis for these processes \parencite[e.g.\ recent studies by][]{marrec_2018, little_2018, verneil_2019, ruiz_2019, uchida_2020, kessouri_2020, tzortzis_2021}, their integrated contribution at the scale of regional biomes is still largely unknown.
 Indeed, as most fronts form, move and dissipate continuously on time scales of days to weeks, they are particularly difficult to sample, and this limitation is reinforced by the fact that only a limited number of fronts can be observed with in situ field observations.
-Thus satellite-derived estimates of al{chl} (hereafter \as{chl}) although limited to the surface and an imperfect proxy for phytoplankton biomass, are the only data that allow to track the impact of fronts synoptically over large areas.
+Thus satellite-derived estimates of \al{chl} (hereafter \as{chl}) although limited to the surface and an imperfect proxy for phytoplankton biomass, are the only data that allow to track the impact of fronts synoptically over large areas.
 A first attempt to assess the contribution of fine scales to regional satellite \as{chl} budgets was based on a geostatistical analysis derived from data at 9km resolution \parencite{doney_2003}, extended later in \textcite{glover_2018}, with which they examined the change in spatial variance with distance.
 This methodology was too coarse to reveal the impact of submesoscales but confirmed the important role of mesoscale eddies in stirring large scale gradients of phytoplankton abundance.
 The role of submesoscales has been assessed with three different methods.
@@ -95,10 +95,10 @@ We evaluate the impact of both types of fronts on \as{chl} on the basis of three
 \subsection{Methods and data}
 
 Our approach combines daily satellite \as{sst} data, which are used to detect fronts and sort them by their strength, with daily satellite surface \as{chl}, from which we derive anomalies over fronts.
-Our region of interest is the North Atlantic from~\ang{15}N to~\ang{55}N, and from~\ang{40}W to the North American shelf break (Fig.~\ref{fig:zone-separation}).
+Our region of interest is the North Atlantic from~\latlon{15N} to~\latlon{55N}, and from~\latlon{40W} to the North American shelf break (Fig.~\ref{fig:zone-separation}).
 This region covers three biomes, a more oligotrophic one in the south, a more productive one in the north where a spring bloom occurs, and an intermediate biome between the two, described below.
 We will refer to them in the following as permanent subtropical biome (PSB), seasonal subtropical biome (SSB) and subpolar biome (PB), moving from south to north.
-They are separated from south to north by a fixed boundary at~\ang{32}N and by a variable boundary near~\ang{40}N dynamically set at each time step to the instantaneous position of the Gulf Stream.
+They are separated from south to north by a fixed boundary at~\latlon{32N} and by a variable boundary near~\latlon{40N} dynamically set at each time step to the instantaneous position of the Gulf Stream.
 
 \subsubsection{Data}
 
@@ -121,10 +121,10 @@ All pixels where water depth is less than~\qty{<1500}{\m} (red isobath in Fig.~\
 The permanently oligotrophic regime to the south of our study area, characterized by warm waters and low \as{chl} (Fig.~\ref{fig:zone-separation}), is known as the subtropical gyre permanently stratified biome \parencite{sarmiento_2004} or permanent deep \as{chl} maximum biome \parencite{bock_2022}.
 Their is no clear physical boundary to the northern limit of this permanent subtropical biome, so we have chosen the latitudinal limit of 32°N to delineate it, which roughly corresponds to the~\qty{0.1}{\mgm}~\as{chl} isocontour in annual mean \as{chl}.
 
-North of~\ang{32}N, the seasonal subtropical biome is also mainly oligotrophic, with intermediate levels of \as{chl} and temperature, and characterized by slightly increased productivity in winter.
+North of~\latlon{32N}, the seasonal subtropical biome is also mainly oligotrophic, with intermediate levels of \as{chl} and temperature, and characterized by slightly increased productivity in winter.
 This second biome is known as the subtropical gyre seasonally stratified biome \parencite{sarmiento_2004}.
 It is bounded to the north by the meanders of the Gulf Stream jet.
-The Gulf Stream jet conveys warm, salty waters poleward along the Florida coast up to Cape Hatteras (\ang{35}N), where the jet separates from the continental shelf and meanders essentially zonally.
+The Gulf Stream jet conveys warm, salty waters poleward along the Florida coast up to Cape Hatteras (\latlon{35N}), where the jet separates from the continental shelf and meanders essentially zonally.
 The north wall of the jet, so called because of its steep temperature gradient, marks the sharp, sinuous and unsteady northern limit of this biome.
 
 To the north of the Gulf Stream is the Slope sea which extends to the shelf-break, with colder and fresher waters \parencite{linder_1998}.
@@ -144,7 +144,7 @@ With the above delimitation of biomes, the two atmospherically and topographical
   \centering
   \includegraphics[width=12cm]{article/zone_separation.pdf}
   \caption[Delimitation of biomes]{
-    Delimitation of the three biomes in the Gulf stream extension region: the Permanent Subtropical Biome~(PSB, south of the dashed line at~\ang{32}N), the Seasonal Subtropical Biome~(SSB, between~\ang{32}N and the meandering Gulf stream northern wall on that day marked with the black contour), and the Subpolar Biome~(PB, north of the Gulf stream northern wall).
+    Delimitation of the three biomes in the Gulf stream extension region: the Permanent Subtropical Biome~(PSB, south of the dashed line at~\latlon{32N}), the Seasonal Subtropical Biome~(SSB, between~\latlon{32N} and the meandering Gulf stream northern wall on that day marked with the black contour), and the Subpolar Biome~(PB, north of the Gulf stream northern wall).
     (a)~\as{sst} and (b)~\as{chl} snapshots on the 22 April 2007 (with data masked by clouds in white), (c)~\as{sst} and (d)~\as{chl}  distribution within each biome for the same day (PB:\@blue, SSB:\@yellow, PSB:\@red).
     The black line in~(c) shows the \as{sst} threshold value detected to delimit the Gulf Stream northern wall (see methods section).
     The x"-axis of the distributions correspond to the x-axis scale of the corresponding color bars.
@@ -212,7 +212,7 @@ To extract the onset date, we filtered the \as{chl} median time series with a lo
 The filtered time-series displayed strong variations in their phenology from year to year, but a bloom was always discernible.
 We considered data from February to July, which allowed us to isolate the spring bloom and exclude the autumn bloom.
 First, we detected the maximum value of \as{chl} in this time window, then defined the bloom onset as the time of maximum \as{chl} derivative prior to the time of maximum \as{chl}.
-To estimate the uncertainty in this evaluation, we computed the standard deviation of all days for which the \as{chl} derivative was above~\ang{90} of its maximum value.
+To estimate the uncertainty in this evaluation, we computed the standard deviation of all days for which the \as{chl} derivative was above~\pct{90} of its maximum value.
 Finally, we averaged the yearly values of lag~\as{lag} in onset days over the 20~years range by computing a weighted average and standard deviation of the difference between values in fronts and in background for each latitudinal band, with the weights equal to the inverse of the standard deviations for each year.
 
 \subsection{Results}
@@ -238,7 +238,7 @@ This separation is imperfect, as seen for instance in Fig.~\ref{fig:zoom} where 
 
 However, the choice of these two \as{hi} thresholds is also guided by the resulting global spatial climatology of weak and strong fronts (Fig.~\ref{fig:frt-occurrence}).
 Weak fronts are abundant, and more or less evenly distributed, over a broad band around and north of the Gulf Stream jet (Fig.~\ref{fig:frt-occurrence}a).
-To the south of the Gulf Stream jet, weak fronts are less present, with nevertheless more fronts on the edges of the subtropical gyre (around~\ang{28}N) than in its center.
+To the south of the Gulf Stream jet, weak fronts are less present, with nevertheless more fronts on the edges of the subtropical gyre (around~\latlon{28N}) than in its center.
 This distribution of weak fronts is consistent with the predominance of mesoscale variability observed along the Gulf Stream system from satellite altimetry \parencite{zhai_2008}, and the injection of eddy kinetic energy north of the Gulf Stream jet by the Gulf Stream extension.
 It is thus consistent with the generation process of submesoscale fronts through mesoscale strain.
 
@@ -251,7 +251,7 @@ It is thus consistent with the generation process of submesoscale fronts through
   \label{fig:frt-occurrence}
 \end{figure}
 
-The climatological distribution of strong fronts shows that they coincide mainly with the Western Boundary Current system, which consists of two main permanent fronts, the first following the Gulf Stream jet going northeast from Cape Hatteras, and a second more northerly and extending eastward to~\ang{50}W, following the northeastern U.S.
+The climatological distribution of strong fronts shows that they coincide mainly with the Western Boundary Current system, which consists of two main permanent fronts, the first following the Gulf Stream jet going northeast from Cape Hatteras, and a second more northerly and extending eastward to~\latlon{50W}, following the northeastern U.S.
 continental shelf break (Fig.~\ref{fig:frt-occurrence}b).
 Thus these contrasted coverage of localized strong fronts and more widespread weak fronts are consistent with the hypothesis that weak fronts are representative of ephemeral submesoscale fronts, whereas strong fronts are representative of the more permanent fronts associated with the Western Boundary Current system that covers part of the seasonal subtropical and subpolar biomes.
 This separation allows us to provide a first order sorting of the impact of each type of front.
@@ -316,12 +316,12 @@ These results are very weakly sensitive to the choice of parameters used to comp
 We can also note that the standard deviation range of the yearly median values (Fig.~\ref{fig:ts-climato}a-c) is smaller than the differences between fronts and background, which further confirms that these differences are robust over 20 years of data, for the three biomes and the two types of fronts.
 
 The strength of the local excess in \as{chl} over fronts also depends on latitude.
-In the permanent subtropical biome (Fig.~\ref{fig:latbands-s}), the excess is only detectable north of~\ang{25}N and remains modest (\(\am{exces}<\pct{10}\)); it reaches its maximum of~\pct{10} at the beginning and end of the production season.
-In the seasonal subtropical biome (Fig.~\ref{fig:latbands-i}), the excess is also small in the southern part of the biome (south of~\ang{35}N) but strongly increases further north (between~\ang{35}N and~\ang{45}N) and decreases again going even further North (between~\ang{40}N and~\ang{45}N).
+In the permanent subtropical biome (Fig.~\ref{fig:latbands-s}), the excess is only detectable north of~\latlon{25N} and remains modest (\(\am{exces}<\pct{10}\)); it reaches its maximum of~\pct{10} at the beginning and end of the production season.
+In the seasonal subtropical biome (Fig.~\ref{fig:latbands-i}), the excess is also small in the southern part of the biome (south of~\latlon{35N}) but strongly increases further north (between~\latlon{35N} and~\latlon{45N}) and decreases again going even further North (between~\latlon{40N} and~\latlon{45N}).
 moreover, in this biome, the increase is stronger in summer (July"-August) compared to winter (December"-January).
 Finally in the subpolar biome, the magnitude of the local excess diminishes going northward.
 It tends to be stronger during winter and during the bloom, and weaker in summer.
-In fact in summer, the differences are hardly discernible when averaged over the entire biome (Fig.~\ref{fig:ts-climato}c), but there is an excess \as{chl} in the southern part of the biome~(\ang{<45}N), and a slightly deficit in the northern part of the biome~(\ang{>45}N) (Fig.~\ref{fig:latbands-n}).
+In fact in summer, the differences are hardly discernible when averaged over the entire biome (Fig.~\ref{fig:ts-climato}c), but there is an excess \as{chl} in the southern part of the biome~(\latlon{<45N}), and a slightly deficit in the northern part of the biome~(\latlon{>45N}) (Fig.~\ref{fig:latbands-n}).
 
 It ensues that the annual mean local excess in \as{chl} over fronts has a distinct latitudinal pattern (Fig.\ref{fig:recap}a).
 The strongest local increase due to fronts is located in the latitudinal band~\qtyrange{35}{45}{\degree}N, where the seasonal subtropical and subpolar biomes meet.
@@ -395,7 +395,7 @@ Therefore, there is roughly~\pct{5} more \as{chl} in the Gulf Stream region than
 \subsubsection{Bloom timing in the subpolar biome}
 
 Another strong impact of fronts is the earlier onset of the bloom over fronts in the subpolar biome (Fig.~\ref{fig:ts-climato}c).
-The spring bloom onset propagates from South to North in the biome, starting in early April at~\ang{35}N and in late June at~\ang{55}N (Fig.~\ref{fig:latbands-n}).
+The spring bloom onset propagates from South to North in the biome, starting in early April at~\latlon{35N} and in late June at~\latlon{55N} (Fig.~\ref{fig:latbands-n}).
 The bloom onsets earlier over fronts in each latitudinal band (Fig.~\ref{fig:latbands-n}).
 To quantify the lag in bloom onset day over fronts, we estimated bloom onset days for each year and within each latitudinal band, over the background and over fronts (Fig.~\ref{fig:bloom}).
 Our estimates are based on averaged statistics over Eulerian time series, assuming that the bloom evolves coherently in the background (resp.\ over fronts) within each latitudinal bands in the subpolar biome.
@@ -457,7 +457,7 @@ The only study that has statistically connected enhanced \as{chl} with the prese
 Our results thus extend those of \textcite{liu_2016} to a region with stronger biological contrasts and phenologies.
 
 A key factor determining the magnitude of the local \as{chl} response to frontal dynamics is the magnitude of the nutrient fluxes, which itself depends on the magnitude of the vertical velocities, of their depth penetration, and of the depth of the nutricline.
-The nutricline depth shows a sharp latitudinal gradient within this region, from~\qty{150}{\m} depth at~\ang{25}N to~\qty{50}{\m} at~\ang{50}N \parencite{romera-castillo_2016}.
+The nutricline depth shows a sharp latitudinal gradient within this region, from~\qty{150}{\m} depth at~\latlon{25N} to~\qty{50}{\m} at~\latlon{50N} \parencite{romera-castillo_2016}.
 This explains the maximum magnitude of the \as{chl} response at the northern edge of the subtropical gyre, where the lack of nutrients is more severely controlling phytoplankton abundance than further north, and where the nutricline is closer to the surface than further south.
 
 Moreover, vertical velocities associated with ephemeral fronts, often confined to the mixed layer, are likely to be a less efficient nutrient flux pathway to the euphotic zone from the interior than deep, dynamic, persistent fronts extending well below the mixed layer \parencite{levy_2018}.
