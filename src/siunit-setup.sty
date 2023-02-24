@@ -1,0 +1,57 @@
+\NeedsTeXFormat{LaTeX2e} %chktex 44
+\ProvidesPackage{src/siunit-setup}
+% chktex-file 1
+% chktex-file 2
+
+\RequirePackage{siunitx}
+\sisetup{
+  mode=math,
+  range-phrase=--,
+  product-units=single,
+  uncertainty-mode=separate,
+}
+
+\ExplSyntaxOn
+
+\DeclareSIUnit \mgm {\milli\gram\per\cubic\metre}
+
+\DeclareSIUnit \pixel {\text{px}}
+\DeclareSIUnit \pixels {\text{pixels}}
+\DeclareSIUnit \bits {\text{bits}}
+
+% Nice inline fraction with degree sign
+\NewDocumentCommand \resol { m m } {
+  \qty [parse-numbers=false] {\slashfrac {#1} {#2}} {\degree}
+}
+
+% Shortcut for percent value
+\NewDocumentCommand \pct { o m } {
+  \qty [#1] {#2} {\percent}
+}
+
+% Shortcut for temperature value
+\NewDocumentCommand \tC { o m } {
+  \qty [#1] {#2} {\degreeCelsius}
+}
+
+
+%%% Lat/Lon commands
+% Command for typesetting latitude or longitude value
+% Input should be a number to send to \ang followed by one of NSWE.
+\msg_new:nnn {ch-thesis} {latlon-invalid-end} {\\latlon\ argument\ should\ end\ with\ [NSWE]\ (found\ `#1')}
+\NewDocumentCommand \latlon { o m } {
+  \tl_set:Nx \l_tmpa_tl {\tl_item:nn{#2}{-1}}
+  \tl_if_in:noTF {NSWE} {\l_tmpa_tl} {}
+  {\msg_warning:nnx {ch-thesis} {latlon-invalid-end} {\l_tmpa_tl}}
+  \ang [#1] { \tl_range:nnn {#2} {1} {-2} } \tl_use:N \l_tmpa_tl
+}
+
+% Typesetting a box in lat/lon range (like 16°N-32°N)
+% Argument is split by ';' then sent to \latlon
+\NewDocumentCommand \latlonRange { o m } {
+  \seq_set_split:Nnn \l_tmpa_seq {;} {#2}
+  \seq_set_map:NNn \l_tmpb_seq \l_tmpa_seq { \latlon [#1] {##1} }
+  \seq_use:Nn \l_tmpb_seq {--}
+}
+
+\ExplSyntaxOff

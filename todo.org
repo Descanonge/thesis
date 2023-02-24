@@ -12,35 +12,52 @@ donner les dates (envoi manuscript, envoi rapport)
 +doodle pour la date de soutenance
 ** Liste
 *** Daniele Iudicone
-Affiliation ?
+Departement of Integrated Marine Ecology, Stazione Zoologica Anton Dohrn, Napoli (SZN)
+mail:daniele.iudicone@szn.it
+orcid:0000-0002-7473-394X
+site:https://www.szn.it/index.php/it/personale/staff/103-iudicone-daniele/765-iudicone-daniele
 Équivalence ?
 Rapporteur ?
 *** Fabrizio d'Ortenzio
-LOV
-Dr CNRS
-Rapporteur ?
+Laboratoire Océangraphique de Villefranche (LOV)
+mail:fabrizio.dortenzio@imev-mer.fr
+site:https://lov.imev-mer.fr/web/member/fabrizio-dortenzio/
+DR CNRS, Hdr
+Rapporteur (je sais pas si LOV est considéré comme SU) ?
 *** Aida Alvera-Azcárate
-Affiliation ?
-Équivalence ?
-Rapportrice ?
+Université de Liège, Faculté des Sciences:
+- Département d'Astrophysique, Géophysique et Océanographie (AGO)
+- GeoHydrodynamics and Environment Research (GHER)
+- Freshwater and OCeanic science Unit of ReSearch (FOCUS)
+mail:a.alvera@uliege.be
+site:https://www.uliege.be/cms/c_9054334/en/directory?uid=U205291
+orcid:0000-0002-0484-4791
+Équivalence ? Rapportrice ?
 *** Marie Isabelle Pujol
-CLS
-Équivalence ?
-Rapportrice ?
+CLS, Environment and Climate Monitoring
 *** Sakina-Dorothée Ayata
-LOCEAN
+LOCEAN/IPSL
 Maîtresse de conférences HDR
-Rapportrice X
-*** Lars Stemmer
-Affiliation
-Équivalence ?
+*** Lars Stemmann
+Professeur Sorbonne Université, LOV
 Président du jury ?
+mail:lars.stemmann@imev-mer.fr
+site:https://lov.imev-mer.fr/web/member/lars-stemmann/
+orcid:0000-0001-8935-4531
 *** Hubert Loisel
-LOG ?
+Université du Littoral Côte d'Opale (ULCO)
+Laboratoire d'Océanologie et de Géosciences (LOG)
+site:https://www.researchgate.net/profile/Hubert-Loisel
+mail:hubert.loisel@univ-littoral.fr
 Équivalence ?
 Rapporteur ?
 *** Roy El Hourany
-LOG ?
+ULCO - LOG
+site:https://www.researchgate.net/profile/Roy-El-Hourany
+mail:roy.elhourany@locean.ipsl.fr
+mail:roy.elhourany@univ-littoral.fr ?
+orcid:0000-0002-6454-1645
+Chercheur junior CNRS
 Maître de conférences ?
 
 * Administratif
@@ -99,7 +116,7 @@ le truc~T de longueur 2~ou plus.
 
 *** (cross-)references
 refname~\ref,
-avant une ref ou une citation, seulement si entre parenthèses:
+avant une ref ou une citation, seulement si entre parenthèses / pas dans le flow de la phrase:
 On voit tel résultat~(\cite{whatev_2000}).
 On voit tel résultat~(\cref{fig:whatev}).
 Mais: On voit sur la \crefname{fig:whatev}.
@@ -126,6 +143,10 @@ est égal à~2, moins que~x, pour tout~i.
 *** Quand des cas sont énumérés
 Sont graphés la sst~(a) et la chl~(b).
 Ces cas sont (1)~isolés, (2)~rares.
+*** Dans les explications de figures
+quand on fait référence à qq chose sur la figure
+par exemple: Est tracé la température seuil~(trait rouge).
+Ça évite d'avoir un orphelin loin de sa ref.
 
 ** Énumérations
 Préférer comme une phrase, avec des virgules (ou point-virgules), et un point final.
@@ -147,6 +168,12 @@ Double espaces (ceux là normalement c'est pas grave)
 
 Espaces avant/après énumérations
 \s-?([a-z])\s-?
+
+Espaces avant commandes de cross-ref
+\s-[(]?\\\(cref\|Cref|ref\)
+
+Espaces avant inline maths
+\s-[(]?\\(
 
 Tirets normaux
 [[[[:alpha:]]]]-[[[[:alpha:]]]]

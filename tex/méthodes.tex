@@ -183,7 +183,7 @@ Sachant que les produits de composition du phytoplancton dont nous disposions (n
 
 Nous utilisons les données de bathymétrie ETOPO1\footfullcite{etopo1}, fournies par \ab{noaa}.
 Les données sont distribuées sur une grille plate"-carrée à une résolution d'une minute d'arc~(\resol{1}{60}), soit trois fois trop pour nous.
-Nous sous"-échantillonnons les données en appliquant une moyenne à chaque groupe de 3\texttimes3 pixels, puis en interpolant le résultat sur la même grille que le reste des données de la même manière que pour la \ab{sst}.
+Nous sous"-échantillonnons les données en appliquant une moyenne à chaque groupe de 3\texttimes3~pixels, puis en interpolant le résultat sur la même grille que le reste des données de la même manière que pour la \ab{sst}.
 
 \begin{figure}
   \centering
@@ -207,7 +207,7 @@ Dans cette section, nous décrivons plus précisement la méthode utilisée pour
 
 \subsection{Séparation des biomes}
 
-La séparation entre les deux biomes subtropicaux est faite par une limite zonale fixée à~\latlon{32N} (trait noir pointillé \cref{fig:regions}).
+La séparation entre les deux biomes subtropicaux est faite par une limite zonale fixée à~\latlon{32N}~(trait noir pointillé~\cref{fig:regions}).
 Cette limite correspond approximativement à un saut visible des valeurs de \ab{chl} à cette latitude (isocontour~\qty{0.1}{\mgm} de la moyenne annuelle de \ab{chl}) qui ne varie que peu au cours de l'année.
 Cette séparation est en accord avec la limite entre les biomes tels que délimités par \textcite{sarmiento_2004}~(\cref{fig:sarmiento}).
 
@@ -215,9 +215,9 @@ Cette séparation est en accord avec la limite entre les biomes tels que délimi
   \centering
   \includegraphics[width=1\textwidth]{régions.pdf}
   \captionT{Résultat de la séparation de la zone d'étude en biomes}{%
-    La zone est découpée en trois biomes: le biome \al{st-perm}~(PSB) au sud de du trait pointillé à~\latlon{32N}; le biome \al{st-sais}~(SSB) entre~\latlon{32N} et la limite~(sinueuse) nord du Gulf Stream dénotée par le contour noir; et le biome \al{sp}~(SP) au nord du Gulf Stream.
+    La zone est découpée en trois biomes: le biome \al{st-perm}~(PSB) au sud de du trait pointillé à~\latlon{32N}; le biome \al{st-sais}~(SSB) entre~\latlon{32N} et la limite (sinueuse) nord du Gulf Stream dénotée par le contour noir; et le biome \al{sp}~(SP) au nord du Gulf Stream.
 
-    Clichés de \ab{sst}~(a) et \ab{chl}~(b) au \frenchdate{2007}{04}{22}, et les distributions de \ab{sst}~(c) et {d}~\ab{chl} pour chacuns des biomes, le même jour (\al{sp}: bleu, \al{st-sais}: jaune, \al{st-perm}: rouge).
+    Clichés de \ab{sst}~(a) et \ab{chl}~(b) au \frenchdate{2007}{04}{22}, et les distributions de \ab{sst}~(c) et {d}~\ab{chl} pour chacuns des biomes, le même jour (\al{sp}:~bleu, \al{st-sais}:~jaune, \al{st-perm}:~rouge).
     La ligne noire verticale sur~(c) marque la température détectée comme seuil de la limite nord du Gulf Stream.
     Les axes des abscisses des distributions correspondent aux barres de couleurs.
     La ligne rouge suit l'isobath~\qty{1500}{\m}. Le plateau continental~(\qty{<1500}{\m}) n'est pas considéré et est masqué.
@@ -233,26 +233,26 @@ Cette séparation est en accord avec la limite entre les biomes tels que délimi
     Les biomes de notre zone d'étude correspondent dans la nomenclature de cet article à: \al{sp}~(``SP'', jaune); \al{st-sais}~(``ST-SS'', bleu); et \al{st-perm}~(``ST-PS'', rose).
 
     \foreignblockquote{english}{Biome classification scheme calculated using mixed layer depths obtained from observed density and from upwelling calculated from the wind stress divergence using observed winds.
-    The equatorially influenced biome covers the area between~\latlon{5N} and~\latlon{5N}, and is colored a dirty light blue in areas where upwelling occurs (labeled~``Eq-U'' on the color bar) and dark pink in areas where downwelling occurs (labeled~``Eq-D'').
-    Outside of this band, the region labeled~``Ice''~(red) is the marginal sea ice biome, the region labeled~``SP''~(yellow) is the subpolar biome, the region labeled~``LL-U''~(light blue) is the low-latitude upwelling biome , the region labeled~``ST-SS''~(dark blue) is the seasonally mixed subtropical gyre biome, and the region labeled~``ST-PS''~(pink) is the permanently stratified subtropical gyre biome.}
+    The equatorially influenced biome covers the area between \latlon{5S}~and~\latlon{5N}, and is colored a dirty light blue in areas where upwelling occurs (labeled~``Eq-U'' on the color bar) and dark pink in areas where downwelling occurs (labeled~``Eq-D'').
+    Outside of this band, the region labeled ``Ice''~(red) is the marginal sea ice biome, the region labeled ``SP''~(yellow) is the subpolar biome, the region labeled ``LL-U''~(light blue) is the low-latitude upwelling biome , the region labeled ``ST-SS''~(dark blue) is the seasonally mixed subtropical gyre biome, and the region labeled ``ST-PS''~(pink) is the permanently stratified subtropical gyre biome.}
   }
 \label{fig:sarmiento}
 \end{figure}
 
 On sépare ensuite le reste de la région au nord de~\latlon{32N} en prenant comme limite le front nord du jet du Gulf Stream (le \engquote{North wall}).
 Cette délimitation est donc dynamique et déterminée chaque jour à partir de l'image de température.
-En effet, il apparaît que la distribution de la \ab{sst} (au nord de~\latlon{32N}) suffit à repérer de manière fiable et robuste une température seuil permettant de séparer les deux biomes (contour sinueux noir plein \cref{fig:regions}).
+En effet, il apparaît que la distribution de la \ab{sst} (au nord de~\latlon{32N}) suffit à repérer de manière fiable et robuste une température seuil permettant de séparer les deux biomes (contour sinueux noir plein~\cref{fig:regions}).
 Sur cette distribution apparaît clairement un pic dans des valeurs élevées correspondant au eaux du jet.
 Il est aisé de repérer le pic et l'ajuster par une gaussienne.
-À partir de là, la température seuil entre les biomes est prise comme la base froide de ce pic, \ab{cad} plus précisemment en soustrayant à la température moyenne du pic deux fois son écart"-type (\cref{fig:temp-seuil-distrib}).
+À partir de là, la température seuil entre les biomes est prise comme la base froide de ce pic, \ab{cad} plus précisemment en soustrayant à la température moyenne du pic deux fois son écart"-type~(\cref{fig:temp-seuil-distrib}).
 La valeur journalière de ce seuil est filtrée temporellement par un filtre médian glissant (avec une fenêtre de largeur 8~jours) afin d'éviter d'éventuelles anomalies de détection.
 
 \begin{figure}
   \centering
   \includegraphics[width=0.7\textwidth]{zone_separation.pdf}
   \captionT{Délimitation des biomes subtropical permanent et subpolaire par température seuil}{%
-    Sur la distribution des valeurs en température au nord de~\latlon{32N} (en noir) pour le \frenchdate{2007}{04}{22}, le pic \encadra{ici autour de~\tC{18}} correspond aux eaux du jet. Il est ajusté par un fit gaussien (en rouge) dans un intervalle de~\tC{5} de large.
-    La température de seuil (en bleu) entre les deux biomes est définie comme la température moyenne du pic (trait fin pointillé) moins deux fois son écart"-type.
+    Sur la distribution des valeurs en température au nord de~\latlon{32N}~(en noir) pour le \frenchdate{2007}{04}{22}, le pic \encadra{ici autour de~\tC{18}} correspond aux eaux du jet. Il est ajusté par un fit gaussien (en rouge) dans un intervalle de~\tC{5} de large.
+    La température de seuil~(en bleu) entre les deux biomes est définie comme la température moyenne du pic~(trait fin pointillé) moins deux fois son écart"-type.
     Cela correspond à la limite nord du Gulf Stream.
   }
   \label{fig:temp-seuil-distrib}
@@ -262,11 +262,11 @@ La valeur journalière de ce seuil est filtrée temporellement par un filtre mé
   \includegraphics[width=\textwidth]{separation_evol_month.pdf}
   \captionT{Variation temporelle de la délimitation entre biomes}{%
     La position limite entre les biomes \al{st-sais} et \al{sp} n'évolue que peu au cours de l'année vis à vis des larges méandres du Gulf Stream.
-    Néanmoins en été, la limite est moins marquée après le détachement du jet (\latlonRange{75W; 70W}).
+    Néanmoins en été, la limite est moins marquée après le détachement du jet~(\latlonRange{75W; 70W}).
 
-    L'isotherme séparant les deux biomes est tracé le 15 de chaque mois pour l'année 2007.
+    L'isotherme séparant les deux biomes est tracé le 15~de chaque mois pour l'année~2007.
     La couleur de chaque contour correspond au jour de l'année comme dénoté par la barre de couleur dans l'inset.
-    Dans l'inset est tracé la température de seuil au long de l'année 2007. Les cercles marquent les jours et températures utilisées pour chaque contour.
+    Dans l'inset est tracé la température de seuil au long de l'année~2007. Les cercles marquent les jours et températures utilisées pour chaque contour.
   }
   \label{fig:var-delim}
 \end{figure}
@@ -274,28 +274,28 @@ La valeur journalière de ce seuil est filtrée temporellement par un filtre mé
 \subsection{Exclusion du plateau continental}
 
 Par ailleurs, il est également nécessaire d'éviter de considérer les pixels trop près des côtes dans notre étude.
-De manière générale la \ab{chl} y suit un régime côtier, visible par des valeurs très élevées (\qty{>10}{\mgm}).
+De manière générale la \ab{chl} y suit un régime côtier, visible par des valeurs très élevées~(\qty{>10}{\mgm}).
 Ensuite, nous cherchons à éviter deux zones qui ne correspondent pas aux biomes définis plus haut.
-Premièrement, le jet du Gulf Stream prend forme au sud de notre zone, le long de la côte de Floride. On trouve donc sur le plateau continental à ces latitudes (\latlon{\approx28N}) de forts courants qu'on ne retrouve pas dans le reste du biome \ab{st-perm}.
-Deuxièmement, plus au nord dans l'anse Nord-Est Américaine de l'Atlantique (\engquote{Mid-Atlantic Bight}), on trouve une séparation nette entre les eaux au nord du Gulf Stream (la \engquote{slope sea}), et les eaux sur le plateau continental.
+Premièrement, le jet du Gulf Stream prend forme au sud de notre zone, le long de la côte de Floride. On trouve donc sur le plateau continental à ces latitudes~(\latlon{\approx28N}) de forts courants qu'on ne retrouve pas dans le reste du biome \ab{st-perm}.
+Deuxièmement, plus au nord dans l'anse Nord-Est Américaine de l'Atlantique~(\engquote{Mid"-Atlantic Bight}), on trouve une séparation nette entre les eaux au nord du Gulf Stream (la \engquote{slope sea}), et les eaux sur le plateau continental.
 Un jet marque cette séparation le long du talus continental~(\cite{flagg_2006}).
 
 Dans les deux cas, imposer une limite haute à la bathymétrie sur notre région d'étude permet de supprimer ces zones problématiques.
 Ainsi, pour calculer nos résultats, nous ne considérons que les pixels où la profondeur n'excède pas~\qty{1500}{\m}.
-Nous utilisons pour cela les données de bathymétrie \dataname{etopo1} (voir~\datasect{etopo1}).
+Nous utilisons pour cela les données de bathymétrie \dataname{etopo1}~(voir \datasect{etopo1}).
 
 \section{Heterogeneity Index (HI)}
 \label{sec:HI}
 
-Comme précisé en introduction, pour quantifier l'effets des fronts sur le phytoplancton il est nécessaire de détecter les fronts, \al{cad} classer chaque pixel comme appartenant à un front ou non (\ab{cad} à l'arrière"-plan ou \guil{background}).
-La méthode retenue ici suit celle présentée par \textcite{liu_2016} ---~qui par son utilisation d'une fenêtre glissante s'apparente elle même à celle de \textcite{cayula_1992}.
+Comme précisé en introduction, pour quantifier l'effets des fronts sur le phytoplancton il est nécessaire de détecter les fronts, \al{cad} classer chaque pixel comme appartenant à un front ou non (\ab{cad} à l'arrière"-plan ou au \engquote{background}).
+La méthode retenue ici suit celle présentée par \textcite{liu_2016} \encadra*{qui par son utilisation d'une fenêtre glissante s'apparente elle même à celle de \textcite{cayula_1992}}.
 Cette section définit cette méthode et notre implémentation, tout en indiquant les modifications que nous y avons apportées.
 
 \subsection{Définition et implémentation}
 \label{sec:HI-definition}
 
 La méthode de \textcite{liu_2016} consiste à quantifier plusieurs quantités statistiques du champ de \ab{sst} dont les fortes valeurs sont associées à la présence de fronts et autres structures de fine échelle.
-Ces quantités sont la bimodalité, l'écart"-type (qui reflète le gradient du champ), et le coefficient d'asymétrie~(\guil{skewness}).
+Ces quantités sont la bimodalité, l'écart"-type (qui reflète le gradient du champ), et le coefficient d'asymétrie~(\engquote{skewness}).
 Ces composantes sont ensuite réunies dans un seul index qui ainsi reflète l'hétérogénéité du champ de \ab{sst}, et donc baptisé \af{hi}.
 
 Pour limiter la taille des structures détectées, on limite le calcul de ces composantes sur une fenêtre de taille appropriée, \ab{cad} pour nous de l'ordre de grandeur d'une dizaine de kilomètres.
@@ -310,13 +310,13 @@ Néanmoins une fenêtre trop petite limite le nombre de pixels disponibles pour 
 Un compromis est à définir.
 
 Nous définissons maintenant plus en détails le calcul des composantes du \ab{hi}.
-Pour chaque position de la fenêtre, on s'intéresse aux \(N\) valeurs de \ab{sst} \(s_{i}\) valides (\ab{cad} des provenant des pixels sans nuages).
+Pour chaque position de la fenêtre, on s'intéresse aux~\(N\) valeurs de \ab{sst}~\(s_{i}\) valides (\ab{cad} des provenant des pixels sans nuages).
 
 On commence par l'écart"-type~\ab{std}, calculé simplement par:
 \begin{equation}
   \am{std} = \sqrt{\frac{1}{N-1} \sum_i \paren{s_i - \moy{s}}^2},
 \end{equation}
-avec \(\moy{s}\) la moyenne des valeurs de température.
+avec~\(\moy{s}\) la moyenne des valeurs de température.
 
 Ensuite, le coefficient d'asymétrie~\ab{skew}, est défini comme la valeur absolue du moment d'ordre trois d'une variable centrée réduite, et qui se calcule donc par:
 \begin{equation}
@@ -331,26 +331,26 @@ Cela présuppose que lorsque les températures sont uni"-modales (\ab{cad} quand
   \centering
   \includegraphics[width=0.6\textwidth]{bimodality.pdf}
   \captionT{Illustration du calcul de la bimodalité}{
-    On calcule la bimodalité comme la norme de la différence entre l'histogramme des températures dans la fenêtre (trait noir) et une distribution gaussienne de même moyenne et de même écart"-type (trait rouge).
+    On calcule la bimodalité comme la norme de la différence entre l'histogramme des températures dans la fenêtre~(trait noir) et une distribution gaussienne de même moyenne et de même écart"-type~(trait rouge).
   }
   \label{fig:bimodality}
 \end{figure}
 
-De manière plus précise on commence par calculer l'histogramme~\(h_i\) des valeurs de \ab{sst} dans la fenêtre, en utilisant des intervalles de largeur fixe de~\qty{0.1}{\dC} et compris entre les valeurs minimales et maximales dans la fênetre.
-Les données de \ab{sst} étant stockées compressées par \engquote{linear packing}\footnotemark\ avec un facteur d'échelle de~\qty{0.01}{\dC}, nos intervalles ont une largeur précisement égale à dix fois l'intervalle de discrétisation des valeurs de température.
-Pour éviter que trop de valeurs tombent sur les bords des intervalles et que l'histogramme soit pollué par des erreurs numériques, on décale les intervalles de~\qty[parse-numbers=false]{0,01/2}{\dC}.
-Par ailleurs, le nombre d'intervalles étant dépendant de la largeur de la distribution de \ab{sst}, dans les cas où il est inférieur ou égal à quatre, la bimodalité est automatiquement assignée nulle (\(B=0\)).
+De manière plus précise on commence par calculer l'histogramme~\(h_i\) des valeurs de \ab{sst} dans la fenêtre, en utilisant des intervalles de largeur fixe de~\tC{0.1} et compris entre les valeurs minimales et maximales dans la fênetre.
+Les données de \ab{sst} étant stockées compressées par \engquote{linear packing}\footnotemark\ avec un facteur d'échelle de~\tC{0.01}, nos intervalles ont une largeur précisement égale à dix fois l'intervalle de discrétisation des valeurs de température.
+Pour éviter que trop de valeurs tombent sur les bords des intervalles et que l'histogramme soit pollué par des erreurs numériques, on décale les intervalles de~\tC[parse-numbers=false]{0,01/2}.
+Par ailleurs, le nombre d'intervalles étant dépendant de la largeur de la distribution de \ab{sst}, dans les cas où il est inférieur ou égal à quatre, la bimodalité est automatiquement assignée nulle~(\(B=0\)).
 \footnotetext{%
   Cette technique de compression avec pertes \encadra{utilisée notamment par l'outil \citesoft{nco}\footnotemark{}} consiste à discrétiser des valeurs flottantes sur des entiers après une transformation linéaire.
-  Par exemple, en prenant pour stockage des entiers non"-signés sur 16~bits~(\texttt{NC\_USHORT}) on peut évidement représenter des valeurs entières entre 0 et \(2^{16}-1 =\num{65535}\); mais en multipliant ces valeurs entières par un facteur de, disons,~\num{0.005} on peut représenter des valeurs entre 0 et~\num{327.675}.
-  On a gagné en volume par rapport à un stockage typique de~32 ou~64~bits, mais en perdant évidemment en précision puisque nos valeurs sont maintenant discrétisées avec un intervalle de~\num{0.005}.}
+  Par exemple, en prenant pour stockage des entiers non"-signés sur \qty{16}{\bits}~(\texttt{NC\_USHORT}) on peut évidement représenter des valeurs entières entre 0 et~\(2^{16}-1 = \num{65535}\); mais en multipliant ces valeurs entières par un facteur de, disons,~\num{0.005} on peut représenter des valeurs entre 0 et~\num{327.675}.
+  On a gagné en volume par rapport à un stockage typique de 32 ou~\qty{64}{\bits}, mais en perdant évidemment en précision puisque nos valeurs sont maintenant discrétisées avec un intervalle de~\num{0.005}.}
 \footnotetext{voir le guide utilisateur: \glsurl{nco-packed}}
 
 Par ailleurs on définit une distribution gaussienne~\(g_i\) sur les même intervalles en utilisant les statistiques calculées précédemment:
 \begin{equation}
   g_i = \frac{1}{\sqrt{2\pi\am{std}}} \exp\paren{-\frac{\paren{x_i-\moy{s}}^2}{2\am{std}^2}},
 \end{equation}
-pour ensuite calculer la norme \(\mathbb{L}^2\) entre les deux distributions:
+pour ensuite calculer la norme~\(\mathbb{L}^2\) entre les deux distributions:
 \begin{equation}
   \begin{split}
   \am{bimod} & = \norme[2]{h - g}\\
@@ -406,14 +406,14 @@ On peut donc enfin calculer le \ab{hi} avec:
 
 On obtient donc finalement un indice capable de quantifier l'hétérogénéité du champ de température à une échelle donnée, ce qui nous permet d'identifier des structures fines dans ce même champ~(\cref{fig:exemple-composantes,fig:exemples-fronts}).
 Il reste toutefois à définir une méthode pour classifier chaque pixel comme appartenant, ou non, à un front.
-Nous allons même plus loin et séparons les pixels en trois catégories: les pixels appartenant à un front fort (\(\am{hi} > 5\)), à un front faible (\(5 < \am{hi} < 10\)), ou à aucun front (\(\am{hi} < 5\), aussi dénotés \engquote{background}).
+Nous allons même plus loin et séparons les pixels en trois catégories: les pixels appartenant à un front fort~(\(\am{hi} > 5\)), à un front faible~(\(5 < \am{hi} < 10\)), ou à aucun front~(\(\am{hi} < 5\), aussi dénotés \engquote{background}).
 La pertinence des valeurs de seuils entre les catégories est discutée dans la suite du manuscript.
 
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{exemple_composantes.pdf}
   \captionT{Exemples de construction du \glsentryshort{hi} à partir de ses composantes}{%
-    Champ de \ab{sst}~(a) pour le~\frenchdate{2007}{04}{07}, à partir de laquelle on calcule les composantes du \ab{hi}: l'écart"-type~(c), l'asymétrie~(e), et la bimodalité~(f) (ici toutes représentées normalisées par leur variance).
+    Champ de \ab{sst}~(a) pour le \frenchdate{2007}{04}{07}, à partir de laquelle on calcule les composantes du \ab{hi}: l'écart"-type~(c), l'asymétrie~(e), et la bimodalité~(f) (ici toutes représentées normalisées par leur variance).
     Le \ab{hi}~(b) est ensuite obtenu par la somme de ces composantes normalisées, avant d'être normalisé lui aussi afin que~\pct{95} de ses valeurs soient inférieures à~\num{9.5}.
     Le \ab{hi} permet de détecter les fronts de \ab{sst}, ici deux valeurs du \ab{hi} normalisé sont contourées, à 5~(trait plein) et 10~(trait pointillé).
   }
@@ -453,14 +453,14 @@ On cherche ensuite à extraire des informations de ces ensembles de pixels ainsi
 Le nombre total de pixels étant conséquent, et parce que l'établissement des ensembles est compliqué et coûteux, les ensembles de pixels sont chacun réduits à des histogrammes de variables d'intérêt (\ab{sst}, \ab{chl}, ou les \abp{pft}).
 Cela diminue les étapes de calcul ainsi que la quantité de données à traiter pour obtenir un diagnostic.
 
-Prenons l'exemple d'une seule image. Pour notre région d'étude, cela représente~\numproduct{1000 x 1000} pixels.
+Prenons l'exemple d'une seule image. Pour notre région d'étude, cela représente \qtyproduct{1000 x 1000}{\pixels}.
 On cherche à extraire un simple diagnostic, par exemple la moyenne de la \ab{chl} dans, et hors des fronts pour chacun des biomes.
 Il nous faut donc séparer la région en biomes, ce qui nécessite rappelons-le de discriminer les pixels par leur température~(\cref{sec:delimitations-regions}).
 Il faut également discriminer les pixels par leur valeur de \ab{hi} pour séparer fronts et \eng{background}.
-On peut maintenant calculer nos statistiques sur chacun des ensembles de pixels constitués, ce qui représente ici de faire 6 calculs (3 biomes \texttimes\ fronts/\eng{backgound}) sur environ~\num{e6} pixels.
-Mais une fois nos histogrammes calculés, un diagnostic ne requiert que de regarder le ou les histogrammes appropriés, et ce qui représente beaucoup moins d'efforts ---~et de données comme nous allons le voir.
+On peut maintenant calculer nos statistiques sur chacun des ensembles de pixels constitués, ce qui représente ici de faire 6~calculs (3~biomes~\texttimes\ fronts/\eng{backgound}) sur environ~\qty{e6}{\pixels}.
+Mais une fois nos histogrammes calculés, un diagnostic ne requiert que de regarder le ou les histogrammes appropriés, et ce qui représente beaucoup moins d'efforts \encadra*{et de données comme nous allons le voir}.
 
-Les histogrammes peuvent être rendus représentatifs sans pour autant utiliser un nombre prohibitif d'intervalles, d'autant plus que les données (\ab{chl} et \ab{sst}) sont déjà stockées compressées avec pertes. Pour la température par exemple, 450 intervalles suffisent à couvrir toutes les valeurs (de~\qty{-5}{\dC} à~\qty{40}{\dC}), avec une largeur d'intervalle de~\qty{0.1}{\dC} équivalente à l'incertitude sur la mesure.
+Les histogrammes peuvent être rendus représentatifs sans pour autant utiliser un nombre prohibitif d'intervalles, d'autant plus que les données (\ab{chl} et \ab{sst}) sont déjà stockées compressées avec pertes. Pour la température par exemple, 450~intervalles suffisent à couvrir toutes les valeurs (de \tC{-5} à~\tC{40}), avec une largeur d'intervalle de~\tC{0.1} équivalente à l'incertitude sur la mesure.
 Les intervalles pour la \ab{chl} et les autres variables biologiques sont pris de largeur logarithmique afin de couvrir les plusieurs ordres de grandeur que peuvent prendre leurs valeurs.
 
 Les histogrammes présentent également l'avantage de pouvoir facilement être combinés entre eux.
@@ -468,26 +468,26 @@ En effet, tous les histogrammes calculés sont stockés non"-normalisés, c'est-
 Ce procédé est notamment utilisé pour calculer des diagnostics sur des périodes de temps autres que journalières, sans avoir besoin de refaire un calcul coûteux impliquant les pixels.
 
 Dans la suite on détaille le processus de normalisation des histogrammes.
-On considère un histogramme qui compte~\(h_i\) valeurs d'une variable quelconque~\(x\), pour le i\ieme{} intervalle \(\left[x_i; x_{i+1} \right]\).
+On considère un histogramme qui compte~\(h_i\) valeurs d'une variable quelconque~\(x\), pour le i\ieme{}~intervalle~\(\left[x_i; x_{i+1} \right]\).
 
-Pour un histogramme donné (\as{par-ex} pour une région à une date et un type de front donné), on extrait facilement le nombre de pixels total
+Pour un histogramme donné (\as{par-ex} pour une région à une date et un type de front donné), on extrait facilement le nombre de pixels total:
 \begin{equation}
   N = \sum_i h_i,
 \end{equation}
-ou une approximation de la valeur moyenne
+ou une approximation de la valeur moyenne:
 \begin{equation}
   \moy{x} = \frac{\sum_i h_i x_i} {N}.
-\end{equation} % ceci est un test
+\end{equation}
 
 Pour d'autres valeurs à extraire il est nécessaire de normaliser les histogrammes afin d'obtenir une densité de probabilité. On prendra soin de considérer les tailles des intervalles dans les calculs.
-La largeur des intervalles est \(w_i = x_{i+1}-x_i\). On transforme le nombre de points en probabilité par unité de valeur \(p_i = h_i / w_i \), avant de le normaliser de sorte à obtenir une intégrale égale à 1:
+La largeur des intervalles est~\(w_i = x_{i+1}-x_i\). On transforme le nombre de points en probabilité par unité de valeur~\(p_i = h_i / w_i \), avant de le normaliser de sorte à obtenir une intégrale égale à 1:
 \begin{equation}
   f_i = \frac{p_i} {\sum_j p_j w_j},
 \end{equation}
-pour ainsi obtenir une approximation de la densité de probabilité \(f\).
+pour ainsi obtenir une approximation de la densité de probabilité~\(f\).
 
-On peut extraire de cette distribution notamment la médiane, ainsi que des percentiles divers en trouvant la valeur de \(x\) pour laquelle la somme cumulée de la densité de probabilité est égale au percentile recherché (0.5 dans le cas de la médiane).
-On délègue ce travail au paquet SciPy dont l'objet \glshref{rv_histogram} permet d'effectuer ces calculs de manière triviale.
+On peut extraire de cette distribution notamment la médiane, ainsi que des percentiles divers en trouvant la valeur de~\(x\) pour laquelle la somme cumulée de la densité de probabilité est égale au percentile recherché (\num{0.5} dans le cas de la médiane).
+On délègue ce travail au paquet SciPy dont l'objet~\glshref{rv_histogram} permet d'effectuer ces calculs de manière triviale.
 
 Il est à noter que l'interprétation de certaines métriques n'ont de sens que si la distribution de la variable concernée est convenable (uni"-modale \ab{par-ex}).
 Cette vérification est reportée dans la \cref{sec:complements-chl},~\cref*{chp:res-chl}.
@@ -496,16 +496,16 @@ Cette vérification est reportée dans la \cref{sec:complements-chl},~\cref*{chp
 \label{sec:extraction-surplus-lag}
 
 Afin de comparer les valeurs de diverse variables à l'intérieur et à l'extérieur des fronts, nous définissons deux métriques.
-La première est l'excès~\ab{exces} de \ab{chl} (\guil{excess} dans l'article \cref{sec:article-bg}, \cref*{chp:res-chl}), qui compare localement les valeurs dans les fronts et le background. On le définit simplement comme la différence relative entre la médiane de \ab{chl} dans et hors des fronts:
+La première est l'excès~\ab{exces} de \ab{chl} (\engquote{excess} dans l'article \cref{sec:article-bg}, \cref*{chp:res-chl}), qui compare localement les valeurs dans les fronts et le background. On le définit simplement comme la différence relative entre la médiane de \ab{chl} dans et hors des fronts:
 \begin{equation}
   \am{exces} = \frac{\med{\am{chl}}_\frt - \med{\am{chl}}_\bkg}
   {\med{\am{chl}}_\bkg} .
 \end{equation}
-Le calcul est fait pour les fronts faibles et forts de la même manière, le background désignant toujours les pixels de \ab{hi} faible (\(\am{hi} < 5\)).
+Le calcul est fait pour les fronts faibles et forts de la même manière, le background désignant toujours les pixels de \ab{hi} faible~(\(\am{hi} < 5\)).
 L'excès est calculé dans des bandes de latitudes larges de~\ang{5}, afin de minimiser l'influence des gradients de grande échelle.
 
 Cette métrique ne tient compte que de la distribution des valeurs de \ab{chl}. Elle ignore la proportion de fronts dans une zone donnée, et ne représente pas la quantité totale de \ab{chl} présente dans un biome.
-On définit donc une deuxième métrique, le surplus~\ab{surplus} de \ab{chl} dans tout un biome (\guil{biome surplus} dans l'article \cref{sec:article-bg}, \cref*{chp:res-chl}) comme la différence relative entre la moyenne de \ab{chl} dans tout le biome et la moyenne dans le background:
+On définit donc une deuxième métrique, le surplus~\ab{surplus} de \ab{chl} dans tout un biome (\enquote{biome surplus} dans l'article \cref{sec:article-bg}, \cref*{chp:res-chl}) comme la différence relative entre la moyenne de \ab{chl} dans tout le biome et la moyenne dans le background:
 \begin{equation}
   \am{surplus} = \frac{\moy{\am{chl}}_\tot - \moy{\am{chl}}_\bkg}
   {\moy{\am{chl}}_\bkg} .
