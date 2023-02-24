@@ -25,19 +25,18 @@ ScaleAgain = 0.96
 \addto\extrasfrench{\sisetup{locale = FR}}
 
 % Insérer du texte anglais, sans et avec guillements
-\newcommand*\eng[1]{\foreignlanguage{english}{#1}}
-\newcommand*\engquote[1]{\foreignquote{english}{#1}}
+\NewDocumentCommand\eng{ m }{\foreignlanguage{english}{#1}}
+\NewDocumentCommand\engquote{ m }{\foreignquote{english}{#1}}
 
 % Guillements à la française ou à l'anglaise (*).
-\NewDocumentCommand\guil{ s m }{%
+\NewDocumentCommand\guil{ s +m }{%
   \IfBooleanTF{#1}%
   {\enquote*{#2}}%
   {\enquote{#2}}}
 
 % Tirets (cadratins) d'incise
-% Utiliser * si la phrase se termine par un tiret
-% (il n'est alors pas inséré)
-\NewDocumentCommand\encadra{ s m }{%
+% Utiliser * si la phrase se termine par un tiret (il n'est alors pas inséré)
+\NewDocumentCommand\encadra{ s +m }{%
   \IfBooleanTF{#1}%
   { ---~#2}%
   { ---~#2~---}}
