@@ -260,3 +260,30 @@ ScaleAgain = 0.96
 {\paragraph{#1.}}{}
 \newenvironment{articleSubBlock}[1]% {name}
 {\subparagraph{#1.}}{}
+
+
+\ExplSyntaxOn
+\newcommand \insertArticle {
+  {
+    \cs_set_eq:NN \subsection_old \subsection
+    \cs_set:Npn \subsection ##1 {
+      \subsection_old {##1}
+      \markright{[Article]\ \thesubsection\ ##1}
+    }
+
+    \selectlanguage {english}
+    \setlength \parindent {0pt}
+
+    \clearpage
+    \section {Article:\ \articleTitle}
+    \label {sec:article-bg}
+    \thispagestyle {plain}
+    \tl_set:Nn \tl_tmpa_l {[\textit{Pre-print\ Biogeosciences}\ \glsurl{preprint-bgs-doi}]}
+    \renewcommand*\ruledefootc{\tl_tmpa_l}
+    \renewcommand*\ruledofootc{\tl_tmpa_l}
+
+    \input {tex/article}
+    \clearpage
+  }
+}
+\ExplSyntaxOff
