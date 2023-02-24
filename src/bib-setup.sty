@@ -47,8 +47,7 @@
 \newcommand*\bibdataTitle{Données}
 
 % Remove small caps in family names
-\AtBeginDocument{\renewcommand*\mkbibnamefamily[1]{#1}}
-% \renewcommand*\mkbibnamefamily[1]{\bname{##1}}%
+\DefineBibliographyExtras{french}{\restorecommand\mkbibnamefamily}
 
 \savebibmacro{cite}
 \savebibmacro{textcite}
@@ -74,6 +73,7 @@
   }
   \c@maxnames\blx@maxbibnames\relax%
   \c@minnames\blx@minbibnames\relax%
+% \renewcommand*\mkbibnamefamily[1]{\bname{##1}}%
 }
 
 % Change default name format
