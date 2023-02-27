@@ -1,0 +1,10 @@
+
+$TITLE = "Ma thèse";
+
+$LONG_TITLES = 10;
+$MAX_SPLIT_DEPTH = 3;
+
+$TEXINPUTS = ".:./src//:./texbuild:";
+
+$default_language = "fr";
+$TITLES_LANGUAGE = "fr";

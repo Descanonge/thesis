@@ -16,7 +16,9 @@ LMK_FLAGS := -lualatex -interaction=batchmode -recorder -quiet
 # Always put those in the \includeonly
 INCLUDE_DEF := tex/front_page, tex/front_matter, tex/annexes_autres
 
-.PHONY: all clean $(MAIN) $(SUB_NAMES)
+export TEXINPUTS := .:src:
+
+.PHONY: all clean $(MAIN) $(SUB_NAMES) html
 
 all: $(MAIN)
 
@@ -31,6 +33,9 @@ $(SUB_NAMES):%: tex/%.tex
 $(MAIN): $(MAIN).tex
 	mkdir -p $(BUILD_DIR)/tex
 	latexmk $(LMK_FLAGS) $(AUXDIR_FLAGS) $<
+
+html: $(MAIN).tex
+	latex2html $(MAIN).tex
 
 clean:
 	rm -rf $(BUILD_DIR)
