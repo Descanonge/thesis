@@ -58,17 +58,16 @@ mail:roy.elhourany@locean.ipsl.fr
 mail:roy.elhourany@univ-littoral.fr ?
 orcid:0000-0002-6454-1645
 Chercheur junior CNRS
-Maître de conférences ?
 
 * Administratif
 ** TODO Valider l'enseignement :(
 
 * Inbox
 ** je ou nous ?
-** NewDocumentCommand
-on peut peut-être améliorer notre préambule
 ** Réanalyses -> renommer Mercator
 ** Ajouter figure comparaison Chl GlobColour / MODIS
+** Plot exemples
+numérotation (1a) -> (a1)
 
 * Recommendations de style
 ** GLS

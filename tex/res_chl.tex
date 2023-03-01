@@ -20,20 +20,68 @@ Permet de valider la méthode aussi.
 \section{Compléments}
 \label{sec:complements-chl}
 
-\begin{figure}
-  \centering
-  \captionT{Test}{Ceci est un test.}
-  \label{fig:test}
-\end{figure}
-
 \subsection{Examples de fronts}
 \label{sec:examples-fronts}
 
 Trouver des images examples de fronts.
 Comparer visuellement avec les données MODIS.
 
-Histogrammes individuels ?
+Histogrammes individuels ? ça va pas marcher
 
 Il est difficile de trouver des examples corrects.
 D'une part à cause de la grande couverture nuageuse.
 D'autre part parce que l'effet sur la Chl est difficilement visible sur des images. (effet statistique).
+
+\subsection{Sensibilité aux paramètres}
+\label{sec:sensibilite-parametres}
+
+meilleure explication des paramètres qu'on teste
+
+plots individuels (histogramme sur 20 ans ?)
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{sensibilité_hist.pdf}
+  \captionT{Sensibilité de la distribution de Chl-\emph{a} aux paramètres}{%
+    Distribution de la \as{chl} sur les 20~années de données, pour les trois régions et un ensemble de paramètres.
+    (a-b-c):~trois tailles de fênetre glissante pour le calcul du \as{hi}, et (d-e-f):~quatres jeux de coefficients de normalisations qui soit, donnent un poids statistique équilibré aux trois composantes, soit donnent 2~fois plus de poids à une des composantes.
+
+    Les distributions dans le \eng{background}~(trait pointillé) ne sont quasiment pas affectées. Les distributions dans les fronts~(\(\am{hi}>5\), trait plein) varient légèrement selon les paramètres.
+    Cela se reflète dans les valeurs médianes des distributions~(indiquées par des traits verticaux) dont l'écart"-type associé à la variation d'un paramètre est typiquement dix fois plus élevé pour les fronts~(valeur indiquée dans chacun des sous"-graphes) que le \eng{background}.
+
+    L'écart de la valeur médiane de \as{chl} dû à la variation d'un paramètre du \as{hi} ne dépasse pas~\qty{5}{\mugm}.
+  }
+  \label{fig:sensibilite-hist}
+\end{figure}
+
+tableau des coefficients ?
+
+
+% chktex-file 2 chktex-file 8
+\begin{table}
+  \centering
+  \begin{siunitText}
+  \begin{tabular}{$r ^c *{3}{^c}} \toprule
+    \multirow{2}*{Variation} & \(K^1\) & \(K^2\) & \(K^3\) & \(K^4\) \\
+     & (écart-type) & (asymétrie) & (bimodalité) & (HI) \\
+    \midrule
+    \emph{Taille fenêtre} & \\
+    \qty{20}{\km} & \num{5.1768} & \num{3.1563} & \num{4.1306} & \num{1.3890} \\
+    \rowstyle{\bfseries}
+    \qty{30}{\km} & \num{3.9401} & \num{2.7200} & \num{4.2917} & \num{1.3418} \\
+    \qty{40}{\km} & \num{3.2692} & \num{2.5031} & \num{4.3444} & \num{1.3129} \\
+    \midrule
+    \emph{Poids composantes} & \\
+    plus d'écart-type & \(\times 2\) & --- & --- & \num{1.0239} \\
+    plus d'asymétrie & --- & \(\times 2\) & --- & \num{0.9912} \\
+    plus de bimodalité & --- & --- & \(\times 2\) & \num{0.9773} \\
+    \bottomrule
+  \end{tabular}
+  \end{siunitText}
+  \caption{%
+    Coefficients de normalisation pour les différents paramètres utilisés.
+  }
+  \label{tab:coefs}
+\end{table}
+
+ref annexe (\cref{fig:ts-sensitivity})

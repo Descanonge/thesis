@@ -5,15 +5,19 @@
 
 \RequirePackage{siunitx}
 \sisetup{
-  mode=math,
+  mode=math,  % for printing stuff like \approx
   range-phrase=--,
   product-units=single,
   uncertainty-mode=separate,
+  reset-text-series=false,  % when needing to print bold (in text mode)
+  reset-text-family=false,
+  reset-text-shape=false,
 }
 
 \ExplSyntaxOn
 
 \DeclareSIUnit \mgm {\milli\gram\per\cubic\metre}
+\DeclareSIUnit \mugm {\micro\gram\per\cubic\metre}
 
 \DeclareSIUnit \pixel {\text{px}}
 \DeclareSIUnit \pixels {\text{pixels}}
@@ -32,6 +36,17 @@
 % Shortcut for temperature value
 \NewDocumentCommand \tC { o m } {
   \qty [#1] {#2} {\degreeCelsius}
+}
+
+\NewDocumentEnvironment {siunitText} {}
+{
+  \tl_set_eq:NN \l_save_number_mode_tl \l__siunitx_print_number_mode_tl
+  \tl_set_eq:NN \l_save_unit_mode_tl \l__siunitx_print_unit_mode_tl
+  \tl_set:Nn \l__siunitx_print_number_mode_tl {text}
+  \tl_set:Nn \l__siunitx_print_unit_mode_tl {text}
+}{
+  \tl_set_eq:NN \l__siunitx_print_number_mode_tl \l_save_number_mode_tl
+  \tl_set_eq:NN \l__siunitx_print_unit_mode_tl \l_save_unit_mode_tl
 }
 
 
