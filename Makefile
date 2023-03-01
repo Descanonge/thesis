@@ -18,9 +18,9 @@ INCLUDE_DEF := tex/front_page, tex/front_matter, tex/annexes_autres
 
 export TEXINPUTS := .:src:
 
-.PHONY: all clean $(MAIN) $(SUB_NAMES) html
+.PHONY: all clean $(PROJECT) $(SUB_NAMES) html checkbib
 
-all: $(MAIN)
+all: $(PROJECT)
 
 $(SUB_NAMES):%: tex/%.tex
 	mkdir -p $(BUILD_DIR)/tex
@@ -30,9 +30,11 @@ $(SUB_NAMES):%: tex/%.tex
 		$(INCLUDE_DEF), tex/$*}" \
 		$(MAIN).tex
 
-$(MAIN): $(MAIN).tex
+$(PROJECT): $(MAIN).tex
 	mkdir -p $(BUILD_DIR)/tex
-	latexmk $(LMK_FLAGS) $(AUXDIR_FLAGS) $<
+	latexmk  $(LMK_FLAGS) $(AUXDIR_FLAGS) \
+		-jobname="$(PROJECT)" \
+		$(MAIN).tex
 
 html: $(MAIN).tex
 	latex2html $(MAIN).tex
@@ -41,3 +43,6 @@ clean:
 	rm -rf $(BUILD_DIR)
 	rm -f $(MAIN).fls
 	rm -f $(foreach sf,$(SUB_NAMES),tex/$(sf).fls)
+
+checkcites:
+	checkcites -b biber $(BUILD_DIR)/$(PROJECT)
