@@ -296,7 +296,33 @@ ScaleAgain = 0.96
 
 
 \ExplSyntaxOn
-\newcommand \insertArticle {
+
+% Commands for having nice rules in list of figures
+\NewDocumentCommand {\xhrulefill} {O{}} {
+  \group_begin:
+  \me_xhrulefill:n { #1 }
+  \group_end:
+}
+
+\keys_define:nn {me/xhrule} {
+  height .dim_set:N    = \l_me_xhrule_height_dim,
+  thickness .dim_set:N = \l_me_xhrule_thickness_dim,
+  fill .skip_set:N     = \l_me_xhrule_fill_skip,
+  height .initial:n    = 0pt,
+  thickness .initial:n = 0.5pt,
+  fill .initial:n      = 0pt plus 1fill,
+}
+
+\cs_new_protected:Nn \me_xhrulefill:n {
+  \keys_set:nn {me/xhrule} { #1 }
+  \leavevmode\leaders\hrule
+  height \dim_eval:n { \l_me_xhrule_height_dim + \l_me_xhrule_thickness_dim }
+  depth \dim_eval:n { -\l_me_xhrule_height_dim }
+  \skip_horizontal:N \l_me_xhrule_fill_skip
+  \kern 0pt
+}
+
+\newcommand* \insertArticle {
   {
     \cs_set_eq:NN \subsection_old \subsection
     \cs_set:Npn \subsection ##1 {
@@ -315,7 +341,12 @@ ScaleAgain = 0.96
     \renewcommand*\ruledefootc{\tl_tmpa_l}
     \renewcommand*\ruledofootc{\tl_tmpa_l}
 
+    \addtocontents{lof}{
+      \makebox[0.6\textwidth]{Article\ \xhrulefill[height=0.5ex]}}
+
     \input {tex/article}
+    \addtocontents{lof}{
+      \makebox[0.6\textwidth]{\xhrulefill[height=1ex]}}
     \clearpage
   }
 }

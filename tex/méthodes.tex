@@ -523,6 +523,9 @@ L'évolution temporelle de la médiane de \ab{chl} dans le biome subpolaire pré
 Pour extraire ces mesures, nous prenons la série temporelle de la médiane de \as{chl}, à laquelle nous appliquons un filtre Butterworth d'order~2 et de fréquence de coupure~\qty[parse-numbers=false]{1/20}{\per\jours}.
 La série filtré montre de fortes variations dans leur phénologie d'une année sur l'autre, mais un bloom est toujours discernable.
 Seuls les données de février à juillet sont considérées ce qui permet d'isoler le bloom printanier et d'exclure le bloom automnal.
+Nous utilisons également la dérivée de \as{chl} que nous calculons à partir de la série filtrée\footnote{%
+  La dérivée est également ré-échantillonnée par interpolation cubique à une résolution temporelle de 3~heures, ce qui permet de repérer plus précisement le maximum de dérivée sans avoir à passer par une régression.
+}.
 
 Premièrement, nous détectons la valeur maximale de \as{chl}~(étape\,\textcircled{1}, en orange, sur la \cref{fig:methode-timing-bloom}a).
 Deuxièmement, nous prenons pour démarrage du bloom l'instant~\as{onset}, antérieur à l'instant de \as{chl} maximale, pour lequel la dérivée de \as{chl} est maximale~(étape\,\textcircled{2}, en rouge, \cref{fig:methode-timing-bloom}c).
@@ -562,4 +565,5 @@ on calcule les valeurs moyennes:
   \text{ et }
   \err{\am{lag}} = \sqrt{ \frac1{N-1} \frac {\sum_y w_y \paren{\am{lag}_y - \am{lag}}^2 } {\sum_y w_y} },
 \end{equation}
-avec~\(N\) le nombre d'années. Le calcul est identique pour l'écart de durée~\as{lag-duree}.
+avec~\(N\) le nombre d'années.
+Le calcul est identique pour l'écart de durée~\as{lag-duree}.
