@@ -1,12 +1,23 @@
 #!/usr/bin/env sh
 
 LOGFILE=$1
-LOG="$(pplatex -i "$LOGFILE" 2>&1)"
 
-if [ "$(echo "$LOG" | wc -l)" -ge 20 ]; then
-    OUTPUT="$(echo "$LOG" | head -n10)\n...\n$(echo "$LOG" | tail -n10)"
+ERR_LOG="$(pplatex -q -i "$LOGFILE" 2>&1)"
+RES="$(echo "$ERR_LOG" | grep -E '^Result')"
+NERRORS="$(echo "$RES" | sed -En -e "s/^Result: o\) Errors: +([0-9]+), Warnings: +([0-9]+), BadBoxes: +([0-9]+)/\1/p")"
+
+if [ "$NERRORS" -ge 1 ]; then
+    # Only print errors if there are errors
+    LOG="$ERR_LOG"
 else
-    OUTPUT="$LOG"
+    LOG="$(pplatex -i "$LOGFILE" 2>&1)"
 fi
 
-echo "$OUTPUT"
+# Cut if too long
+HEAD=20
+if [ "$(echo "$LOG" | wc -l)" -gt "$HEAD" ]; then
+    echo "$LOG" | head -n"$HEAD"
+    echo "$RES"
+else
+    echo "$LOG"
+fi
