@@ -1,8 +1,9 @@
 \NeedsTeXFormat{LaTeX2e} %chktex 44
 \ProvidesPackage{ch-thesis}[2023/02/09 CH Thèse]
 
+\RequirePackage[english,main=french]{babel}
+
 \RequirePackage{xparse}
-\RequirePackage{geometry}
 \RequirePackage[T1]{fontenc}
 \RequirePackage{fontspec}
 \RequirePackage[otfmath]{XCharter}
@@ -15,7 +16,6 @@ ScaleAgain = 0.96
 \RequirePackage{microtype}
 
 %%% Localization
-\RequirePackage[english,main=french]{babel}
 \RequirePackage{csquotes}
 \frenchsetup{
   ItemLabels=\textendash,
@@ -53,8 +53,9 @@ ScaleAgain = 0.96
 \RequirePackage{graphicx}
 \graphicspath{{resources}}
 
-\RequirePackage{listings}
 \RequirePackage{amsmath}
+\RequirePackage{geometry}
+\RequirePackage{listings}
 \RequirePackage{multirow}
 
 \RequirePackage{siunit-setup}
@@ -208,6 +209,7 @@ ScaleAgain = 0.96
 \DeclareMathOperator{\std}{std}
 \newcommand*\moy[1]{\left[#1\right]}
 \newcommand*\med[1]{\overline{#1}}
+\newcommand*\err[1]{\tilde{#1}}
 \newcommand*\norm[1]{\operatorname{norm}\paren{#1}}
 \newcommand*\abs[1]{\left|#1\right|}
 \newcommand*\paren[1]{\left(#1\right)}
@@ -244,6 +246,22 @@ ScaleAgain = 0.96
   \cref{sec:donnees-#1}}
 \newcommand*\dataname[1]{% {biblio label}
   \hyperref[sec:donnees-#1]{\citefield{#1}[citefield]{shorttitle}}}
+
+% Hyperref overrides xcharter definition
+% DONT USE IT WHERE IT COULD END IN BOOKMARKS
+\renewcommand*\textcircled[1]{%
+  \hmode@bgroup%
+  \ifnum`#1>`9\relax%
+  \def\y{.3ex}\def\x{\scshape\lowercase{#1}}%
+  \else%
+  \def\y{.19ex}\def\x{\liningnums#1}%
+  \fi%
+  \mbox{%
+    \ooalign{%
+      \hfil\raise\y\hbox{\scalefont{.78}\x}\hfil\crcr%
+      {\usefont{TS1}{XCharter-TLF}{m}{n}\char79}%\textbigcircle
+    }}%
+  \egroup}
 
 %%% Framed environments
 \usepackage[dvipsnames]{xcolor}
@@ -303,21 +321,23 @@ ScaleAgain = 0.96
 }
 
 %%% Front page
-\NewDocumentCommand \makeJury { +m } {
-  \group_begin:
-  \seq_clear:N \l_tmpa_seq
-  \cs_set_nopar:Npn \jury ##1##2##3 {
-    \seq_put_right:Nn \l_tmpa_seq {
-      \bsc {##1} & ##2 & ##3 \\
-    }
-  }
-  #1
-  \begin{center}
-    \begin{tabular}{llr<{\raggedleft}}
-      \seq_use:Nn \l_tmpa_seq {}
-    \end{tabular}
-  \end{center}
-  \group_end:
-}
+
+% \seq_new:N \g_jury_seq
+% \NewDocumentCommand \addJury { > { \SplitArgument { 2 } , m m m } {
+%   % \cs_set_nopar:Npn \l_printname:nn ##1##2 {
+%   %   ##1
+%   % }
+%   \seq_put_right:Nn \g_jury_seq {
+%     \l_printname:nn #1 & #2 & #3 \\
+%   }
+% }
+
+% \newcommand \makeJury {
+%   \begin{center}
+%     \begin{tabular}{rlll<{\raggedleft}}
+%       \seq_use:Nn \g_jury_seq {}
+%     \end{tabular}
+%   \end{center}
+% }
 
 \ExplSyntaxOff

@@ -17,6 +17,7 @@ fi
 HEAD=20
 if [ "$(echo "$LOG" | wc -l)" -gt "$HEAD" ]; then
     echo "$LOG" | head -n"$HEAD"
+    echo "..."
     echo "$RES"
 else
     echo "$LOG"

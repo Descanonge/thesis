@@ -107,12 +107,10 @@ utiliser \guil{} pour des guillements français.
 Pour insérer des mots anglais préférer utiliser \eng{}. Cela change les options de biblatex et autres paquets compatibles. C'est surtout utile pour adapter le setup d'hyphenation.
 
 Pour signaler une traduction de l'anglais utiliser \engquote{} (met l'expression entre guillemets).
-
 ** Non breaking spaces
 Attention si l'élement est multiple.
 les équations 2 et~3.
 le truc~T de longueur 2~ou plus.
-
 *** (cross-)references
 refname~\ref,
 avant une ref ou une citation, seulement si entre parenthèses / pas dans le flow de la phrase:
@@ -146,14 +144,27 @@ Ces cas sont (1)~isolés, (2)~rares.
 quand on fait référence à qq chose sur la figure
 par exemple: Est tracé la température seuil~(trait rouge).
 Ça évite d'avoir un orphelin loin de sa ref.
-
 ** Énumérations
 Préférer comme une phrase, avec des virgules (ou point-virgules), et un point final.
 Le et final peut être omis pour plus de lisibilité si les items s'alignent.
 \item a,
 \item b,
 \item (et) c.
-
+** Majuscules
+https://fr.wikipedia.org/wiki/Usage_des_majuscules_en_fran%C3%A7ais
+*** En fr. pas de maj pour les jours de la semaine, les mois.
+*** aux gentilés, mais pas aux noms de langues, ou si utilisé comme adj
+c'est un Français, il parle le français
+la région parisienne
+*** Antonomase, pas de maj
+fonction gaussienne.
+*** points cardinaux, pas maj sauf si toponyme
+le sud de l'Amérique, l'Amérique du Sud
+l'hémisphère nord
+exception: le pôle Nord
+**** usage alternatif
+selon certain, si cela sert à désigner une partie de la terre une majuscule est ok: hémisphère Nord, l'Atlantique Nord
+Je préfère celle-ci en vrai, proche de l'anglais
 
 * Vérifications à faire
 ** Spelling

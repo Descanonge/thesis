@@ -291,9 +291,6 @@ Comme précisé en introduction, pour quantifier l'effets des fronts sur le phyt
 La méthode retenue ici suit celle présentée par \textcite{liu_2016} \encadra*{qui par son utilisation d'une fenêtre glissante s'apparente elle même à celle de \textcite{cayula_1992}}.
 Cette section définit cette méthode et notre implémentation, tout en indiquant les modifications que nous y avons apportées.
 
-\subsection{Définition et implémentation}
-\label{sec:HI-definition}
-
 La méthode de \textcite{liu_2016} consiste à quantifier plusieurs quantités statistiques du champ de \ab{sst} dont les fortes valeurs sont associées à la présence de fronts et autres structures de fine échelle.
 Ces quantités sont la bimodalité, l'écart"-type (qui reflète le gradient du champ), et le coefficient d'asymétrie~(\engquote{skewness}).
 Ces composantes sont ensuite réunies dans un seul index qui ainsi reflète l'hétérogénéité du champ de \ab{sst}, et donc baptisé \af{hi}.
@@ -308,6 +305,9 @@ Ainsi, pour chaque pixel, la valeur de chaque composante est calculée sur la di
 Parce qu'une fenêtre plus large entraînerait la détection de structures trop grandes pour notre étude, nous nous limiterons aux tailles présentées ci"-dessus.
 Néanmoins une fenêtre trop petite limite le nombre de pixels disponibles pour calculer les valeurs statistique dont nous avons besoin convenablement.
 Un compromis est à définir.
+
+\subsection{Implémentation: Calcul des composantes}
+\label{sec:calcul-composantes}
 
 Nous définissons maintenant plus en détails le calcul des composantes du \ab{hi}.
 Pour chaque position de la fenêtre, on s'intéresse aux~\(N\) valeurs de \ab{sst}~\(s_{i}\) valides (\ab{cad} des provenant des pixels sans nuages).
@@ -366,6 +366,9 @@ Notre méthode de calcul de la bimodalité est la première grande modification 
 Ces dernier·ère·s calculent également l'histogramme de la température, mais au lieu de directement le comparer avec une distribution gaussienne, iels ajustent l'histogramme par un polynôme de degré~5 avant de comparer ce dernier avec la gaussienne.
 Cet ajustement, par ailleurs difficile à mettre en place, est facilement mal conditionné et rien ne garantit sa convergence.
 Nous proposons donc une méthode plus facile à implémenter, plus robuste, et au coût de calcul réduit.
+
+\subsection{Implémentation: Coefficients de normalisation}
+\label{sec:coef-normalisation}
 
 Avant de pouvoir réunir les trois composantes il est nécessaire de leur appliquer un poids statistique équivalent à chacune. Cela est accompli par calcule de coefficients constants de normalisation.
 Alors que \citeauthor{liu_2016} proposent de normaliser chaque composante~\(C^n\) par ses valeurs minimales et maximales (prises sur toutes les valeurs disponibles) selon:
@@ -511,5 +514,52 @@ On définit donc une deuxième métrique, le surplus~\ab{surplus} de \ab{chl} da
   {\moy{\am{chl}}_\bkg} .
 \end{equation}
 
-<bloom lag>
-J'ai oublié d'inclure la méthode pour détecter le bloom... Dans mon plan c'était dans les compléments de l'article, mais ça a mieux sa place ici. Je le rajouterai plus tard.
+\subsection{Décalage du bloom}
+\label{sec:decalage-bloom}
+
+L'évolution temporelle de la médiane de \ab{chl} dans le biome subpolaire présente un bloom printanier dont nous mesurons la phénologie \encadra{plus précisement la date de démarrage et la durée du bloom} à la fois dans le \eng{background} et les fronts.
+Étant donné que le bloom se propage vers le nord, ces mesures sont faites sur des bandes de latitudes de largeur~\ang{5}.
+
+Pour extraire ces mesures, nous prenons la série temporelle de la médiane de \as{chl}, à laquelle nous appliquons un filtre Butterworth d'order~2 et de fréquence de coupure~\qty[parse-numbers=false]{1/20}{\per\jours}.
+La série filtré montre de fortes variations dans leur phénologie d'une année sur l'autre, mais un bloom est toujours discernable.
+Seuls les données de février à juillet sont considérées ce qui permet d'isoler le bloom printanier et d'exclure le bloom automnal.
+
+Premièrement, nous détectons la valeur maximale de \as{chl}~(étape\,\textcircled{1}, en orange, sur la \cref{fig:methode-timing-bloom}a).
+Deuxièmement, nous prenons pour démarrage du bloom l'instant~\as{onset}, antérieur à l'instant de \as{chl} maximale, pour lequel la dérivée de \as{chl} est maximale~(étape\,\textcircled{2}, en rouge, \cref{fig:methode-timing-bloom}c).
+Afin d'estimer l'incertitude de cette mesure, nous prenons l'écart"-type de l'ensemble des dates pour lesquels la dérivée de \as{chl} est supérieur à~\pct{90} de sa valeur maximale.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{phenologie_2015_N:45-50.pdf}
+  \captionT{Mesure du timing du bloom entre fronts et background}{%
+    Les dates de démarrage du bloom et sa durée sont obtenues à partir des séries temporelles de la médiane de \as{chl}~(ligne du haut) et de sa dérivé~(ligne du bas). Les données proviennent de l'année~2015 et la bande de latitude~\latlonRange{40N; 45N}.
+
+    Le processus est illustré sur la série correspondant aux fronts faibles~(colonne de gauche):
+    \textcircled{1}\,Nous déterminons l'instant pour lequel la \as{chl} est maximale, puis \textcircled{2}\,prenons pour démarrage du bloom l'instant antérieur à ce dernier et pour lequel la dérivée de \as{chl} est maximale.
+    Enfin, \textcircled{3}\,la date de fin de bloom est prise comme la date la plus tardive pour laquelle la \as{chl} est supérieure à~\pct{75} de sa valeur maximale.
+
+    Les résultats pour les trois séries temporelles correspondant au \eng{background}~(rouge), fronts faibles~(bleu), et fronts forts~(vert) sont superposés~(colonne de droite).
+  }
+  \label{fig:methode-timing-bloom}
+\end{figure}
+
+Enfin, nous prenons comme date de fin du bloom la date la plus tardive pour laquelle la \as{chl} est supérieure à~\pct{75} de sa valeur maximale~(étape\,\textcircled{3}, en vert, \cref{fig:methode-timing-bloom}a).
+Pour obtenir une incertitude nous prenons ici l'écart"-type de l'ensemble des dates pour lesquelles la \as{chl} est comprise dans un intervalle de~\pct{5} autour du seuil~(\as{cad}~\pct{75\pm2.5}).
+La durée~\as{duree} du bloom est prise entre les dates de démarrage et de fin ci"-dessus.
+
+Il est légitime de questionner le détail de ces méthodes \encadra{d'autant plus pour certaines années ou le démarrage du bloom est étalé sur une longue période, ou fragmenté en plusieurs pics}, cependant on s'intéresse ici aux différences entre les valeurs trouvées dans les fronts et dans le \eng{background}~(\cref{fig:methode-timing-bloom}\,b et~d).
+Étant donné que l'on effectue ces mesures de manière identique dans les deux cas, on s'attend à trouver des différences de valeurs pertinentes.
+
+Les variables retenues pour l'étude de la phénologie du bloom sont donc le retard au démarrage du bloom~(\(\am{lag} = \am{onset}_\frt - \am{onset}_\bkg \), \enquote{lag} dans l'article), et l'écart de durée~(\(\am{lag-duree} = \am{duree}_\frt - \am{duree}_\bkg\)).
+Leurs valeurs annuelles (ainsi que les incertitudes associées) sont moyennées avec pondération.
+Par exemple, pour le retard de valeur annuelle~\(\am{lag}_y\) et d'incertitude~\(\err{\am{lag}}_y\), en prenant comme pondération~\(w_y\):
+\begin{equation}
+  w_y = \frac 1 {1 + \err{\am{lag}}_y} ,
+\end{equation}
+on calcule les valeurs moyennes:
+\begin{equation}
+  \am{lag} = \frac {\sum_y w_y \am{lag}_y} {\sum_y w_y}
+  \text{ et }
+  \err{\am{lag}} = \sqrt{ \frac1{N-1} \frac {\sum_y w_y \paren{\am{lag}_y - \am{lag}}^2 } {\sum_y w_y} },
+\end{equation}
+avec~\(N\) le nombre d'années. Le calcul est identique pour l'écart de durée~\as{lag-duree}.
