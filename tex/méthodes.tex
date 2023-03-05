@@ -50,6 +50,7 @@ Ces variables étant rarement distribuées sur des grilles à des résolutions k
 % Éventuellement à déplacer à une mention antérieure des niveaux
 \begin{note}
   Tout au long de ce manuscript nous utilisons les dénominations des \guil*{niveaux} de données tels que typiquement utilisés par les distributeurs, et qui correspondent de manière générale à:
+  \review{TODO}
   \begin{itemize}
     \item L1:,
     \item L2:,
@@ -133,7 +134,7 @@ Les données sont téléchargées depuis \ab{cmems}\footfullcite{sst_esacci}.
 
 Une solution pour s'affranchir de la couverture nuageuse est de s'appuyer sur des produits de réanalyses.
 Tôt dans ce projet, certaines pistes de travail (\ab{par-ex} le suivi temporel des fronts) nous ont poussé à tester l'utilisation de tels produits.
-Les données produites par <infos et ref>, disponibles à la résolution~\resol{1}{12}~(\qty{\approx8}{\km})\footfullcite{sst_reanalyses}.
+Les données produites par \review{TODO infos et ref}, disponibles à la résolution~\resol{1}{12}~(\qty{\approx8}{\km})\footfullcite{sst_reanalyses}.
 Outre la résolution assez faible de ce produit, on notera des différences importantes avec les autres produits, et qui ne sont visiblement pas due à un simple lissage du champ de \ab{sst}~(\cref{fig:comparaison-sst}).
 
 % Problème ici: c'est très vieux (pendant stage de master), donc j'ai peu de traces.
@@ -184,6 +185,7 @@ Sachant que les produits de composition du phytoplancton dont nous disposions (n
 Nous utilisons les données de bathymétrie ETOPO1\footfullcite{etopo1}, fournies par \ab{noaa}.
 Les données sont distribuées sur une grille plate"-carrée à une résolution d'une minute d'arc~(\resol{1}{60}), soit trois fois trop pour nous.
 Nous sous"-échantillonnons les données en appliquant une moyenne à chaque groupe de 3\texttimes3~pixels, puis en interpolant le résultat sur la même grille que le reste des données de la même manière que pour la \ab{sst}.
+La bathymétrie nous permet d'exclure de nos résultats le plateau continental~(\cref{fig:bathymetrie}), pour des raisons discutées ci"-dessous.
 
 \begin{figure}
   \centering
@@ -412,7 +414,7 @@ Il reste toutefois à définir une méthode pour classifier chaque pixel comme a
 Nous allons même plus loin et séparons les pixels en trois catégories: les pixels appartenant à un front fort~(\(\am{hi} > 5\)), à un front faible~(\(5 < \am{hi} < 10\)), ou à aucun front~(\(\am{hi} < 5\), aussi dénotés \engquote{background}).
 La pertinence des valeurs de seuils entre les catégories est discutée dans la suite du manuscript.
 
-Nous avons réalisé des test de sensibilité à certains paramètres de cette méthode, à savoir la taille de la fenêtre glissante et le choix des coefficients de normalisation~(\cref{fig:ts-sensitivity}, \cref{sec:sensibilite-parametres}).
+Nous avons réalisé des test de sensibilité à certains paramètres de cette méthode \encadra{à savoir la taille de la fenêtre glissante et le choix des coefficients de normalisation} qui sont discutés plus en détail \cref{sec:sensibilite-parametres}.
 
 \begin{figure}
   \centering
@@ -512,14 +514,14 @@ On définit donc une deuxième métrique, le surplus~\ab{surplus} de \ab{chl} da
 L'évolution temporelle de la médiane de \ab{chl} dans le biome subpolaire présente un bloom printanier dont nous mesurons la phénologie \encadra{plus précisement la date de démarrage et la durée du bloom} à la fois dans le \eng{background} et les fronts.
 Étant donné que le bloom se propage vers le nord, ces mesures sont faites sur des bandes de latitudes de largeur~\ang{5}.
 
-Pour extraire ces mesures, nous prenons la série temporelle de la médiane de \as{chl}, à laquelle nous appliquons un filtre Butterworth d'order~2 et de fréquence de coupure~\qty[parse-numbers=false]{1/20}{\per\jours}.
+Pour extraire ces mesures, nous prenons la série temporelle de la médiane de \as{chl}, à laquelle nous appliquons un filtre Butterworth d'ordre~2 et de fréquence de coupure~\qty[parse-numbers=false]{1/20}{\per\jours}.
 La série filtré montre de fortes variations dans leur phénologie d'une année sur l'autre, mais un bloom est toujours discernable.
 Seuls les données de février à juillet sont considérées ce qui permet d'isoler le bloom printanier et d'exclure le bloom automnal.
 Nous utilisons également la dérivée de \as{chl} que nous calculons à partir de la série filtrée\footnote{%
   La dérivée est également ré-échantillonnée par interpolation cubique à une résolution temporelle de 3~heures, ce qui permet de repérer plus précisement le maximum de dérivée sans avoir à passer par une régression.
 }.
 
-Premièrement, nous détectons la valeur maximale de \as{chl}~(étape\,\textcircled{1}, en orange, sur la \cref{fig:methode-timing-bloom}a).
+Premièrement, nous détectons la valeur maximale de \as{chl}~(étape\,\textcircled{1}, en orange, \cref{fig:methode-timing-bloom}a).
 Deuxièmement, nous prenons pour démarrage du bloom l'instant~\as{onset}, antérieur à l'instant de \as{chl} maximale, pour lequel la dérivée de \as{chl} est maximale~(étape\,\textcircled{2}, en rouge, \cref{fig:methode-timing-bloom}c).
 Afin d'estimer l'incertitude de cette mesure, nous prenons l'écart"-type de l'ensemble des dates pour lesquels la dérivée de \as{chl} est supérieur à~\pct{90} de sa valeur maximale.
 

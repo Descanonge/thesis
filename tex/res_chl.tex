@@ -4,16 +4,19 @@
 \graphicspath{{resources/res_chl}}
 
 \minitoc%
-\clearpage
 
-préambule
+\review{%
+  préambule
 
-motivation.
-Résultat attendu sur la biomasse, la composition.
-Permet de valider la méthode aussi.
+  motivation.
+  Résultat attendu sur la biomasse, la composition.
+  Permet de valider la méthode aussi.
+}
 
 \section{Résumé de l'article}
 \label{sec:resume-article}
+
+\review{TODO}
 
 \insertArticle{}
 
@@ -21,17 +24,28 @@ Permet de valider la méthode aussi.
 \label{sec:complements-chl}
 \suppressfloats[t]
 
-\subsection{Examples de fronts}
-\label{sec:examples-fronts}
+\subsection{Vérification des distributions}
+\label{sec:verif-hist}
 
-Trouver des images examples de fronts.
-Comparer visuellement avec les données MODIS\@.
+Un certain nombre de diagnostiques présentés dans ce manuscript reposent sur les valeurs médianes de différentes variables (la \as{chl} notamment).
+Cet indicateur permet de représenter la distribution d'une variable en une valeur unique, néanmoins, pour que cette représentation soit pertinente il est nécessaire de vérifier que la distribution de laquelle il est extrait soit adaptée.
 
-Il est difficile de trouver des examples corrects.
-D'une part à cause de la grande couverture nuageuse.
-D'autre part parce que l'effet sur la Chl est difficilement visible sur des images. (effet statistique).
+Les distributions de valeurs de la \as{chl} s'avèrent être invariablement unimodales, avec des queues de valeurs élevées plus ou moins prononcées~(\cref{fig:verif-hist}).
+Il semble donc pertinent de qualifier ces distributions par leur valeur médiane.
+Les distributions de \as{sst} sont également unimodale, à l'exception du biome subpolaire, qui présente des distributions largement bimodales~(\cref{fig:verif-hist}), indiquant la présence de deux masses d'eaux de températures distinctes.
+Les résultats portant sur les valeurs de \as{sst} dans les fronts, présentés \cref{sec:res-sst}, omettent donc le biome subpolaire par soucis de simplicité.
 
-\subsection{Vérification des histogrammes}
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{verif_hist.pdf}
+  \captionT{Distributions saisonnières de Chl-\text{a} et SST dans, et hors des fronts}{%
+    Les distributions de valeurs sont indiquées pour l'année~2007 par tranches de trois mois~(lignes), par zones~(colonnes), et pour les \eng{background}~(rouge), fronts faibles~(bleu), et fronts forts~(vert).
+
+    La \as{chl}~(à gauche) présente une distribution unimodale avec une queue de valeurs élevées plus ou moins prononcée.
+    La \as{sst}~(à droite) en revanche affiche des distributions largement bimodales, comme dans le biome subpolaire notamment.
+  }
+  \label{fig:verif-hist}
+\end{figure}
 
 \subsection{Sensibilité aux paramètres}
 \label{sec:sensibilite-parametres}
@@ -39,7 +53,7 @@ D'autre part parce que l'effet sur la Chl est difficilement visible sur des imag
 L'implémentation de la détection des fronts avec l'\af{hi} nécessite de faire le choix d'un certain nombre de paramètres. Nous testons ici la variabilité des résultats finaux (\ab{ie} l'impact des fronts sur la \as{chl}) vis-à-vis de deux paramètres.
 D'une part, nous faisons varier la taille de la fenêtre glissante utilisée pour calculer les composantes du \as{hi}~(\cref{sec:calcul-composantes}), nous testons trois tailles: \qty{20}{\km},~\qty{30}{\km} et~\qty{40}{\km}. La taille retenue est de~\qty{30}{\km}.
 
-Les coefficients de normalisations sont à recalculer pour chacune des tailles (tel que décrit \cref{sec:coef-normalisation}) et sont listés \cref{tab:coefs}.
+Les coefficients de normalisations sont à recalculer pour chacune des tailles (tel que décrit figure~\ref{sec:coef-normalisation}) et sont listés dans la table~\ref{tab:coefs}.
 D'autre part nous testons l'influence de ces coefficients. En prenant les composantes calculées avec une fenêtre de~\qty{30}{\km}, tour à tour nous doublons le coefficient d'une des composantes (et donc son poids statistique dans le \ab{hi}). Le coefficient~\(K^4\) pour le \ab{hi} doit être recalculé~(\cref{tab:coefs}).
 
 % chktex-file 2
@@ -73,8 +87,7 @@ Les résultats sont très peu sensibles aux choix des paramètres.
 Les évolutions climatologiques des valeurs médianes et du surplus sont très peu affectés. La fraction de surface impactée par les fronts est plus sensible mais néanmoins les tendances restent identiques~(\cref{fig:ts-sensitivity}).
 Pour quantifier plus en détail cette variation, nous calculons l'écart"-type des valeurs médiane de \as{chl} sur l'ensemble des paramètres (les trois tailles de fenêtres et trois configurations de coefficients), semaine par semaine sur les 20~années de données, puis en prenons la moyenne temporelle.
 Il en ressort les mêmes résultats que sur la climatologie, avec une variabilité élevée dans les fronts forts (entre \qty{4.4}{\mugm} et~\qty{11.4}{\mugm}), moyenne dans les fronts faibles (entre \qty{2.0}{\mugm} et~\qty{3.3}{\mugm}), et plus faible dans le \eng{background} (entre \qty{0.07}{\mugm} et~\qty{3.8}{\mugm})~(\cref{tab:sensibilite-mediane}).
-Ces
-
+\review{Rajouter discussion des valeurs relatives.}
 
 \begin{table}
   \centering
@@ -109,22 +122,28 @@ Ces
 
 Dans cette étude de sensibilité nous n'avons pas considéré l'impact du seuil en \as{hi} choisi, ayant déjà couvert l'évolution de la \as{chl} avec le \as{hi}~(\cref{fig:chl-vs-hi}).
 Il en resortait que les valeurs de \as{chl} tendent à augmenter avec celles du \as{hi}, et ce sur toute l'amplitude du \as{hi}.
-Le choix du seuil importe donc peu vis"-à"-vis des tendances observées; Néanmoins il est possible que la variation de la \as{chl} avec les paramètres du \as{hi} soit plus le fait du seuil choisi en rapport avec la distribution de \ab{hi} \encadra{le seuil restant fixé à~5 quelque soit les paramètres} que d'un changement dans l'emplacement des fronts détectés.
+Le choix du seuil importe donc peu vis"-à"-vis des tendances observées.
+Néanmoins il est possible que la variation de la \as{chl} avec les paramètres du \as{hi} soit plus le fait du seuil choisi en rapport avec la distribution de \ab{hi} \encadra{le seuil restant fixé à~5 quelque soit les paramètres} que d'un changement dans l'emplacement des fronts détectés.
 Autrement dit, il est possible que la variation en \as{chl} (dans les fronts) soit autant dûe à la \emph{quantité} de fronts détectés qu'à leur \guil*{\emph{qualité}}.
 
 Pour étudier cet éventuel lien entre la surface des fronts et les valeurs de \as{chl} dans ces fronts, nous prenons les valeurs climatologiques mensuelles de la fraction de surface impactée par les fronts \emph{faibles}, et de la valeur médiane de \as{chl} dans ces même fronts, pour tous les paramètres testés (et les trois régions).
 Nous éliminons la dépendance de ces deux variables en temps et en région, en leur soustrayant leur valeur moyennée sur l'ensemble des paramètres testés.
 Nous obtenons donc la relation (relative) entre la fraction de surface de fronts détectés et la médiane de \as{chl} dans les fronts~(\cref{fig:sensibilite-surface}).
-Comme attendu, la médiane de \as{chl} est bien (anti-)corrélée à la fraction de surface \encadra*{le coefficient de corrélation de Pearson entre les deux variables est de~\num{-0.73}}.
+Comme attendu, la médiane de \as{chl} est bien (négativement) corrélée à la fraction de surface: le coefficient de corrélation de Pearson entre les deux variables est de~\num{-0.73}.
 Un seuil situé trop bas augmente la surface de fronts détectés et \guil*{dilue} les valeurs de \as{chl} dans ces fronts.
 
 \begin{figure}
   \centering
   \includegraphics[width=0.7\textwidth]{sensibilité_surface.pdf}
   \captionT{Corrélation de l'augmentation de Chl-\textit{a} avec la surface couverte par les fronts}{%
+    Les valeurs médianes de \as{chl} dans les fronts sont négativement corrélées à la surface occupée par les fronts.
+    La moyenne sur l'ensemble des paramètres testés de ces variables leur est soustraite afin passer outre leur dépendances en temps et région.
+
+    \review{Je viens de rajouter les fronts forts par curiosité et dans le biome subpolaire c'est correlé dans l'autre sens, je l'ai pas discuté. J'ai pas mis de fit non plus j'ai pas eu le temps.}
   }
   \label{fig:sensibilite-surface}
 \end{figure}
 
 
 \subsection{Impact sur la SST}
+\label{sec:res-sst}

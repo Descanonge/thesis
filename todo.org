@@ -72,6 +72,9 @@ Par ex. on a "le HI" et "l'heterogeneity index" :/
 ça serait pas mal d'avoir une commande qui gère ça
 ** Plot exemples
 numérotation (1a) -> (a1)
+** Durée bloom marker plus jolis
+markeredgecolor and stuff
+faire un plot légèrement plus petit aussi
 
 * Recommendations de style
 ** GLS
@@ -84,6 +87,13 @@ Dans les captions, open bar (a priori).
 ** Figures
 Toujours centrées.
 Utiliser captionT{titre}{caption}. Le titre sera mis dans la ToF et ajouté en emph au début de la caption.
+** Cross refs
+*** abbrv
+pas d'abbréviations quand c'est dans la phrase.
+On voit sur la figure~\ref{}. On a ce résultat~(\cref{}).
+De manière générale éviter de ref les figures dans le cours de la phrase de toute façon.
+
+Pour les sections, \cref n'
 ** Citations
 *** Articles
 use \textcite and (\cite)
