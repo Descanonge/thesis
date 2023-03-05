@@ -41,6 +41,10 @@ ScaleAgain = 0.96
   { ---~#2}%
   { ---~#2~---}}
 
+% Notes pour relecture
+\NewDocumentCommand\review{ +m }{%
+  \textcolor{red}{#1}} % chktex 44
+
 %%% Shorthands
 \useshorthands*{"}
 % Hard hyphen, no breaks (but word after is breakable)
@@ -207,7 +211,7 @@ ScaleAgain = 0.96
 
 % Some operators
 \DeclareMathOperator{\std}{std}
-\newcommand*\moy[1]{\left[#1\right]}
+\newcommand*\moy[1]{\langle#1\rangle}
 \newcommand*\med[1]{\overline{#1}}
 \newcommand*\err[1]{\tilde{#1}}
 \newcommand*\norm[1]{\operatorname{norm}\paren{#1}}
@@ -296,6 +300,11 @@ ScaleAgain = 0.96
 
 
 \ExplSyntaxOn
+
+% Command for repeating stuff
+\NewDocumentCommand {\Repeat} { m +m } {
+  \prg_replicate:nn {#1} {#2}
+}
 
 % Commands for having nice rules in list of figures
 \NewDocumentCommand {\xhrulefill} {O{}} {

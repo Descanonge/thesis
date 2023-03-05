@@ -66,6 +66,10 @@ Chercheur junior CNRS
 ** je ou nous ?
 ** Réanalyses -> renommer Mercator
 ** Ajouter figure comparaison Chl GlobColour / MODIS
+** Commandes gls
+je suis frileux quand j'utilise des abbrv dans une phrase à propos de l'article qui précède.
+Par ex. on a "le HI" et "l'heterogeneity index" :/
+ça serait pas mal d'avoir une commande qui gère ça
 ** Plot exemples
 numérotation (1a) -> (a1)
 

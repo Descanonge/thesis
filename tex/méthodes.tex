@@ -298,9 +298,9 @@ Ces composantes sont ensuite réunies dans un seul index qui ainsi reflète l'h�
 Pour limiter la taille des structures détectées, on limite le calcul de ces composantes sur une fenêtre de taille appropriée, \ab{cad} pour nous de l'ordre de grandeur d'une dizaine de kilomètres.
 Ainsi, pour chaque pixel, la valeur de chaque composante est calculée sur la distribution de \ab{sst} à l'intérieur d'une fenêtre glissante centrée sur ce pixel et dont les tailles possibles sont:
 \begin{itemize}
-        \item \(3 \times 3 =\qty{9}{\pixels}\) soit~\qty{17}{\km} de côté,
-        \item \(5 \times 5 =\qty{25}{\pixels}\) soit~\qty{28}{\km} de côté,
-        \item \(7 \times 7 =\qty{49}{\pixels}\) soit~\qty{39}{\km} de côté.
+        \item \(3 \times 3 =\qty{9}{\pixels}\) soit~\qty{\approx20}{\km} de côté,
+        \item \(5 \times 5 =\qty{25}{\pixels}\) soit~\qty{\approx30}{\km} de côté,
+        \item \(7 \times 7 =\qty{49}{\pixels}\) soit~\qty{\approx40}{\km} de côté.
 \end{itemize}
 Parce qu'une fenêtre plus large entraînerait la détection de structures trop grandes pour notre étude, nous nous limiterons aux tailles présentées ci"-dessus.
 Néanmoins une fenêtre trop petite limite le nombre de pixels disponibles pour calculer les valeurs statistique dont nous avons besoin convenablement.
@@ -412,6 +412,8 @@ Il reste toutefois à définir une méthode pour classifier chaque pixel comme a
 Nous allons même plus loin et séparons les pixels en trois catégories: les pixels appartenant à un front fort~(\(\am{hi} > 5\)), à un front faible~(\(5 < \am{hi} < 10\)), ou à aucun front~(\(\am{hi} < 5\), aussi dénotés \engquote{background}).
 La pertinence des valeurs de seuils entre les catégories est discutée dans la suite du manuscript.
 
+Nous avons réalisé des test de sensibilité à certains paramètres de cette méthode, à savoir la taille de la fenêtre glissante et le choix des coefficients de normalisation~(\cref{fig:ts-sensitivity}, \cref{sec:sensibilite-parametres}).
+
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{exemple_composantes.pdf}
@@ -433,16 +435,6 @@ La pertinence des valeurs de seuils entre les catégories est discutée dans la 
   }
   \label{fig:exemples-fronts}
 \end{figure}
-
-
-\subsection{Sensibilité aux paramètres}
-\label{sec:HI-sensibilite}
-
-Je pense bouger cette section vers les résultats. C'est mieux de le présenter après je crois.
-
-Nécessité d'évaluer les incertitudes sur la méthode.
-Pour voir si résultat significatif.
-Taille de la fenêtre glissante. Coefs de normalisation.
 
 
 \section{Extraction des résultats}
