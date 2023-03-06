@@ -75,6 +75,10 @@ numérotation (1a) -> (a1)
 ** Durée bloom marker plus jolis
 markeredgecolor and stuff
 faire un plot légèrement plus petit aussi
+** Réduire marges
+visiblement on est autour de 90 caractères. C'est trop (conseillé 45-70, idéal 66)
+** small caps on acronyms
+because it's nice 😊
 
 * Recommendations de style
 ** GLS
