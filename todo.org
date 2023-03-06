@@ -70,6 +70,8 @@ Chercheur junior CNRS
 je suis frileux quand j'utilise des abbrv dans une phrase à propos de l'article qui précède.
 Par ex. on a "le HI" et "l'heterogeneity index" :/
 ça serait pas mal d'avoir une commande qui gère ça
+ouais mais de toute façon ça peut pas gérer les autres accords (avec des adj. par ex.) donc autant vérifier ce qu'on fait à l'écriture.
+Je pense que je fais enlever HI et SST de toute façon il n'y a aucune difficulté à les écrire.
 ** Plot exemples
 numérotation (1a) -> (a1)
 ** Durée bloom marker plus jolis
@@ -77,9 +79,6 @@ markeredgecolor and stuff
 faire un plot légèrement plus petit aussi
 ** Réduire marges
 visiblement on est autour de 90 caractères. C'est trop (conseillé 45-70, idéal 66)
-** small caps on acronyms
-because it's nice 😊
-
 * Recommendations de style
 ** GLS
 On se dit que pas de \ab ?

@@ -1,3 +1,4 @@
+% chktex-file 13
 
 \chapter{Impact des fronts sur le budget de Chlorophylle-\textit{a}}
 \addChpLof
@@ -33,8 +34,8 @@ Cet indicateur permet de représenter la distribution d'une variable en une vale
 
 Les distributions de valeurs de la \as{chl} s'avèrent être invariablement unimodales, avec des queues de valeurs élevées plus ou moins prononcées~(\cref{fig:verif-hist}).
 Il semble donc pertinent de qualifier ces distributions par leur valeur médiane.
-Les distributions de \as{sst} sont également unimodale, à l'exception du biome subpolaire, qui présente des distributions largement bimodales~(\cref{fig:verif-hist}), indiquant la présence de deux masses d'eaux de températures distinctes.
-Les résultats portant sur les valeurs de \as{sst} dans les fronts, présentés \cref{sec:res-sst}, omettent donc le biome subpolaire par soucis de simplicité.
+Les distributions de SST sont également unimodale, à l'exception du biome subpolaire, qui présente des distributions largement bimodales~(\cref{fig:verif-hist}), indiquant la présence de deux masses d'eaux de températures distinctes.
+Les résultats portant sur les valeurs de SST dans les fronts, présentés \cref{sec:res-sst}, omettent donc le biome subpolaire par soucis de simplicité.
 
 \begin{figure}
   \centering
@@ -43,7 +44,7 @@ Les résultats portant sur les valeurs de \as{sst} dans les fronts, présentés 
     Les distributions de valeurs sont indiquées pour l'année~2007 par tranches de trois mois~(lignes), par zones~(colonnes), et pour les \eng{background}~(rouge), fronts faibles~(bleu), et fronts forts~(vert).
 
     La \as{chl}~(à gauche) présente une distribution unimodale avec une queue de valeurs élevées plus ou moins prononcée.
-    La \as{sst}~(à droite) en revanche affiche des distributions largement bimodales, comme dans le biome subpolaire notamment.
+    La SST~(à droite) en revanche affiche des distributions largement bimodales, comme dans le biome subpolaire notamment.
   }
   \label{fig:verif-hist}
 \end{figure}
@@ -52,10 +53,10 @@ Les résultats portant sur les valeurs de \as{sst} dans les fronts, présentés 
 \label{sec:sensibilite-parametres}
 
 L'implémentation de la détection des fronts avec l'\af{hi} nécessite de faire le choix d'un certain nombre de paramètres. Nous testons ici la variabilité des résultats finaux (\ab{ie} l'impact des fronts sur la \as{chl}) vis-à-vis de deux paramètres.
-D'une part, nous faisons varier la taille de la fenêtre glissante utilisée pour calculer les composantes du \as{hi}~(\cref{sec:calcul-composantes}), nous testons trois tailles: \qty{20}{\km},~\qty{30}{\km} et~\qty{40}{\km}. La taille retenue est de~\qty{30}{\km}.
+D'une part, nous faisons varier la taille de la fenêtre glissante utilisée pour calculer les composantes du HI~(\cref{sec:calcul-composantes}), nous testons trois tailles: \qty{20}{\km},~\qty{30}{\km} et~\qty{40}{\km}. La taille retenue est de~\qty{30}{\km}.
 
 Les coefficients de normalisations sont à recalculer pour chacune des tailles (tel que décrit figure~\ref{sec:coef-normalisation}) et sont listés dans la table~\ref{tab:coefs}.
-D'autre part nous testons l'influence de ces coefficients. En prenant les composantes calculées avec une fenêtre de~\qty{30}{\km}, tour à tour nous doublons le coefficient d'une des composantes (et donc son poids statistique dans le \ab{hi}). Le coefficient~\(K^4\) pour le \ab{hi} doit être recalculé~(\cref{tab:coefs}).
+D'autre part nous testons l'influence de ces coefficients. En prenant les composantes calculées avec une fenêtre de~\qty{30}{\km}, tour à tour nous doublons le coefficient d'une des composantes (et donc son poids statistique dans le HI). Le coefficient~\(K^4\) pour le HI doit être recalculé~(\cref{tab:coefs}).
 
 % chktex-file 2
 \begin{table}
@@ -121,10 +122,10 @@ Il en ressort les mêmes résultats que sur la climatologie, avec une variabilit
   \label{tab:sensibilite-mediane}
 \end{table}
 
-Dans cette étude de sensibilité nous n'avons pas considéré l'impact du seuil en \as{hi} choisi, ayant déjà couvert l'évolution de la \as{chl} avec le \as{hi}~(\cref{fig:chl-vs-hi}).
-Il en resortait que les valeurs de \as{chl} tendent à augmenter avec celles du \as{hi}, et ce sur toute l'amplitude du \as{hi}.
+Dans cette étude de sensibilité nous n'avons pas considéré l'impact du seuil en HI choisi, ayant déjà couvert l'évolution de la \as{chl} avec le HI~(\cref{fig:chl-vs-hi}).
+Il en resortait que les valeurs de \as{chl} tendent à augmenter avec celles du HI, et ce sur toute l'amplitude du HI.
 Le choix du seuil importe donc peu vis"-à"-vis des tendances observées.
-Néanmoins il est possible que la variation de la \as{chl} avec les paramètres du \as{hi} soit plus le fait du seuil choisi en rapport avec la distribution de \ab{hi} \encadra{le seuil restant fixé à~5 quelque soit les paramètres} que d'un changement dans l'emplacement des fronts détectés.
+Néanmoins il est possible que la variation de la \as{chl} avec les paramètres du HI soit plus le fait du seuil choisi en rapport avec la distribution de HI \encadra{le seuil restant fixé à~5 quelque soit les paramètres} que d'un changement dans l'emplacement des fronts détectés.
 Autrement dit, il est possible que la variation en \as{chl} (dans les fronts) soit autant dûe à la \emph{quantité} de fronts détectés qu'à leur \guil*{\emph{qualité}}.
 
 Pour étudier cet éventuel lien entre la surface des fronts et les valeurs de \as{chl} dans ces fronts, nous prenons les valeurs climatologiques mensuelles de la fraction de surface impactée par les fronts \emph{faibles}, et de la valeur médiane de \as{chl} dans ces même fronts, pour tous les paramètres testés (et les trois régions).

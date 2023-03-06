@@ -52,50 +52,22 @@ toc, section=section, symbols,
   \renewcommand*\CustomAbbreviationFields{%
     name={\the\glslabeltok},%
     sort={\the\glslabeltok},%
-    first={\the\glsshorttok},%
-    firstplural={\the\glsshorttok},%
-    text={\the\glsshorttok},%
-    plural={\the\glsshorttok},%
+    first={\protect\glsfirstabbrvfont{\the\glsshorttok}},%
+    firstplural={\protect\glsfirstabbrvfont{\the\glsshorttok}},%
+    text={\protect\glsabbrvfont{\the\glsshorttok}},%
+    plural={\protect\glsabbrvfont{\the\glsshorttok}},%
     description={\the\glslongtok}}%
   \renewcommand*\GlsXtrPostNewAbbreviation{%
     \glssetattribute{\the\glslabeltok}{regular}{true}%
-    \glssetattribute{\the\glslabeltok}{nohyper}{true}}}%
-{%
+    \glssetattribute{\the\glslabeltok}{nohyper}{true}}%
+}{%
   \GlsXtrUseAbbrStyleFmts{nolong-short}%
+  \renewcommand*\glsabbrvfont[1]{\glsabbrvdefaultfont{##1}}%
+  \renewcommand*\glsfirstabbrvfont[1]{\glsfirstabbrvdefaultfont{##1}}%
   \renewcommand*\glsfirstlongfont[1]{\glsfirstlongdefaultfont{##1}}%
   \renewcommand*\glslongfont[1]{\glslongdefaultfont{##1}}%
-  \renewcommand*\glsxtrinlinefullformat[2]{%
-    \protect\glsfirstlongfont{\glsaccesslong{##1}%
-      \ifglsxtrinsertinside##2\fi}%
-    \ifglsxtrinsertinside\else##2\fi~%
-    \glsaccessshort{##1}}%
-  \renewcommand*\glsxtrinlinefullplformat[2]{%
-    \protect\glsfirstlongfont{\glsaccesslongpl{##1}%
-     \ifglsxtrinsertinside##2\fi}%
-    \ifglsxtrinsertinside\else##2\fi~%
-    \glsaccessshortpl{##1}}%
-  \renewcommand*\Glsxtrinlinefullformat[2]{%
-    \protect\glsfirstlongfont{\Glsaccesslong{##1}%
-      \ifglsxtrinsertinside##2\fi}%
-    \ifglsxtrinsertinside\else##2\fi~%
-    \glsaccessshort{##1}}%
-  \renewcommand*\Glsxtrinlinefullplformat[2]{%
-    \protect\glsfirstlongfont{\Glsaccesslongpl{##1}%
-       \ifglsxtrinsertinside##2\fi}%
-     \ifglsxtrinsertinside\else##2\fi~%
-    \glsaccessshort{##1}}%
-  \renewcommand*\glsxtrfullformat[2]{%
-    \glsaccessshort{##1}\ifglsxtrinsertinside##2\fi%
-    \ifglsxtrinsertinside\else##2\fi}%
-  \renewcommand*\glsxtrfullplformat[2]{%
-    \glsaccessshort{##1}\ifglsxtrinsertinside##2\fi%
-    \ifglsxtrinsertinside\else##2\fi}%
-  \renewcommand*\Glsxtrfullformat[2]{%
-    \glsaccessshort{##1}\ifglsxtrinsertinside##2\fi%
-    \ifglsxtrinsertinside\else##2\fi}%
-  \renewcommand*\Glsxtrfullplformat[2]{%
-    \glsaccessshort{##1}\ifglsxtrinsertinside##2\fi%
-    \ifglsxtrinsertinside\else##2\fi}}
+  \renewcommand*\glsxtrfullsep[1]{~}%
+}
 
 \setabbreviationstyle[symbol]{short-symbol}
 

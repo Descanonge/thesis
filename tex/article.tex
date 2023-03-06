@@ -17,7 +17,7 @@ and \authorArticle[2]{Laurent}{Bopp}
 }
 
 % \begin{keypoints}
-% \item Over \as{sst} fronts in the Gulf Stream region \al{chl} is enhanced by up to a factor two and the bloom onsets earlier by up to two weeks.
+% \item Over SST fronts in the Gulf Stream region \al{chl} is enhanced by up to a factor two and the bloom onsets earlier by up to two weeks.
 % \item The enhancement intensity increases significantly with the strength of the front.
 % \item The net contribution of fronts to \al{chl} enhancement over the Gulf Stream region is less than 5\%.
 % \end{keypoints}
@@ -26,8 +26,8 @@ and \authorArticle[2]{Laurent}{Bopp}
   Fronts affect phytoplankton growth and phenology by locally reducing stratification and increasing vertical nutrient supply.
   Biomass peaks at fronts have been observed in-situ and linked to local nutrient upwelling, and reduced stratification over fronts has been shown to induce earlier blooms in numerical models.
   However observation of these biophysical interactions through satellite imagery have been scarce, despite the opportunity to quantify them at synoptic scales.
-  Here we used twenty years of \as{sst} and \al{chl} satellite data in a large region surrounding the Gulf Stream to quantify the impact of fronts on phytoplankton in contrasting regimes, from oligotrophy to bloom, and throughout the year.
-  We computed an heterogeneity index \as{hi} from \as{sst}, and used it to sort fronts into weak and strong fronts based on \as{hi} thresholds.
+  Here we used twenty years of SST and \al{chl} satellite data in a large region surrounding the Gulf Stream to quantify the impact of fronts on phytoplankton in contrasting regimes, from oligotrophy to bloom, and throughout the year.
+  We computed an heterogeneity index HI from SST, and used it to sort fronts into weak and strong fronts based on HI thresholds.
   We observed that the localization of strong fronts corresponded to western boundary current fronts, and weak fronts to more ephemeral submesoscale fronts.
   We compared \al{chl} distributions over strong fronts, weak fronts and outside of fronts.
   We assessed three metrics, the local enhancement of \al{chl} over fronts, the global enhancement of \al{chl} due to fronts at the scale of the region, and the lag in spring bloom onset due to fronts.
@@ -69,7 +69,7 @@ The role of submesoscales has been assessed with three different methods.
 \textcite{guo_2019} combined ocean color data with altimetry and drifting floats, and estimated that, over subtropical gyres of the global ocean, the respective contributions of mesoscales and submesoscales to high \as{chl} anomalies were comparable in magnitude.
 \textcite{keerthi_2022} proposed an approach based on deconvolution of local \as{chl} time series into different timescales; they observed that sub-seasonal time scales contributed roughly~\pct{30} of the total satellite \as{chl} variance and were associated with small~(\qty{<100}{\km}) spacial scales.
 Finally, the most quantitative approach was proposed by \textcite{liu_2016}, which they applied to the North Pacific Subtropical Gyre.
-They detected sea-surface temperature (\as{sst}) fronts by computing an index that measures the local heterogeneity of the \as{sst} field from satellite \as{sst} data.
+They detected sea-surface temperature (SST) fronts by computing an index that measures the local heterogeneity of the SST field from satellite SST data.
 This allowed them to compare satellite \as{chl} values over areas impacted by fronts (characterized by a large value of the heterogeneity index) with values over areas that were not impacted.
 They found that the increase in \as{chl} over the fronts was negligible in summer but reached almost~\pct{40} in winter.
 
@@ -88,13 +88,13 @@ In between, there is a moderately productive regime, with maximum productivity i
 Another feature that makes this study area particularly relevant is that it has different types of fronts.
 On the one hand, there are two strong persistent fronts, the Gulf Stream and the shelf-break front, which are held in place by topography and atmospheric circulation, and which are both associated with strong and deep-reaching vertical circulations \parencite{flagg_2006, liao_2022}.
 But there are also more ephemeral and weaker fronts, created by mesoscale strain that are continuously forming at more random locations \parencite{drushka_2019, sanchez-rios_2020}.
-We use satellite data of \as{chl} and \as{sst}, and extend on the approach of \textcite{liu_2016}, to distinguish between persistent and ephemeral fronts.
+We use satellite data of \as{chl} and SST, and extend on the approach of \textcite{liu_2016}, to distinguish between persistent and ephemeral fronts.
 We evaluate the impact of both types of fronts on \as{chl} on the basis of three indicators, the excess (or deficit) \as{chl} over fronts at the local scale of the front, the surplus \as{chl} attributable to fronts at the scale of regional biomes, and the change in the timing of the \as{chl} spring bloom over fronts.
 
 
 \subsection{Methods and data}
 
-Our approach combines daily satellite \as{sst} data, which are used to detect fronts and sort them by their strength, with daily satellite surface \as{chl}, from which we derive anomalies over fronts.
+Our approach combines daily satellite SST data, which are used to detect fronts and sort them by their strength, with daily satellite surface \as{chl}, from which we derive anomalies over fronts.
 Our region of interest is the North Atlantic from~\latlon{15N} to~\latlon{55N}, and from~\latlon{40W} to the North American shelf break (Fig.~\ref{fig:zone-separation}).
 This region covers three biomes, a more oligotrophic one in the south, a more productive one in the north where a spring bloom occurs, and an intermediate biome between the two, described below.
 We will refer to them in the following as permanent subtropical biome (PSB), seasonal subtropical biome (SSB) and subpolar biome (PB), moving from south to north.
@@ -104,10 +104,10 @@ They are separated from south to north by a fixed boundary at~\latlon{32N} and b
 
 For \as{chl}, we used the L3 product distributed by ACRI-ST over the period 2000--2020, generated by Copernicus-GlobColour, constructed with data from different sensors (\as{seawifs}, \as{modis} Aqua \& Terra, \as{meris}, \as{viirs}-\as{snpp} \& \as{jpss}[1], \as{olci}[-S3A] \& S3B) merged and reprocessed, available daily at 4km resolution \parencite{article_chl}\footnote{Dataset \dataname{chl_globcolour} décrit section~\ref{sec:donnees-chl_globcolour}}.
 
-For \as{sst}, we used the European Space Agency Sea Surface Temperature Climate Change Initiative analysis product version 2.1 \parencite{merchant_2019, article_sst, good_2020}\footnote{Dataset \dataname{sst_esacci} décrit section~\ref{sec:donnees-sst_esacci}}, also available daily at~\qty{4}{\km} resolution over the period 2000--2020.
-This product combines data from all available infrared sensors (\as{atsr}, \as{slstr}, and \as{avhrr} sensors), ensuring good resolution where data are available, unlike other \as{sst} products which also include microwave and in-situ measurements, resulting in considerable smoothing of the \as{sst} field. %chktex 36
-Where \as{sst} data is not available, spatial interpolation is performed to obtain a cloud free product which, at the cost of resolution on finer features, provides complete synoptic coverage of our large study area.
-This interpolation tends to provide an underestimate of the detection of fronts, as the \as{sst} field is smoother over cloud-covered areas \parencite{merchant_2019}.
+For SST, we used the European Space Agency Sea Surface Temperature Climate Change Initiative analysis product version 2.1 \parencite{merchant_2019, article_sst, good_2020}\footnote{Dataset \dataname{sst_esacci} décrit section~\ref{sec:donnees-sst_esacci}}, also available daily at~\qty{4}{\km} resolution over the period 2000--2020.
+This product combines data from all available infrared sensors (\as{atsr}, \as{slstr}, and \as{avhrr} sensors), ensuring good resolution where data are available, unlike other SST products which also include microwave and in-situ measurements, resulting in considerable smoothing of the SST field. %chktex 36
+Where SST data is not available, spatial interpolation is performed to obtain a cloud free product which, at the cost of resolution on finer features, provides complete synoptic coverage of our large study area.
+This interpolation tends to provide an underestimate of the detection of fronts, as the SST field is smoother over cloud-covered areas \parencite{merchant_2019}.
 However, the combination of several sensors allows to reduce these areas to a minimum.
 Furthermore, we have only considered cloud-free pixels for our analysis, which ensures that cloudy areas are not taken into account in our quantification.
 
@@ -131,8 +131,8 @@ To the north of the Gulf Stream is the Slope sea which extends to the shelf-brea
 Aligned with the shelf break, a persistent front with an intensified surface jet separates the shelf waters (excluded from this study) from the slope sea.
 This highly productive subpolar biome, known as subpolar waters \parencite{sarmiento_2004} and high-chlorophyll-bloom \parencite{bock_2022}, is characterized by a strong spring bloom whose onset is tied to the spring stratification of the mixed-layer.
 
-The position of the north wall of the Gulf stream, that delimits the subpolar and seasonal subtropical biomes (black meandering contour in Fig.~\ref{fig:zone-separation}a-b), is determined at each daily time step by thresholding the daily \as{sst} map.
-The daily threshold values (black vertical line in Fig.~\ref{fig:zone-separation}c) are determined from the daily \as{sst} distributions above 32°N (blue line, continued by the yellow line in Fig.~\ref{fig:zone-separation}c).
+The position of the north wall of the Gulf stream, that delimits the subpolar and seasonal subtropical biomes (black meandering contour in Fig.~\ref{fig:zone-separation}a-b), is determined at each daily time step by thresholding the daily SST map.
+The daily threshold values (black vertical line in Fig.~\ref{fig:zone-separation}c) are determined from the daily SST distributions above 32°N (blue line, continued by the yellow line in Fig.~\ref{fig:zone-separation}c).
 Indeed, the Gulf Stream is easily identifiable in this distribution as it is manifested by a temperature peak (yellow line in Fig.~\ref{fig:zone-separation}c).
 To detect the start of this peak, which marks our boundary, we fit the peak with a Gaussian, and define the threshold temperature as the mean minus twice the standard deviation.
 Then, the threshold temperature time series is median filtered over an 8-day window to eliminate spurious detection anomalies.
@@ -145,8 +145,8 @@ With the above delimitation of biomes, the two atmospherically and topographical
   \includegraphics[width=12cm]{article/zone_separation.pdf}
   \caption[Delimitation of biomes]{
     Delimitation of the three biomes in the Gulf stream extension region: the Permanent Subtropical Biome~(PSB, south of the dashed line at~\latlon{32N}), the Seasonal Subtropical Biome~(SSB, between~\latlon{32N} and the meandering Gulf stream northern wall on that day marked with the black contour), and the Subpolar Biome~(PB, north of the Gulf stream northern wall).
-    (a)~\as{sst} and (b)~\as{chl} snapshots on the 22 April 2007 (with data masked by clouds in white), (c)~\as{sst} and (d)~\as{chl}  distribution within each biome for the same day (PB:\@blue, SSB:\@yellow, PSB:\@red).
-    The black line in~(c) shows the \as{sst} threshold value detected to delimit the Gulf Stream northern wall (see methods section).
+    (a)~SST and (b)~\as{chl} snapshots on the 22 April 2007 (with data masked by clouds in white), (c)~SST and (d)~\as{chl}  distribution within each biome for the same day (PB:\@blue, SSB:\@yellow, PSB:\@red).
+    The black line in~(c) shows the SST threshold value detected to delimit the Gulf Stream northern wall (see methods section).
     The x"-axis of the distributions correspond to the x-axis scale of the corresponding color bars.
     The red line follows the 1500m isobath.
     Data on the continental shelf~(\qty{<1500}{\m}) is not considered here and have been masked.
@@ -158,32 +158,32 @@ With the above delimitation of biomes, the two atmospherically and topographical
 \subsubsection{Front detection}
 
 Our front detection method aims to sort the domain into pixels that are located (or not) over fronts, at each daily time step.
-We follow the approach of \textcite{liu_2016} that builds upon the well established Cayula-Cornillon algorithm \parencite{cayula_1992, belkin_2009}, and identify pixels as belonging to fronts when the region in the vicinity of the pixel is characterized by high \as{sst} heterogeneity.
-More precisely, on each pixel and for each time step, we compute an Heterogeneity Index~(\as{hi}) which quantifies the heterogeneity of the \as{sst} in a square window comprising a few pixels~(\numproduct{7 x 7}) centered on the pixel of interest.
-Thus \as{hi} measures the \as{sst} heterogeneity at spatial scales less than~\qty{30}{\km}.
-The \as{hi} is defined as the weighted sum of the skewness~\ab{skew}, standard deviation~\ab{std}, and bimodality~\ab{bimod} of \as{sst} within the window (\(\am{hi} = a \left( b \am{skew} + c \am{std} + d \am{bimod} \right)\), with a, b, c, d constant normalization coefficients).
+We follow the approach of \textcite{liu_2016} that builds upon the well established Cayula-Cornillon algorithm \parencite{cayula_1992, belkin_2009}, and identify pixels as belonging to fronts when the region in the vicinity of the pixel is characterized by high SST heterogeneity.
+More precisely, on each pixel and for each time step, we compute an Heterogeneity Index~(HI) which quantifies the heterogeneity of the SST in a square window comprising a few pixels~(\numproduct{7 x 7}) centered on the pixel of interest.
+Thus HI measures the SST heterogeneity at spatial scales less than~\qty{30}{\km}.
+The HI is defined as the weighted sum of the skewness~\ab{skew}, standard deviation~\ab{std}, and bimodality~\ab{bimod} of SST within the window (\(\am{hi} = a \left( b \am{skew} + c \am{std} + d \am{bimod} \right)\), with a, b, c, d constant normalization coefficients).
 
 We have adapted the original formulation of \textcite{liu_2016} with minor modification in the computation of bimodality and in the relative weighing of each component which are described below.
-We computed the bimodality as the L2 norm of the difference between the \as{sst} histogram (with bins of~\tC{0.1}) and a Gaussian fit of the histogram.
-We chose this method because it was simpler to implement and more robust than that of \textcite{liu_2016} which computed the normalized absolute difference between a polynomial fit of order~5 of the \as{sst} histogram and a Gaussian fit of the histogram, the polynomial fit often being poorly constrained.
+We computed the bimodality as the L2 norm of the difference between the SST histogram (with bins of~\tC{0.1}) and a Gaussian fit of the histogram.
+We chose this method because it was simpler to implement and more robust than that of \textcite{liu_2016} which computed the normalized absolute difference between a polynomial fit of order~5 of the SST histogram and a Gaussian fit of the histogram, the polynomial fit often being poorly constrained.
 We normalized each component by its variance (b, c and d being defined as the inverse of the standard deviation of each component computed over one year), as opposed to \textcite{liu_2016} who normalized the coefficients by their annual maximum.
 This avoided putting too much weight on extrema.
-Finally we normalized \as{hi}~(coefficient a) such that~\pct{95} of values are below an arbitrary value of~\num{9.5}.
+Finally we normalized HI~(coefficient a) such that~\pct{95} of values are below an arbitrary value of~\num{9.5}.
 For simplicity, the normalization coefficients were computed for year 2007 and used over the entire time series.
-We performed sensitivity tests on the different parameters used to compute \as{hi}, namely the number of pixels in the rolling window and the choice of normalization coefficients.
-An example of the resulting \as{hi} over a single front is given on Fig.~\ref{fig:zoom}; elevated \as{hi} values are located along the curved \as{sst} gradient to the north east of the window.
+We performed sensitivity tests on the different parameters used to compute HI, namely the number of pixels in the rolling window and the choice of normalization coefficients.
+An example of the resulting HI over a single front is given on Fig.~\ref{fig:zoom}; elevated HI values are located along the curved SST gradient to the north east of the window.
 
 At each time step, we sorted the pixels into those belonging to strong fronts (defined as \(\am{hi} > 10\)), those belonging to weak fronts (defined as \(5 < \am{hi} < 10\)), and those that do not belong to fronts (when \(\am{hi} < 5\), and called them ``background'' in the following).
-Sorting fronts by range of \as{hi} enabled us to roughly separate the quasi-permanent fronts, which are associated with the strongest \as{sst} gradients~(strong fronts), from the more ephemeral ones, associated with weaker gradients~(weak fronts).
-The choice of the two \as{hi} threshold is somehow arbitrary, but it is supported by the \as{hi} distributions presented below.
+Sorting fronts by range of HI enabled us to roughly separate the quasi-permanent fronts, which are associated with the strongest SST gradients~(strong fronts), from the more ephemeral ones, associated with weaker gradients~(weak fronts).
+The choice of the two HI threshold is somehow arbitrary, but it is supported by the HI distributions presented below.
 
 
 \begin{figure}
   \centering
   \includegraphics[width=12cm]{article/front_example.pdf}
   \caption[Example of front]{
-    The \as{sst}, \as{chl}, and heterogeneity index~(\as{hi}) of a front on the 7 July 2007.
-    The plain and dashed contours correspond to \as{hi} values of~5 and~10.
+    The SST, \as{chl}, and heterogeneity index~(HI) of a front on the 7 July 2007.
+    The plain and dashed contours correspond to HI values of~5 and~10.
     This front is categorized as weak.
     \as{chl} are elevated inside the front.
   }%
@@ -219,24 +219,24 @@ Finally, we averaged the yearly values of lag~\as{lag} in onset days over the 20
 
 \subsubsection{Distribution of fronts}
 
-Our definition of weak fronts and strong fronts is primarily based on thresholds, derived from the \as{hi} distributions (Fig.~\ref{fig:chl-vs-hi}, red dashed line).
-In each biome, the majority of \as{hi} values are below~5, and as mentioned before, we used this threshold to distinguish pixels in the background from those over fronts (when \(\am{hi} > 5\)).
-Secondly, the number of points in the \as{hi} distribution decreases sharply as the \as{hi} value increases above~5, reflecting the fact that fronts with stronger \as{sst} gradients are much less frequent than fronts with weaker gradients, as one would expect.
-We used the \as{hi} threshold of~10 to distinguish weak fronts from strong fronts.
-This separation is imperfect, as seen for instance in Fig.~\ref{fig:zoom} where a few pixels with \as{hi} values larger than~10 appear at the core of an otherwise weak front.
+Our definition of weak fronts and strong fronts is primarily based on thresholds, derived from the HI distributions (Fig.~\ref{fig:chl-vs-hi}, red dashed line).
+In each biome, the majority of HI values are below~5, and as mentioned before, we used this threshold to distinguish pixels in the background from those over fronts (when \(\am{hi} > 5\)).
+Secondly, the number of points in the HI distribution decreases sharply as the HI value increases above~5, reflecting the fact that fronts with stronger SST gradients are much less frequent than fronts with weaker gradients, as one would expect.
+We used the HI threshold of~10 to distinguish weak fronts from strong fronts.
+This separation is imperfect, as seen for instance in Fig.~\ref{fig:zoom} where a few pixels with HI values larger than~10 appear at the core of an otherwise weak front.
 
 \begin{figure}
   \centering
   \includegraphics[width=12cm]{article/chl_vs_hi.pdf}
   \caption[Distribution of \glsentryshort{chl} against \glsentryshort{hi}]{%
-    Normalized distribution of the Heterogeneity Index~(\as{hi}, red dashed line) within each biome, and distribution of \as{chl} as a function of \as{hi} (representing front strength), over the full period 2000--2020.
+    Normalized distribution of the Heterogeneity Index~(HI, red dashed line) within each biome, and distribution of \as{chl} as a function of HI (representing front strength), over the full period 2000--2020.
     Shown are the median value of the \as{chl} distributions (solid black line), and 1st and 3rd quartiles (dashed lines).
-    Note that~\pct{0.5} of pixels have outstanding large \as{hi} values and are not included here.
+    Note that~\pct{0.5} of pixels have outstanding large HI values and are not included here.
   }%
   \label{fig:chl-vs-hi}
 \end{figure}
 
-However, the choice of these two \as{hi} thresholds is also guided by the resulting global spatial climatology of weak and strong fronts (Fig.~\ref{fig:frt-occurrence}).
+However, the choice of these two HI thresholds is also guided by the resulting global spatial climatology of weak and strong fronts (Fig.~\ref{fig:frt-occurrence}).
 Weak fronts are abundant, and more or less evenly distributed, over a broad band around and north of the Gulf Stream jet (Fig.~\ref{fig:frt-occurrence}a).
 To the south of the Gulf Stream jet, weak fronts are less present, with nevertheless more fronts on the edges of the subtropical gyre (around~\latlon{28N}) than in its center.
 This distribution of weak fronts is consistent with the predominance of mesoscale variability observed along the Gulf Stream system from satellite altimetry \parencite{zhai_2008}, and the injection of eddy kinetic energy north of the Gulf Stream jet by the Gulf Stream extension.
@@ -257,28 +257,28 @@ Thus these contrasted coverage of localized strong fronts and more widespread we
 This separation allows us to provide a first order sorting of the impact of each type of front.
 
 % <check list of percent correctly typeset>
-With the chosen thresholds, the areal proportion of weak fronts tends to increase from South to North, with~\qtylist{7;19;42}{\percent} of \as{hi} values comprised between~5 and~10 in the permanent subtropical, seasonal subtropical, and subpolar biome, respectively.
-Regarding strong fronts, there are only present in the seasonal subtropical and subpolar biome (as expected from the fact that the Gulf Stream and shelf-break fronts are located within these biomes), where \as{hi} values above 10 account for~\pct{6} and~\pct{17}, respectively.
+With the chosen thresholds, the areal proportion of weak fronts tends to increase from South to North, with~\qtylist{7;19;42}{\percent} of HI values comprised between~5 and~10 in the permanent subtropical, seasonal subtropical, and subpolar biome, respectively.
+Regarding strong fronts, there are only present in the seasonal subtropical and subpolar biome (as expected from the fact that the Gulf Stream and shelf-break fronts are located within these biomes), where HI values above 10 account for~\pct{6} and~\pct{17}, respectively.
 
 The fraction of the area occupied by fronts also varies with the seasons, with generally less fronts in summer (Fig.~\ref{fig:ts-climato}d-f).
 In the permanent subtropical biome, weak fronts cover on average up to~\pct{12} in spring and drop to~\pct{2} in summer.
 In the seasonal subtropical biome, the variation is from~\pct{27} to~\pct{13} for weak fronts, and~\pct{8} to~\pct{4} for strong front.
 In the subpolar biome, strong fronts cover between~\pct{11} in summer and~\pct{26} at their peak.
 This seasonality is consistent with other estimates that submesoscale activity is greater in winter due to greater mixed-layer thickness compared to summer \parencite{callies_2015}, and also consistent with the most recent modelling results by \textcite{dong_2020} in another Western Boundary system (the Kuroshio Extension) where they show that the strongest submesoscales occur with a lag of about a month after the mixed layer thickness maximum is reached.
-An exception to this seasonal pattern is the greater presence of weak fronts in summer in the subpolar biome (\pct{50} in summer versus~\pct{35} in winter), which may be partly explained by the reduction of the \as{hi} over Western Boundary Current fronts in summer, which results in them being counted as weak fronts in summer.
+An exception to this seasonal pattern is the greater presence of weak fronts in summer in the subpolar biome (\pct{50} in summer versus~\pct{35} in winter), which may be partly explained by the reduction of the HI over Western Boundary Current fronts in summer, which results in them being counted as weak fronts in summer.
 
 \subsubsection{Local impact of fronts on Chl-\textit{a}}
 
-The local impact of fronts on \as{chl} is illustrated by the example shown in Fig.~\ref{fig:zoom}, where the highest values of \as{chl} are found within the \as{hi} contour delimiting fronts.
-It should be noted, however, that in this example as in other similar examples, the localization of the highest \as{chl} do not perfectly coincide with elevated values of \as{hi};\ they are places where the \as{hi} is large and \as{chl} is small, and there are also places with elevated patches of \as{chl} outside of \as{hi} contours.
+The local impact of fronts on \as{chl} is illustrated by the example shown in Fig.~\ref{fig:zoom}, where the highest values of \as{chl} are found within the HI contour delimiting fronts.
+It should be noted, however, that in this example as in other similar examples, the localization of the highest \as{chl} do not perfectly coincide with elevated values of HI;\ they are places where the HI is large and \as{chl} is small, and there are also places with elevated patches of \as{chl} outside of HI contours.
 
 Nevertheless, it appears that on average, \as{chl} is affected by the presence of fronts, and depends on their strength.
-In order to measure that effect, we computed for each biome the \as{chl} distribution sorted by bins of \as{hi} (of width~\num{0.1}) for the whole time series~(Fig.~\ref{fig:chl-vs-hi}).
+In order to measure that effect, we computed for each biome the \as{chl} distribution sorted by bins of HI (of width~\num{0.1}) for the whole time series~(Fig.~\ref{fig:chl-vs-hi}).
 For low values of the heterogeneity index, these distributions are representative of background conditions and reflect the expected differences between biomes: the median \as{chl} is lowest~(\qty{0.05}{\mgm}) in the permanent subtropical biome, intermediate in the seasonal subtropical biome~(\qty{0.1}{\mgm}), and highest in the subpolar biome~(\qty{0.2}{\mg1}).
 The \as{chl} variability along the year and within the biome (i.e.\ the width of the distribution, highlighted by grey shading in Fig.~\ref{fig:chl-vs-hi}) is larger moving northwards, because of the higher seasonal variability.
 
-Importantly, in all 3 biomes, \as{chl} values increase with \as{hi}, and are also more dispersed as \as{hi} increases~(Fig.~\ref{fig:chl-vs-hi}).
-This suggests that the distinction between background, weak and strong fronts is somehow artificial and that the observed changes in \as{chl} are overall rather continuously dependent on the value of \as{hi}.
+Importantly, in all 3 biomes, \as{chl} values increase with HI, and are also more dispersed as HI increases~(Fig.~\ref{fig:chl-vs-hi}).
+This suggests that the distinction between background, weak and strong fronts is somehow artificial and that the observed changes in \as{chl} are overall rather continuously dependent on the value of HI\@.
 Nevertheless, our partitioning into background, weak and strong fronts remains meaningful because it enables us to isolate the most permanent fronts from the ephemeral ones, and we will therefore retain it in the following.
 
 
@@ -312,7 +312,7 @@ In both subtropical biomes, \as{chl} over fronts is systematically larger than i
 This increase is very modest over the permanent subtropical biome.
 The local increase over weak fronts also remains modest in the seasonal subtropical gyre, but is much larger over strong fronts.
 Finally in the subpolar biome (Fig.~\ref{fig:ts-climato}c), \as{chl} is significantly higher over fronts from the fall until the peak of the bloom but this difference diminishes as the spring bloom decays, and throughout summer.
-These results are very weakly sensitive to the choice of parameters used to compute \as{hi} (supplementary Fig.~\ref{fig:ts-sensitivity}).
+These results are very weakly sensitive to the choice of parameters used to compute HI (supplementary Fig.~\ref{fig:ts-sensitivity}).
 We can also note that the standard deviation range of the yearly median values (Fig.~\ref{fig:ts-climato}a-c) is smaller than the differences between fronts and background, which further confirms that these differences are robust over 20 years of data, for the three biomes and the two types of fronts.
 
 The strength of the local excess in \as{chl} over fronts also depends on latitude.
@@ -422,15 +422,15 @@ Nevertheless, for individual years, delays larger than one months could occur.
 
 \subsection{Discussion}
 
-Our analyses of surface satellite data over the Gulf Stream extension region, based on the computation of an heterogeneity index \as{hi}, allowed us to show a substantial local increase of \as{chl} concentrations over \as{sst} fronts compared to background levels, to detect earlier blooms by one to two weeks over fronts, and to quantify that the global effect of fronts on \as{chl} concentration at the scale of the region was less than~\pct{5}.
+Our analyses of surface satellite data over the Gulf Stream extension region, based on the computation of an heterogeneity index HI, allowed us to show a substantial local increase of \as{chl} concentrations over SST fronts compared to background levels, to detect earlier blooms by one to two weeks over fronts, and to quantify that the global effect of fronts on \as{chl} concentration at the scale of the region was less than~\pct{5}.
 The background levels in this region are very contrasted seasonally and geographically, with a productive and highly seasonal subpolar biome North of the Gulf Stream, a more steady oligotrophic permanent subtropical biome to the South, and an intermediate situation in between the two, where a seasonal subtropical biome prevails.
-The main results above hold for these three contrasted biomes, although with different intensities, which also depend on the strength of \as{hi}.
+The main results above hold for these three contrasted biomes, although with different intensities, which also depend on the strength of HI\@.
 
 \subsubsection{Caveats}
 
-The level~4 \as{sst} product used in this study has the advantage to be readily available on download platforms (here\as{cmems}) at a reasonably high spatial resolution~(\qty{4}{\km}), avoiding the need to regrid as was done in \textcite{liu_2016} who used~\qty{1}{\km} resolution L2 MODIS-Aqua data.
+The level~4 SST product used in this study has the advantage to be readily available on download platforms (here\as{cmems}) at a reasonably high spatial resolution~(\qty{4}{\km}), avoiding the need to regrid as was done in \textcite{liu_2016} who used~\qty{1}{\km} resolution L2 MODIS-Aqua data.
 It also has an excellent spatial coverage (e.g.\ Fig.~\ref{fig:zone-separation}) as it includes merged data from several sensors, but there is a trade-off between coverage and resolution.
-We have performed initial tests to investigate the differences in using 1km and 4km resolution \as{sst} data, which convinced us that the use of 4km resolution data was appropriate (not shown), particularly since the heterogeneity index \as{hi} is computed here over boxes of~\qtyproduct{30 x 30}{\km}.
+We have performed initial tests to investigate the differences in using 1km and 4km resolution SST data, which convinced us that the use of 4km resolution data was appropriate (not shown), particularly since the heterogeneity index HI is computed here over boxes of~\qtyproduct{30 x 30}{\km}.
 Nevertheless a more in-depth study of the sensitivity of our results to the resolution of the satellite products could be carried out in the future.
 
 Another caveat of this level~4 product is that the spatial interpolation performed to merge data from several sensors smooths out the finer features, particularly when some of the data are obstructed by clouds.
@@ -449,8 +449,8 @@ This uncertainty could be restricted by taking advantage of recent advances in s
 
 With these caveats in mind, we find that the degree of local \as{chl} increase at fronts varied seasonally, but mostly varied from one biome to another, with an intensity which was weaker in the more oligotrophic region, stronger between~\qtyrange{35}{45}{\degree}N, and intermediate in the subpolar biome (Fig.~\ref{fig:recap}a).
 Moreover, the local excess of \as{chl} was always significantly larger over strong fronts than over weak fronts.
-The increase in \as{chl} with increasing front strength (i.e.\ with increasing \as{hi}, Fig.~\ref{fig:chl-vs-hi}) is consistent with the hypothesis that phytoplankton production is enhanced at fronts by a submesoscale vertical flux of nutrients, and that this flux is stronger the stronger the front is.
-On the other hand, the larger dispersion in the \as{chl} distribution with increasing \as{hi} reflects the fact that not all fronts are equally efficient.
+The increase in \as{chl} with increasing front strength (i.e.\ with increasing HI, Fig.~\ref{fig:chl-vs-hi}) is consistent with the hypothesis that phytoplankton production is enhanced at fronts by a submesoscale vertical flux of nutrients, and that this flux is stronger the stronger the front is.
+On the other hand, the larger dispersion in the \as{chl} distribution with increasing HI reflects the fact that not all fronts are equally efficient.
 
 Co-occurrence between frontal vertical velocities (or divergence) and enhanced \as{chl} has been observed over specific fronts in the North Atlantic \parencite{mourino_2004, allen_2005, lehahn_2007}.
 The only study that has statistically connected enhanced \as{chl} with the presence of temperature front was conducted in the North Pacific subtropical gyre \parencite{liu_2016}, which shares characteristics with the permanent subtropical biome examined here.
@@ -462,8 +462,8 @@ This explains the maximum magnitude of the \as{chl} response at the northern edg
 
 Moreover, vertical velocities associated with ephemeral fronts, often confined to the mixed layer, are likely to be a less efficient nutrient flux pathway to the euphotic zone from the interior than deep, dynamic, persistent fronts extending well below the mixed layer \parencite{levy_2018}.
 The contrasting impacts of deep and shallow fronts are striking in models \parencite{levy_2012}, but are difficult to quantify from a small number of in situ observations.
-Here we observed that the magnitude of the \as{chl} response over fronts increased with the strength of the heterogeneity index \as{hi} (Fig.~\ref{fig:chl-vs-hi}).
-In other words, strong fronts, characterized by high values of \as{hi} (\(\am{hi} > 10\)), led to a stronger increase in \as{chl} values than weak fronts, characterized by intermediate values of \as{hi} (\(5 < \am{hi} < 10\)).
+Here we observed that the magnitude of the \as{chl} response over fronts increased with the strength of the heterogeneity index HI (Fig.~\ref{fig:chl-vs-hi}).
+In other words, strong fronts, characterized by high values of HI (\(\am{hi} > 10\)), led to a stronger increase in \as{chl} values than weak fronts, characterized by intermediate values of HI (\(5 < \am{hi} < 10\)).
 
 Finally, an important outcome of this study is that, contrary to what is generally thought, the impact of fronts is stronger in bloom regimes than in oligotrophic regimes.
 In the subpolar biome, the \as{chl}  excess over fronts reaches~\pct{150} during the bloom and~\pct{50} in summer (Fig.~\ref{fig:latbands-n}), while in the permanent subtropical biome it never exceeds~\pct{10} (Fig.~\ref{fig:latbands-s}).
@@ -476,12 +476,12 @@ The above results are suggestive that the heterogeneity index could be used as a
 The localization and frequency of strong and weak fronts is consistent with this hypothesis.
 Weak fronts are much more frequent than strong fronts, as we expect from ephemeral sub-mesoscale fronts compared with permanent fronts (Fig.~\ref{fig:frt-occurrence}).
 In addition, the localization of strong fronts coincide with the position of the Gulf Stream.
-Another element that supports this hypothesis is the scale over which the \as{hi} is computed (\qty{30}{\km}) which gives a strong weight to \as{sst} heterogeneities associated with large contrasts which is the case across the Gulf Stream.
+Another element that supports this hypothesis is the scale over which the HI is computed (\qty{30}{\km}) which gives a strong weight to SST heterogeneities associated with large contrasts which is the case across the Gulf Stream.
 Of course, more direct evidence linking the penetration of fronts with the intensity of the heterogeneity index would be needed to confirm the association.
 
 \subsubsection{Biome-scale impact of fronts on Chl-\textit{a}}
 
-The categorization of fronts based on \as{hi} has allowed us to quantify the respective contribution of two types of fronts on the regional \as{chl} budget (Fig.~\ref{fig:recap}b).
+The categorization of fronts based on HI has allowed us to quantify the respective contribution of two types of fronts on the regional \as{chl} budget (Fig.~\ref{fig:recap}b).
 Weak fronts lead to a local \as{chl} enhancement which is weaker than strong front, in general, but because they are also more frequent than strong fronts, depending on the biome and seasons, they contribute equally to the regional \as{chl} budget as strong fronts.
 There is also some degree of seasonality in this small surplus of \as{chl} attributed to fronts, which heavily depends on the region of interest (Fig.~\ref{fig:ts-climato}).
 As predicted by theory and noted by previous studies, sub-mesoscale fronts \encadra{which are confined to the mixed-layer} are less abundant in summer when mixed-layers are shallower.
@@ -510,7 +510,7 @@ It should also be noted that it is inherently difficult to pinpoint the precise 
 
 The Gulf stream extension region is a region of strong biological contrasts and particularly strong frontal activity of the world's ocean, undergoing rapid warming which strongly affect fisheries \parencite{pershing_2015, neto_2021}.
 Quantifying the impact of fronts on phytoplankton there is thus particularly relevant, and we expected to detect a large impact.
-The use of 20~years of satellite data of \as{sst} to detect fronts and of surface \as{chl} to compute anomalies over the front allowed us to provide a robust assessment of this impact.
+The use of 20~years of satellite data of SST to detect fronts and of surface \as{chl} to compute anomalies over the front allowed us to provide a robust assessment of this impact.
 We found three main results.
 First, that the regional increase in surface phytoplankton due to fronts much weaker than we expected, \pct{5} at most; second that nutrient supplies at fronts enhanced the spring bloom two to three three times more than they enhanced oligotrophic regions; and third, that the spring bloom onset was earlier over fronts by one to two weeks, which we already knew from models \parencite{karleskind_2011, mahadevan_2012} but for which we had no direct evidence nor sound quantification.
 
