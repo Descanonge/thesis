@@ -51,7 +51,6 @@
 
 \savebibmacro{cite}
 \savebibmacro{textcite}
-\savebibmacro{citeyear}
 
 % No extra date
 \renewbibmacro*{date+extradate}{}%
@@ -69,12 +68,23 @@
     \DeclareFieldAlias{bibhyperref}{noformat}%
     \printtext[bold]{%
       \restorebibmacro{cite}%
+      \lfstyle%
       \usebibmacro{cite}\addspace:\space}%
   }
   \c@maxnames\blx@maxbibnames\relax%
   \c@minnames\blx@minbibnames\relax%
 % \renewcommand*\mkbibnamefamily[1]{\bname{##1}}%
 }
+
+\DeclareFieldFormat
+  [software,dataset]
+  {title}{\mkbibemph{\textlf{#1}}}
+\DeclareFieldFormat
+  [article,inbook,incollection,inproceedings,patent,thesis,unpublished]
+  {title}{\mkbibquote{#1\isdot}}
+\DeclareFieldFormat{version}{\bibstring{version}~{\textosf{#1}}}
+\DeclareFieldFormat[dataset,software]{shorttitle}{\textlf{#1}}
+\DeclareFieldFormat[dataset,software]{citefield}{\textlf{#1}}
 
 % Change default name format
 \DeclareNameAlias{default}{family-given}
@@ -177,10 +187,6 @@
     {\bibcloseparen\global\boolfalse{cbx:parens}}
     {}}}
 
-\DeclareFieldFormat{citeyearhyperref}{%
-  \DeclareFieldAlias{bibhyperref}{noformat}%
-  \bibhyperref{#1}}
-
 \renewbibmacro*{cite}{%
   \printtext[citehyperref]{%
     \restorebibmacro{cite}%
@@ -199,8 +205,3 @@
   \printtext[textcitehyperref]{%
     \restorebibmacro{textcite}%
     \usebibmacro{textcite}}}
-
-% \renewbibmacro*{citeyear}{%
-%   \printtext[citeyearhyperref]{%
-%     \restorebibmacro{citeyear}%
-%     \usebibmacro{citeyear}}}

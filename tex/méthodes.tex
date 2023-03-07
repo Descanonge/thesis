@@ -9,7 +9,7 @@
 \clearpage
 
 Maintenant que les objectifs de ce projet ont été précisés, nous détaillons dans ce chapitre l'ensemble des outils nécessaire à leur accomplissement.
-Nous décrivons dans les sections qui suivent les données utilisées, puis les méthodes utilisées pour séparer notre zone d'étude en sous"-régions, pour repérer les fronts en utilisant le \engquote{\al{hi}}~(HI), et pour extraire nos résultats.
+Nous décrivons dans les sections qui suivent les données utilisées, puis les méthodes utilisées pour séparer notre zone d'étude en sous"-régions, pour repérer les fronts, et pour extraire nos résultats.
 
 \section{Données}
 \label{sec:donnees}
@@ -29,7 +29,7 @@ Ces derniers sont cités en note de bas de page et listés dans la section~\reft
 \label{sec:donnees-sst}
 
 Nous commencons par la température de surface que nous allons notamment utiliser comme proxy de la densité pour repérer les fronts.
-Malgré que de nombreux produits de SST soient disponibles, il n'en demeure pas moins difficile de trouver un produit qui satisfasse les exigences inhérentes à notre étude.
+De nombreux produits de SST sont disponibles, néanmoins il n'en demeure pas moins difficile de trouver un produit qui satisfasse les exigences inhérentes à notre étude.
 Étant donné que nous voulons repérer des structures de fine échelle la résolution est peut être l’exigence qui apparaît comme première.
 Cependant, et comme nous allons le voir plus en détail, d'autres paramètres rentrent en compte et il est nécessaire de faire des compromis dans ce domaine.
 Brièvement ces autres paramètres sont (entre autres) la disponibilité des autres variables à une résolution similaire, la facilité d'obtention\footnote{%
@@ -42,44 +42,48 @@ ou encore la couverture spatio"-temporelle.
   Nous faisons donc une correspondance simple entre fraction de degré et kilomètres, quelque soit la distance considérée, notamment pour la taille des pixels et des fenêtres.
 \end{note}
 
-\subsubsection{MODIS-1km}
+\subsubsection{Modis-L3}
 \declareDataset{sst_modis}
 \declareDataset{chl_modis}
 
-Un des premiers jeu de données SST à considérer est celui utilisé par \textcite{liu_2016}, dont l'étude consistait également à détecter des fronts de SST et les colocaliser aux données de \ab{chl}.
-Ces variables étant rarement distribuées sur des grilles à des résolutions kilométriques, il apparaît comme nécessaire de projeter sur grille régulière nous même des produits~L2 \encadra*{\al{cad} des données d'un seul capteur, converties en variables géophysiques, et disposées à la résolution de capture}.
+Afin d'obtenir des données avec une résolution spatiale optimale, une solution est de travailler directement à partir d'un produit \guil*{brut}.
+Nous commençons donc par un jeu de données que l'on désignera par \dataname{sst_modis}, s'appuyant sur les données~\abbrv{L2} du capteur \ab{modis}, à bord du satellite Aqua~(\cite{kilpatrick_2015}).
+Ce sont les données utilisées par \textcite{liu_2016} \encadra{et produites par les même outils} dont l'étude consistait également à détecter des fronts de SST et les colocaliser aux données de \ab{chl}.
 
 % Éventuellement à déplacer à une mention antérieure des niveaux
 \begin{note}
-  Tout au long de ce manuscript nous utilisons les dénominations des \guil*{niveaux} de données tels que typiquement utilisés par les distributeurs, et qui correspondent de manière générale à:
+  Tout au long de ce manuscript nous utilisons les dénominations des niveaux de données tels que typiquement utilisés par les distributeurs, et qui correspondent de manière générale à:
   \review{TODO}
   \begin{itemize}
-    \item L1:,
-    \item L2:,
-    \item L3:,
-    \item L4:.
+    \item \abbrv{L1}:,
+    \item \abbrv{L2}:,
+    \item \abbrv{L3}:,
+    \item \abbrv{L4}:.
   \end{itemize}
 \end{note}
 
-Pour le jeu de données qu'on désignera par \dataname{sst_modis} dans la suite, il s'agit de données provenant du capteur \ab{modis}, à bord du satellite Aqua~(\cite{kilpatrick_2015}).
-Les données sont téléchargées au niveau~L2 depuis le \href{https://cmr.earthdata.nasa.gov/search/}{Common Metadata Repository (CMR)}\footfullcite{sst_modis} en sélectionnant les \eng{swaths} intersectant notre région d'étude, collectés de jour, et pour les courtes longueurs d'onde infrarouges~(\qty{11}{\um}).
-Pour ensuite projeter les données sur une grille kilométrique globale, j'ai repris les outils utilisés par \citeauthor{liu_2016}, à savoir les programmes présents dans le paquet de l'\href{https://oceandata.sci.gsfc.nasa.gov/ocssw}{\ab{ocssw}}, version~\verb|v7.5|, qui est maintenu par l'Ocean Biology Processing Group et notamment distribué à travers l'outil \href{https://seadas.gsfc.nasa.gov/}{SeaDAS}.
-Les \eng{swaths}, maintenant tous sur la même grille spatiale peuvent être moyennés par date.
+Les données sont téléchargées au niveau~\abbrv{L2} depuis le \af{cmr}\footfullcite{sst_modis} en sélectionnant les sections de fauchées\footnotemark{} intersectant notre région d'étude, collectés de jour, et pour les courtes longueurs d'onde infrarouges~(\qty{11}{\um}).
+Ces données sont projetées sur une grille kilométrique globale, en reprenant les outils utilisés par \citeauthor{liu_2016}, à savoir les programmes présents dans le paquet de l'\href{https://oceandata.sci.gsfc.nasa.gov/ocssw}{\ab{ocssw}}, version~v\num{7.5}, qui est maintenu par l'\al{obpg} et notamment distribué à travers l'outil \href{https://seadas.gsfc.nasa.gov/}{SeaDAS}.
+Les sections de fauchées, maintenant toutes sur la même grille spatiale, peuvent être moyennées jour par jour, pour obtenir un produit de niveau~\abbrv{L3}.
+\footnotetext{%
+  \engquote{swath} en anglais, bande de terrain couverte par le satellite le long de son orbite.
+  \ab{modis} \slashfrac{s}{}\,Aqua produit des fauchées d'environ~\qty{2300}{\km} de large, qui sont distribuées en sections d'environ la même longueur (le long de la trajectoire).
+}
 
 Cela permet donc d'obtenir des données à la limite de la résolution des capteurs, mais présente un certain nombre de désavantages majeurs.
-C'est tout d'abord un travail important à réaliser: d'abord de téléchargement, les fichiers~L2 étant particulièrement lourds et nombreux (jusqu'à une dizaine pour une journée); ensuite de projection, qui à une résolution kilométrique demande une certaine puissance de calcul.
+C'est tout d'abord un travail important à réaliser: d'une part de téléchargement, les fichiers~\abbrv{L2} étant particulièrement lourds et nombreux (jusqu'à une dizaine pour une journée); d'autre part de projection, qui à une résolution kilométrique demande une certaine puissance de calcul.
 De plus, toutes les étapes décrites jusqu'ici ne concernent qu'un seul capteur.
 Des étapes et calculs additionnels seraient nécessaires pour y combiner les données d'autres capteurs, ce qui pose des problèmes supplémentaires et se ferait non sans difficultés.
-Même pour un capteur identique (\ab{modis} à bord de Terra \ab{par-ex}), il devient nécessaire de considérer des différences de calibrations, ainsi que de possibles artefacts lorsque l'on superpose plusieurs \eng{swaths} (que nous avons d'ailleurs largement ignorés pour agréger les \eng{swaths} sur une seule journée\dots).
+Même pour un capteur identique (\ab{modis} à bord de Terra \ab{par-ex}), il devient nécessaire de considérer des différences de calibrations, ainsi que de possibles artefacts lorsque l'on superpose plusieurs fauchées (que nous avons d'ailleurs largement ignorés pour agréger les fauchées sur une seule journée\dots).
 
-Face à ces difficultés, nous avons donc décidé dans un premier temps d'en rester à un seul capteur malgré la couverture spatiale réduite.
-Il est également à noter qu'à ce niveau, peu d'actions ont été prises pour disqualifier les pixels nuageux.
-Il en résulte des pixels aux valeurs visiblement erronées mais qui n'ont pas été masqués comme nuageux.
+Face à ces difficultés, nous avons donc décidé dans un premier temps d'en rester à un seul capteur, malgré la couverture spatiale réduite.
+Il est également que nous n'avons pas réalisé de détection de nuages supplémentaire et ne disposons que d'un indice de qualité des pixels fourni avec les données~\abbrv{L2}.
+Cet indice ne suffit pas à exclure des pixels aux valeurs visiblement erronées.
 Cela se manifeste par exemple comme du bruit autour de nuages.
 Il est difficile de les disqualifier correctement sans un bon algorithme de détection de nuage, ce qui nécessite un travail supplémentaire important.
-Nous contournons le problème d'une manière similaire à celle de \textcite{liu_2016} en ne travaillant que sur des fenêtres de~\qtyproduct{100 x 100}{\km} avec une faible couverture nuageuse~(\pct{<70}), ce qui élimine une partie de ces cas problématiques.
+Nous contournons le problème d'une manière similaire à celle de \citeauthor{liu_2016} en ne travaillant que sur des fenêtres de~\qtyproduct{100 x 100}{\km} avec une faible couverture nuageuse~(\pct{<70}), ce qui élimine une partie de ces cas problématiques.
 
-Malgré le fait que l'on soit limité à un seul capteur, \ab{modis} présente l'avantage de mesurer concomitamment la SST et la couleur de l'océan.
+Malgré le fait que l'on soit limité ici à un seul capteur, \ab{modis} présente l'avantage de mesurer concomitamment la SST et la couleur de l'océan.
 Cela permet d'obtenir les valeurs de \ab{chl} aux même pixels, en utilisant le même traitement pour le jeu de données, accessible au \ab{cmems}\footfullcite{chl_modis}.
 
 Il est néanmoins possible de trouver d'autres jeux de données permettant notre étude et nécessitant moins de travail (et autant d'éventuelles erreurs), ces dernières années ayant vu apparaître des données distribuées à des résolutions élevées.
@@ -94,40 +98,40 @@ La grande couverture spatiale de ce produit se fait donc par l'utilisation de me
 Le champ de SST se retrouve donc lissé à la fois par l'interpolation et par l'inclusion de ces mesures.
 L'utilisation du produit suivant cherche à palier à ce problème.
 
-\subsubsection{ESA SST CCI / C3S}
+\subsubsection{ESA-SST-CCI / C3S}
 \declareDataset{sst_esacci}
 
-Ce produit est distribué conjointement par l'\ab{esa} SST \ab{cci} et le \ab{c3s}.
+Ce produit est distribué conjointement par l'\ab{esa}\-\glsabbrvfont{SST}\-\ab{cci} et le \ab{c3s}.
 Il agglomère les mesures de tous les capteurs infrarouges disponibles depuis~1981, ce qui comprend 11~\ab{avhrr} à bord des satellites \ab{metop}["~A] et \ab{noaa} (entre les itérations 6 et~19) et trois \ab{atsr} à bord de \ab{ers} 1 et~2, et Envisat.
 Cela donne au moins deux capteurs en fonctionnement simultané, et au moins trois depuis~1992.
 Outre la bonne couverture obtenue, l'uniformité des capteurs permet d'obtenir un jeu de données stable dans le temps, pouvant servir à la détection de tendances climatiques~(\cite{merchant_2019}).
 
 Les données sont distribuées à différents niveaux, dont nous allons préciser le passage de l'un à l'autre dans la suite:
 \begin{itemize}
-  \item L2P (mono-capteur),
-  \item L3U (mono-capteur mais sur grille régulière),
-  \item L3C (multi-capteurs regroupés par famille d'instrument),
-  \item et L4 (tous les capteurs, combinés par interpolation).
+  \item \abbrv{L2P} (mono-capteur),
+  \item \abbrv{L3U} (mono-capteur mais sur grille régulière),
+  \item \abbrv{L3C} (multi-capteurs regroupés par famille d'instrument),
+  \item et \abbrv{L4} (tous les capteurs, combinés par interpolation).
 \end{itemize}
 
-Le produit~L2P est similaire aux données brutes utilisées pour le set \datasect{sst_modis}, mais avec l'avantage de disposer de données standardisées sur un grand nombre de capteurs.
-Ces données sont projetées capteur par capteur sur une grille régulière, à une résolution de~\resol{1}{20}, soit~\qty{\approx5}{\km}, ce qui donne le produit~L3U.
+Le produit~\abbrv{L2P} est similaire aux données brutes utilisées pour le set \datasect{sst_modis}, mais avec l'avantage de disposer de données standardisées sur un grand nombre de capteurs.
+Ces données sont projetées capteur par capteur sur une grille régulière, à une résolution de~\resol{1}{20}, soit~\qty{\approx5}{\km}, ce qui donne le produit~\abbrv{L3U}.
 Il est à noter que nous pourrions faire ce processus nous même, mais les outils que nous utilisons ne sont pas garantis de fonctionner directement sur ces données.
 
-Les données sont regroupées par famille de d'instrument pour le produit~L3C. Une légère perte de précision est attendue, mais les produits L3U et~L3C peuvent néanmoins tous deux être utilisés dans l'étude de structures fines et où la présence de nuages n'est pas rédhibitoire~(\cite{merchant_2019}).
+Les données sont regroupées par famille de d'instrument pour le produit~\abbrv{L3C}. Une légère perte de précision est attendue, mais les produits \abbrv{L3U} et~\abbrv{L3C} peuvent néanmoins tous deux être utilisés dans l'étude de structures fines et où la présence de nuages n'est pas rédhibitoire~(\cite{merchant_2019}).
 
-Enfin, le produit~L4 regroupe l'ensemble des capteurs en utilisant le schéma d'intégration variationnelle \verb|NEMOVAR| intégré dans le système \ab{ostia}~(\cite{good_2020}).
+Enfin, le produit~\abbrv{L4} regroupe l'ensemble des capteurs en utilisant le schéma d'intégration variationnelle \verb|NEMOVAR| intégré dans le système \ab{ostia}~(\cite{good_2020}).
 Ce produit donne ainsi un champ de SST sans nuages, estimé par une combinaison des observations satellites, et de la prévision d'un modèle numérique d'un jour sur l'autre.
 L'absence de couverture nuageuse et la simplicité d'usage se fait au détriment du lissage inévitable des structures les plus fines.
 
-Une estimation quantitative du lissage due à l'interpolation est compliqué, car la paramétrisation de cette dernière dépend de la variabilité du champ de température à J"~1.
+Une estimation quantitative du lissage due à l'interpolation est compliqué, car la paramétrisation de cette dernière dépend de la variabilité du champ de température à~\abbrv{J"~1}.
 On peut néanmoins imaginer que le champ de SST produit est plus lissé dans les zones normalement nuageuses, et de plus potentiellement plus éloigné de la réalité~(voir \cref{sec:donnees-sst_reanalyses}).
 Il est tout de même possible de mitiger ces effets en ne comptabilisant dans nos statistiques seulement les pixels non"-nuageux, ce que nous faisons pour tous les résultats présentés.
 Nous utilisons pour cela les données de \ab{chl} qui identifient les pixels nuageux.
 % À noter qu'il serait également possible d'utiliser les erreurs d'intégration associées à chaque pixel, mais cela n'a pas été exploré.
 % -> c'est pas vraiment possible, les erreurs d'inté sont données avec une résolution très faible
 
-Sauf indication contraire, c'est le produit~L4 que nous utiliserons pour le champ de SST dans toute la suite de cette thèse.
+Sauf indication contraire, c'est le produit~\abbrv{L4} que nous utiliserons pour le champ de SST dans toute la suite de cette thèse.
 Il permet d'accéder à des données SST simplement, avec une résolution convenable, et est stable sur une longue durée (plusieurs décennies).
 Les données sont téléchargées depuis \ab{cmems}\footfullcite{sst_esacci}.
 
@@ -160,11 +164,11 @@ Outre la résolution assez faible de ce produit, on notera des différences impo
 \declareDataset{chl_globcolour}
 
 Pour le champ de \al{chl}, nous utilisons les données produites dans le cadre du projet GlobColour, développées, validées et distribuées par ACRI"~ST, France~(\cite{maritorena_2002}).
-La version \guil{MultiYear}, au niveau L3 est utilisée.
+La version \guil{MultiYear}, au niveau~\abbrv{L3} est utilisée.
 On obtient des données à une résolution de~\resol{1}{24} (soit~\qty{\approx4}{\km}), journalière, avec des nuages.
 Les données sont récupérées sur \ab{cmems}\footfullcite{chl_globcolour}.
 
-Ce produit aggrège les données optiques de plusieurs capteurs: \ab{seawifs}, \ab{modis} Aqua et Terra, \ab{meris} à bord d'Envisat, \ab{viirs} à bord de \ab{snpp} et \ab{noaa}[-20], et enfin \ab{olci} à bord de Sentinel-3A et -3B.
+Ce produit aggrège les données optiques de plusieurs capteurs: \ab{seawifs}, \ab{modis} Aqua et Terra, \ab{meris} à bord d'Envisat, \ab{viirs} à bord de \ab{snpp} et \ab{noaa}[\textlf{-20}], et enfin \ab{olci} à bord de \textlf{Sentinel-3A et -3B}.
 Les données de reflectance de chaque capteur sont transformées en concentration de \ab{chl} avant d'être fusionnées en seul produit.
 Les algorithmes pour le passage en \ab{chl} sont ajustés indépendamment pour chacun des capteurs, ce qui permet d'obtenir un produit cohérent et stable~(\cite{garnesson_2019}).
 
@@ -184,9 +188,9 @@ Sachant que les produits de composition du phytoplancton dont nous disposions (n
 \label{sec:donnees-bathymetrie}
 \declareDataset{etopo1}
 
-Nous utilisons les données de bathymétrie ETOPO1\footfullcite{etopo1}, fournies par \ab{noaa}.
+Nous utilisons les données de bathymétrie \abbrv{ETOPO1}\footfullcite{etopo1}, fournies par \ab{noaa}.
 Les données sont distribuées sur une grille plate"-carrée à une résolution d'une minute d'arc~(\resol{1}{60}), soit trois fois trop pour nous.
-Nous sous"-échantillonnons les données en appliquant une moyenne à chaque groupe de 3\texttimes3~pixels, puis en interpolant le résultat sur la même grille que le reste des données de la même manière que pour la SST.
+Nous sous"-échantillonnons les données en appliquant une moyenne à chaque groupe de \qtyproduct{3x3}{\pixels}, puis en interpolant le résultat sur la même grille que le reste des données de la même manière que pour la SST.
 La bathymétrie nous permet d'exclure de nos résultats le plateau continental~(\cref{fig:bathymetrie}), pour des raisons discutées ci"-dessous.
 
 \begin{figure}
@@ -221,7 +225,7 @@ Cette séparation est en accord avec la limite entre les biomes tels que délimi
   \captionT{Résultat de la séparation de la zone d'étude en biomes}{%
     La zone est découpée en trois biomes: le biome \al{st-perm}~(PSB) au sud de du trait pointillé à~\latlon{32N}; le biome \al{st-sais}~(SSB) entre~\latlon{32N} et la limite (sinueuse) nord du Gulf Stream dénotée par le contour noir; et le biome \al{sp}~(SP) au nord du Gulf Stream.
 
-    Clichés de SST~(a) et \ab{chl}~(b) au \frenchdate{2007}{04}{22}, et les distributions de SST~(c) et {d}~\ab{chl} pour chacuns des biomes, le même jour (\al{sp}:~bleu, \al{st-sais}:~jaune, \al{st-perm}:~rouge).
+    Clichés de SST~(a) et \ab{chl}~(b) au \frenchdate{2007}{04}{22}, et les distributions de SST~(c) et (d)~\ab{chl} pour chacuns des biomes, le même jour (\al{sp}:~bleu, \al{st-sais}:~jaune, \al{st-perm}:~rouge).
     La ligne noire verticale sur~(c) marque la température détectée comme seuil de la limite nord du Gulf Stream.
     Les axes des abscisses des distributions correspondent aux barres de couleurs.
     La ligne rouge suit l'isobath~\qty{1500}{\m}. Le plateau continental~(\qty{<1500}{\m}) n'est pas considéré et est masqué.
@@ -342,12 +346,12 @@ Cela présuppose que lorsque les températures sont uni"-modales (\ab{cad} quand
 
 De manière plus précise on commence par calculer l'histogramme~\(h_i\) des valeurs de SST dans la fenêtre, en utilisant des intervalles de largeur fixe de~\tC{0.1} et compris entre les valeurs minimales et maximales dans la fênetre.
 Les données de SST étant stockées compressées par \engquote{linear packing}\footnotemark\ avec un facteur d'échelle de~\tC{0.01}, nos intervalles ont une largeur précisement égale à dix fois l'intervalle de discrétisation des valeurs de température.
-Pour éviter que trop de valeurs tombent sur les bords des intervalles et que l'histogramme soit pollué par des erreurs numériques, on décale les intervalles de~\tC[parse-numbers=false]{0,01/2}.
+Pour éviter que trop de valeurs tombent sur les bords des intervalles et que l'histogramme soit pollué par des erreurs numériques, on décale les intervalles de~\tC[parse-numbers=false]{0.01/2}.
 Par ailleurs, le nombre d'intervalles étant dépendant de la largeur de la distribution de SST, dans les cas où il est inférieur ou égal à quatre, la bimodalité est automatiquement assignée nulle~(\(B=0\)).
 \footnotetext{%
   Cette technique de compression avec pertes \encadra{utilisée notamment par l'outil \citesoft{nco}\footnotemark{}} consiste à discrétiser des valeurs flottantes sur des entiers après une transformation linéaire.
-  Par exemple, en prenant pour stockage des entiers non"-signés sur \qty{16}{\bits}~(\texttt{NC\_USHORT}) on peut évidement représenter des valeurs entières entre 0 et~\(2^{16}-1 = \num{65535}\); mais en multipliant ces valeurs entières par un facteur de, disons,~\num{0.005} on peut représenter des valeurs entre 0 et~\num{327.675}.
-  On a gagné en volume par rapport à un stockage typique de 32 ou~\qty{64}{\bits}, mais en perdant évidemment en précision puisque nos valeurs sont maintenant discrétisées avec un intervalle de~\num{0.005}.}
+  Par exemple, en prenant pour stockage des entiers non"-signés sur 16~bits~(\texttt{NC\_USHORT}) on peut évidement représenter des valeurs entières entre \num{0} et~\(2^{16}-1 = \num{65535}\); mais en multipliant ces valeurs entières par un facteur de, disons,~\num{0.005} on peut représenter des valeurs entre \num{0} et~\num{327.675}.
+  On a gagné en volume par rapport à un stockage typique de 32 ou~64~bits, mais en perdant évidemment en précision puisque nos valeurs sont maintenant discrétisées avec un intervalle de~\num{0.005}.}
 \footnotetext{voir le guide utilisateur: \glsurl{nco-packed}}
 
 Par ailleurs on définit une distribution gaussienne~\(g_i\) sur les même intervalles en utilisant les statistiques calculées précédemment:
@@ -399,7 +403,7 @@ En revanche, la normalisation par l'écart"-type permet d'attribuer une part éq
 \end{figure}
 
 Jusqu'ici nous n'imposons aucune contrainte sur l'amplitude des valeurs du HI.
-Afin de \guil*{standardiser} quelque peu ses valeurs finales, nous définissons un quatrième coefficient de normalisation défini de sorte que~\pct{95} des valeurs du HI soient inférieures à~\num{9.5}.
+Afin de \guil*{standardiser} quelque peu ses valeurs finales, nous définissons un quatrième coefficient de normalisation défini de sorte que~\pct{95} des valeurs du HI soient inférieures à~9.5.
 
 Les coefficients de normalisation~\(\am{coef}^n\) sont obtenus par analyse des distributions des composantes pour l'année~2007 uniquement. Ils sont ensuite appliqués de manière uniforme au reste des données.
 
@@ -423,7 +427,7 @@ Nous avons réalisé des test de sensibilité à certains paramètres de cette m
   \includegraphics[width=\textwidth]{exemple_composantes.pdf}
   \captionT{Exemples de construction du \glsentryshort{hi} à partir de ses composantes}{%
     Champ de SST~(a) pour le \frenchdate{2007}{04}{07}, à partir de laquelle on calcule les composantes du HI: l'écart"-type~(c), l'asymétrie~(e), et la bimodalité~(f) (ici toutes représentées normalisées par leur variance).
-    Le HI~(b) est ensuite obtenu par la somme de ces composantes normalisées, avant d'être normalisé lui aussi afin que~\pct{95} de ses valeurs soient inférieures à~\num{9.5}.
+    Le HI~(b) est ensuite obtenu par la somme de ces composantes normalisées, avant d'être normalisé lui aussi afin que~\pct{95} de ses valeurs soient inférieures à~9.5.
     Le HI permet de détecter les fronts de SST, ici deux valeurs du HI normalisé sont contourées, à 5~(trait plein) et 10~(trait pointillé).
   }
   \label{fig:exemple-composantes}
@@ -433,7 +437,7 @@ Nous avons réalisé des test de sensibilité à certains paramètres de cette m
   \centering
   \includegraphics[width=\textwidth]{exemples_fronts.pdf}
   \captionT{Exemples de structures fines}{%
-    Champs de SST~(colonne gauche), \ab{chl}~(colonne centre), et HI~(colonne droite) pour trois exemples de structures: 1\ier~exemple~(1a--c) le \frenchdate{2007}{04}{07}, 2\ieme~exemple~(2a--c) le \frenchdate{2007}{02}{23}, et 3\ieme~exemple~(3a--c) le \frenchdate{2007}{02}{28}.
+    Champs de SST~(colonne gauche), \ab{chl}~(colonne centre), et HI~(colonne droite) pour trois exemples de structures: \textlf{1}\ier~exemple~(1a--c) le \frenchdate{2007}{04}{07}, \textlf{2}\ieme~exemple~(2a--c) le \frenchdate{2007}{02}{23}, et \textlf{3}\ieme~exemple~(3a--c) le \frenchdate{2007}{02}{28}.
     Chaque fenêtre représente une surface d'environ~\qtyproduct{200x200}{\km}.
     Deux valeurs seuil de HI sont contourées, à 5~(trait plein) et 10~(trait pointillé).
   }
@@ -456,7 +460,7 @@ Prenons l'exemple d'une seule image. Pour notre région d'étude, cela représen
 On cherche à extraire un simple diagnostic, par exemple la moyenne de la \ab{chl} dans, et hors des fronts pour chacun des biomes.
 Il nous faut donc séparer la région en biomes, ce qui nécessite rappelons-le de discriminer les pixels par leur température~(\cref{sec:delimitations-regions}).
 Il faut également discriminer les pixels par leur valeur de HI pour séparer fronts et \eng{background}.
-On peut maintenant calculer nos statistiques sur chacun des ensembles de pixels constitués, ce qui représente ici de faire 6~calculs (3~biomes~\texttimes\ fronts/\eng{backgound}) sur environ~\qty{e6}{\pixels}.
+On peut maintenant calculer nos statistiques sur chacun des ensembles de pixels constitués, ce qui représente ici de faire 6~calculs (\textlf{3}~biomes~\texttimes\ fronts/\eng{backgound}) sur environ~\qty{e6}{\pixels}.
 Mais une fois nos histogrammes calculés, un diagnostic ne requiert que de regarder le ou les histogrammes appropriés, et ce qui représente beaucoup moins d'efforts \encadra*{et de données comme nous allons le voir}.
 
 Les histogrammes peuvent être rendus représentatifs sans pour autant utiliser un nombre prohibitif d'intervalles, d'autant plus que les données (\ab{chl} et SST) sont déjà stockées compressées avec pertes. Pour la température par exemple, 450~intervalles suffisent à couvrir toutes les valeurs (de \tC{-5} à~\tC{40}), avec une largeur d'intervalle de~\tC{0.1} équivalente à l'incertitude sur la mesure.
@@ -485,7 +489,7 @@ La largeur des intervalles est~\(w_i = x_{i+1}-x_i\). On transforme le nombre de
 \end{equation}
 pour ainsi obtenir une approximation de la densité de probabilité~\(f\).
 
-On peut extraire de cette distribution notamment la médiane, ainsi que des percentiles divers en trouvant la valeur de~\(x\) pour laquelle la somme cumulée de la densité de probabilité est égale au percentile recherché (\num{0.5} dans le cas de la médiane).
+On peut extraire de cette distribution notamment la médiane, ainsi que des percentiles divers en trouvant la valeur de~\(x\) pour laquelle la somme cumulée de la densité de probabilité est égale au percentile recherché (0.5 dans le cas de la médiane).
 On délègue ce travail au paquet SciPy dont l'objet~\glshref{rv_histogram} permet d'effectuer ces calculs de manière triviale.
 
 Il est à noter que l'interprétation de certaines métriques n'ont de sens que si la distribution de la variable concernée est convenable (uni"-modale \ab{par-ex}).
@@ -535,7 +539,7 @@ Afin d'estimer l'incertitude de cette mesure, nous prenons l'écart"-type de l'e
 
     Le processus est illustré sur la série correspondant aux fronts faibles~(colonne de gauche):
     \textcircled{1}\,Nous déterminons l'instant pour lequel la \as{chl} est maximale, puis \textcircled{2}\,prenons pour démarrage du bloom l'instant antérieur à ce dernier et pour lequel la dérivée de \as{chl} est maximale.
-    Enfin, \textcircled{3}\,la date de fin de bloom est prise comme la date la plus tardive pour laquelle la \as{chl} est supérieure à~\pct{75} de sa valeur maximale.
+    Enfin\,\textcircled{3} la date de fin de bloom est prise comme la date la plus tardive pour laquelle la \as{chl} est supérieure à~\pct{75} de sa valeur maximale.
 
     Les résultats pour les trois séries temporelles correspondant au \eng{background}~(rouge), fronts faibles~(bleu), et fronts forts~(vert) sont superposés~(colonne de droite).
   }

@@ -22,7 +22,7 @@
 
 \RequirePackage[T1]{fontenc}
 \RequirePackage{fontspec}
-\RequirePackage[otfmath]{XCharter}
+\RequirePackage[otfmath, osf]{XCharter}
 \RequirePackage[defaultsans]{opensans}
 \setmonofont{RobotoMono-Regular}[
 Scale = MatchLowercase,
@@ -38,7 +38,7 @@ ScaleAgain = 0.96
   ThinColonSpace
 }
 \addto\extrasenglish{\sisetup{locale = US}}
-\addto\extrasfrench{\sisetup{locale = FR}}
+\addto\extrasfrench{\sisetup{locale = FR, output-decimal-marker=.}}
 
 \ExplSyntaxOn
 
@@ -126,16 +126,18 @@ ScaleAgain = 0.96
 \ExplSyntaxOn
 \makepagestyle {thesis}
 
+\newcommand*\pnumstyle{}
+
 \bool_if:NTF \l_chthesis_print_bool {
-  \makeevenfoot{thesis}{\thepage}{}{}
-  \makeoddfoot{thesis}{}{}{\thepage}
+  \makeevenfoot{thesis}{\pnumstyle\thepage}{}{}
+  \makeoddfoot{thesis}{}{}{\pnumstyle\thepage}
   \makeheadrule{ruled}{\textwidth}{\normalrulethickness}
   \makepsmarks{thesis}{\@ruledmarks}
   \makeevenhead{thesis}{\scshape\leftmark}{}{}
   \makeoddhead{thesis}{}{}{\rightmark}
 }{
-  \makeevenfoot{thesis}{}{\thepage}{}
-  \makeoddfoot{thesis}{}{\thepage}{}
+  \makeevenfoot{thesis}{}{\pnumstyle\thepage}{}
+  \makeoddfoot{thesis}{}{\pnumstyle\thepage}{}
   \makeheadrule{ruled}{\textwidth}{\normalrulethickness}
   \makepsmarks{thesis}{\@ruledmarks}
   \makeevenhead{thesis}{\scshape\leftmark}{}{}
@@ -148,17 +150,31 @@ ScaleAgain = 0.96
 \raggedbottom
 
 \setsecnumdepth{subsubsection}
-\renewcommand\thesection{\arabic{section}} % No chapter number in section
-\renewcommand\thechapter{\Roman{chapter}}
+\renewcommand*\thesection{\arabic{section}} % No chapter number in section
+\renewcommand*\thechapter{\Roman{chapter}}
 
 % Figure number with middle dot
 % \mainmatter reset things so we have to hack a bit
 \renewcommand\@memmain@floats{%
   \counterwithin{figure}{chapter}
   \counterwithin{table}{chapter}
-  \def\thefigure{\thechapter\textperiodcentered\arabic{figure}}
-  \def\thetable{\thechapter\textperiodcentered\arabic{table}}
+  \def\thefigure{\thechapter\textperiodcentered\textlf{\arabic{figure}}}
+  \def\thetable{\thechapter\textperiodcentered\textlf{\arabic{table}}}
 }
+
+% Footnote marker in XCharter superior figure style
+\renewcommand*\@makefnmark{\textsu{\@thefnmark}}
+% and lining figure
+\renewcommand{\@makefntextFB}[1]{%
+  \def\footscript##1{\textlf{##1}\dotFFN\kernFFN}%
+  \setlength{\footmarkwidth}{\FBfnindent}%
+  \setlength{\footmarksep}{-\footmarkwidth}%
+  \setlength{\footparindent}{\parindentFFN}%
+  \makefootmark #1}%
+
+% Equation number in lining style
+\renewcommand*\theequation{%
+  \ifnum \c@chapter>\z@ \thechapter.\fi \textlf{\arabic{equation}}}
 
 %% Page Layout
 % A4 297x210mm (global a4paper option)
@@ -185,8 +201,10 @@ ScaleAgain = 0.96
 
 %%% TOC, contents, lof
 % Section numbering and toc options
-\renewcommand\cftchaptername{\chaptername~}
-\renewcommand\cftappendixname{\appendixname~}
+\renewcommand*\cftchaptername{\chaptername~}
+\renewcommand*\cftappendixname{\appendixname~}
+\renewcommand*\cftsectionpresnum{\lfstyle}
+\renewcommand*\cftsubsectionpresnum{\lfstyle}
 \setcounter{lofdepth}{1}
 \setcounter{tocdepth}{2}
 \setlength{\cftchapterindent}{0pt}
@@ -390,11 +408,11 @@ ScaleAgain = 0.96
     \bool_if:NTF \l_chthesis_print_bool {
       % \renewcommand*\ruledefootc{\tl_tmpa_l}
       % \renewcommand*\ruledofootc{\tl_tmpa_l}
-      \makeevenfoot{thesis}{\thepage}{\tl_tmpa_l}{}
-      \makeoddfoot{thesis}{}{}{\tl_tmpa_l}{\thepage}
+      \makeevenfoot{thesis}{\pnumstyle\thepage}{\tl_tmpa_l}{}
+      \makeoddfoot{thesis}{}{}{\tl_tmpa_l}{\pnumstyle\thepage}
     }{
-      \makeevenfoot{thesis}{\thepage}{}{\tl_tmpa_l}
-      \makeoddfoot{thesis}{\thepage}{}{\tl_tmpa_l}
+      \makeevenfoot{thesis}{\pnumstyle\thepage}{}{\tl_tmpa_l}
+      \makeoddfoot{thesis}{\pnumstyle\thepage}{}{\tl_tmpa_l}
     }
 
     \addtocontents{lof}{

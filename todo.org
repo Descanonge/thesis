@@ -17,13 +17,11 @@ mail:daniele.iudicone@szn.it
 orcid:0000-0002-7473-394X
 site:https://www.szn.it/index.php/it/personale/staff/103-iudicone-daniele/765-iudicone-daniele
 Équivalence ?
-Rapporteur ?
 *** Fabrizio d'Ortenzio
 Laboratoire Océangraphique de Villefranche (LOV)
 mail:fabrizio.dortenzio@imev-mer.fr
 site:https://lov.imev-mer.fr/web/member/fabrizio-dortenzio/
 DR CNRS, Hdr
-Rapporteur (je sais pas si LOV est considéré comme SU) ?
 *** Aida Alvera-Azcárate
 Université de Liège, Faculté des Sciences:
 - Département d'Astrophysique, Géophysique et Océanographie (AGO)
@@ -32,8 +30,8 @@ Université de Liège, Faculté des Sciences:
 mail:a.alvera@uliege.be
 site:https://www.uliege.be/cms/c_9054334/en/directory?uid=U205291
 orcid:0000-0002-0484-4791
-Équivalence ? Rapportrice ?
-*** Marie Isabelle Pujol
+Équivalence ? Rapportrice !
+*** [?] Marie Isabelle Pujol
 CLS, Environment and Climate Monitoring
 *** Sakina-Dorothée Ayata
 LOCEAN/IPSL
@@ -50,8 +48,8 @@ Laboratoire d'Océanologie et de Géosciences (LOG)
 site:https://www.researchgate.net/profile/Hubert-Loisel
 mail:hubert.loisel@univ-littoral.fr
 Équivalence ?
-Rapporteur ?
-*** Roy El Hourany
+Rapporteur !
+*** [?] Roy El Hourany
 ULCO - LOG
 site:https://www.researchgate.net/profile/Roy-El-Hourany
 mail:roy.elhourany@locean.ipsl.fr
@@ -90,6 +88,15 @@ Dans les captions, open bar (a priori).
 ** Figures
 Toujours centrées.
 Utiliser captionT{titre}{caption}. Le titre sera mis dans la ToF et ajouté en emph au début de la caption.
+** Chiffres
+je crois que j'aime bien le style inline (dans le texte)
+siunit insère en mode math donc c'est pas affecté.
+hmmm. il y a plein d'endroits ou c'est moins adapté.
+numéro de figure!, abbrev., toc!, footnotes!.
+Use \textlf{} accordingly.
+ça jure à côté de texte en all-caps, \abbrv{} se charge de ça.
+ça jure à côté d'unités
+je les laisse dans le texte quand il n'y a pas d'unités, ou qu'elles sont écrites en toutes lettres (on regarde sur 20~jours, on obtient une valeur de 0.8.)
 ** Cross refs
 *** abbrv
 pas d'abbréviations quand c'est dans la phrase.

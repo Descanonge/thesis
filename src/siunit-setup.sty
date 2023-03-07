@@ -9,6 +9,7 @@
   range-phrase=--,
   product-units=single,
   uncertainty-mode=separate,
+  separate-uncertainty-units=single,
   reset-text-series=false,  % when needing to print bold (in text mode)
   reset-text-family=false,
   reset-text-shape=false,
@@ -57,8 +58,9 @@
 \msg_new:nnn {ch-thesis} {latlon-invalid-end} {\\latlon\ argument\ should\ end\ with\ [NSWE]\ (found\ `#1')}
 \NewDocumentCommand \latlon { o m } {
   \tl_set:Nx \l_tmpa_tl {\tl_item:nn{#2}{-1}}
-  \tl_if_in:noTF {NSWE} {\l_tmpa_tl} {}
-  {\msg_warning:nnx {ch-thesis} {latlon-invalid-end} {\l_tmpa_tl}}
+  \tl_if_in:noF {NSWE} {\l_tmpa_tl} {
+    \msg_warning:nnx {ch-thesis} {latlon-invalid-end} {\l_tmpa_tl}
+  }
   \ang [#1] { \tl_range:nnn {#2} {1} {-2} } \tl_use:N \l_tmpa_tl
 }
 

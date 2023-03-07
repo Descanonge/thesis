@@ -12,6 +12,11 @@ toc, section=section, symbols,
 
 \makeglossaries%
 
+\renewcommand*\glsabbrvdefaultfont[1]{\textlf{#1}}
+
+\NewDocumentCommand \abbrv { m } {%
+  \textlf{#1}}
+
 \setglossarystyle{long}
 
 %%% Glossary width
