@@ -407,24 +407,10 @@ ScaleAgain = 0.96
   }
 }
 
-%%% Front page
-
-% \seq_new:N \g_jury_seq
-% \NewDocumentCommand \addJury { > { \SplitArgument { 2 } , m m m } {
-%   % \cs_set_nopar:Npn \l_printname:nn ##1##2 {
-%   %   ##1
-%   % }
-%   \seq_put_right:Nn \g_jury_seq {
-%     \l_printname:nn #1 & #2 & #3 \\
-%   }
-% }
-
-% \newcommand \makeJury {
-%   \begin{center}
-%     \begin{tabular}{rlll<{\raggedleft}}
-%       \seq_use:Nn \g_jury_seq {}
-%     \end{tabular}
-%   \end{center}
-% }
+% Font in any size
+\NewDocumentCommand \anysize { m O{1.1} +m }{%
+  \dim_set:Nn \l_tmpa_dim {#1}
+  {\fontsize {#1} {\dim_eval:n{\l_tmpa_dim*#2}} \selectfont #3}
+}
 
 \ExplSyntaxOff

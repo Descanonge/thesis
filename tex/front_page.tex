@@ -2,53 +2,78 @@
 \pagenumbering{Alph}
 \newgeometry{left=1.5cm, right=1.5cm, top=2cm, bottom=3cm}
 
+\NewDocumentCommand \addjury { m m m m }{
+  \textit{#3} & #1 \textsc{#2} \\
+  & \anysize{8pt}{\raisebox{2pt}{#4}} \\ \addlinespace[0.5ex]
+}
+
 \begin{titlingpage}
 
 \begin{center}
-  \includegraphics[height=3em]{Logos/sorbonne.pdf}
+  \def\logosheight{3.2em}
+  \includegraphics[height=\logosheight]{Logos/sorbonne.pdf}
   \hfill
-  \includegraphics[height=3em]{Logos/locean.png}
+  \includegraphics[height=\logosheight]{Logos/locean.png}
   \hfill
-  \includegraphics[height=3em]{Logos/ipsl.png}
+  \includegraphics[height=\logosheight]{Logos/ipsl.png}
   \hfill
-  \includegraphics[height=3em]{Logos/chanel_enspsl.png}
+  \includegraphics[height=\logosheight]{Logos/chanel_enspsl.png}
 
-  \vspace{1cm}
+  \vspace{3.5ex}
 
-  {\LARGE Sorbonne Université}\\[2ex]
-  École Doctorale 129 Sciences de l'Environnement\\
-  \emph{Laboratoire d'Océanographie et du Climat: Expérimentations et Approches Numériques}
+  \anysize{22pt}{\scshape Thèse de doctorat de Sorbonne Université}\\
+  \vspace{3ex}
+  {\normalsize École Doctorale 129 \textendash\ Sciences de l'Environnement\\
+  Spécialité: Cycles biogéochimiques et changements environnementaux globaux}
 
-  \vspace{3cm}
+  \vspace{2ex}
 
-  \par\noindent\rule[0.7em]{\textwidth}{2pt}
-  {\bfseries\Large \Title}\\
-  \par\noindent\rule{\textwidth}{2pt}
+  {\small\textit{effecutée au}}\\
+  {\normalsize Laboratoire d'Océanographie et du Climat: Expérimentations et Approches Numériques}
 
-  \vspace{3cm}
+  \vspace{\stretch{1.5}}
 
-  Thèse de doctorat\\
-  Spécialité: Cycles biogéochimiques et changements environnementaux globaux
+  \parbox{0.9\linewidth}{
+    {
+      \centering\parskip=0pt
+      \xhrulefill[thickness=2pt, height=-0.6ex]\par
+      \anysize{19pt}{\linespread{1.5}\bfseries\Title\\
+      \strut\xhrulefill[thickness=2pt, height=0.5ex]}
+    }
+  }
 
-  \vspace{1cm}
+  \vspace{\stretch{1}}
 
-  {\normalsize par \bsc{Clément Haëck}}
+  \anysize{14pt}{{\normalsize \textit{par}} \textsc{Clément Haëck},\\
+    \vspace{2ex}
+    {\normalsize \textit{dirigée par}} \textsc{Marina Lévy} {\normalsize \textit{et}} \textsc{Laurent Bopp}}
 
-  \vspace{1cm}
-
-  Dirigée par \bsc{Marina Lévy} et \bsc{Laurent Bopp}
-
-  \vspace{2cm}
 \end{center}
 
-\par\noindent Présentée et soutenue publiquement le 30 avril 2023,\\
-devant un jury composé de:
+\vspace{\stretch{2}}
 
-\makeJury{
-  \jury{Marina Lévy}{DR CNRS}{Directrice de thèse}
-  \jury{Laurent Bopp}{DR CNRS}{Co-directeur de thèse}
+{
+  \small
+  \itshape
+  \noindent Présentée et soutenue publiquement le 31 mai 2023,\\
+  devant un jury composé de:
 }
 
+\vspace{1ex}
+
+{
+  \fontsize{10pt}{12pt}\selectfont
+  \hspace{0.8cm}\begin{tabular}{r l}
+  \addjury{Lars}{Stemmann}{Président du jury}{Prof.\ Sorbonne Université, Lab. Océanographique de Villefranche}
+  \addjury{Aida}{Alvera-Azcárate}{Rapportrice}{Université de Liège, Départ.\ d'Astrophysique, Géophysique et Océanographie}
+  \addjury{Hubert}{Loisel}{Rapporteur}{Université du Littoral Côte d'Opale, Lab.\ d'Océanologie et de Géosciences}
+  \addjury{Sakina-Dorothée}{Ayata}{Examinatrice}{MCF Sorbonne Université, LOCEAN}
+  \addjury{Daniele}{Iudicone}{Examinateur}{Stazione Zoologica Anton Dohrn, Napoli}
+  \addjury{Marina}{Lévy}{Directrice de thèse}{DR CNRS, LOCEAN}
+  \addjury{Laurent}{Bopp}{Co-dir.\ de thèse}{DR CNRS, Lab.\ de Météorologie Dynamique}
+  \end{tabular}
+
+}
 \end{titlingpage}
 
 \restoregeometry%
