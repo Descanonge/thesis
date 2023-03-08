@@ -32,7 +32,17 @@ Scale = MatchLowercase,
 ScaleAgain = 0.96
 ]
 
-\RequirePackage[babel, disable=ifdraft]{microtype}
+\RequirePackage[babel]{microtype}
+% This removes warnings in logs, but
+% I have no idea what I'm doing
+\SetProtrusion{
+  encoding = {TU},
+  family = {XCharterMath},
+} {}
+\SetProtrusion{
+  encoding = {TS1},
+  family = {XCharter-TLF}
+} {}
 
 %%% Localization
 \RequirePackage{csquotes}
