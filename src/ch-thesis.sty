@@ -344,13 +344,22 @@ ScaleAgain = 0.96
 
 \colorlet{shadecolor-note}{Cerulean!15!white}
 
-\newenvironment{note}{%
-  \def\FrameCommand{%
-    \fboxsep=\FrameSep \vrule width 1pt \colorbox{shadecolor-note}}% chktex 1
-  \MakeFramed{\parindent=0pt\textbf{\sffamily Note}\\[3pt]
-    \advance\hsize -\width \FrameRestore}}% chktex 1
-{\endMakeFramed}
-
+\ExplSyntaxOn
+\newenvironment{note}{
+  \def \FrameCommand {
+    \fboxsep=\FrameSep
+    \vrule width 4pt\relax
+    \colorbox {shadecolor-note}
+  }
+  \MakeFramed{
+    \parindent=0pt
+    \textbf {\sffamily Note}\\[3pt]
+    \advance \hsize -\width \FrameRestore
+  }
+}{
+  \endMakeFramed
+}
+\ExplSyntaxOff
 
 %%% Captions
 \newcommand\captionT[2]{% {Title}{text}
