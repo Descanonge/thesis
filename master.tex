@@ -33,7 +33,7 @@ draft,
 %%% Metadata
 \newcommand*\Author{Clément Haëck}
 \newcommand*\Email{clement.haeck@locean.ipsl.fr}
-\newcommand*\Title{Impact des fronts sur le Phytoplancton dans la région du Gulf Stream quantifié par imagerie satellitaire}
+\newcommand*\Title{Impact des Fronts sur le Phytoplancton dans la Région du Gulf Stream Quantifié par Imagerie Satellitaire}
 \newcommand*\Subject{biogeochemistry}
 \newcommand*\Keywords{}
 
@@ -55,9 +55,11 @@ draft,
 \include{tex/front_matter}
 
 %%% Glossary
-\setglswidth%
-\printglossary[toctitle=Glossaire]
-\thispagestyle{plain}
+\ifdraft{}{%
+  \setglswidth%
+  \printglossary[toctitle=Glossaire]
+  \thispagestyle{plain}
+}
 
 %%% TOC
 \clearpage

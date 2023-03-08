@@ -17,6 +17,9 @@
 
 \ProcessKeysOptions{chthesis}
 
+\NewDocumentCommand \ifdraft { +m +m } {
+  \ifdraftdoc #1 \else #2 \fi}
+
 \ExplSyntaxOff % babel no like expl3 :(
 \RequirePackage[english,main=french]{babel}
 
@@ -29,7 +32,7 @@ Scale = MatchLowercase,
 ScaleAgain = 0.96
 ]
 
-\RequirePackage{microtype}
+\RequirePackage[babel, disable=ifdraft]{microtype}
 
 %%% Localization
 \RequirePackage{csquotes}
