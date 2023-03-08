@@ -62,7 +62,8 @@ Chercheur junior CNRS
 
 * Inbox
 ** je ou nous ?
-** Réanalyses -> renommer Mercator
+** Réanalyses -> renommer Mercator + ajouter info
+** Finir corrections méthodes
 ** Ajouter figure comparaison Chl GlobColour / MODIS
 ** Commandes gls
 je suis frileux quand j'utilise des abbrv dans une phrase à propos de l'article qui précède.
@@ -77,6 +78,8 @@ markeredgecolor and stuff
 faire un plot légèrement plus petit aussi
 ** Réduire marges
 visiblement on est autour de 90 caractères. C'est trop (conseillé 45-70, idéal 66)
+** titre de section plice classique romane s
+
 * Recommendations de style
 ** GLS
 On se dit que pas de \ab ?
@@ -103,7 +106,11 @@ pas d'abbréviations quand c'est dans la phrase.
 On voit sur la figure~\ref{}. On a ce résultat~(\cref{}).
 De manière générale éviter de ref les figures dans le cours de la phrase de toute façon.
 
-Pour les sections, \cref n'
+Pour les sections, \cref n'abbrège pas donc on est bon.
+Aussi les numéros de sections et chapitres peuvent être assez court, c'est bien d'avoir le lien hyper aussi sur le mot 'section'.
+*** idée pour gérer les liens
+\nref[figure]{fig:lol} => \href[fig:lol]{figure~\ref{fig:lol}}
+si pas d'options -> utiliser crefname.
 ** Citations
 *** Articles
 use \textcite and (\cite)
@@ -136,11 +143,16 @@ Attention si l'élement est multiple.
 les équations 2 et~3.
 le truc~T de longueur 2~ou plus.
 *** (cross-)references
-refname~\ref,
-avant une ref ou une citation, seulement si entre parenthèses / pas dans le flow de la phrase:
-On voit tel résultat~(\cite{whatev_2000}).
-On voit tel résultat~(\cref{fig:whatev}).
-Mais: On voit sur la \crefname{fig:whatev}.
+toujours refname~\ref
+avant une ref/citation seulement si en fin de paragraphe et pas dans le flow de la phrase.
+On voit tel résultat~(\nref{fig:whatev}).\par
+Mais: On voit sur la \nref[figure]{fig:whatev}.
+Ça évite les orphelins en fin de phrases du style
+#+begin_src
+On voit très très bien ce résultat
+(fig. 3).
+
+#+end_src
 *** Au milieu des noms
 Donald~E. Knuth. Machin Van~der~Truk.
 Utiliser \bname pour ça.
@@ -148,7 +160,7 @@ Utiliser \bname pour ça.
 3~jours.
 *** Nombre dans une phrase
 ~\num, ~\ang, ~\qty,...
-Même entre parenthèses: telles valeurs~(\qty{})
+pas quand entre parenthèses: telles valeurs (\qty{})
 *** mathematical symbol à côté de son nom
 l'écart"-type~\ab{std}
 tel truc~\(T\)
@@ -157,10 +169,9 @@ Autres cas: produits~L2
 *** Symbole à côté de préposition
 de~x, from 0 to~1, increase by~2.
 Attention encore aux compositions: de u~et~v.
+entre 0 et~15.
 *** Équations en phrases
 est égal à~2, moins que~x, pour tout~i.
-*** numbers, quantities
-~\num, ~\qty
 *** Quand des cas sont énumérés
 Sont graphés la sst~(a) et la chl~(b).
 Ces cas sont (1)~isolés, (2)~rares.
@@ -192,6 +203,10 @@ Je préfère celle-ci en vrai, proche de l'anglais
 
 * Vérifications à faire
 ** Spelling
+** Les overfull hbox yaaay
+** que les footnotes ne soient pas coupées
+ça implique peut être de jouer avec les marges
+**
 ** Regexps
 #+begin_src
 Repeated words

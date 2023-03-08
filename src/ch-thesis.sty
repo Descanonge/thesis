@@ -156,6 +156,7 @@ ScaleAgain = 0.96
   \makeevenhead{thesis}{\scshape\leftmark}{}{}
   \makeoddhead{thesis}{\scshape\leftmark}{}{}
 }
+
 \ExplSyntaxOff
 
 \pagestyle{thesis}
@@ -189,20 +190,32 @@ ScaleAgain = 0.96
 \renewcommand*\theequation{%
   \ifnum \c@chapter>\z@ \thechapter.\fi \textlf{\arabic{equation}}}
 
+\setlxvchars
+\typeout{lxvchars: \the\lxvchars}
+
 %% Page Layout
 % A4 297x210mm (global a4paper option)
 \settrims{0pt}{0pt} % no trim needed
 % Fix width/height for comfort
-\settypeblocksize{230mm}{160mm}{*}
+\settypeblocksize{210mm}{365pt}{*}
 % Upper/Lower margins, fix upper, lower has what's left (enough hopefully)
-\setulmargins{3cm}{*}{*}
+\setulmargins{*}{*}{*}
 % Left/Right margins, set ratio so that spine is smaller than edge
 \setlrmargins{*}{*}{1.}
 % Set header size and foot skip, header taller than baseline for É in sections titles
 \setheadfoot{2.\onelineskip}{2\onelineskip}
-\setheaderspaces{*}{\onelineskip}{*}
+\setheaderspaces{*}{2.5\onelineskip}{*}
 % Check and apply layout
 \checkandfixthelayout
+
+\ExplSyntaxOn
+\dim_new:N \figwidth
+\dim_set:Nn \figwidth {398pt}
+\NewDocumentCommand \insertfig { O{1} m }{%
+  \centerline{
+    \includegraphics [width=\dim_eval:n {#1\figwidth}] {#2}
+  }}
+\ExplSyntaxOff
 
 %%% Sections styles
 \renewcommand*\chaptitlefont{\normalfont\HUGE\bfseries\sffamily}

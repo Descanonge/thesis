@@ -9,6 +9,14 @@
 \newcommand*\creftitle[1]{% {label}
   \namecref{#1}~\reftitle{#1}}
 
+% Cross-ref while managing manually the citation name
+\NewDocumentCommand \nref { o m } {%
+  \hyperref[#2]{%
+    \IfNoValueTF{#1}%
+    {\namecref{#2}}%
+    {#1}%
+    ~\ref{#2}}}
+
 \crefname{equation}{éq.}{éq.}%
 \Crefname{equation}{Équation}{Équations}%
 \crefname{figure}{fig.}{fig.}%

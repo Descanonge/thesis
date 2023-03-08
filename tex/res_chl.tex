@@ -32,14 +32,14 @@
 Un certain nombre de diagnostiques présentés dans ce manuscript reposent sur les valeurs médianes de différentes variables (la \as{chl} notamment).
 Cet indicateur permet de représenter la distribution d'une variable en une valeur unique, néanmoins, pour que cette représentation soit pertinente il est nécessaire de vérifier que la distribution de laquelle il est extrait soit adaptée.
 
-Les distributions de valeurs de la \as{chl} s'avèrent être invariablement unimodales, avec des queues de valeurs élevées plus ou moins prononcées~(\cref{fig:verif-hist}).
+Les distributions de valeurs de la \as{chl} s'avèrent être invariablement unimodales, avec des queues de valeurs élevées plus ou moins prononcées (\nref{fig:verif-hist}).
 Il semble donc pertinent de qualifier ces distributions par leur valeur médiane.
-Les distributions de SST sont également unimodale, à l'exception du biome subpolaire, qui présente des distributions largement bimodales~(\cref{fig:verif-hist}), indiquant la présence de deux masses d'eaux de températures distinctes.
-Les résultats portant sur les valeurs de SST dans les fronts, présentés \cref{sec:res-sst}, omettent donc le biome subpolaire par soucis de simplicité.
+Les distributions de SST sont également unimodale, à l'exception du biome subpolaire, qui présente des distributions largement bimodales (\nref{fig:verif-hist}), indiquant la présence de deux masses d'eaux de températures distinctes.
+Les résultats portant sur les valeurs de SST dans les fronts, présentés \nref[section]{sec:res-sst}, omettent donc le biome subpolaire par soucis de simplicité.
 
 \begin{figure}
   \centering
-  \includegraphics[width=\textwidth]{verif_hist.pdf}
+  \insertfig{verif_hist.pdf}
   \captionT{Distributions saisonnières de Chl-\text{a} et SST dans, et hors des fronts}{%
     Les distributions de valeurs sont indiquées pour l'année~2007 par tranches de trois mois~(lignes), par zones~(colonnes), et pour les \eng{background}~(rouge), fronts faibles~(bleu), et fronts forts~(vert).
 
@@ -53,10 +53,10 @@ Les résultats portant sur les valeurs de SST dans les fronts, présentés \cref
 \label{sec:sensibilite-parametres}
 
 L'implémentation de la détection des fronts avec l'\af{hi} nécessite de faire le choix d'un certain nombre de paramètres. Nous testons ici la variabilité des résultats finaux (\ab{ie} l'impact des fronts sur la \as{chl}) vis-à-vis de deux paramètres.
-D'une part, nous faisons varier la taille de la fenêtre glissante utilisée pour calculer les composantes du HI~(\cref{sec:calcul-composantes}), nous testons trois tailles: \qty{20}{\km},~\qty{30}{\km} et~\qty{40}{\km}. La taille retenue est de~\qty{30}{\km}.
+D'une part, nous faisons varier la taille de la fenêtre glissante utilisée pour calculer les composantes du HI (\nref{sec:calcul-composantes}), nous testons trois tailles: \qty{20}{\km},~\qty{30}{\km} et~\qty{40}{\km}. La taille retenue est de~\qty{30}{\km}.
 
-Les coefficients de normalisations sont à recalculer pour chacune des tailles (tel que décrit figure~\ref{sec:coef-normalisation}) et sont listés dans la table~\ref{tab:coefs}.
-D'autre part nous testons l'influence de ces coefficients. En prenant les composantes calculées avec une fenêtre de~\qty{30}{\km}, tour à tour nous doublons le coefficient d'une des composantes (et donc son poids statistique dans le HI). Le coefficient~\(K^4\) pour le HI doit être recalculé~(\cref{tab:coefs}).
+Les coefficients de normalisations sont à recalculer pour chacune des tailles (tel que décrit figure~\ref{sec:coef-normalisation}) et sont listés dans la \nref[table]{tab:coefs}.
+D'autre part nous testons l'influence de ces coefficients. En prenant les composantes calculées avec une fenêtre de~\qty{30}{\km}, tour à tour nous doublons le coefficient d'une des composantes (et donc son poids statistique dans le HI). Le coefficient~\(K^4\) pour le HI doit être recalculé~(\nref{tab:coefs}).
 
 % chktex-file 2
 \begin{table}
@@ -86,9 +86,9 @@ D'autre part nous testons l'influence de ces coefficients. En prenant les compos
 \end{table}
 
 Les résultats sont très peu sensibles aux choix des paramètres.
-Les évolutions climatologiques des valeurs médianes et du surplus sont très peu affectés. La fraction de surface impactée par les fronts est plus sensible mais néanmoins les tendances restent identiques~(\cref{fig:ts-sensitivity}).
+Les évolutions climatologiques des valeurs médianes et du surplus sont très peu affectés. La fraction de surface impactée par les fronts est plus sensible mais néanmoins les tendances restent identiques (\nref{fig:ts-sensitivity}).
 Pour quantifier plus en détail cette variation, nous calculons l'écart"-type des valeurs médiane de \as{chl} sur l'ensemble des paramètres (les trois tailles de fenêtres et trois configurations de coefficients), semaine par semaine sur les 20~années de données, puis en prenons la moyenne temporelle.
-Il en ressort les mêmes résultats que sur la climatologie, avec une variabilité élevée dans les fronts forts (entre~\qty{4.4}{\mugm} et~\qty{11.4}{\mugm}), moyenne dans les fronts faibles (entre~\qty{2.0}{\mugm} et~\qty{3.3}{\mugm}), et plus faible dans le \eng{background} (entre~\qty{0.07}{\mugm} et~\qty{3.8}{\mugm})~(\cref{tab:sensibilite-mediane}).
+Il en ressort les mêmes résultats que sur la climatologie, avec une variabilité élevée dans les fronts forts (entre~\qty{4.4}{\mugm} et~\qty{11.4}{\mugm}), moyenne dans les fronts faibles (entre~\qty{2.0}{\mugm} et~\qty{3.3}{\mugm}), et plus faible dans le \eng{background} (entre~\qty{0.07}{\mugm} et~\qty{3.8}{\mugm}) (\nref{tab:sensibilite-mediane}).
 \review{Rajouter discussion des valeurs relatives.}
 
 \begin{table}
@@ -122,7 +122,7 @@ Il en ressort les mêmes résultats que sur la climatologie, avec une variabilit
   \label{tab:sensibilite-mediane}
 \end{table}
 
-Dans cette étude de sensibilité nous n'avons pas considéré l'impact du seuil en HI choisi, ayant déjà couvert l'évolution de la \as{chl} avec le HI~(\cref{fig:chl-vs-hi}).
+Dans cette étude de sensibilité nous n'avons pas considéré l'impact du seuil en HI choisi, ayant déjà couvert l'évolution de la \as{chl} avec le HI (\nref{fig:chl-vs-hi}).
 Il en resortait que les valeurs de \as{chl} tendent à augmenter avec celles du HI, et ce sur toute l'amplitude du HI.
 Le choix du seuil importe donc peu vis"-à"-vis des tendances observées.
 Néanmoins il est possible que la variation de la \as{chl} avec les paramètres du HI soit plus le fait du seuil choisi en rapport avec la distribution de HI \encadra{le seuil restant fixé à~5 quelque soit les paramètres} que d'un changement dans l'emplacement des fronts détectés.
@@ -130,13 +130,13 @@ Autrement dit, il est possible que la variation en \as{chl} (dans les fronts) so
 
 Pour étudier cet éventuel lien entre la surface des fronts et les valeurs de \as{chl} dans ces fronts, nous prenons les valeurs climatologiques mensuelles de la fraction de surface impactée par les fronts \emph{faibles}, et de la valeur médiane de \as{chl} dans ces même fronts, pour tous les paramètres testés (et les trois régions).
 Nous éliminons la dépendance de ces deux variables en temps et en région, en leur soustrayant leur valeur moyennée sur l'ensemble des paramètres testés.
-Nous obtenons donc la relation (relative) entre la fraction de surface de fronts détectés et la médiane de \as{chl} dans les fronts~(\cref{fig:sensibilite-surface}).
+Nous obtenons donc la relation (relative) entre la fraction de surface de fronts détectés et la médiane de \as{chl} dans les fronts (\nref{fig:sensibilite-surface}).
 Comme attendu, la médiane de \as{chl} est bien (négativement) corrélée à la fraction de surface: le coefficient de corrélation de Pearson entre les deux variables est de~\num[mode=text]{-0.73}.
 Un seuil situé trop bas augmente la surface de fronts détectés et \guil*{dilue} les valeurs de \as{chl} dans ces fronts.
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.7\textwidth]{sensibilité_surface.pdf}
+  \insertfig[0.7]{sensibilité_surface.pdf}
   \captionT{Corrélation de l'augmentation de Chl-\textit{a} avec la surface couverte par les fronts}{%
     Les valeurs médianes de \as{chl} dans les fronts sont négativement corrélées à la surface occupée par les fronts.
     La moyenne sur l'ensemble des paramètres testés de ces variables leur est soustraite afin passer outre leur dépendances en temps et région.
