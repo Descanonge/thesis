@@ -4,6 +4,8 @@
 \RequirePackage{xparse}
 \RequirePackage{l3keys2e}
 
+\directlua{chthesis = require("ch-thesis")}
+
 \ExplSyntaxOn
 
 \bool_new:N \l_chthesis_print_bool
@@ -21,11 +23,22 @@
   \ifdraftdoc #1 \else #2 \fi}
 
 \ExplSyntaxOff % babel no like expl3 :(
+% Also it seems nice load it early
 \RequirePackage[english,main=french]{babel}
+
+% Kerning for `a)', this makes '(a)' nicer (the a looks centered)
+% as well for Old-style numbers (I feel the kerning is all over the place there)
+\directlua{chthesis.addFeatKern()}
 
 \RequirePackage[T1]{fontenc}
 \RequirePackage{fontspec}
+
+% Add kerning feature to the font for all subsequent calls of setmainfont
+% this might fuck things up ¯\_(ツ)_/¯
+\defaultfontfeatures[XCharter]{RawFeature=+customkern}
 \RequirePackage[otfmath, osf]{XCharter}
+
+% Better sans serif and monospace fonts
 \RequirePackage[defaultsans]{opensans}
 \setmonofont{RobotoMono-Regular}[
 Scale = MatchLowercase,
@@ -88,6 +101,7 @@ ScaleAgain = 0.96
 \ExplSyntaxOff
 
 %%% Shorthands
+% Watch at, this messes lua interpretation
 \useshorthands*{"}
 % Hard hyphen, no breaks (but word after is breakable)
 \defineshorthand{"~}{\babelhyphen{nobreak}}
@@ -218,12 +232,12 @@ ScaleAgain = 0.96
 \ExplSyntaxOff
 
 %%% Sections styles
-\renewcommand*\chaptitlefont{\normalfont\HUGE\bfseries\sffamily}
-\renewcommand*\chapnumfont{\normalfont\huge\bfseries\sffamily}
-\renewcommand*\chapnamefont{\normalfont\huge\bfseries\sffamily}
-\setsecheadstyle{\Large\bfseries\sffamily}
-\setsubsecheadstyle{\large\bfseries\sffamily}
-\setsubsubsecheadstyle{\bfseries\sffamily}
+\renewcommand*\chaptitlefont{\normalfont\HUGE\bfseries}
+\renewcommand*\chapnumfont{\normalfont\huge\bfseries}
+\renewcommand*\chapnamefont{\normalfont\huge\bfseries}
+\setsecheadstyle{\Large\bfseries\lfstyle}
+\setsubsecheadstyle{\large\bfseries\lfstyle}
+\setsubsubsecheadstyle{\bfseries\lfstyle}
 
 %%% TOC, contents, lof
 % Section numbering and toc options
@@ -231,6 +245,7 @@ ScaleAgain = 0.96
 \renewcommand*\cftappendixname{\appendixname~}
 \renewcommand*\cftsectionpresnum{\lfstyle}
 \renewcommand*\cftsubsectionpresnum{\lfstyle}
+\renewcommand*\cftsubsubsectionpresnum{\lfstyle}
 \setcounter{lofdepth}{1}
 \setcounter{tocdepth}{2}
 \setlength{\cftchapterindent}{0pt}
@@ -246,7 +261,9 @@ ScaleAgain = 0.96
 
 \RequirePackage{minitoc}
 \mtcsetdepth{minitoc}{3}
-\mtcsetfont{minitoc}{section}{\normalfont\small}
+\mtcsetfont{minitoc}{section}{\normalfont\small\lfstyle}
+\mtcsetfont{minitoc}{subsection}{\normalfont\small\lfstyle}
+\mtcsetfont{minitoc}{subsubsection}{\normalfont\small\lfstyle}
 
 % Remove chapter typesetting stuff (we want a simple section instead)
 \renewcommand\lofheadstart{}

@@ -38,7 +38,7 @@ ou encore la couverture spatio"-temporelle.
 
 % Éventuellement à déplacer à une mention antérieure des résolutions
 \begin{note}
-  Bien que notre zone d'étude s'étende à de (relativement) hautes latitudes~(\latlon{\approx55N}), nous ne considérons pas les différences de distances zonales et méridionales.
+  Bien que notre zone d'étude s'étende à de (relativement) hautes latitudes~(\tapprox\latlon{55N}), nous ne considérons pas les différences de distances zonales et méridionales.
   Nous faisons donc une correspondance simple entre fraction de degré et kilomètres, quelque soit la distance considérée, notamment pour la taille des pixels et des fenêtres.
 \end{note}
 
@@ -55,8 +55,8 @@ Ce sont les données utilisées par \textcite{liu_2016} \encadra{et produites pa
   Tout au long de ce manuscript nous utilisons les dénominations des niveaux de données tels que typiquement utilisés par les distributeurs, et qui correspondent de manière générale aux définitions suivantes:
   \renewcommand\arraystretch{1.2}
   \par\hspace{2em}\begin{tabularx}{0.9\textwidth}{>{\lfstyle}r X}
-    L1 & Données d'un seul capteur, sans traitement (au delà de ceux nécessaire à la transmission depuis le satellite), et à la résolution de capture (donc celle maximale disponible) spatiale et temporelle.
-    Elles sont projetées dans le référentiel du capteur (\ab{ie} nombre de lignes et nombre de pixels par ligne), et accompagnées des données de positionnement du satellite.
+    L1 & Données d'un seul capteur, sans traitement (au delà de ceux nécessaire à la transmission depuis le satellite), et à la résolution de capture \encadra*{\ab{cad} projetées dans le référentiel du capteur (nb.\ de lignes et nb.\ de pixels par ligne)}.
+    Elles sont accompagnées des données de positionnement du satellite.
     \\
     L2 & Variables géophysiques dérivées des données~\abbrv{L1}, à la même résolution et disposés de la même manière que ces dernières.
     Des métadonnées peuvent les accompagner, comme la qualité des pixels par exemple.
@@ -69,7 +69,7 @@ Ce sont les données utilisées par \textcite{liu_2016} \encadra{et produites pa
 \end{note}
 
 Les données sont téléchargées au niveau~\abbrv{L2} depuis le \af{cmr}\footfullcite{sst_modis} en sélectionnant les sections de fauchées\footnotemark{} intersectant notre région d'étude, collectés de jour, et pour les courtes longueurs d'onde infrarouges~(\qty{11}{\um}).
-Ces données sont projetées sur une grille kilométrique globale, en reprenant les outils utilisés par \citeauthor{liu_2016}, à savoir les programmes présents dans le paquet de l'\href{https://oceandata.sci.gsfc.nasa.gov/ocssw}{\ab{ocssw}}, version~v\num{7.5}, qui est maintenu par l'\al{obpg} et notamment distribué à travers l'outil \href{https://seadas.gsfc.nasa.gov/}{SeaDAS}.
+Ces données sont projetées sur une grille kilométrique globale, en reprenant les outils utilisés par \citeauthor{liu_2016}, à savoir les programmes présents dans le paquet de l'\href{https://oceandata.sci.gsfc.nasa.gov/ocssw}{\ab{ocssw}}, version~v7.5, qui est maintenu par l'\al{obpg} et notamment distribué à travers l'outil \href{https://seadas.gsfc.nasa.gov/}{SeaDAS}.
 Les sections de fauchées, maintenant toutes sur la même grille spatiale, peuvent être moyennées jour par jour, pour obtenir un produit de niveau~\abbrv{L3}.
 \footnotetext{%
   \engquote{swath} en anglais, bande de terrain couverte par le satellite le long de son orbite.
@@ -107,8 +107,8 @@ L'utilisation du produit suivant cherche à palier à ce problème.
 \subsubsection{ESA-SST-CCI / C3S}
 \declareDataset{sst_esacci}
 
-Ce produit est distribué conjointement par l'\ab{esa}"-"\glsabbrvfont{SST}"-"\ab{cci} et le \ab{c3s}.
-Il agglomère les mesures de tous les capteurs infrarouges disponibles depuis~1981, ce qui comprend 11~\ab{avhrr} à bord des satellites \ab{metop}["~A] et \ab{noaa} (entre les itérations 6 et~19) et trois \ab{atsr} à bord de \ab{ers} 1~et~2, et Envisat. \review{Ajouter SLSTR.}
+Ce produit est distribué conjointement par l'\ab{esa}"-\glsabbrvfont{SST}"-\ab{cci} et le \ab{c3s}.
+Il~agglomère les mesures de tous les capteurs infrarouges disponibles depuis~1981, ce qui comprend 11~\ab{avhrr} à bord des satellites \ab{metop}["~A] et \ab{noaa} (entre les itérations 6 et~19) et trois \ab{atsr} à bord de \ab{ers} 1~et~2, et Envisat. \review{Ajouter SLSTR.}
 Cela donne au moins deux capteurs en fonctionnement simultané, et au moins trois depuis~1992.
 Outre la bonne couverture obtenue, l'uniformité des capteurs permet d'obtenir un jeu de données stable dans le temps, pouvant servir à la détection de tendances climatiques~(\cite{merchant_2019}).
 
@@ -192,7 +192,7 @@ Cela motive à utiliser un produit SST de résolution légèrement moindre afin 
 Cela renforce notre choix pour les données \dataname{sst_esacci}, en défaveur du set \dataname{sst_mur}.
 
 Les deux jeux choisis pour la SST et \ab{chl} ont des résolutions spatiales similaires mais néanmoins légèrement différentes.
-Les deux grilles sont plate"-carrées (régulières en latitude et longitude) mais le champ de \ab{chl} est défini sur une grille \glshref{epsg-chl} de résolution~\resol{1}{24}~(\qty{\approx4.6}{\km}); et le champ de SST sur une grille \glshref{epsg-sst} de résolution~\resol{1}{20}~(\qty{\approx5.6}{\km}).
+Les deux grilles sont plate"-carrées (régulières en latitude et longitude) mais le champ de \ab{chl} est défini sur une grille \glshref{epsg-chl} de résolution~\resol{1}{24}~(\tapprox\qty{4.6}{\km}); et le champ de SST sur une grille \glshref{epsg-sst} de résolution~\resol{1}{20}~(\tapprox\qty{5.6}{\km}).
 
 Sachant que les produits de composition du phytoplancton dont nous disposions (non décrits ici) sont définis sur la même grille que la Chlorophylle, nous adaptons la SST sur la grille de la \ab{chl} par une simple interpolation bi"-linéaire.
 
@@ -264,7 +264,7 @@ Cette délimitation est donc dynamique et déterminée chaque jour à partir de 
 En effet, il apparaît que la distribution de la SST (au nord de~\latlon{32N}) suffit à repérer de manière fiable et robuste une température seuil permettant de séparer les deux biomes (contour sinueux noir plein \nref[figure]{fig:regions}).
 Sur cette distribution apparaît clairement un pic dans des valeurs élevées correspondant au eaux du jet.
 Il est aisé de repérer le pic et l'ajuster par une gaussienne.
-À partir de là, la température seuil entre les biomes est prise comme la base froide de ce pic, \ab{cad} plus précisemment en soustrayant à la température moyenne du pic deux fois son écart"-type (\nref{fig:temp-seuil-distrib}).
+À~partir de là, la température seuil entre les biomes est prise comme la base froide de ce pic, \ab{cad} plus précisemment en soustrayant à la température moyenne du pic deux fois son écart"-type (\nref{fig:temp-seuil-distrib}).
 La valeur journalière de ce seuil est filtrée temporellement par un filtre médian glissant (avec une fenêtre de largeur 8~jours) afin d'éviter d'éventuelles anomalies de détection.
 
 \begin{figure}
@@ -297,7 +297,7 @@ Par ailleurs, il est également nécessaire d'éviter de considérer les pixels 
 D'une part la \ab{chl} atteint dans les kilomètres les plus proches de côtes des valeurs très élevées (jusqu'à~\qty{10}{\mgm}) pour des raisons qui ne concernent pas notre étude et qui pourraient fausser les distributions mesurées.
 D'autre part, nous cherchons à éviter deux zones qui ne correspondent pas aux biomes définis plus haut.
 
-Premièrement, le jet du Gulf Stream prend forme au sud de notre zone, le long de la côte de Floride. On trouve donc sur le plateau continental à ces latitudes~(\latlon{\approx28N}) de forts courants qu'on ne retrouve pas dans le reste du biome \ab{st-perm}.
+Premièrement, le jet du Gulf Stream prend forme au sud de notre zone, le long de la côte de Floride. On trouve donc sur le plateau continental à ces latitudes~(\tapprox\latlon{28N}) de forts courants qu'on ne retrouve pas dans le reste du biome \ab{st-perm}.
 Deuxièmement, plus au nord dans l'anse Nord-Est Américaine de l'Atlantique (\engquote{Mid"-Atlantic Bight}), on trouve une séparation nette entre les eaux au nord du Gulf Stream (la \engquote{slope sea}), et les eaux sur le plateau continental.
 Un jet marque cette séparation le long du talus continental~(\cite{flagg_2006}).
 
@@ -319,9 +319,9 @@ Ces composantes sont ensuite réunies dans un seul index qui ainsi reflète l'h�
 Pour limiter la taille des structures détectées, on limite le calcul de ces composantes sur une fenêtre de taille appropriée, \ab{cad} pour nous de l'ordre de grandeur d'une dizaine de kilomètres.
 Ainsi, pour chaque pixel, la valeur de chaque composante est calculée sur la distribution de SST à l'intérieur d'une fenêtre glissante centrée sur ce pixel et dont les tailles possibles sont:
 \begin{itemize}
-        \item \(3 \times 3 =\qty{9}{\pixels}\) soit~\qty{\approx20}{\km} de côté,
-        \item \(5 \times 5 =\qty{25}{\pixels}\) soit~\qty{\approx30}{\km} de côté,
-        \item \(7 \times 7 =\qty{49}{\pixels}\) soit~\qty{\approx40}{\km} de côté.
+        \item \(3 \times 3 =\qty{9}{\pixels}\) soit~\tapprox\qty{20}{\km} de côté,
+        \item \(5 \times 5 =\qty{25}{\pixels}\) soit~\tapprox\qty{30}{\km} de côté,
+        \item \(7 \times 7 =\qty{49}{\pixels}\) soit~\tapprox\qty{40}{\km} de côté.
 \end{itemize}
 Parce qu'une fenêtre plus large entraînerait la détection de structures trop grandes pour notre étude, nous nous limiterons aux tailles présentées ci"-dessus.
 Néanmoins une fenêtre trop petite limite le nombre de pixels disponibles pour calculer les valeurs statistique dont nous avons besoin convenablement.
@@ -515,7 +515,7 @@ La première est l'excès~\ab{exces} de \ab{chl} (\engquote{excess} dans l'artic
   {\med{\am{chl}}_\bkg} .
 \end{equation}
 Le calcul est fait pour les fronts faibles et forts de la même manière, le background désignant toujours les pixels de HI faible~(\(\am{hi} < 5\)).
-L'excès est calculé dans des bandes de latitudes larges de~\ang{5}, afin de minimiser l'influence des gradients de grande échelle.
+L'excès est calculé dans des bandes de latitudes larges de~\ang[mode=math]{5}, afin de minimiser l'influence des gradients de grande échelle.
 
 Cette métrique ne tient compte que de la distribution des valeurs de \ab{chl}. Elle ignore la proportion de fronts dans une zone donnée, et ne représente pas la quantité totale de \ab{chl} présente dans un biome.
 On définit donc une deuxième métrique, le surplus~\ab{surplus} de \ab{chl} dans tout un biome (\enquote{biome surplus} dans l'article \nref[section]{sec:article-bg}, \cref*{chp:res-chl}) comme la différence relative entre la moyenne de \ab{chl} dans tout le biome et la moyenne dans le background:
@@ -528,7 +528,7 @@ On définit donc une deuxième métrique, le surplus~\ab{surplus} de \ab{chl} da
 \label{sec:decalage-bloom}
 
 L'évolution temporelle de la médiane de \ab{chl} dans le biome subpolaire présente un bloom printanier dont nous mesurons la phénologie \encadra{plus précisement la date de démarrage et la durée du bloom} à la fois dans le \eng{background} et les fronts.
-Étant donné que le bloom se propage vers le nord, ces mesures sont faites sur des bandes de latitudes de largeur~\ang{5}.
+Étant donné que le bloom se propage vers le nord, ces mesures sont faites sur des bandes de latitudes de largeur~\ang[mode=math]{5}.
 
 Pour extraire ces mesures, nous prenons la série temporelle de la médiane de \as{chl}, à laquelle nous appliquons un filtre Butterworth d'ordre~2 et de fréquence de coupure~\qty[parse-numbers=false]{1/20}{\jours^{-1}}.
 La série filtré montre de fortes variations dans leur phénologie d'une année sur l'autre, mais un bloom est toujours discernable.

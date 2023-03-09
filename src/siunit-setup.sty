@@ -5,7 +5,7 @@
 
 \RequirePackage{siunitx}
 \sisetup{
-  mode=math,  % for printing stuff like \approx
+  mode=match,
   range-phrase=--,
   product-units=single,
   uncertainty-mode=separate,
@@ -14,6 +14,15 @@
   reset-text-family=false,
   reset-text-shape=false,
 }
+
+
+% Define a new command to emulate \approx without going into math mode.
+% SiUnitx does not like it, so use it before \num and friends.
+% This essentially allows the approx sign (which is only defined in math fonts)
+% to be used next to numbers in text font (if we don't use fulloldstyle).
+\newcommand*\tapprox{\hbox{$∿$}}
+% could also be ≈
+% could also be {\setmainfont{XCharter-Math}≈}
 
 \ExplSyntaxOn
 
@@ -56,7 +65,7 @@
 % Command for typesetting latitude or longitude value
 % Input should be a number to send to \ang followed by one of NSWE.
 \msg_new:nnn {ch-thesis} {latlon-invalid-end} {\\latlon\ argument\ should\ end\ with\ [NSWE]\ (found\ `#1')}
-\NewDocumentCommand \latlon { o m } {
+\NewDocumentCommand \latlon { O{mode=math} m } {
   \tl_set:Nx \l_tmpa_tl {\tl_item:nn{#2}{-1}}
   \tl_if_in:noF {NSWE} {\l_tmpa_tl} {
     \msg_warning:nnx {ch-thesis} {latlon-invalid-end} {\l_tmpa_tl}

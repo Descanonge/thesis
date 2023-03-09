@@ -17,6 +17,7 @@ LMK_FLAGS := -lualatex -interaction=batchmode -recorder -quiet
 INCLUDE_DEF := tex/front_page, tex/front_matter, tex/annexes_autres
 
 export TEXINPUTS := .:src:
+export LUAINPUTS := .:src:
 
 .PHONY: all clean $(PROJECT) $(SUB_NAMES) html checkbib
 
