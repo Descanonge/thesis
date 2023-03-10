@@ -39,11 +39,24 @@
 \RequirePackage[otfmath, osf]{XCharter}
 
 % Better sans serif and monospace fonts
-\RequirePackage[defaultsans]{opensans}
-\setmonofont{RobotoMono-Regular}[
-Scale = MatchLowercase,
-ScaleAgain = 0.96
+% \RequirePackage[defaultsans]{opensans}
+% More weights are available but I don't need it rn
+\setsansfont{NotoSans}[
+  Scale=MatchLowercase,
+  Extension=.ttf,
+  UprightFont={*-Regular},
+  ItalicFont={*-Italic},
+  BoldFont={*-Bold},
+  BoldItalicFont={*-BoldItalic}
 ]
+\setmonofont{NotoSansMono}[
+  Scale=MatchLowercase,
+  Extension=.ttf,
+  UprightFont={*-Regular},
+  BoldFont={*-Bold}
+]
+% \setsansfont{Roboto-Regular}[Scale=MatchLowercase, ScaleAgain=0.96]
+% \setmonofont{RobotoMono-Regular}[Scale=MatchLowercase, ScaleAgain=0.96]
 
 \RequirePackage[babel]{microtype}
 % This removes warnings in logs, but
@@ -155,6 +168,20 @@ ScaleAgain = 0.96
   }
 }
 
+% Typeset urls in Sans-serif
+\urlstyle{sf}
+% But printing url is weird, I want to correct the kerning of '//'
+% This is lifted from url.sty
+% This might be doable a bit more nicely in latex3 (see t3token \peek_ functions)
+\g@addto@macro\UrlSpecials{\do\/{\Urlspaceyslash}}
+\newmuskip\Urlslashmuskip
+\Urlslashmuskip=1.5mu plus1.5mu minus1.5mu
+\def\Urlspaceyslash{\futurelet\Urlssnext\finishUrlspaceyslash}
+\def\finishUrlspaceyslash{%
+  \mathchar8239
+  \ifx\Urlssnext/\mskip-\Urlslashmuskip \fi}
+
+% links to floats points to the *top* of the float, not the caption
 \RequirePackage[all]{hypcap}
 
 \RequirePackage{cref-setup}
