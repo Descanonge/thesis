@@ -18,7 +18,6 @@ Dans cette section sont décrits les jeux de données utilisés pour ce projet.
 Le choix de ces données s'est avéré être une question importante et difficile dès le départ.
 Nous savions qu'il allait être nécessaire de combiner plusieurs jeux de données: la SST avec la \ab{chl}, puis avec des données de composition de la communauté de phytoplancton.
 Cela a donc informé le choix des données, ainsi que la création des outils nécessaires à la gestion de plusieurs sets de données.
-
 Plusieurs options ont été considérées, notamment pour la SST.
 Elles sont reportées ci"-dessous, même si elles ne sont pas utilisées pour le reste des résultats présentés.
 
@@ -37,7 +36,7 @@ Brièvement ces autres paramètres sont (entre autres) la disponibilité des aut
 ou encore la couverture spatio"-temporelle.
 
 % Éventuellement à déplacer à une mention antérieure des résolutions
-\begin{note}
+\begin{note}[label={note:approx-lat-km}]
   Bien que notre zone d'étude s'étende à de (relativement) hautes latitudes~(\tapprox\latlon{55N}), nous ne considérons pas les différences de distances zonales et méridionales.
   Nous faisons donc une correspondance simple entre fraction de degré et kilomètres, quelque soit la distance considérée, notamment pour la taille des pixels et des fenêtres.
 \end{note}
@@ -51,7 +50,7 @@ Nous commençons donc par un jeu de données que l'on désignera par \dataname{s
 Ce sont les données utilisées par \textcite{liu_2016} \encadra{et produites par les même outils} dont l'étude consistait également à détecter des fronts de SST et les colocaliser aux données de \ab{chl}.
 
 % Éventuellement à déplacer à une mention antérieure des niveaux
-\begin{note}
+\begin{note}[label={note:data-levels}]
   Tout au long de ce manuscript nous utilisons les dénominations des niveaux de données tels que typiquement utilisés par les distributeurs, et qui correspondent de manière générale aux définitions suivantes:
   \renewcommand\arraystretch{1.2}
   \par\hspace{2em}\begin{tabularx}{0.9\textwidth}{>{\lfstyle}r X}

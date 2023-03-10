@@ -103,7 +103,11 @@ ScaleAgain = 0.96
 %%% Framed environments
 \RequirePackage{tcolorbox}
 \tcbuselibrary{skins, breakable}
-\newtcolorbox{note}{
+\newcounter{note}
+\newtcolorbox[
+  use counter={note},
+  number format={}
+]{note}[1][]{
   enhanced, skin=enhancedmiddle,
   breakable,
   frame hidden, interior hidden,
@@ -111,6 +115,7 @@ ScaleAgain = 0.96
   borderline west={2pt}{1em}{black},
   before upper={\textbf{\textit{Note.}}\hspace{1em}},
   % title after break={\textbf{\textit{Note\ldots}}}, coltitle=black
+  #1
 }
 
 %%% Shorthands

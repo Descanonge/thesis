@@ -6,23 +6,23 @@
 Envoi du manuscript fin mars. Dernière semaine de mars ? -> vendredi 31 mars.
 Envoi du rapport, 1 mois plus tard (fin avril). À vérifier avec l'ED.
 Soutenance, 1 mois plus tard (fin mai). À vérifier avec l'ED
-** TODO Envoyer mail ED pour confirmer jury
+** DONE Envoyer mail ED pour confirmer jury
 ** TODO Envoyer mail demande au jury
 donner les dates (envoi manuscript, envoi rapport)
 +doodle pour la date de soutenance
 ** Liste
-*** Daniele Iudicone
+*** OKAY Daniele Iudicone
 Departement of Integrated Marine Ecology, Stazione Zoologica Anton Dohrn, Napoli (SZN)
 mail:daniele.iudicone@szn.it
 orcid:0000-0002-7473-394X
 site:https://www.szn.it/index.php/it/personale/staff/103-iudicone-daniele/765-iudicone-daniele
 Équivalence ?
-*** Fabrizio d'Ortenzio
+*** NO Fabrizio d'Ortenzio
 Laboratoire Océangraphique de Villefranche (LOV)
 mail:fabrizio.dortenzio@imev-mer.fr
 site:https://lov.imev-mer.fr/web/member/fabrizio-dortenzio/
 DR CNRS, Hdr
-*** Aida Alvera-Azcárate
+*** OKAY Aida Alvera-Azcárate
 Université de Liège, Faculté des Sciences:
 - Département d'Astrophysique, Géophysique et Océanographie (AGO)
 - GeoHydrodynamics and Environment Research (GHER)
@@ -31,25 +31,29 @@ mail:a.alvera@uliege.be
 site:https://www.uliege.be/cms/c_9054334/en/directory?uid=U205291
 orcid:0000-0002-0484-4791
 Équivalence ? Rapportrice !
-*** [?] Marie Isabelle Pujol
+*** OKAY Élodie Martinez
+LOPS
+mail:elodie.martinez@ird.fr
+site:https://emartinez550.wixsite.com/website/professional-experience
+*** NO Marie Isabelle Pujol
 CLS, Environment and Climate Monitoring
-*** Sakina-Dorothée Ayata
+*** NO Sakina-Dorothée Ayata
 LOCEAN/IPSL
 Maîtresse de conférences HDR
-*** Lars Stemmann
+*** OKAY Lars Stemmann
 Professeur Sorbonne Université, LOV
 Président du jury ?
 mail:lars.stemmann@imev-mer.fr
 site:https://lov.imev-mer.fr/web/member/lars-stemmann/
 orcid:0000-0001-8935-4531
-*** Hubert Loisel
+*** OKAY Hubert Loisel
 Université du Littoral Côte d'Opale (ULCO)
 Laboratoire d'Océanologie et de Géosciences (LOG)
 site:https://www.researchgate.net/profile/Hubert-Loisel
 mail:hubert.loisel@univ-littoral.fr
 Équivalence ?
 Rapporteur !
-*** [?] Roy El Hourany
+*** NO Roy El Hourany
 ULCO - LOG
 site:https://www.researchgate.net/profile/Roy-El-Hourany
 mail:roy.elhourany@locean.ipsl.fr
@@ -60,8 +64,23 @@ Chercheur junior CNRS
 * Administratif
 ** TODO Valider l'enseignement :(
 
+* Remerciements
+la colloc étendu: théo, thomas, arthur, rémi, rémy, clément, sarah
+parler du confinement ?
+les potos: benjamin, marie, charlie, paul, jessie, piwi
+
+la mifa
+
+mon comité de thèse ? Sakina, Daniele
+
+le 426 le meilleur bureau, tous les autres doctorants et post-doctorants et stagiaires
+c'est quand même vachement plus fun avec elleux.
+
+l'équipe admin du labo, bigup
+
 * Inbox
 ** je ou nous ?
+** Quel est le timerange des produits que j'utilise ?
 ** Réanalyses -> renommer Mercator + ajouter info
 ** Finir corrections méthodes
 ** Ajouter figure comparaison Chl GlobColour / MODIS
@@ -76,9 +95,7 @@ numérotation (1a) -> (a1)
 ** Durée bloom marker plus jolis
 markeredgecolor and stuff
 faire un plot légèrement plus petit aussi
-** Réduire marges
-visiblement on est autour de 90 caractères. C'est trop (conseillé 45-70, idéal 66)
-** titre de section plice classique romane s
+** titre de section police classique romane serif
 
 * Recommendations de style
 ** GLS
