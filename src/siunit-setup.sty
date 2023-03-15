@@ -64,21 +64,55 @@
 %%% Lat/Lon commands
 % Command for typesetting latitude or longitude value
 % Input should be a number to send to \ang followed by one of NSWE.
+\DeclareSIUnit \latlon_degN {\text{\textdegree N}}
+\DeclareSIUnit \latlon_degS {\text{\textdegree S}}
+\DeclareSIUnit \latlon_degW {\text{\textdegree W}}
+\DeclareSIUnit \latlon_degE {\text{\textdegree E}}
+
+% Command for typesetting latitude or longitude value
+% Input should be a number to send to \ang followed by one of NSWE.
 \msg_new:nnn {ch-thesis} {latlon-invalid-end} {\\latlon\ argument\ should\ end\ with\ [NSWE]\ (found\ `#1')}
-\NewDocumentCommand \latlon { O{mode=math} m } {
-  \tl_set:Nx \l_tmpa_tl {\tl_item:nn{#2}{-1}}
-  \tl_if_in:noF {NSWE} {\l_tmpa_tl} {
-    \msg_warning:nnx {ch-thesis} {latlon-invalid-end} {\l_tmpa_tl}
+
+\tl_new:N \latlon__tmp_number_tl
+\tl_new:N \latlon__tmp_unit_tl
+
+% Separate number and units into sequence
+\cs_set:Npn \latlon__sep_unit:n #1 {
+  \tl_set:Nx \latlon__tmp_unit_tl { \tl_item:nn {#1} {-1} }
+  \tl_if_in:noTF {NSWE} {\latlon__tmp_unit_tl} {
+    \tl_set:Nx \latlon__tmp_number_tl { \tl_range:nnn {#1} {1} {-2} }
+    \tl_set:Nx \latlon__tmp_unit_tl { \use:c { latlon_deg \latlon__tmp_unit_tl } }
+  }{
+    \tl_set:Nx \latlon__tmp_number_tl {#1}
+    \tl_set:Nn \latlon__tmp_unit_tl {}
   }
-  \ang [#1] { \tl_range:nnn {#2} {1} {-2} } \tl_use:N \l_tmpa_tl
 }
 
-% Typesetting a box in lat/lon range (like 16°N-32°N)
-% Argument is split by ';' then sent to \latlon
-\NewDocumentCommand \latlonRange { o m } {
-  \seq_set_split:Nnn \l_tmpa_seq {;} {#2}
-  \seq_set_map:NNn \l_tmpb_seq \l_tmpa_seq { \latlon [#1] {##1} }
-  \seq_use:Nn \l_tmpb_seq {--}
+\NewDocumentCommand \latlon { O{mode=math} m } {
+  \latlon__sep_unit:n {#2}
+  \qty[#1]
+    { \latlon__tmp_number_tl }
+    { \latlon__tmp_unit_tl }
+}
+
+% % Typesetting a box in lat/lon range (like 16°N-32°N)
+% % {5S}{10N} -> 5°S -- 10°N
+% % {10}{20N} -> 10 -- 20°N
+% % {10N}{20N} -> 10°N -- 20°N
+\NewDocumentCommand \latlonRange { O{mode=math} m m } {
+  \latlon__sep_unit:n {#2}
+  \tl_if_empty:NTF \latlon__tmp_unit_tl {
+    \num [#1] { \latlon__tmp_number_tl }
+  }{
+    \qty [#1]
+      { \latlon__tmp_number_tl }
+      { \latlon__tmp_unit_tl }
+  }
+  \textendash
+  \latlon__sep_unit:n {#3}
+  \qty [#1]
+    { \latlon__tmp_number_tl }
+    { \latlon__tmp_unit_tl }
 }
 
 \ExplSyntaxOff
