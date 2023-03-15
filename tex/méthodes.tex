@@ -50,21 +50,21 @@ Nous commençons donc par un jeu de données que l'on désignera par \dataname{s
 Ce sont les données utilisées par \textcite{liu_2016} \encadra{et produites par les même outils} dont l'étude consistait également à détecter des fronts de SST et les colocaliser aux données de \ab{chl}.
 
 % Éventuellement à déplacer à une mention antérieure des niveaux
-\begin{note}[label={note:data-levels}]
+\begin{note}[label={note:data-levels}, breakable]
   Tout au long de ce manuscript nous utilisons les dénominations des niveaux de données tels que typiquement utilisés par les distributeurs, et qui correspondent de manière générale aux définitions suivantes:
-  \renewcommand\arraystretch{1.2}
-  \par\hspace{2em}\begin{tabularx}{0.9\textwidth}{>{\lfstyle}r X}
-    L1 & Données d'un seul capteur, sans traitement (au delà de ceux nécessaire à la transmission depuis le satellite), et à la résolution de capture \encadra*{\ab{cad} projetées dans le référentiel du capteur (nb.\ de lignes et nb.\ de pixels par ligne)}.
+  \newcommand*\lvllabel[1]{\hspace\labelsep \normalfont\bfseries\lfstyle #1}%
+  \begin{flexlabelled}{lvllabel}{1em}{1.5em}{1em}{2em}{1em}
+    \item[L1] Données d'un seul capteur, sans traitement (au delà de ceux nécessaire à la transmission depuis le satellite), et à la résolution de capture \encadra*{\ab{cad} projetées dans le référentiel du capteur (nb.\ de lignes et nb.\ de pixels par ligne)}.
     Elles sont accompagnées des données de positionnement du satellite.
-    \\
-    L2 & Variables géophysiques dérivées des données~\abbrv{L1}, à la même résolution et disposés de la même manière que ces dernières.
+
+    \item[L2] Variables géophysiques dérivées des données~\abbrv{L1}, à la même résolution et disposés de la même manière que ces dernières.
     Des métadonnées peuvent les accompagner, comme la qualité des pixels par exemple.
-    \\
-    L3 & Variables projetées sur une grille régulière en espace et en temps.
+
+    \item[L3] Variables projetées sur une grille régulière en espace et en temps.
     Des traitement supplémentaires peuvent être appliqués.
-    \\
-    L4 & Résultats d'analyses plus poussées comme l'aggrégation de plusieurs sources de données, ou l'assimilation par un modèle numérique.
-  \end{tabularx}
+
+    \item[L4] Résultats d'analyses plus poussées comme l'aggrégation de plusieurs sources de données, ou l'assimilation par un modèle numérique.
+  \end{flexlabelled}
 \end{note}
 
 Les données sont téléchargées au niveau~\abbrv{L2} depuis le \af{cmr}\footfullcite{sst_modis} en sélectionnant les sections de fauchées\footnotemark{} intersectant notre région d'étude, collectés de jour, et pour les courtes longueurs d'onde infrarouges~(\qty{11}{\um}).
@@ -82,16 +82,15 @@ Des étapes et calculs additionnels seraient nécessaires pour y combiner les do
 Même pour un capteur identique (\ab{modis} à bord de Terra \ab{par-ex}), il devient nécessaire de considérer des différences de calibrations, ainsi que de possibles artefacts lorsque l'on superpose plusieurs fauchées (que nous avons d'ailleurs largement ignorés pour agréger les fauchées sur une seule journée\dots).
 
 Face à ces difficultés, nous avons donc décidé dans un premier temps d'en rester à un seul capteur, malgré la couverture spatiale réduite.
-Il est également que nous n'avons pas réalisé de détection de nuages supplémentaire et ne disposons que d'un indice de qualité des pixels fourni avec les données~\abbrv{L2}.
-Cet indice ne suffit pas à exclure des pixels aux valeurs visiblement erronées.
-Cela se manifeste par exemple comme du bruit autour de nuages.
-Il est difficile de les disqualifier correctement sans un bon algorithme de détection de nuage, ce qui nécessite un travail supplémentaire important.
+Il est également à noter que nous n'avons pas réalisé de détection de nuages supplémentaire à celle des données~\abbrv{L2}, qui ne suffit pas à exclure des pixels aux valeurs visiblement erronées (ce qui se manifeste notamment par des valeurs bruitées autour de nuages).
+Il est difficile de disqualifier de tels pixels correctement sans un bon algorithme de détection de nuage, ce qui nécessite un travail supplémentaire important.
 Nous contournons le problème d'une manière similaire à celle de \citeauthor{liu_2016} en ne travaillant que sur des fenêtres de~\qtyproduct{100 x 100}{\km} avec une faible couverture nuageuse~(\pct{<70}), ce qui élimine une partie de ces cas problématiques.
 
-Malgré le fait que l'on soit limité ici à un seul capteur, \ab{modis} présente l'avantage de mesurer concomitamment la SST et la couleur de l'océan.
-Cela permet d'obtenir les valeurs de \ab{chl} aux même pixels, en utilisant le même traitement pour le jeu de données, accessible au \ab{cmems}\footfullcite{chl_modis}.
+Malgré le fait d'être limité à deux capteurs (à bords de Aqua et Terra), \ab{modis} présente l'avantage de mesurer concomitamment la SST et la couleur de l'océan.
+Cela permet d'obtenir les valeurs de \ab{chl} aux même pixels, en utilisant le même traitement pour le jeu de données.
 
-Il est néanmoins possible de trouver d'autres jeux de données permettant notre étude et nécessitant moins de travail (et autant d'éventuelles erreurs), ces dernières années ayant vu apparaître des données distribuées à des résolutions élevées.
+
+Les difficultés évoquées ci-dessus motivent à trouver un produit nécessitant moins de travail (et donc autant d'éventuelles erreurs en moins), ces dernières années ayant vu apparaître des produits globaux distribués à des résolutions élevées.
 
 \subsubsection{MUR}
 \declareDataset{sst_mur}
@@ -106,7 +105,8 @@ L'utilisation du produit suivant cherche à palier à ce problème.
 \subsubsection{ESA-SST-CCI / C3S}
 \declareDataset{sst_esacci}
 
-Ce produit est distribué conjointement par l'\ab{esa}"-\glsabbrvfont{SST}"-\ab{cci} et le \ab{c3s}.
+Ce produit est distribué conjointement par l'\ab{esa}"-\glsabbrvfont{SST}"-\ab{cci} et le \ab{c3s}\footnote{%
+  l'ESA-CCI pour la période 1981--2016 et le \abbrv{C3S} après 2017}.
 Il~agglomère les mesures de tous les capteurs infrarouges disponibles depuis~1981, ce qui comprend 11~\ab{avhrr} à bord des satellites \ab{metop}["~A] et \ab{noaa} (entre les itérations 6 et~19) et trois \ab{atsr} à bord de \ab{ers} 1~et~2, et Envisat. \review{Ajouter SLSTR.}
 Cela donne au moins deux capteurs en fonctionnement simultané, et au moins trois depuis~1992.
 Outre la bonne couverture obtenue, l'uniformité des capteurs permet d'obtenir un jeu de données stable dans le temps, pouvant servir à la détection de tendances climatiques~(\cite{merchant_2019}).
@@ -149,40 +149,68 @@ Nous utilisons ici une réanalyse globale (désignée par \dataname{sst_reanalys
 Cette réanalyse est faite sur une grille \engquote{eddy"-resolving}, au \resol{1}{12} soit environ~\qty{8}{\km}, et sur 50~niveaux verticaux. Les données sont disponibles en résolution journalière.
 Le noyau \abbrv{nemo} est forcé en surface par les réanalyses \abbrv{ERA}-Interim et \abbrv{ERA-5} du centre \ab{ecmwf}.
 Le modèle fait de l'assimilation de données d'observations: altimétrie, SST \guil{Reynolds}~\resol{1}{4} (seulement \ab{avhrr}), concentration en glace de mer, et profiles in"-situ de températures et profils de salinité~\ab{cora}.
-Outre sa résolution assez faible, on notera des différences importantes dans les structures visibles avec les autres produits, et qui ne sont visiblement pas due à un simple lissage du champ de SST~(\nref{fig:comparaison-sst}).
+
+\subsubsection{Comparaison des produits de SST}
 
 \begin{figure}
   \insertfig{comparaison_sst.pdf}
-  \captionT{Comparaison entre produits de SST}{%
-    Zoom sur une même fenêtre, le \frenchdate{2007}{04}{22}, de la SST pour quatres produits considérés: \dataname{sst_esacci}~(a), \dataname{sst_reanalyses}~(b), \dataname{sst_mur}~(c), et \dataname{sst_modis}~(d).
-    Les données \dataname{sst_mur}, malgré leur haute résolution présentent des zones très lissées, par exemple dans la zone~\latlonRange{68W; 64W}; \latlonRange{40N; 42N}.
-    Les données \dataname{sst_esacci} semblent en revanche capturer avec régularité les structures visibles sur les données plus brutes de \dataname{sst_modis}, excepté les plus fines évidemment.
+  \captionT{Comparaison des produits de SST}{%
+    Zoom sur une même fenêtre, le \frenchdate{2007}{04}{22}, de la SST pour quatres produits considérés: \dataname{sst_esacci}~(a), \dataname{sst_modis}~(b), \dataname{sst_mur}~(c), et \dataname{sst_reanalyses}~(d).
   }
   \label{fig:comparaison-sst}
 \end{figure}
 
-Sauf indication contraire, c'est le produit~\abbrv{L4} que nous utiliserons pour le champ de SST dans toute la suite de cette thèse.
-Il permet d'accéder à des données SST simplement, avec une résolution convenable, et est stable sur une longue durée (plusieurs décennies).
-Les données sont téléchargées depuis \ab{cmems}\footfullcite{sst_esacci}.
+Nous illustrons ici notre comparaison entre les différents produits de SST en nous appuyant sur un instantanné (\nref{fig:comparaison-sst}).
+Seul le produit \dataname{sst_modis}~(b) n'est pas issu d'une interpolation ou d'une réanalyse, on peut le considérer comme étant le plus proche d'une \engquote{ground truth} (en dehors des pixels nuageux bien sûr).
+
+On notera pour le produit de réanalyses \dataname{sst_reanalyses}~(d), outre sa résolution assez faible, des différences importantes dans les structures présentes sur les autres produits, qui ne sont visiblement pas due à un simple lissage du champ de SST.
+Ce produit manque les caractéristiques de certaines structures, mais surtout manque leur position exacte.
+
+Les produits issus d'interpolations de plusieurs capteurs semblent moins souffrir de ce problème.
+Les données \dataname{sst_mur}~(c), malgré leur haute résolution présentent des zones très lissées, par exemple dans le secteur~\latlonRange{68}{64W}; \latlonRange{40}{42N}.
+On peut émettre l'hypothèse que l'inclusion de données basse-résolution (in"-situ et micro"-ondes) en est (au moins partiellement) la cause.
+À l'inverse, les données \dataname{sst_esacci}~(a) semblent capturer avec plus de régularité les structures visibles sur les données plus brutes de \dataname{sst_modis}, excepté les plus fines évidemment.
+
+Le produit \dataname{sst_esacci} semble être le plus approprié parmi ceux présentés.
+Il permet d'accéder au champ de SST simplement, ce avec une résolution convenable.
+Sauf indication contraire, c'est le produit~\dataname{sst_esacci} que nous utiliserons pour le champ de SST dans toute la suite de cette thèse.
 
 \subsection{Chlorophylle-\textit{a}}
 \label{sec:donnees-chl}
 \declareDataset{chl_globcolour}
 
-Pour le champ de \al{chl}, nous utilisons les données produites dans le cadre du projet GlobColour, développées, validées et distribuées par ACRI"~ST, France (\cite{maritorena_2002}).
-La version \engquote{MultiYear} au niveau~\abbrv{L3} est utilisée.
-Ce sont des données de résolution spatiale~\resol{1}{24} (soit environ~\qty{4}{\km}), journalières, et qui comportent des nuages.
-Elles sont récupérées sur \ab{cmems}\footfullcite{chl_globcolour}.
+Pour le champ de \al{chl}, seuls deux produits ont été utilisés.
+D'une part les données du capteur \ab{modis} à bord d'Aqua.
+Comme évoqué précédemment ce capteur mesure concomitamment les bandes infrarouges et visibles ce qui permet de bénéficier des valeurs de SST et de \as{chl} aux même points.
+Les valeurs de \as{chl} sont calculées à partir des valeurs de réflectance à différentes bandes de longueurs d'ondes, ici avec l'algorithme OCI~(Ocean Colour Index).
+Ce dernier combine les algorithmes: CI pour les faibles valeurs de \as{chl}, OCx~(\as{ie} \abbrv{OC3} pour le capteur \as{modis}) pour les fortes valeurs, et un mélange des deux dans une zone de transition~(0.25~\textless \as{chl}~\textless 0.35~\unit{mgm}).
+Les données de \as{chl} sont téléchargées séparément, cette fois-ci depuis le \ab{cmems}\footfullcite{chl_modis}, mais le même traitement de projection sur grille régulière kilométrique leur est appliquée.
 
-Ce produit aggrège les données optiques de plusieurs capteurs: \ab{seawifs}, \ab{modis} Aqua et Terra, \ab{meris} à bord d'Envisat, \ab{viirs} à bord de \ab{snpp} et \ab{noaa}[\textlf{-20}], et enfin \ab{olci} à bord de \textlf{Sentinel-3A et -3B}.
-Les données de reflectance de chaque capteur sont transformées en concentration de \ab{chl} avant d'être fusionnées en seul produit.
-Les algorithmes pour le passage en \ab{chl} sont ajustés indépendamment pour chacun des capteurs, ce qui permet d'obtenir un produit cohérent et stable~(\cite{garnesson_2019}).
+En second lieu, nous utilisons également des données de l'initiative \as{octac} (service du \as{cmems}).
+Nous utilisons le produit global, MultiYear\footnote{%
+  MultiYear: traitement le plus récent de toutes les années disponibles
+}, au niveau~\abbrv{L3}, version dite Copernicus"-GlobColour, développée, validée et distribuée par ACRI-ST France.
+Les données sont récupérées sur \ab{cmems}\footfullcite{chl_globcolour}.
+Elles sont de résolution spatiale~\resol{1}{24} (soit environ~\qty{4}{\km}), journalières, et comportent des nuages.
+
+Ce produit aggrège les données optiques de plusieurs capteurs: \ab{seawifs}, \ab{modis} Aqua et Terra, \ab{meris} à bord d'Envisat, \ab{viirs} à bord de \ab{snpp} et \ab{noaa}[\textlf{-20}]\footnote{parfois indiqué par son nom avant lancement: \as{jpss}[\textlf{-1}]}, et enfin \ab{olci} à bord de \textlf{Sentinel-3A et -3B}.
+Similairement au produit Modis, les valeurs de \as{chl} sont calculées à partir des réflectance en utilisant ici un mélange des algorithmes \abbrv{OC3/4}, CI, et \abbrv{OC5}.
+
+\begin{note}[label={note:merge-chl-or-rrs}]
+  Cette aggrégation se fait selon le traitement dit Copernicus"-GlobColour: les données de reflectance de chaque capteur sont transformées en concentration de \ab{chl} avant d'être fusionnées en seul produit~(\cite{garnesson_2019}).
+  À l'inverse, le produit (\as{esa})~OC-\as{cci}/\as{c3s} du même projet \as{octac}, développé par le Plymouth Marine Laboratory, fusionne les reflectances des différents capteurs avant la conversion en \as{chl}.
+  Aggréger les valeurs de Chlorophylle plutôt que de réflectance permet \encadra{entre autres} un ajout de nouveaux capteurs facilité (à ce jour le produit OC-\as{cci} n'intègre pas le capteur de \as{noaa}[-\textlf{20}] par ex.), ainsi qu'une meilleur couverture spatiale~(\cite{garnesson_2019}).
+\end{note}
+
+Produits vont par pairs.
+Autant garder ceux à 4km.
+Ce produit présente essentiellement les même avantages et inconvénients que son homologue pour SST.
 
 \begin{figure}
   \centering
-
-  \captionT{Comparaison entre produits de Chl-\textit{a}}{%
-    \review{TODO}
+  \insertfig{comparaison_chl.pdf}
+  \captionT{Comparaison des produits de Chl-\textit{a}}{%
+    Zoom sur une même fenêtre, le \frenchdate{2007}{04}{22}, de la \as{chl} pour les deux produits considérés: Copernicus"-GlobColour~(a), et \abbrv{Modis-L3}~{b}.
   }
   \label{fig:comparaison-chl}
 \end{figure}
@@ -284,7 +312,7 @@ La valeur journalière de ce seuil est filtrée temporellement par un filtre mé
   \insertfig{separation_evol_month.pdf}
   \captionT{Variation temporelle de la délimitation entre biomes}{%
     La position limite entre les biomes \al{st-sais} et \al{sp} n'évolue que peu au cours de l'année vis à vis des larges méandres du Gulf Stream.
-    Néanmoins en été, la limite est moins marquée après le détachement du jet~(\latlonRange{75W; 70W}).
+    Néanmoins en été, la limite est moins marquée après le détachement du jet~(\latlonRange{75}{70W}).
 
     L'isotherme séparant les deux biomes est tracé le 15~de chaque mois pour l'année~2007.
     La couleur de chaque contour correspond au jour de l'année comme dénoté par la barre de couleur dans l'inset.
@@ -321,9 +349,9 @@ Ces composantes sont ensuite réunies dans un seul index qui ainsi reflète l'h�
 Pour limiter la taille des structures détectées, on limite le calcul de ces composantes sur une fenêtre de taille appropriée, \ab{cad} pour nous de l'ordre de grandeur d'une dizaine de kilomètres.
 Ainsi, pour chaque pixel, la valeur de chaque composante est calculée sur la distribution de SST à l'intérieur d'une fenêtre glissante centrée sur ce pixel et dont les tailles possibles sont:
 \begin{itemize}
-        \item \(3 \times 3 =\qty{9}{\pixels}\) soit~\tapprox\qty{20}{\km} de côté,
-        \item \(5 \times 5 =\qty{25}{\pixels}\) soit~\tapprox\qty{30}{\km} de côté,
-        \item \(7 \times 7 =\qty{49}{\pixels}\) soit~\tapprox\qty{40}{\km} de côté.
+  \item \(3 \times 3 =\qty{9}{\pixels}\) soit~\tapprox\qty{20}{\km} de côté,
+  \item \(5 \times 5 =\qty{25}{\pixels}\) soit~\tapprox\qty{30}{\km} de côté,
+  \item \(7 \times 7 =\qty{49}{\pixels}\) soit~\tapprox\qty{40}{\km} de côté.
 \end{itemize}
 Parce qu'une fenêtre plus large entraînerait la détection de structures trop grandes pour notre étude, nous nous limiterons aux tailles présentées ci"-dessus.
 Néanmoins une fenêtre trop petite limite le nombre de pixels disponibles pour calculer les valeurs statistique dont nous avons besoin convenablement.
@@ -540,30 +568,38 @@ Nous utilisons également la dérivée de \as{chl} que nous calculons à partir 
 }.
 
 Premièrement, nous détectons la valeur maximale de \as{chl} (étape\,\textcircled{1}, en orange, \nref{fig:methode-timing-bloom}a).
-Deuxièmement, nous prenons pour démarrage du bloom l'instant~\as{onset}, antérieur à l'instant de \as{chl} maximale, pour lequel la dérivée de \as{chl} est maximale (étape\,\textcircled{2}, en rouge, \nref{fig:methode-timing-bloom}c).
+Deuxièmement, nous prenons pour démarrage du bloom l'instant~\as{onset}, antérieur à l'instant de \as{chl} maximale, pour lequel la dérivée de \as{chl} est maximale (étape\,\textcircled{2}, en rouge, \nref{fig:methode-timing-bloom}b).
 Afin d'estimer l'incertitude de cette mesure, nous prenons l'écart"-type de l'ensemble des dates pour lesquels la dérivée de \as{chl} est supérieur à~\pct{90} de sa valeur maximale.
 
 \begin{figure}
   \centering
-  \insertfig{phenologie_2015_N:45-50.pdf}
+  \insertfig{phenologie_méthode_2015_N:45-50.pdf}
   \captionT{Mesure du timing du bloom entre fronts et background}{%
-    Les dates de démarrage du bloom et sa durée sont obtenues à partir des séries temporelles de la médiane de \as{chl}~(ligne du haut) et de sa dérivé~(ligne du bas). Les données proviennent de l'année~2015 et la bande de latitude~\latlonRange{40N; 45N}.
+    Les dates de démarrage du bloom et sa durée sont obtenues à partir des séries temporelles de la médiane de \as{chl}~(a) et de sa dérivé~(b). Les données proviennent de l'année~2015 et la bande de latitude~\latlonRange{40}{45N}.
 
-    Le processus est illustré sur la série correspondant aux fronts faibles~(colonne de gauche):
+    Le processus est illustré sur la série correspondant aux fronts faibles:
     \textcircled{1}\,Nous déterminons l'instant pour lequel la \as{chl} est maximale, puis \textcircled{2}\,prenons pour démarrage du bloom l'instant antérieur à ce dernier et pour lequel la dérivée de \as{chl} est maximale.
     Enfin\,\textcircled{3} la date de fin de bloom est prise comme la date la plus tardive pour laquelle la \as{chl} est supérieure à~\pct{75} de sa valeur maximale.
-
-    Les résultats pour les trois séries temporelles correspondant au \eng{background}~(rouge), fronts faibles~(bleu), et fronts forts~(vert) sont superposés~(colonne de droite).
   }
   \label{fig:methode-timing-bloom}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \insertfig{phenologie_frt-bkg_2015_N:45-50.pdf}
+  \captionT{Mesure du timing du bloom entre fronts et background}{%
+    Les dates de démarrage du bloom et sa durée sont obtenues à partir des séries temporelles de la médiane de \as{chl}~(a) et de sa dérivé~(b). Les résultats pour les trois séries temporelles correspondant au \eng{background}~(rouge), fronts faibles~(bleu), et fronts forts~(vert) sont superposés; le timing du bloom pour chaque série est représenté par une flèche horizontale.
+    Les données proviennent de l'année~2015 et la bande de latitude~\latlonRange{40}{45N}.
+  }
+  \label{fig:bloom-lag}
 \end{figure}
 
 Enfin, nous prenons comme date de fin du bloom la date la plus tardive pour laquelle la \as{chl} est supérieure à~\pct{75} de sa valeur maximale (étape\,\textcircled{3}, en vert, \nref{fig:methode-timing-bloom}a).
 Pour obtenir une incertitude nous prenons ici l'écart"-type de l'ensemble des dates pour lesquelles la \as{chl} est comprise dans un intervalle de~\pct{5} autour du seuil (\as{cad}~\pct{75\pm2.5}).
 La durée~\as{duree} du bloom est prise entre les dates de démarrage et de fin ci"-dessus.
 
-Il est légitime de questionner le détail de ces méthodes \encadra{d'autant plus pour certaines années ou le démarrage du bloom est étalé sur une longue période, ou fragmenté en plusieurs pics}, cependant on s'intéresse ici aux différences entre les valeurs trouvées dans les fronts et dans le \eng{background} (\nref{fig:methode-timing-bloom}\,b et~d).
-Étant donné que l'on effectue ces mesures de manière identique dans les deux cas, on s'attend à trouver des différences de valeurs pertinentes.
+Il est légitime de questionner le détail de ces méthodes \encadra{d'autant plus pour certaines années ou le démarrage du bloom est étalé sur une longue période, ou fragmenté en plusieurs pics}, cependant on s'intéresse ici aux différences entre les valeurs trouvées dans les fronts et dans le \eng{background} (\nref{fig:bloom-lag}).
+Étant donné que l'on effectue ces mesures de manière identique dans les deux cas, on s'attend néanmoins à trouver des différences de valeurs pertinentes.
 
 Les variables retenues pour l'étude de la phénologie du bloom sont donc le retard au démarrage du bloom (\(\am{lag} = \am{onset}_\frt - \am{onset}_\bkg \), \enquote{lag} dans l'article), et l'écart de durée (\(\am{lag-duree} = \am{duree}_\frt - \am{duree}_\bkg\)).
 Leurs valeurs annuelles (ainsi que les incertitudes associées) sont moyennées avec pondération.

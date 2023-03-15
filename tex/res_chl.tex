@@ -34,7 +34,10 @@ Cet indicateur permet de représenter la distribution d'une variable en une vale
 
 Les distributions de valeurs de la \as{chl} s'avèrent être invariablement unimodales, avec des queues de valeurs élevées plus ou moins prononcées (\nref{fig:verif-hist}).
 Il semble donc pertinent de qualifier ces distributions par leur valeur médiane.
-Les distributions de SST sont également unimodale, à l'exception du biome subpolaire, qui présente des distributions largement bimodales (\nref{fig:verif-hist}), indiquant la présence de deux masses d'eaux de températures distinctes.
+Les distributions de SST sont également unimodale, à l'exception du biome subpolaire, qui présente des distributions largement bimodales (\nref{fig:verif-hist}).
+Une séparation en bande de latitude de~\ang{5} de large (\nref{fig:hists-sst-latbands}) ne suffit pas; les valeurs de SST étant encore distribuées de manière bimodale entre décembre et mai dans les bandes de latitude \latlonRange{40}{45N}.
+
+, indiquant la présence de deux masses d'eau de températures distinctes.
 Les résultats portant sur les valeurs de SST dans les fronts, présentés \nref[section]{sec:res-sst}, omettent donc le biome subpolaire par soucis de simplicité.
 
 \begin{figure}
@@ -47,6 +50,17 @@ Les résultats portant sur les valeurs de SST dans les fronts, présentés \nref
     La SST~(à droite) en revanche affiche des distributions largement bimodales, comme dans le biome subpolaire notamment.
   }
   \label{fig:verif-hist}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \insertfig{hists_sst_latbands.pdf}
+  \captionT{Histogrammes de SST par bande de latitude dans le biome subpolaire}{%
+    Les distributions de valeurs sont indiquées pour l'année~2007 par tranches de trois mois~(colonnes), par bande de latitude~(ligne0), et pour les \eng{background}~(rouge), fronts faibles~(bleu), et fronts forts~(vert).
+
+    \review{en annexe ?}
+  }
+  \label{fig:hists-sst-latbands}
 \end{figure}
 
 \subsection{Sensibilité aux paramètres}

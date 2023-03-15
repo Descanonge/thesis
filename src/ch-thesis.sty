@@ -79,39 +79,30 @@
 \addto\extrasenglish{\sisetup{locale = US}}
 \addto\extrasfrench{\sisetup{locale = FR, output-decimal-marker=.}}
 
-\ExplSyntaxOn
-
 % Insérer du texte anglais, sans et avec guillements
-\NewDocumentCommand \eng { m } {
-  \foreignlanguage {english} {#1}}
+\NewDocumentCommand \eng { m } {%
+  \foreignlanguage{english}{#1}}
 
-\NewDocumentCommand \engquote{ m } {
-  \foreignquote {english} {#1}}
+\NewDocumentCommand \engquote{ m } {%
+  \foreignquote{english}{#1}}
 
 % Guillements à la française ou à l'anglaise (*).
-\NewDocumentCommand \guil { s +m }{
-  \IfBooleanTF {#1} {
-    \enquote* {#2}
-  }{
-    \enquote {#2}
-  }}
+\NewDocumentCommand \guil { s +m }{%
+  \IfBooleanTF{#1}%
+  {\enquote*{#2}}%
+  {\enquote{#2}}}
 
 % Tirets (cadratins) d'incise
 % Utiliser * si la phrase se termine par un tiret (il n'est alors pas inséré)
-\NewDocumentCommand \encadra { s +m } {
-  \IfBooleanTF {#1} {
-    \ --~#2%
-  }{
-    \ --~#2~--%
-  }}
-
+\NewDocumentCommand \encadra { s +m } {%
+  \IfBooleanTF{#1}%
+  {\ --~#2}%
+  {\ --~#2~--}}
 
 % Notes pour relecture
-\NewDocumentCommand \review { +m }{
-  { \color{red} #1 }
-}
+\NewDocumentCommand \review { +m }{%
+  {\color{red}#1}}
 
-\ExplSyntaxOff
 
 %%% Framed environments
 \RequirePackage{tcolorbox}
@@ -122,7 +113,6 @@
   number format={}
 ]{note}[1][]{
   enhanced, skin=enhancedmiddle,
-  breakable,
   frame hidden, interior hidden,
   top=0pt, bottom=0pt, right=0pt,
   borderline west={2pt}{1em}{black},
@@ -219,8 +209,9 @@
 \ExplSyntaxOff
 
 \pagestyle{thesis}
-
 \raggedbottom
+\setfootins{1.5\bigskipamount}{\bigskipamount}
+\tightlists
 
 \setsecnumdepth{subsubsection}
 \renewcommand*\thesection{\arabic{section}} % No chapter number in section
@@ -494,7 +485,7 @@
     \addtocontents{lof}{
       \makebox[0.6\textwidth]{Article\ \xhrulefill[height=0.5ex]}}
 
-    \input {tex/article}
+    \input{tex/article}
     \addtocontents{lof}{
       \makebox[0.6\textwidth]{\xhrulefill[height=1ex]}}
     \clearpage

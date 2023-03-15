@@ -76,6 +76,15 @@
 % \renewcommand*\mkbibnamefamily[1]{\bname{##1}}%
 }
 
+% And if we don't want that, we can hack it this way
+% (maybe there is a cleaner way to pass an option to
+% the driver idk)
+\newcommand*\resetbegentry{%
+  \renewbibmacro*{begentry}{%
+    \c@maxnames\blx@maxbibnames\relax%
+    \c@minnames\blx@minbibnames\relax}}
+
+% Manage old-style figures
 \DeclareFieldFormat
   [software,dataset]
   {title}{\mkbibemph{\textlf{#1}}}
@@ -92,7 +101,7 @@
 \DeclareNameAlias{citename}{family-given}
 % Remove comma and put in parens
 \renewcommand*\revsdnamepunct{}
-\renewcommand*\mkbibnamegiven[1]{\mkbibparens{#1}}
+% \renewcommand*\mkbibnamegiven[1]{\mkbibparens{#1}}
 
 \newbibmacro*{label:dataset}{%
   \printlist{datavar}
@@ -105,6 +114,8 @@
   % \usebibmacro{begentry}% only for regular entries
   \printtext[bold]{\usebibmacro{label:dataset}}%
   \printfield{title}%
+  \newunit%
+  \printfield{version}%
   \newunit\newblock%
   \printnames{author}%
   \newunit%
