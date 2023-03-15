@@ -6,10 +6,53 @@
 Envoi du manuscript fin mars. Dernière semaine de mars ? -> vendredi 31 mars.
 Envoi du rapport, 1 mois plus tard (fin avril). À vérifier avec l'ED.
 Soutenance, 1 mois plus tard (fin mai). À vérifier avec l'ED
-** DONE Envoyer mail ED pour confirmer jury
-** TODO Envoyer mail demande au jury
-donner les dates (envoi manuscript, envoi rapport)
-+doodle pour la date de soutenance
+** Dispo
+
+*** tentative recap
+JUIN
+19 xHubert
+20 xHubert
+21 xLars
+22 xLars xHubert
+23 xLars xHubert
+--
+26 xLars (Hubert:visio)
+27 xLars xHubert
+28 xLars xAida
+29 xLars xAida xÉlodie
+30 xÉlodie (Aida:aprem si besoin)
+
+JUILLET
+ 3 (Hubert:visio) <-
+ 4 (Hubert:visio) <-
+ 5 xHubert
+ 6 xHubert xAida
+ 7 xHubert xAida
+--
+10 xHubert? <-
+11 xHubert? <-
+12 xHubert? <-
+13 xHubert? xÉlodie
+14 xHubert? xÉlodie
+
+*** Hubert:
+- Juin 21
+- Juin 26 (matin en visio)
+- Juin 28
+- Juin 29 (matin en visio)
+- Juin 30
+- Juillet 3 (visio, avant 18h)
+- Juillet 4 (visio, avant 18h)
+*** Daniele
+Dispo <3
+*** Élodie
+26-28 juin, 3-7 juillet
+si jamais, du 19 au 23 juin et du 10 au 12 juillet
+*** Lars
+pas dispo du 21 au 29 juin (peut être même jusqu'à plus tard)
+*** Aida
+19-23 juin, 26-27 juin, 30 juin aprem si besoin,
+3-5 juillet, 10-14 juillet
 ** Liste
 *** OKAY Daniele Iudicone
 Departement of Integrated Marine Ecology, Stazione Zoologica Anton Dohrn, Napoli (SZN)
@@ -81,21 +124,11 @@ l'équipe admin du labo, bigup
 * Inbox
 ** je ou nous ?
 ** Quel est le timerange des produits que j'utilise ?
-** Réanalyses -> renommer Mercator + ajouter info
 ** Finir corrections méthodes
-** Ajouter figure comparaison Chl GlobColour / MODIS
-** Commandes gls
-je suis frileux quand j'utilise des abbrv dans une phrase à propos de l'article qui précède.
-Par ex. on a "le HI" et "l'heterogeneity index" :/
-ça serait pas mal d'avoir une commande qui gère ça
-ouais mais de toute façon ça peut pas gérer les autres accords (avec des adj. par ex.) donc autant vérifier ce qu'on fait à l'écriture.
-Je pense que je fais enlever HI et SST de toute façon il n'y a aucune difficulté à les écrire.
-** Plot exemples
-numérotation (1a) -> (a1)
+** Embed fonts
 ** Durée bloom marker plus jolis
 markeredgecolor and stuff
 faire un plot légèrement plus petit aussi
-** titre de section police classique romane serif
 
 * Recommendations de style
 ** GLS
@@ -223,7 +256,6 @@ Je préfère celle-ci en vrai, proche de l'anglais
 ** Les overfull hbox yaaay
 ** que les footnotes ne soient pas coupées
 ça implique peut être de jouer avec les marges
-**
 ** Regexps
 #+begin_src
 Repeated words
