@@ -52,13 +52,14 @@ draft,
 
 %%% Front matter
 \frontmatter
+\pagestyle{thesis-front}
 \include{tex/front_matter}
 
 %%% Glossary
 \ifFinal{%
   \setglswidth%
   \printglossary[toctitle=Glossaire]
-  \thispagestyle{plain}
+  \thispagestyle{thesis-empty}
 }
 
 %%% TOC
@@ -70,10 +71,11 @@ draft,
   \addcontentsline{toc}{section}{\contentsname}
 }
 
+%%% LOF
 \clearpage
 
-%%% LOF
 \listoffigures*
+\thispagestyle{thesis-empty}
 % phantomsection already called by \listoffigures
 \addcontentsline{toc}{section}{\listfigurename}
 
@@ -81,6 +83,7 @@ draft,
 
 %%% Mainmatter
 \mainmatter
+\pagestyle{thesis}
 
 \include{tex/intro}
 \include{tex/méthodes}

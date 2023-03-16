@@ -29,11 +29,11 @@ JUILLET
  6 xHubert xAida
  7 xHubert xAida
 --
-10 xHubert? <-
-11 xHubert? <-
-12 xHubert? <-
-13 xHubert? xÉlodie
-14 xHubert? xÉlodie
+10 xHubert
+11 xHubert
+12 xHubert
+13 xHubert xÉlodie
+14 xHubert xÉlodie
 
 *** Hubert:
 - Juin 21
@@ -107,28 +107,9 @@ Chercheur junior CNRS
 * Administratif
 ** TODO Valider l'enseignement :(
 
-* Remerciements
-la colloc étendu: théo, thomas, arthur, rémi, rémy, clément, sarah
-parler du confinement ?
-les potos: benjamin, marie, charlie, paul, jessie, piwi
-
-la mifa
-
-mon comité de thèse ? Sakina, Daniele
-
-le 426 le meilleur bureau, tous les autres doctorants et post-doctorants et stagiaires
-c'est quand même vachement plus fun avec elleux.
-
-l'équipe admin du labo, bigup
-
 * Inbox
-** je ou nous ?
 ** Quel est le timerange des produits que j'utilise ?
 ** Finir corrections méthodes
-** Embed fonts
-** Durée bloom marker plus jolis
-markeredgecolor and stuff
-faire un plot légèrement plus petit aussi
 
 * Recommendations de style
 ** GLS

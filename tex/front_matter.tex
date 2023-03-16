@@ -1,18 +1,38 @@
 % chktex-file 13
 
+\thispagestyle{thesis-empty}
 \unsection{Résumé}
+
 Résumé
 
-% \clearpage
-% \section*{Remerciements}
-% \label{sec:thanks}
-% Remerciements \dots
+\begin{comment}
 
 \clearpage
+\thispagestyle{thesis-empty}
 
-\vspace{5\onelineskip}
+\section*{Remerciements}
+\label{sec:thanks}
+
+la colloc étendu: théo, thomas, arthur, rémi, rémy, clément, sarah
+parler du confinement ?
+les potos: benjamin, marie, charlie, paul, jessie, piwi
+
+la mifa
+
+mon comité de thèse ? Sakina, Daniele
+
+le 426 le meilleur bureau, tous les autres doctorants et post-doctorants et stagiaires
+c'est quand même vachement plus fun avec elleux.
+
+l'équipe admin du labo, bigup
+\end{comment}
+
+\clearpage
+\thispagestyle{thesis-empty}
+
+\vspace*{5ex}
 \par\addvspace{\beforesecskip}\addvspace{\baselineskip}
-\textit{À l'intention du lecteur\dots}\par
+\par\noindent\textit{À l'intention du lecteur\dots}\par
 \vspace{\aftersecskip}
 
 à quoi s'attendre vis à vis du contenu, plus orienté méthodo / technique.
@@ -21,67 +41,83 @@ parce que c'est ce qui m'intéresse le plus.
 En vous souhaitant une agréable lecture.
 
 \clearpage
+\thispagestyle{thesis-empty}
+
 \unsection{Publications et productions}
 \label{sec:productions}
 
 \begingroup
 \resetbegentry
+\defaultlists
 Le travail effectué durant ma thèse et présenté dans ce manuscrit a donné lieu à plusieurs articles:
 \begin{itemize}
+  \setlength{\itemsep}{1.8\onelineskip}
+  \renewcommand*\labelitemi{\adfrightarrowhead}
   \item un premier article présentant la méthode développée, et certains des résultats obtenus.
         Cet article est intégré à la structure de ce manuscrit, et inclu dans sa totalité au \nref[chapitre]{chp:res-chl}.
-        \begin{note}[before upper={}]\fullcite{haeck_2023}\end{note}
+        \textnote{\fullcite{haeck_2023}}
 
   \item un second article décrivant l'étude effectuée par I.\ Mangolte dans la région du courant de Californie, et qui exploite en partie la méthode présentée dans cette thèse. Cet article est discuté dans le \hyperref[sec:CCE]{chapitre~\ref{chp:perspectives}} et resumé en \nref[annexe]{ax:article-cce}.
-        \begin{note}[before upper={}]\review{cite: \articleCceTitle}\end{note}
+        \textnote{\review{\articleCceTitle}}
 
   \item et un article de \eng{review} dans lequel s’inscrit ce travail, discuté dans le \hyperref[sec:review]{chapitre~\ref{chp:perspectives}} et résumé en \nref[annexe]{ax:article-review}.
-        \begin{note}[before upper={}]\review{cite: \articleReviewTitle}\end{note}
+        \textnote{\review{\articleReviewTitle}}
 
 \end{itemize}
-\medskip
 \endgroup
 
-Par ailleurs, une majeure partie de mon attention et effort a été diri
-Lors de mon travail de thèse, j'ai été amené à écrire des outils qu'il m'a parru utile de rendre publics et accessibles.
-<appuyer sur l'importance de l'open source et de faciliter la reproducibilité.>
-Tous les codes utilisés sont disponibles sur un dépôt public\footnote{%
-  \glsurl{gitlab}
-}, et sur un répertoire Zenodo (\glsurl{zenodo}).
-\medskip
+\bigskip
 
-Certains outils sont distribués à part:
-\begin{itemize}
-  \item \citesoft{filefinder}:
-        un paquet python qui permet, entre autres, de trouver des fichiers grâce à la structure de leur nom de fichier.
-        <Expliquer que j'utilise ça pour toutes mes bases de données.>
-  \item \citesoft{xarray-histogram}:
-        un paquet python qui permet de calculer des histogrammes depuins des données gérées par Xarray.
-  \item \citesoft{tol-colors}:
-        un paquet python qui donne accès à des jeux de couleurs adaptés aux personnes atteintes de daltonisme. Les jeux de couleurs ont été développés par \glsname{paultol}\footnote{voir~\glsurl{paultol}}, je les ai seulement rendus accessibles sur PyPi, et plus facilement modifiables.
-  \item \citesoft{dateloop}:
-        un script bash permettant de générer des ensembles de dates.
-\end{itemize}
-\medskip
+Par ailleurs, pendant cette thèse une grande partie de mon effort s'est tournée sur l'élaboration d'outils informatiques cohérents \encadra{j'entends allant au"-delà d'une simple collection de scripts} permettant les analyses présentées ci"-après.
+Une attention toute particulière a été portée à assurer leur ré"-utilisation et extension avec facilité, d'une part pour garantir la reproducibilité effective de cette étude, et d'autre part à ce que ce travail puisse bénéficier à d'autres.
+Bien entendu, d'autres considérations entrent également en compte, par exemple de performances et de libre accès.
+Certaines parties de ce travail en particulier se sont muées en projets indépendants, qu'il m'a paru utile de distribuer séparément.
+J'ai ainsi durant ma thèse publié publiquement les outils suivant:
+\begingroup
+\resetbegentry
+\renewbibmacro*{label:software}{}
+\begin{description}
+  \setlength{\itemsep}{1.8\onelineskip}
+  \item[FileFinder]
+        est un paquet Python qui permet \encadra{entre autres} de trouver des fichiers grâce à la structure de leur nom de fichier, ce qui est particulièrement utile pour des données dépendant de la date, ou de la valeur d'un paramètre, ou des deux.
+        L'entièreté des fichiers de données utilisés pour cette thèse sont gérées grâce à cet outil.
+        \textnote{\citesoftfull{filefinder}}
 
-J'ai également participé à un projet open-source (\citesoft{cf-xarray}~\href{https://github.com/xarray-contrib/cf-xarray/pull/354}{pull request~\textlf{\#354}}) visant à rendre accessible au paquet python XArray les conventions de métadonnées~\as{cf}.
-J'y ai ajouté le support pour les variables drapeaux utilisant un masque binaire.
+  \item[tol-colors]
+        est un paquet Python qui donne accès à des assortiments de couleurs adaptés aux personnes atteintes de daltonisme.
+        Les jeux de couleurs ont été développés par \glsname{paultol}\footnote{voir~\glsurl{paultol}}, je les ai seulement rendus plus facilement accessibles via PyPI.
+        \textnote{\citesoftfull{tol-colors}}
 
-\begin{center}
-  \vspace{1\baselineskip}
-  \rule{0.77\textwidth}{0.5pt}
-  \vspace{1\baselineskip}
-\end{center}
+  \item[Xarray-histogram]
+        est un paquet Python\footnote{%
+        Il est à noter que ce projet est plus proche du stade de preuve de concept que d'outil exploitable.
+        Son utilisation sur de large quantités de données avec Dask présente des problèmes non résolus.
+        Néanmoins les bénéfices en performances sont très prometteurs (voir le dépôt Github).
+        } qui permet de calculer des histogrammes de données gérées par \citesoft{xarray}.
+        C'est une opération centrale dans la méthode développée dans cette thèse, mais néanmoins délicate.
+        Des solutions existent déjà, mais présentent certains désavantages (notamment de performances et de base de code complexe) que j'ai cherché à palier.
+        \textnote{\citesoftfull{xarray-histogram}}
 
-{%
-  \raggedright%
-  \emergencystretch=\textwidth
-  \printbibliography[heading=none, type=software, keyword=personnal]
-}
+  \item[dateloop]
+        est une simple commande bash permettant de générer des ensembles de dates.
+        Elle a été utilisée au début de ce projet afin de faciliter la gestion et le téléchargement des fichiers de données par des scripts shell. Ces scripts ont progressivement été remplacés par des équivalents Python.
+        \textnote{\citesoftfull{dateloop}}
 
+\end{description}
+\endgroup
 
-Bilan carbone.
-AR EGU train.
-AR bus + métro 4 ans.
-Repas végé cantine 4 ans.
-Pas d'estimation du traitement de données sur cluster.
+\bigskip
+
+En dehors des outils explicités ci"-dessus, tous les codes utilisés \encadra{accompagné qu'une documentation (partielle)} sont disponibles sur un dépôt Git public\footnote{\glsurl{gitlab}} hébergé par l'\abbrv{IN2P3}~(Institut National de Physique Nucléaire et de Physique de Particules, CNRS).
+Une version a également été déposée sur un répertoire Zenodo (\hbox{\glsurl{zenodo}}).
+
+\bigskip
+
+De manière plus secondaire mais que je tiens néanmoins à noter, j'ai participé au projet \citesoft{cf-xarray} \encadra{visant à rendre accessible à \citesoft{xarray} les conventions de métadonnées \as{cf}} en y implémentant l'extraction de variables drapeaux sur masque binaire (\href{https://github.com/xarray-contrib/cf-xarray/pull/354}{\eng{pull request}~\textlf{\#354}}).
+Le principe est détaillé en \nref[annexe]{sec:cf-flags}.
+
+\bigskip
+
+Enfin, pour conclure cette section, bien que la production suivante ne soit pas désirable elle n'en est pas moins réelle, et le résultat de ce projet de thèse.
+L'accomplissement de cette thèse aura généré 0~tonnes de~CO\textsubscript{2}, principalement par le biais du transport.
+L'estimation sommaire de ce bilan carbone est détaillée en \nref[annexe]{sec:bilan-carbone}.

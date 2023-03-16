@@ -182,6 +182,16 @@
   \printfield[citehyperref]{shorttitle}%
 }{, }{}
 
+\DeclareCiteCommand{citesoftfull}{}{%
+  {%
+    \raggedright%
+    \printfield{title}%
+    \par%
+    \printfield{pypi}%
+    \setunit{\par}%
+    \printfield{url}%
+  }
+}{}{}
 
 %%% Hyperlink cite macros
 % Citations commands that are fully hyperlinked

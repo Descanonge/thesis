@@ -49,6 +49,9 @@
 \RequirePackage[T1]{fontenc}
 \RequirePackage{fontspec}
 
+% Ornementations
+\RequirePackage{adforn}
+
 % Add kerning feature to the font for all subsequent calls of setmainfont
 % this might fuck things up ¯\_(ツ)_/¯
 \defaultfontfeatures[XCharter]{RawFeature=+customkern}
@@ -201,25 +204,33 @@
 %%% Page style
 \chapterstyle{ger}
 
-\makepagestyle {thesis}
-
+\copypagestyle{thesis}{ruled}
 \newcommand*\pnumstyle{}
 
 \ifPrintTF{
   \makeevenfoot{thesis}{\pnumstyle\thepage}{}{}
   \makeoddfoot{thesis}{}{}{\pnumstyle\thepage}
-  \makeheadrule{thesis}{\textwidth}{\normalrulethickness}
-  \makepsmarks{thesis}{\@ruledmarks}
   \makeevenhead{thesis}{\scshape\leftmark}{}{}
   \makeoddhead{thesis}{}{}{\rightmark}
 }{
   \makeevenfoot{thesis}{}{\pnumstyle\thepage}{}
   \makeoddfoot{thesis}{}{\pnumstyle\thepage}{}
-  \makeheadrule{thesis}{\textwidth}{\normalrulethickness}
-  \makepsmarks{thesis}{\@ruledmarks}
   \makeevenhead{thesis}{\scshape\leftmark}{}{}
   \makeoddhead{thesis}{\scshape\leftmark}{}{}
 }
+
+\copypagestyle{thesis-front}{thesis}
+\ifPrintTF{
+  \makeevenhead{thesis-front}{\leftmark}{}{}
+  \makeoddhead{thesis-front}{}{}{\rightmark}
+}{
+  \makeevenhead{thesis-front}{\rightmark}{}{}
+  \makeoddhead{thesis-front}{\rightmark}{}{}
+}
+
+\copypagestyle{thesis-empty}{thesis}
+\makeevenhead{thesis-empty}{}{}{}
+\makeoddhead{thesis-empty}{}{}{}
 
 \pagestyle{thesis}
 \raggedbottom
@@ -317,7 +328,7 @@
 % Remove chapter typesetting stuff (we want a simple section instead)
 \renewcommand\lofheadstart{}
 \renewcommand\printloftitle[1]{\section*{#1}}
-\renewcommand\afterloftitle{\thispagestyle{thesis}}
+\renewcommand\afterloftitle{\thispagestyle{thesis-empty}}
 \renewcommand\lofmark{\markboth{}{\listfigurename}}
 \setlength{\cftfigureindent}{2.5em}
 
@@ -343,6 +354,7 @@
   \phantomsection%
   \addcontentsline{toc}{section}{#1}%
   \refstepcounter{unsection}%
+  \markright{#1}%
   \section*{#1}}
 
 \ExplSyntaxOff
@@ -439,6 +451,13 @@
 
 
 \ExplSyntaxOn
+
+% Front matter citations
+\NewDocumentCommand \textnote { O{before~upper={}} +m } {
+  \begin{note} [#1]
+    #2
+  \end{note}
+}
 
 % Command for repeating stuff
 \NewDocumentCommand {\Repeat} { m +m } {
