@@ -9,20 +9,36 @@
 \ExplSyntaxOn
 
 \bool_new:N \l_chthesis_print_bool
+\bool_new:N \l_chthesis_draft_bool
 \keys_define:nn { chthesis } {
   print .bool_set:N = \l_chthesis_print_bool,
-  print .default:n = false
+  print .default:n = false,
+  draft .bool_set:N = \l_chthesis_draft_bool,
+  print .default:n = false,
 }
 \keys_set:nn { chthesis } {
   print = false,
+  draft = false,
 }
 
 \ProcessKeysOptions{chthesis}
 
-\NewDocumentCommand \ifdraft { +m +m } {
-  \ifdraftdoc #1 \else #2 \fi}
+\NewDocumentCommand \ifPrintTF { +m +m } {
+  \bool_if:NTF \l_chthesis_print_bool {#1} {#2} }
+\NewDocumentCommand \ifPrint { +m } {
+  \bool_if:NT \l_chthesis_print_bool {#1} }
 
-\ExplSyntaxOff % babel no like expl3 :(
+\NewDocumentCommand \ifDraftTF { +m +m } {
+  \bool_if:NTF \l_chthesis_draft_bool {#1} {#2} }
+\NewDocumentCommand \ifFinalTF { +m +m } {
+  \bool_if:NTF \l_chthesis_draft_bool {#2} {#1} }
+\NewDocumentCommand \ifDraft { +m } {
+  \bool_if:NT \l_chthesis_draft_bool {#1} }
+\NewDocumentCommand \ifFinal { +m } {
+  \bool_if:NF \l_chthesis_draft_bool {#1} }
+
+\ExplSyntaxOff
+
 % Also it seems nice load it early
 \RequirePackage[english,main=french]{babel}
 
@@ -185,12 +201,11 @@
 %%% Page style
 \chapterstyle{ger}
 
-\ExplSyntaxOn
 \makepagestyle {thesis}
 
 \newcommand*\pnumstyle{}
 
-\bool_if:NTF \l_chthesis_print_bool {
+\ifPrintTF{
   \makeevenfoot{thesis}{\pnumstyle\thepage}{}{}
   \makeoddfoot{thesis}{}{}{\pnumstyle\thepage}
   \makeheadrule{thesis}{\textwidth}{\normalrulethickness}
@@ -205,8 +220,6 @@
   \makeevenhead{thesis}{\scshape\leftmark}{}{}
   \makeoddhead{thesis}{\scshape\leftmark}{}{}
 }
-
-\ExplSyntaxOff
 
 \pagestyle{thesis}
 \raggedbottom
@@ -472,7 +485,7 @@
     \section {Article:\ \articleTitle}
     \label {sec:article-bg}
     \tl_set:Nn \tl_tmpa_l {[\textit{Pre-print\ Biogeosciences}\ \glsurl{preprint-bgs-doi}]}
-    \bool_if:NTF \l_chthesis_print_bool {
+    \ifPrintTF{
       % \renewcommand*\ruledefootc{\tl_tmpa_l}
       % \renewcommand*\ruledofootc{\tl_tmpa_l}
       \makeevenfoot{thesis}{\pnumstyle\thepage}{\tl_tmpa_l}{}

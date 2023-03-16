@@ -55,7 +55,7 @@ draft,
 \include{tex/front_matter}
 
 %%% Glossary
-\ifdraft{}{%
+\ifFinal{%
   \setglswidth%
   \printglossary[toctitle=Glossaire]
   \thispagestyle{plain}

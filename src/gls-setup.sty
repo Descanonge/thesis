@@ -10,9 +10,7 @@ toc, section=section, symbols,
 \RequirePackage{glossary-long}
 \RequirePackage{glossary-tree} % needed for \setglswidth
 
-\ifdraftdoc{}{%
-  \makeglossaries%
-}
+\ifFinal{\makeglossaries}
 
 \renewcommand*\glsabbrvdefaultfont[1]{\textlf{#1}}
 
