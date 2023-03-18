@@ -55,34 +55,31 @@
 % No extra date
 \renewbibmacro*{date+extradate}{}%
 
+% Report display url
+\ExecuteBibliographyOptions[report]{url = true}
+
 % Customize bibliography: Start by the 'label', ie the
 % citation as it appears in the text
-\renewbibmacro*{begentry}{%
-  {
-    % We are in bibliography but we want maxCITEnames
-    \c@maxnames\blx@maxcitenames\relax
-    \c@minnames\blx@mincitenames\relax
-    % reset some variables to avoid cite to merge
-    \global\undef\cbx@lasthash
-    \global\undef\cbx@lastyear
-    \DeclareFieldAlias{bibhyperref}{noformat}%
-    \printtext[bold]{%
-      \restorebibmacro{cite}%
-      \lfstyle%
-      \usebibmacro{cite}\addspace:\space}%
-  }
-  \c@maxnames\blx@maxbibnames\relax%
-  \c@minnames\blx@minbibnames\relax%
-% \renewcommand*\mkbibnamefamily[1]{\bname{##1}}%
-}
-
-% And if we don't want that, we can hack it this way
-% (maybe there is a cleaner way to pass an option to
-% the driver idk)
-\newcommand*\resetbegentry{%
+\AtBeginBibliography{
   \renewbibmacro*{begentry}{%
+    {
+      % We are in bibliography but we want maxCITEnames
+      \c@maxnames\blx@maxcitenames\relax
+      \c@minnames\blx@mincitenames\relax
+      % reset some variables to avoid cite to merge
+      \global\undef\cbx@lasthash
+      \global\undef\cbx@lastyear
+      \DeclareFieldAlias{bibhyperref}{noformat}%
+      \printtext[bold]{%
+        \restorebibmacro{cite}%
+        \lfstyle%
+        \usebibmacro{cite}\addspace:\space}%
+    }
     \c@maxnames\blx@maxbibnames\relax%
-    \c@minnames\blx@minbibnames\relax}}
+    \c@minnames\blx@minbibnames\relax%
+    % \renewcommand*\mkbibnamefamily[1]{\bname{##1}}%
+  }
+}
 
 % Manage old-style figures
 \DeclareFieldFormat
@@ -178,20 +175,40 @@
 
 % Citation command for software
 % (too much hassle to rewrite textcite or cite)
-\DeclareCiteCommand{citesoft}{}{%
-  \printfield[citehyperref]{shorttitle}%
-}{, }{}
+\DeclareCiteCommand{citesoft}
+{\usebibmacro{prenote}}
+{\printfield[citehyperref]{shorttitle}}
+{\multicitedelim}
+{\usebibmacro{postnote}}
 
-\DeclareCiteCommand{citesoftfull}{}{%
+\DeclareCiteCommand{citesoftfullPerso}
+{\usebibmacro{prenote}}
+{%
+  \begingroup%
+  \raggedright%
+  \printfield{title}%
+  \par%
+  \printfield{pypi}%
+  \setunit{\par}%
+  \printfield{url}%
+  \endgroup%
+}
+{\multicitedelim}
+{\usebibmacro{postnote}}
+
+% Citation command that puts all authors (instead of truncating at maxcitenames)
+\DeclareCiteCommand{fullcite}
+{\usebibmacro{prenote}}
+{\usedriver
   {%
-    \raggedright%
-    \printfield{title}%
-    \par%
-    \printfield{pypi}%
-    \setunit{\par}%
-    \printfield{url}%
+    \DeclareNameAlias{sortname}{default}%
+    \c@maxnames\blx@maxbibnames\relax%
+    \c@minnames\blx@minbibnames\relax%
   }
-}{}{}
+  {\thefield{entrytype}}%
+}
+{\multicitedelim}
+{\usebibmacro{postnote}}
 
 %%% Hyperlink cite macros
 % Citations commands that are fully hyperlinked

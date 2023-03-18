@@ -75,7 +75,6 @@ draft,
 \clearpage
 
 \listoffigures*
-\thispagestyle{thesis-empty}
 % phantomsection already called by \listoffigures
 \addcontentsline{toc}{section}{\listfigurename}
 
@@ -94,15 +93,12 @@ draft,
 %%% Appendices
 \begin{appendices}
 \changeappendixmark%
+\chapterstyle{section}
 
 \chapter{Article: \articleCceTitle}
-\label[appendix]{ax:article-cce}
+\label{ax:article-cce}
 \chapter{Article: \articleReviewTitle}
-\label[appendix]{ax:article-review}
-
-\renewcommand\thesection{\Alph{chapter}.\arabic{section}}
-\chapter{Autres}
-\label[appendix]{ax:autres}
+\label{ax:article-review}
 \include{tex/annexes_autres}
 
 \end{appendices}

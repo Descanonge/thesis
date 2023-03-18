@@ -47,7 +47,6 @@ En vous souhaitant une agréable lecture.
 \label{sec:productions}
 
 \begingroup
-\resetbegentry
 \defaultlists
 Le travail effectué durant ma thèse et présenté dans ce manuscrit a donné lieu à plusieurs articles:
 \begin{itemize}
@@ -73,20 +72,17 @@ Une attention toute particulière a été portée à assurer leur ré"-utilisati
 Bien entendu, d'autres considérations entrent également en compte, par exemple de performances et de libre accès.
 Certaines parties de ce travail en particulier se sont muées en projets indépendants, qu'il m'a paru utile de distribuer séparément.
 J'ai ainsi durant ma thèse publié publiquement les outils suivant:
-\begingroup
-\resetbegentry
-\renewbibmacro*{label:software}{}
 \begin{description}
   \setlength{\itemsep}{1.8\onelineskip}
   \item[FileFinder]
         est un paquet Python qui permet \encadra{entre autres} de trouver des fichiers grâce à la structure de leur nom de fichier, ce qui est particulièrement utile pour des données dépendant de la date, ou de la valeur d'un paramètre, ou des deux.
         L'entièreté des fichiers de données utilisés pour cette thèse sont gérées grâce à cet outil.
-        \textnote{\citesoftfull{filefinder}}
+        \textnote{\citesoftfullPerso{filefinder}}
 
   \item[tol-colors]
         est un paquet Python qui donne accès à des assortiments de couleurs adaptés aux personnes atteintes de daltonisme.
         Les jeux de couleurs ont été développés par \glsname{paultol}\footnote{voir~\glsurl{paultol}}, je les ai seulement rendus plus facilement accessibles via PyPI.
-        \textnote{\citesoftfull{tol-colors}}
+        \textnote{\citesoftfullPerso{tol-colors}}
 
   \item[Xarray-histogram]
         est un paquet Python\footnote{%
@@ -96,15 +92,14 @@ J'ai ainsi durant ma thèse publié publiquement les outils suivant:
         } qui permet de calculer des histogrammes de données gérées par \citesoft{xarray}.
         C'est une opération centrale dans la méthode développée dans cette thèse, mais néanmoins délicate.
         Des solutions existent déjà, mais présentent certains désavantages (notamment de performances et de base de code complexe) que j'ai cherché à palier.
-        \textnote{\citesoftfull{xarray-histogram}}
+        \textnote{\citesoftfullPerso{xarray-histogram}}
 
   \item[dateloop]
         est une simple commande bash permettant de générer des ensembles de dates.
         Elle a été utilisée au début de ce projet afin de faciliter la gestion et le téléchargement des fichiers de données par des scripts shell. Ces scripts ont progressivement été remplacés par des équivalents Python.
-        \textnote{\citesoftfull{dateloop}}
+        \textnote{\citesoftfullPerso{dateloop}}
 
 \end{description}
-\endgroup
 
 \bigskip
 
@@ -119,5 +114,5 @@ Le principe est détaillé en \nref[annexe]{sec:cf-flags}.
 \bigskip
 
 Enfin, pour conclure cette section, bien que la production suivante ne soit pas désirable elle n'en est pas moins réelle, et le résultat de ce projet de thèse.
-L'accomplissement de cette thèse aura généré 0~tonnes de~CO\textsubscript{2}, principalement par le biais du transport.
+L'accomplissement de cette thèse aura généré~\qty{2.7}{\tcarbone}, dont la majeure partie correspond à l'alimentation~(\qty{1.7}{\tcarbone}).
 L'estimation sommaire de ce bilan carbone est détaillée en \nref[annexe]{sec:bilan-carbone}.

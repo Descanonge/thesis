@@ -34,6 +34,21 @@
 \DeclareSIUnit \bits {\text{bits}}
 \DeclareSIUnit \jours {\text{jours}}
 
+\DeclareSIUnit \carbone {\text{CO\textosf{2}}}
+\DeclareSIUnit [inter-unit-product={}] \tcarbone {\tonne\carbone}
+
+\DeclareSIUnit \octet {\text{o}}
+\DeclareSIUnit \ko {\kilo\octet}
+\DeclareSIUnit \Mo {\mega\octet}
+\DeclareSIUnit \Go {\giga\octet}
+\DeclareSIUnit \To {\tera\octet}
+\DeclareSIUnit \byte {\text{B}}
+\DeclareSIUnit \kB {\kilo\byte}
+\DeclareSIUnit \MB {\mega\byte}
+\DeclareSIUnit \GB {\giga\byte}
+\DeclareSIUnit \TB {\tera\byte}
+
+
 % Nice inline fraction with degree sign
 \NewDocumentCommand \resol { m m } {
   \qty [parse-numbers=false] {\slashfrac {#1} {#2}} {\degree}
