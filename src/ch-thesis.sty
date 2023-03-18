@@ -200,6 +200,9 @@
 %%% Bookmarks
 \RequirePackage[depth=4]{bookmark}
 \bookmarksetup{numbered}
+\pdfstringdefDisableCommands{%
+  \def\textlf#1{}
+}
 
 %%% Page style
 \chapterstyle{ger}
