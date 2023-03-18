@@ -7,9 +7,24 @@
 \section{Bilan carbone de la thèse}
 \label{sec:bilan-carbone}
 
-AR avion venise.
-LAPCOD (Lagrangian Analysis and Prediction of Coastal and Ocean Dynamics).
-AR EGU train (paris - vienne).
-AR bus + métro 4 ans.
-Repas végé cantine 4 ans.
-Pas d'estimation du traitement de données sur cluster.
+Dans cette section, j'estime le coût carbone engendré par mon travail de thèse.
+Commencons par les voyages professionels, typiquement un grand poste émetteur dans les carrières scientifiques.
+
+Le premier est un aller"-retour Paris--Venise, en avion, pour assister à la 7\ieme~conférence \abbrv(LAPCOD)~(Lagrangian Analysis and Prediction of Coastal and Ocean Dynamics).
+Réalisé pendant mon stage de master, je n'étais alors que peu sensibilisé à ces questions. Avec plus de prévoyance, il aurait pu être effectué en train.
+Ce trajet comptabilise~\qty{266 \pm 27}{\kg\carbone} (sans compter les traînées) selon l'outil \abbrv{GES}~1point5, développé par le collectif \href{https://labos1point5.org/}{\textit{Labos~1point5}} (\cite{mariette_2022}).
+En train, ce trajet aurait coûté~\qty{55 \pm 24}{\kg\carbone}.
+
+Le second trajet est un aller"-retour Paris--Vienne, en train, pour assister l'assemblée générale 2022 de l'\abbrv{EGU}.
+Selon le même outil, ce trajet a comptabilisé~\qty{75 \pm 33}{\kg\carbone}.
+En avion il aurait coûté~\qty{230}{\kg\carbone}.
+Je dois ici remercier les collègues chercheurs et le personnel administratif du laboratoire ayant rendu ce trajet quelque peu aventureux possible, et agréable.
+
+J'estime \encadra{toujours avec \abbrv{GES}~1point5} mes trajets domicile"-travail effectués (le plus généralement) en bus et métro à~\qty{162 \pm 96}{\kg\carbone} par an.
+Ce coût est en dessous de celui préconisé pour respecter les accords de Paris (\qty{0.3}{\tonne\carbone} selon \textcite{dugast_2019}).
+Enfin les 5~repas journaliers (végétariens), pris au self du personnel, et les très nécessaires tasses de café et thé sont estimés à~\qty{420}{\kg\carbone} annuels par l'outil \href{https://nosgestesclimat.fr}{Nos Gestes Climat}.
+
+Côté informatique, nous n'avons pas réalisé d'achats de matériel.
+La majorité des calculs sont réalisés sur les machines du mésocentre de l'\ab{ipsl}; les données y sont également stockées (\qty{<1}{\To}).
+Ces calculs sont pour leur vaste majorité de nombreux processus, courts (quelques minutes), et utilisent peu de ressources (un seul processeur et quelques~\unit{\Go} de mémoire vive) \encadra*{en contraste à une situation plus \guil*{simple}, par exemple, de quelques calculs très intensifs qui représenteraient la quasi"-totalité du bilan carbone}.
+Il est donc compliqué d'estimer le coût de tous ces calculs dont l'historique n'a pas été conservé, en plus des difficultés usuelles de ce genre d'estimation sur des ressources informatiques partagé.
