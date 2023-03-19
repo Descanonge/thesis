@@ -21,13 +21,13 @@ Cela a donc informé le choix des données, ainsi que la création des outils n�
 Plusieurs options ont été considérées, notamment pour la SST.
 Elles sont reportées ci"-dessous, même si elles ne sont pas utilisées pour le reste des résultats présentés.
 
-Au long de ce chapitre (et ailleurs dans ce manuscript) les articles publiés correspondant aux jeux de données sont bien évidemment cités, mais sont également précisés les accès par lesquels nous avons obtenus les données.
+Au long de ce chapitre (et ailleurs dans ce manuscrit) les articles publiés correspondant aux jeux de données sont bien évidemment cités, mais sont également précisés les accès par lesquels nous avons obtenus les données.
 Ces derniers sont cités en note de bas de page et listés dans la section~\reftitle{bib:data} de la bibliographie~(\cpageref{bib:data}).
 
 \subsection{Sea Surface Temperature (SST)}
 \label{sec:donnees-sst}
 
-Nous commencons par la température de surface que nous allons notamment utiliser comme proxy de la densité pour repérer les fronts.
+Nous commençons par la température de surface que nous allons notamment utiliser comme proxy de la densité pour repérer les fronts.
 De nombreux produits de SST sont disponibles, néanmoins il n'en demeure pas moins difficile de trouver un produit qui satisfasse les exigences inhérentes à notre étude.
 Étant donné que nous voulons repérer des structures de fine échelle la résolution est peut être l’exigence qui apparaît comme première.
 Cependant, et comme nous allons le voir plus en détail, d'autres paramètres rentrent en compte et il est nécessaire de faire des compromis dans ce domaine.
@@ -51,7 +51,7 @@ Ce sont les données utilisées par \textcite{liu_2016} \encadra{et produites pa
 
 % Éventuellement à déplacer à une mention antérieure des niveaux
 \begin{note}[label={note:data-levels}, breakable]
-  Tout au long de ce manuscript nous utilisons les dénominations des niveaux de données tels que typiquement utilisés par les distributeurs, et qui correspondent de manière générale aux définitions suivantes:
+  Tout au long de ce manuscrit nous utilisons les dénominations des niveaux de données tels que typiquement utilisés par les distributeurs, et qui correspondent de manière générale aux définitions suivantes:
   \newcommand*\lvllabel[1]{\hspace\labelsep \normalfont\bfseries\lfstyle #1}%
   \begin{flexlabelled}{lvllabel}{1em}{1.5em}{1em}{2em}{1em}
     \item[L1] Données d'un seul capteur, sans traitement (au delà de ceux nécessaire à la transmission depuis le satellite), et à la résolution de capture \encadra*{\ab{cad} projetées dans le référentiel du capteur (nb.\ de lignes et nb.\ de pixels par ligne)}.
@@ -63,7 +63,7 @@ Ce sont les données utilisées par \textcite{liu_2016} \encadra{et produites pa
     \item[L3] Variables projetées sur une grille régulière en espace et en temps.
     Des traitement supplémentaires peuvent être appliqués.
 
-    \item[L4] Résultats d'analyses plus poussées comme l'aggrégation de plusieurs sources de données, ou l'assimilation par un modèle numérique.
+    \item[L4] Résultats d'analyses plus poussées comme l’agrégation de plusieurs sources de données, ou l'assimilation par un modèle numérique.
   \end{flexlabelled}
 \end{note}
 
@@ -102,7 +102,7 @@ La grande couverture spatiale de ce produit se fait donc par l'utilisation de me
 Le champ de SST se retrouve donc lissé à la fois par l'interpolation et par l'inclusion de ces mesures.
 L'utilisation du produit suivant cherche à palier à ce problème.
 
-\subsubsection{ESA-SST-CCI / \abbrv{C3S}}
+\subsubsection{ESA-SST-CCI / \textlf{C3S}}
 \declareDataset{sst_esacci}
 
 Ce produit est distribué conjointement par l'\as{esa}"-\abbrv{SST}"-\as{cci} et le \as{c3s}\footnote{%
@@ -160,7 +160,7 @@ Le modèle fait de l'assimilation de données d'observations: altimétrie, SST \
   \label{fig:comparaison-sst}
 \end{figure}
 
-Nous illustrons ici notre comparaison entre les différents produits de SST en nous appuyant sur un instantanné (\nref{fig:comparaison-sst}).
+Nous illustrons ici notre comparaison entre les différents produits de SST en nous appuyant sur un instantané (\nref{fig:comparaison-sst}).
 Seul le produit \dataname{sst_modis}~(b) n'est pas issu d'une interpolation ou d'une réanalyse, on peut le considérer comme étant le plus proche d'une \engquote{ground truth} (en dehors des pixels nuageux bien sûr).
 
 On notera pour le produit de réanalyses \dataname{sst_reanalyses}~(d), outre sa résolution assez faible, des différences importantes dans les structures présentes sur les autres produits, qui ne sont visiblement pas due à un simple lissage du champ de SST.
@@ -193,7 +193,7 @@ Nous utilisons le produit global, MultiYear\footnote{%
 Les données sont récupérées sur \as{cmems}\footfullcite{chl_globcolour}.
 Elles sont de résolution spatiale~\resol{1}{24} (soit environ~\qty{4}{\km}), journalières, et comportent des nuages.
 
-Ce produit aggrège les données optiques de plusieurs capteurs: \as{seawifs}, \as{modis} Aqua et Terra, \as{meris} à bord d'Envisat, \as{viirs} à bord de \as{snpp} et \as{noaa}[\textlf{-20}]\footnote{parfois indiqué par son nom avant lancement: \as{jpss}[\textlf{-1}]}, et enfin \as{olci} à bord de \textlf{Sentinel-3A et -3B}.
+Ce produit agrège les données optiques de plusieurs capteurs: \as{seawifs}, \as{modis} Aqua et Terra, \as{meris} à bord d'Envisat, \as{viirs} à bord de \as{snpp} et \as{noaa}[\textlf{-20}]\footnote{parfois indiqué par son nom avant lancement: \as{jpss}[\textlf{-1}]}, et enfin \as{olci} à bord de \textlf{Sentinel-3A et -3B}.
 Similairement au produit Modis, les valeurs de \as{chl} sont calculées à partir des réflectance en utilisant ici un mélange des algorithmes \abbrv{OC3/4}, CI, et \abbrv{OC5}.
 
 \begin{note}[label={note:merge-chl-or-rrs}]
@@ -253,7 +253,7 @@ Nous définissons donc trois biomes.
 Le biome subtropical permanent, le plus au sud, correspond à un régime largement oligotrophe.
 Le biome subpolaire, le plus au nord, comprend les eaux froides et productives au nord du Gulf Stream.
 Enfin le biome subtropical saisonnier, entre les deux précédents, présente un régime intermédiaire: oligotrophe mais avec une production plus élevée permise par une couche de mélange profonde en hiver.
-Dans cette section, nous décrivons plus précisement la méthode utilisée pour définir ces biomes spatialement.
+Dans cette section, nous décrivons plus précisément la méthode utilisée pour définir ces biomes spatialement.
 
 \subsection{Séparation des biomes}
 
@@ -338,7 +338,7 @@ Nous utilisons pour cela les données de bathymétrie \dataname{etopo1}~(voir \d
 \section{Heterogeneity Index (HI)}
 \label{sec:HI}
 
-Comme précisé en introduction, pour quantifier l'effets des fronts sur le phytoplancton il est nécessaire de détecter les fronts, \al{cad} de classer chaque pixel comme appartenant à un front ou non (\ab{cad} à l'arrière"-plan ou au \engquote{background}).
+Comme précisé en introduction, pour quantifier l'effet des fronts sur le phytoplancton il est nécessaire de détecter les fronts, \al{cad} de classer chaque pixel comme appartenant à un front ou non (\ab{cad} à l'arrière"-plan ou au \engquote{background}).
 La méthode retenue ici suit celle présentée par \textcite{liu_2016} \encadra*{qui par son utilisation d'une fenêtre glissante s'apparente elle même à celle de \textcite{cayula_1992}}.
 Cette section définit cette méthode et notre implémentation, tout en indiquant les modifications que nous y avons apportées.
 
@@ -461,7 +461,7 @@ On peut donc calculer le HI avec:
 On obtient un indice capable de quantifier l'hétérogénéité du champ de température à une échelle donnée, ce qui nous permet d'identifier des structures fines dans ce même champ (\cref{fig:exemple-composantes,fig:exemples-fronts}).
 Il reste toutefois à définir une méthode pour classifier chaque pixel comme appartenant, ou non, à un front.
 Nous allons même plus loin et séparons les pixels en trois catégories: les pixels appartenant à un front fort~(\(\am{hi} > 5\)), à un front faible~(\(5 < \am{hi} < 10\)), ou à aucun front~(\(\am{hi} < 5\), aussi dénotés \engquote{background}).
-La pertinence des valeurs de seuils entre les catégories est discutée dans la suite du manuscript.
+La pertinence des valeurs de seuils entre les catégories est discutée dans la suite du manuscrit.
 
 Nous avons réalisé des test de sensibilité à certains paramètres de cette méthode \encadra{à savoir la taille de la fenêtre glissante et le choix des coefficients de normalisation} qui sont discutés plus en détail \nref[section]{sec:sensibilite-parametres}.
 
@@ -492,7 +492,7 @@ Nous avons réalisé des test de sensibilité à certains paramètres de cette m
 \label{sec:extraction-hist}
 
 Une fois le HI calculé, il devient possible de catégoriser chaque pixel par la biome auquel il appartient (subtropical permanent, subtropical saisonnier, subpolaire), ainsi que par sa valeur de HI.
-On cherche ensuite à extraire des informations de ces ensembles de pixels ainsi consistués.
+On cherche ensuite à extraire des informations de ces ensembles de pixels ainsi constitués.
 Le nombre total de pixels étant conséquent, et parce que l'établissement des ensembles est compliqué et coûteux, les ensembles de pixels sont chacun réduits à des histogrammes de variables d'intérêt (SST, \as{chl}, ou les \asp{pft}).
 Cela diminue les étapes de calcul ainsi que la quantité de données à traiter pour obtenir un diagnostic.
 
@@ -507,7 +507,7 @@ Les histogrammes peuvent être rendus représentatifs sans pour autant utiliser 
 Les intervalles pour la \as{chl} et les autres variables biologiques sont pris de largeur logarithmique afin de couvrir les plusieurs ordres de grandeur que peuvent prendre leurs valeurs.
 
 Les histogrammes présentent également l'avantage de pouvoir facilement être combinés entre eux.
-En effet, tous les histogrammes calculés sont stockés non"-normalisés, c'est-à-dire en nombre de pixel par intervalle. Ainsi plusieurs histogrammes peuvent être sommés entre eux avant d'être normalisés pour en extraire une valeur, comme la valeur médiane de la distribution résultante par example.
+En effet, tous les histogrammes calculés sont stockés non"-normalisés, c'est-à-dire en nombre de pixel par intervalle. Ainsi plusieurs histogrammes peuvent être sommés entre eux avant d'être normalisés pour en extraire une valeur, comme la valeur médiane de la distribution résultante par exemple.
 Ce procédé est notamment utilisé pour calculer des diagnostics sur des périodes de temps autres que journalières, sans avoir besoin de refaire un calcul coûteux impliquant les pixels.
 
 Dans la suite on détaille le processus de normalisation des histogrammes.
@@ -557,7 +557,7 @@ On définit donc une deuxième métrique, le surplus~\as{surplus} de \as{chl} da
 \section{Décalage du bloom}
 \label{sec:decalage-bloom}
 
-L'évolution temporelle de la médiane de \as{chl} dans le biome subpolaire présente un bloom printanier dont nous mesurons la phénologie \encadra{plus précisement la date de démarrage et la durée du bloom} à la fois dans le \eng{background} et les fronts.
+L'évolution temporelle de la médiane de \as{chl} dans le biome subpolaire présente un bloom printanier dont nous mesurons la phénologie \encadra{plus précisément la date de démarrage et la durée du bloom} à la fois dans le \eng{background} et les fronts.
 Étant donné que le bloom se propage vers le nord, ces mesures sont faites sur des bandes de latitudes de largeur~\ang[mode=math]{5}.
 
 Pour extraire ces mesures, nous prenons la série temporelle de la médiane de \as{chl}, à laquelle nous appliquons un filtre Butterworth d'ordre~2 et de fréquence de coupure~\qty[parse-numbers=false]{1/20}{\jours^{-1}}.
