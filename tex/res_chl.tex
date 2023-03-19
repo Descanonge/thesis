@@ -75,10 +75,13 @@ D'autre part nous testons l'influence de ces coefficients. En prenant les compos
 % chktex-file 2
 \begin{table}
   \centering
-  \begin{siunitText}
+  \caption[]{%
+    Coefficients de normalisation pour les différents paramètres utilisés.
+  }
+  \label{tab:coefs}
   \begin{tabular}{$r<{\hspace{1em}} ^c *{3}{^c}} \toprule
-    \multirow{2}*{Variation} & \(K^1\) & \(K^2\) & \(K^3\) & \(K^4\) \\
-     & (écart-type) & (asymétrie) & (bimodalité) & (HI) \\
+    \multirow{2}*{Variation} & \(K^1\)      & \(K^2\)     & \(K^3\)      & \(K^4\) \\
+                             & (écart-type) & (asymétrie) & (bimodalité) & (HI)    \\
     \midrule
     \emph{Taille fenêtre} & \\
     \qty{20}{\km} & \num{5.1768} & \num{3.1563} & \num{4.1306} & \num{1.3890} \\
@@ -87,16 +90,11 @@ D'autre part nous testons l'influence de ces coefficients. En prenant les compos
     \qty{40}{\km} & \num{3.2692} & \num{2.5031} & \num{4.3444} & \num{1.3129} \\
     \midrule
     \emph{Poids composantes} & \\
-    plus d'écart-type & \(\times 2\) & --- & --- & \num{1.0239} \\
-    plus d'asymétrie & --- & \(\times 2\) & --- & \num{0.9912} \\
-    plus de bimodalité & --- & --- & \(\times 2\) & \num{0.9773} \\
+    plus d'écart-type  & \(\times 2\) & ---          & ---          & \num{1.0239} \\
+    plus d'asymétrie   & ---          & \(\times 2\) & ---          & \num{0.9912} \\
+    plus de bimodalité & ---          & ---          & \(\times 2\) & \num{0.9773} \\
     \bottomrule
   \end{tabular}
-  \end{siunitText}
-  \caption[]{%
-    Coefficients de normalisation pour les différents paramètres utilisés.
-  }
-  \label{tab:coefs}
 \end{table}
 
 Les résultats sont très peu sensibles aux choix des paramètres.
@@ -107,7 +105,12 @@ Il en ressort les mêmes résultats que sur la climatologie, avec une variabilit
 
 \begin{table}
   \centering
-  \bgroup
+  \caption[]{%
+    Sensibilité aux paramètres: écart"-type de la valeur médiane de \as{chl} calculé sur l'ensemble des paramètres~\(p\) testés (trois tailles de fenêtres, et trois configuration de coefficients de normalisation); en valeur absolue~(\(\std[\am{chl}_p]\), en~\unit{\mugm}) et relative~(%
+    \(\std[(\am{chl}_p - \moy{\am{chl}}_p) / \moy{\am{chl}}_p]\), en~\%).
+  }
+  \label{tab:sensibilite-mediane}
+  \begingroup
   \newcommand*\typeunits[1]{\multicolumn{1}{c}{\small\textit{#1}}}
   \newcolumntype{y}{%
     !{}@{}S[mode=text]@{}
@@ -128,12 +131,7 @@ Il en ressort les mêmes résultats que sur la climatologie, avec une variabilit
     fronts forts    & 5.92   & 9.64  & 12.48  & 8.05  & 4.96   & 1.37  \\
     \bottomrule
   \end{tabular}
-  \egroup
-  \caption[]{%
-    Sensibilité aux paramètres: écart"-type de la valeur médiane de \as{chl} calculé sur l'ensemble des paramètres~\(p\) testés (trois tailles de fenêtres, et trois configuration de coefficients de normalisation); en valeur absolue~(\(\std(\am{chl}_p)\), en~\unit{\mugm}) et relative~(%
-    \(\std((\am{chl}_p - \moy{\am{chl}}_p) / \moy{\am{chl}}_p)\), en~\%).
-  }
-  \label{tab:sensibilite-mediane}
+  \endgroup
 \end{table}
 
 Dans cette étude de sensibilité nous n'avons pas considéré l'impact du seuil en HI choisi, ayant déjà couvert l'évolution de la \as{chl} avec le HI (\nref{fig:chl-vs-hi}).
