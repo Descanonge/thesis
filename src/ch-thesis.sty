@@ -157,6 +157,7 @@
 \RequirePackage{geometry}
 \RequirePackage{listings}
 \RequirePackage{multirow}
+\RequirePackage{bigdelim}
 
 \RequirePackage{siunit-setup}
 
@@ -239,6 +240,18 @@
 \raggedbottom
 \setfootins{1.5\bigskipamount}{\bigskipamount}
 \tightlists
+
+\makechapterstyle{appendix}{%
+  \openany
+  \chapterstyle{ger}%
+  \renewcommand\chapnamefont{\normalfont\LARGE\bfseries}%
+  \renewcommand\chapnumfont{\normalfont\LARGE\bfseries}%
+  \renewcommand\chaptitlefont{\normalfont\LARGE\bfseries}%
+  % no linebreak between number and title
+  \renewcommand\afterchapternum{\space\textendash\space}%
+  % no huge space before title
+  \setlength{\beforechapskip}{0pt}%
+}
 
 \setsecnumdepth{subsubsection}
 \renewcommand*\thesection{\arabic{section}} % No chapter number in section

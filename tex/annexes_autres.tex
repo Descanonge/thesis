@@ -1,11 +1,24 @@
 
 
-\section{Variables drapeaux sur masque binaire}
-\label{sec:cf-flags}
+\chapter{Variables drapeaux sur masque binaire}
+\label{ax:cf-flags}
 
+pourquoi : flags des variables chl
+obtenir les nuages et aussi les pixels 'land'.
 
-\section{Bilan carbone de la thèse}
-\label{sec:bilan-carbone}
+comment: expliquer les conventions cf (lien docu).
+surtout une question de compression. une variable booléenne c'est en réalité 8bits.
+première méthode: valeurs indépendantes. easy simple comparaison.
+deuxième méthode: masque binaire. ajouter un bitwise xor avant la comparaison.
+troisième: mélange des deux yaaas. enfait idem que 2ème. trop easy.
+
+implémentation.
+
+ce qu'il reste à faire (doc, cache).
+
+\chapter{Bilan carbone de la thèse}
+\label{ax:bilan-carbone}
+% \suppressfloats[t]
 
 Dans cette section, j'estime le coût carbone engendré par mon travail de thèse.
 Commencons par les voyages professionels, typiquement un grand poste émetteur dans les carrières scientifiques.
@@ -28,3 +41,24 @@ Côté informatique, nous n'avons pas réalisé d'achats de matériel.
 La majorité des calculs sont réalisés sur les machines du mésocentre de l'\ab{ipsl}; les données y sont également stockées (\qty{<1}{\To}).
 Ces calculs sont pour leur vaste majorité de nombreux processus, courts (quelques minutes), et utilisent peu de ressources (un seul processeur et quelques~\unit{\Go} de mémoire vive) \encadra*{en contraste à une situation plus \guil*{simple}, par exemple, de quelques calculs très intensifs qui représenteraient la quasi"-totalité du bilan carbone}.
 Il est donc compliqué d'estimer le coût de tous ces calculs dont l'historique n'a pas été conservé, en plus des difficultés usuelles de ce genre d'estimation sur des ressources informatiques partagé.
+
+\begin{table}
+  \centering
+  \caption{Récapitulatif du bilan carbone}
+  \label{tab:bilan-carbone}
+  \begin{tabular}{l >{\hspace{2em}} r !{} r @{\,}w{l}{1em}@{}} \toprule
+    \multirow{2}*{Objet} & \multicolumn{2}{r}{Coût (\unit{\kg\carbone})} \\
+                         & par an & total                                \\
+    \midrule
+    LAPCOD (Venise)      &        & 266 & \rdelim\}{2}*[Voyages: \qty{341}{\kg\carbone}] \\
+    EGU (Vienne)         &        & 75                                   \\
+    \addlinespace
+
+    Domicile-travail     & 162    & 648                                  \\
+    Alimentation         & 420    & 1680                                 \\
+
+    \midrule
+    Total                &        & \bfseries 2669                       \\
+    \bottomrule
+  \end{tabular}
+\end{table}
