@@ -469,6 +469,27 @@
 
 \ExplSyntaxOn
 
+% Siècle en chiffre romains
+\NewDocumentCommand \siecle { m }{
+  {
+    \normalfont \scshape
+    \int_to_roman:n {#1}
+  }
+  \ieme
+}
+
+% Fancy break
+\newcommand*\fancybreakdisplay{\adfflourishleft\quad\adforn{11}\quad\adfflourishright}
+\RenewDocumentCommand \fancybreak { s O{\baselineskip} O{\baselineskip} } {
+  \par
+  \addvspace{#2}
+  \noindent\parbox{\linewidth}{\centering \fancybreakdisplay}
+  \par
+  \addvspace{#3}
+  \@afterheading
+  \IfBooleanTF{#1}{\@afterindenttrue}{\@afterindentfalse}
+}
+
 % Front matter citations
 \NewDocumentCommand \textnote { O{before~upper={}} +m } {
   \begin{note} [#1]
