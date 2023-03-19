@@ -35,8 +35,14 @@ l'équipe admin du labo, bigup
 \par\noindent\textit{À l'intention du lecteur\dots}\par
 \vspace{\aftersecskip}
 
-à quoi s'attendre vis à vis du contenu, plus orienté méthodo / technique.
-parce que c'est ce qui m'intéresse le plus.
+Ce manuscrit compile la majeure partie des travaux que j'ai réalisé durant les 4~dernières années.
+J'ai eu la chance d'avoir bénéficié d'un encadrement de thèse exceptionnel: soutenu, et pourtant permettant une grande liberté dans mon approche, à la fois des problématiques scientifiques et des problèmes méthodologiques.
+Ces années m'ont ainsi permis d'approfondir mes compétences méthodologiques et ma compréhension des ces questions scientifiques, mais aussi et surtout d'explorer ce qui m'animait vraiment \encadra*{au gré de ma curiosité}.
+
+Force est de constater que, bien que les questions scientifiques posées dans ce manuscrit m'intéressent, m'entretenir à y répondre en tant que \guil*{chercheur} ne me correspond pas.
+À l'inverse, j'ai pu trouver une réelle vocation dans le développement des outils requis par la résolution de ces questions.
+Si vous me permettez cette analogie: si cette thèse n'aura pas pu me mettre sur les rails du jeune chercheur, elle m'a montré la voie de l'ingénieur de recherche, qui y court parallèle et qui me convient bien mieux.
+En conséquence, ce manuscrit reflète cette préférence et s'attardera peut"-être un peu plus qu'à l'accoutumée sur des considérations techniques.
 
 En vous souhaitant une agréable lecture.
 
@@ -68,45 +74,43 @@ Le travail effectué durant ma thèse et présenté dans ce manuscrit a donné l
 \bigskip
 
 Par ailleurs, pendant cette thèse une grande partie de mon effort s'est tournée sur l'élaboration d'outils informatiques cohérents \encadra{j'entends allant au"-delà d'une simple collection de scripts} permettant les analyses présentées ci"-après.
-Une attention toute particulière a été portée à assurer leur ré"-utilisation et extension avec facilité, d'une part pour garantir la reproducibilité effective de cette étude, et d'autre part à ce que ce travail puisse bénéficier à d'autres.
+Une attention toute particulière a été portée à assurer leur ré"-utilisation et extension avec facilité, d'une part pour garantir la reproductibilité effective de cette étude, et d'autre part à ce que ce travail puisse bénéficier à d'autres.
 Bien entendu, d'autres considérations entrent également en compte, par exemple de performances et de libre accès.
+Tous les codes utilisés \encadra{accompagné qu'une documentation (partielle)} sont disponibles sur un dépôt Git public\footnote{\glsurl{gitlab}} hébergé par l'\abbrv{IN2P3}~(Institut National de Physique Nucléaire et de Physique des Particules, CNRS).
+Une version a également été déposée sur un répertoire Zenodo (\hbox{\glsurl{zenodo}}).
+
+\bigskip
+
 Certaines parties de ce travail en particulier se sont muées en projets indépendants, qu'il m'a paru utile de distribuer séparément.
 J'ai ainsi durant ma thèse publié publiquement les outils suivant:
 \begin{description}
   \setlength{\itemsep}{1.8\onelineskip}
   \item[FileFinder]
-        est un paquet Python qui permet \encadra{entre autres} de trouver des fichiers grâce à la structure de leur nom de fichier, ce qui est particulièrement utile pour des données dépendant de la date, ou de la valeur d'un paramètre, ou des deux.
+        est un paquet Python qui permet \encadra{entre autres} de trouver des fichiers grâce à la structure de leur nom de fichier, ce qui est particulièrement utile par exemple pour des fichiers dépendant de la date, ou de la valeur d'un paramètre, ou des deux.
         L'entièreté des fichiers de données utilisés pour cette thèse sont gérées grâce à cet outil.
         \textnote{\citesoftfullPerso{filefinder}}
 
   \item[tol-colors]
         est un paquet Python qui donne accès à des assortiments de couleurs adaptés aux personnes atteintes de daltonisme.
-        Les jeux de couleurs ont été développés par \glsname{paultol}\footnote{voir~\glsurl{paultol}}, je les ai seulement rendus plus facilement accessibles via PyPI.
+        Les jeux de couleurs étaient pré-existants et ont été développés par \glsname{paultol}\footnote{voir~\glsurl{paultol}}; je les ai seulement rendus plus facilement accessibles via PyPI.
         \textnote{\citesoftfullPerso{tol-colors}}
 
   \item[Xarray-histogram]
         est un paquet Python\footnote{%
         Il est à noter que ce projet est plus proche du stade de preuve de concept que d'outil exploitable.
         Son utilisation sur de large quantités de données avec Dask présente des problèmes non résolus.
-        Néanmoins les bénéfices en performances sont très prometteurs (voir le dépôt Github).
+        Néanmoins les bénéfices en performances sont très prometteurs (voir le dépôt Github pour des comparaisons).
         } qui permet de calculer des histogrammes de données gérées par \citesoft{xarray}.
-        C'est une opération centrale dans la méthode développée dans cette thèse, mais néanmoins délicate.
+        C'est une opération centrale dans les calculs effectués pour cette thèse (\nref{sec:extraction-hist}).
         Des solutions existent déjà, mais présentent certains désavantages (notamment de performances et de base de code complexe) que j'ai cherché à palier.
         \textnote{\citesoftfullPerso{xarray-histogram}}
 
   \item[dateloop]
         est une simple commande bash permettant de générer des ensembles de dates.
-        Elle a été utilisée au début de ce projet afin de faciliter la gestion et le téléchargement des fichiers de données par des scripts shell. Ces scripts ont progressivement été remplacés par des équivalents Python.
+        Elle a surtout été utilisée au début de ce projet afin de faciliter la gestion et le téléchargement des fichiers de données par des scripts shell. Ces scripts ont progressivement été remplacés par des équivalents Python.
         \textnote{\citesoftfullPerso{dateloop}}
 
 \end{description}
-
-\bigskip
-
-En dehors des outils explicités ci"-dessus, tous les codes utilisés \encadra{accompagné qu'une documentation (partielle)} sont disponibles sur un dépôt Git public\footnote{\glsurl{gitlab}} hébergé par l'\abbrv{IN2P3}~(Institut National de Physique Nucléaire et de Physique de Particules, CNRS).
-Une version a également été déposée sur un répertoire Zenodo (\hbox{\glsurl{zenodo}}).
-
-\bigskip
 
 De manière plus secondaire mais que je tiens néanmoins à noter, j'ai participé au projet \citesoft{cf-xarray} (visant à rendre accessible à \citesoft{xarray} les conventions de métadonnées \as{cf}) en y implémentant l'extraction de variables drapeaux sur masque binaire (\href{https://github.com/xarray-contrib/cf-xarray/pull/354}{\eng{pull request}~\textlf{\#354}}).
 Le principe est détaillé en \nref[annexe]{ax:cf-flags}.
