@@ -2,7 +2,8 @@
 (TeX-add-style-hook
  "ch-thesis"
  (lambda ()
-   (LaTeX-add-labels
-    "fig:lolol")
+   (TeX-add-symbols
+    '("nref" ["text"] TeX-arg-label)
+    )
    )
  :latex)

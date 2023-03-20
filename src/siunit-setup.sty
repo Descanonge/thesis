@@ -7,6 +7,7 @@
 \sisetup{
   mode=match,
   range-phrase=--,
+  range-units=single,
   product-units=single,
   uncertainty-mode=separate,
   separate-uncertainty-units=single,
@@ -63,6 +64,8 @@
 \NewDocumentCommand \tC { o m } {
   \qty [#1] {#2} {\degreeCelsius}
 }
+
+\newcommand*\OM{\ensuremath{O}}
 
 \NewDocumentEnvironment {siunitText} {}
 {

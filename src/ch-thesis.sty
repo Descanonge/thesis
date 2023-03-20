@@ -10,15 +10,16 @@
 
 \bool_new:N \l_chthesis_print_bool
 \bool_new:N \l_chthesis_draft_bool
+\bool_new:N \l_chthesis_url_showpage_bool
 \keys_define:nn { chthesis } {
   print .bool_set:N = \l_chthesis_print_bool,
-  print .default:n = false,
+  print .initial:n = false,
+
   draft .bool_set:N = \l_chthesis_draft_bool,
-  print .default:n = false,
-}
-\keys_set:nn { chthesis } {
-  print = false,
-  draft = false,
+  print .initial:n = false,
+
+  urlshowpage .bool_set:N = \l_chthesis_url_showpage_bool,
+  print .initial:n = false,
 }
 
 \ProcessKeysOptions{chthesis}

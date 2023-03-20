@@ -110,6 +110,8 @@ Chercheur junior CNRS
 * Inbox
 ** Quel est le timerange des produits que j'utilise ?
 ** Finir corrections méthodes
+** (sub-)meso-échelle
+tirets ? pas tirets ?
 
 * Recommendations de style
 ** GLS
