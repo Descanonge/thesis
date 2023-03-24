@@ -246,20 +246,65 @@ Important bloom (plus de détail, ref sur la phénologie, )
 \subsection{Détection des fronts sur images satellites}
 \label{sec:detection-fronts}
 
-On se concentre sur la SST, mais on peut utiliser d'autres traceurs (Chloro par ex).
+Afin de mesurer l'impact des sub-mesoéchelle sur le phytoplancton, nous partons de l'idée de détecter les fronts de densité à partir de la SST afin de les colocaliser aux valeurs de \al{chl}.
+Nous nous concentrons dans cette section sur les méthodes existantes cherchant à détecter les fronts sur des images satellites de SST.
 
-méthodes avec gradient
+Une première catégorie de méthodes s'appuie la dérivation spatiale du champ de SST, avec divers opérateurs: Gradient (\cite{kazmin_1996, moore_1997, kostianoy_2004}), Sobel (\cite{sauter_1994}), ou Laplacien (\cite{holyer_1989}), etc.
+Ces étapes de dérivation introduisent cependant du bruit qui impacte négativement la détection.
+On notera d'ailleurs que la détection des fronts de fine échelle, qui nous intéresse ici, est plus sensible au bruit du fait de gradients plus faibles.
+Un filtrage préalable de l'image permet d'en limiter l'impact.
+C'est le cas de la méthode de détection de contours \emph{Canny} (\cite{canny_1986}), qui applique un filtre gaussien avant de calculer le gradient, et par ailleurs ajoute des traitements supplémentaire aux contours détectés.
+Initialement développée pour de la détection de contours en traitement d'image \encadra{domaine où elle demeure un standard, et où ses implémentations sont amplement disponibles}, elle a également été largement appliquée en océanographie à la détection de fronts en température, entre autres (cite{93-101}).
 
-méthodes se basant sur histogrammes (Otsu, Cayula)
-méthodes avec fenêtre glissante
+Similairement, l'algorithme de Belkin--O'Reilly~(\cite{belkin_2009}) applique un filtre itératif contextuel capable de réduire le niveau de bruit de l'image d'entrée tout en préservant les forts gradients.
+Il a été développé afin de cibler à la fois les fronts de \as{chl} et de SST.
 
-méthodes utilisant variance, entropie
+Il est également possible d'éviter l'utilisation du gradient, comme le fait la méthode de \al{cc}~(\as{cc}, \cite{cayula_1992}).
+L'algorithme que nous utiliserons par la suite, décrit dans le \nref[chapitre]{chp:methodes}~(\nref{sec:HI}), en est inspiré. Nous le décrivons donc succinctement dans la suite.
 
-Quelques mots sur le suivi des fronts + reconstruction de fronts 'linéaire'
-qu'on utilise pas on reste en 'vue pixelisée'
+Le principe de l'algorithme \as{cc} est le suivant: Un front sépare deux masses d'eau de température différentes; il est raisonnable que la température des pixels à proximité du front soit distribuées de manière bimodale, chaque mode se situant autour de la température d'une des masses d'eau.
+Ainsi, afin de ne considérer les pixels que proche des fronts, la méthode utilise une fenêtre glissante dans laquelle on s'intéresse à l'histogramme des valeurs de SST.
+Une température seuil est choisie pour séparer l'histogramme en deux modes, de façon à minimiser la variance intra"-mode\footnote{%
+  La méthode de séparation des valeurs en deux modes est identique à la méthode d'\textcite{otsu_1979}, couramment utilisée en traitement d'image pour réaliser un \guil*{seuillage}, \as{cad} pour catégoriser les pixels d'une photo en deux.
+}.
+Pour cette séparation optimale, un critère évaluant la séparation des deux modes est calculé. Si ce dernier est supérieur à un certain seuil, la fenêtre est estimée contenir un front.
+
+Une étape supplémentaire consiste à vérifier que la cohérence spatiale de chacune des masses d'eau dans la fenêtre est suffisante.
+Cela permet d'éviter les faux positifs, notamment sur des images bruitée ou contaminée par des nuages.
+
+\begin{note}
+  On notera que \textcite{cayula_1992} choisissent les seuils de cohérence spatiale de manière à ce que le cas le plus cohérent soit un front en ligne droite.
+  Cela signifie qu'un front sinueux se vera attribuer une cohérence spatiale moindre, et pourrait être disqualifié.
+  En fonction des structures à detecter, il sera nécessaire d'adapter les divers seuils de la méthode, éventuellement au détriment la spécificité de la méthode (éviter les faux positifs).
+\end{note}
+
+La méthode \abbrv{CC} a largement été utilisée pour détecter des fronts de SST
+(cite(107, 134)). (10.1007/s12524-022-01629-1), notamment dans une étude de la répartition des fronts à l'échelle globale (2).
+Elle a également été appliquée avec succès sur des données de Chlorophylle (110, 124, 135).
+Diverses dérivations en ont été proposées.
+\textcite{cayula_1995} proposent une version travaillant sur plusieurs images consécutives.
+Plutôt que d'utiliser des images à des instants différents, \textcite{nieto_2012} applique l'algorithme \abbrv{CC} sur quatres fenêtre glissantes décalées en longitude et latitude et fusionnent les résultats des pixels se chevauchant.
+\textcite{miller_2009} combine les résultats de l'algorithme \abbrv{CC} pour des produits SST et \as{chl} afin d'augmenter la couverture disponible.
+
+Une méthode au fonctionnement similaire est proposé par \textcite{vazquez_1999}, qui pour quantifier la séparation des deux distributions en température (de part et d'autre d'un éventuel front) utilise une mesure entropique: la divergence de Jensen--Shannon (\cite{barranco-lopez_1995}).
+\textcite{shimada_2005} reprendra cette méthode et l'adjoindra d'un algorithme de morphologie mathématique (\cite{jiang_1997}).
+Cette configuration sera réutilisée à plusieurs reprises (\cite{lan_2012} \ab{par-ex}).
+
+Enfin, dans le but de quantifier les valeurs de \as{chl} dans les fronts de sub-mesoéchelle de la gyre subtropicale du Pacifique Nord, \textcite{liu_2016} propose une méthode inspiré de l'algorithme \as{cc}.
+Les auteur·ices définissent un indice d'hétérogénéité (\as{hi}) du champ de SST.
+La valeur de cette indice est calculé en chaque pixel à partir de la distribution en température dans une fenêtre (glissante donc) autour de ce pixel.
+La valeur de l'indice est la somme (pondérée par des coefficient de normalisation) de la variance de la distribution, de sa bimodalité (calculée différement que dans les méthodes ci"-dessus), et de son asymétrie (afin de cibler les plus petits fronts).
+
+On notera dans cette dernière étude une différence d'approche, essentiellement sémantique mais qui reste néanmoins d'intérêt.
+L'indice calculé (\al{hi}) cherche plus à quantifier l'hétérogénéité spatiale de la SST (sa \engquote{patchiness}) pour chaque pixel, qu'à \guil{détecter les fronts}.
+La plupart des méthodes introduites plus haut incluent une étape algorithmique (omise ci"-dessus) permettant d'obtenir en sortie uniquement la position des fronts, représentée par une ligne d'épaisseur nulle (ou 1~pixel).
+Par opposition à la démarche de \citeauthor{liu_2016}, où les fronts sont définis par un simple\footnotemark seuil sur le HI, ce qui donne une surface de fronts variable.
+À l'inverse, l'algorithme \as{cc} par exemple est construit de manière beaucoup plus dichotomique.
+
+Par cette construction orientée vers une mesure graduelle des fronts, cette méthode de détection apparaît pertinente pour distinguer différents types de fronts par intensité.
+\footnotetext{Bien que le choix du seuil soit fait de manière non"-triviale par \textcite{liu_2016}, nous montrons dans notre implémentation qu'un seuil fixe suffit à notre étude.}
 
 \subsubsection{Vers des fronts de densité}
-
 
 Lien entre densité et température.
 La salinité intervient aussi. La salinité par satellite est très basse résolution (SMOS) donc on a pas vraiment accès.
@@ -288,4 +333,7 @@ Des résultats suggèrent que la salinité ne joue pas beaucoup (Flagg 2006, suc
 \section{Plan de thèse}
 \label{sec:plan-de-these}
 
+Cette thèse en organisée en 6~chapitres, en comptant l'introduction ci"-dessus.
+Dans le \nref[chapitre]{chp:méthode}, nous commencons par détailler les différents ensembles de données que nous avons considérés, et expliciter le
+Le \nref[chapitre]{}
 comment gérer l'article

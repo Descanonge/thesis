@@ -409,9 +409,8 @@ pour ensuite calculer la norme~\(\mathbb{L}^2\) entre les deux distributions:
   \end{split}
 \end{equation}
 
-Ce principe de calcul de bimodalité s'apparente à celle de \textcite{cayula_1992}, qui consiste à trouver une valeur seuil séparant l'histogramme des valeurs en deux classes et pour laquelle la variance intra"-classe est minimale.
-Cette méthode est d'ailleurs utilisée en analyse d'image, non pas sur une fenêtre glissante mais pour toute l'image, et connue sous le nom de méthode d'\textcite{otsu_1979}.
-Bien qu'elle soit appliquée avec succès pour la détection de front, il apparaît que cette méthode nécessite de construire un histogramme d'une résolution suffisante, ce qui s'avère difficile aux échelles où nous travaillons.
+Ce principe de calcul de bimodalité s'apparente à celle de \textcite{cayula_1992} (voir \nref{sec:detection-front}).
+Bien que cette dernière soit appliquée avec succès pour la détection de front, il apparaît que cette méthode nécessite de construire un histogramme d'une résolution suffisante, ce qui s'avère difficile aux échelles où nous travaillons.
 
 Notre méthode de calcul de la bimodalité est la première grande modification apportée à celle de \textcite{liu_2016}.
 Ces dernier·ère·s calculent également l'histogramme de la température, mais au lieu de directement le comparer avec une distribution gaussienne, iels ajustent l'histogramme par un polynôme de degré~5 avant de comparer ce dernier avec la gaussienne.

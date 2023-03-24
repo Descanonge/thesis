@@ -58,11 +58,20 @@
 % Report display url
 \ExecuteBibliographyOptions[report]{url = true}
 
+\DefineBibliographyStrings{french}{
+  and = {\&},
+  version = {ver\adddot},
+}
+
 % Customize bibliography: Start by the 'label', ie the
 % citation as it appears in the text
 \AtBeginBibliography{
+  \renewcommand*\finalnamedelim{,\space}
+
   \renewbibmacro*{begentry}{%
     {
+      % Use & instead of and
+      \renewcommand*\finalnamedelim{\space\bibstring{and}\space}
       % We are in bibliography but we want maxCITEnames
       \c@maxnames\blx@maxcitenames\relax
       \c@minnames\blx@mincitenames\relax
@@ -168,10 +177,6 @@
 \DeclareFieldFormat[software]{type}{\mkbibparens{#1}}
 \DeclareFieldFormat[software]{url}{\mkbibacro{url}\addcolon~\url{#1}}
 \DeclareFieldFormat[software]{pypi}{\mkbibacro{pypi}\addcolon~\href{https://pypi.org/project/#1}{#1}}
-
-% Add abbreviation for version
-\DefineBibliographyStrings{french}{%
-  version = {ver\adddot}}
 
 % Citation command for software
 % (too much hassle to rewrite textcite or cite)
