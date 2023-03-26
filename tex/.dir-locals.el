@@ -1,4 +1,5 @@
 
 (
- ( nil . ((TeX-master . "../master.tex")))
+ ( nil . ((TeX-master . "../master.tex")
+          (reftex-bibpath-environment-variables . "../references")))
  )

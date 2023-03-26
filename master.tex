@@ -25,6 +25,10 @@ hyperfootnotes=false, % put here otherwise option clash
 
 \usepackage{ch-thesis}
 
+% Just for Reftex, otherwise it does not scan article and biblios
+% \input{src/ch-thesis.sty}
+% \input{src/bib-setup.sty}
+
 \AtBeginDocument{%
   \bookmark[named=FirstPage, level=section]{Page de garde}%
 }
@@ -39,7 +43,8 @@ hyperfootnotes=false, % put here otherwise option clash
 %%% Article titles
 % Some titles of articles
 \newcommand*\articleTitle{Satellite data reveal earlier and stronger phytoplankton blooms over fronts in the Gulf Stream region}
-\newcommand*\articleCceTitle{Multi-trophic planktonic responses to fronts in a coastal upwelling ecosystem}
+\newcommand*\articleCceTitle{Sub-frontal niches of plankton communities driven by transport and
+trophic interactions at ocean fronts}
 \newcommand*\articleReviewTitle{Impact of submesoscale processes on biogeochemical cycles in a changing ocean}
 
 
