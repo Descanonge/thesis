@@ -112,6 +112,8 @@ Chercheur junior CNRS
 ** Finir corrections méthodes
 ** (sub-)meso-échelle
 tirets ? pas tirets ?
+** intro mesure: figure jolie image chl fines échelles ?
+** intro mesure: schéma explicatif de la télédetection de chl
 
 * Recommendations de style
 ** GLS

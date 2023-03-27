@@ -16,7 +16,7 @@
   }%
   \captionT{Les couleurs du Gulf Stream par satellite}{%
     \small
-    Image en fausses couleurs de l'océan Atlantique Nord, prises par \as{modis} \slashfrac{s}{}~Aqua le \frenchdate{2020}{02}{23}, retouchées par Norman Kuring (groupe \eng{Ocean Biology}, \abbrv{NASA}).
+    Image en fausses couleurs de l'océan Atlantique Nord, prises par \as{modis} \sur~Aqua le \frenchdate{2020}{02}{23}, retouchées par Norman Kuring (groupe \eng{Ocean Biology}, \abbrv{NASA}).
     Adapté de l'\eng{Image of the day} 2020-03-10 \textit{Hints of Spring in the Atlantic}, sur \eng{\glshref{ve-illustration} \& \glshref{eo-illustration}}.
   }
   \label{fig:oc-illustration}
@@ -130,12 +130,92 @@ Cette dualité des sources de croissance (lumière en surface, nutriments en pro
 Or on considère généralement les courants océaniques à l'ordre 1 comme strictement horizontaux.
 Les petites et moyennes échelles ((sub-)mésoéchelles) présentent des moyens de créer des échanges verticaux (comme on le verra plus tard).
 
-\subsubsection{Télédétection}
+\subsubsection{Mesurer le phytoplancton}
 \label{sec:teledetection}
 
-Le phytoplancton est complexe à étudier.
-Une observation synoptique est seulement possible par satellite.
-Ces obs se font sur la couleur de l'océan. (quelques mots sur le principe, depuis quand ça existe, révélation des fines échelles dans les 1ères images).
+\begin{figure}
+  \centering
+
+  \captionT{Structures fines vue dans la couleur de l'océan}{%
+    prendre une image depuis visibleearth
+  }
+  \label{fig:oc-fine-illustration}
+\end{figure}
+
+L'observation du phytoplancton comporte un certain nombre de défis que nous allons rapidement évoquer dans cette section.
+
+Comme pour d'autres variables géophysiques, l'utilisation de l'imagerie satellite a permis de fournir depuis ces dernières décennies une vision synoptique du phytoplancton.
+En effet cette dernière offre une couverture globale, journalière, et à haute résolution spatiale.
+La possibilité d'observer des micro-organismes depuis l'espace n'apparaît pourtant pas comme évidente.
+Rappelons alors que ces organismes, réalisant de la phytosynthèse, contiennent différents pigments leur permettant de récupérer l'énergie lumineuse du soleil.
+Toutes les espèces de phytoplancton contiennent majoritairement de la \al{chl}~(\as{chl}) et, éventuellement, des pigments secondaires.
+Ces pigments absorbent plus ou moins certaines longueurs d'onde du rayonnement pénétrant dans la couche de surface de l'océan, affectant ainsi la rétrodiffusion (\engquote{backscatter}).
+En d'autres termes, la couleur de l'océan apparaît plus verte\footnote{%
+  la chlorophylle, pigment majoritaire, absorbe dans le rouge et le bleu}
+sur les zones où la concentration en phytoplancton est élevée.
+
+Ce phénomène, compris depuis longtemps, fut testé avec succès par des mesures en avion: \ab{par-ex} par \textcite{clarke_1970} dans la région du Gulf Stream, au large de Cape Cod; puis par satellite par John Arvesen et Dr.\ Ellen Weaver\footnote{%
+  Je conseille d'ailleurs l'article suivant qui s'attarde sur sa carrière scientifique passionnante (qui inclut un passage par le projet Manhattan !): \citetitle{marshall_2010}, \cite{marshall_2010}.},
+en coopération avec le capitaine Cousteau à bord du Calypso\footnote{%
+  Ce dernier commentera d'ailleurs: \engquote{The space-age satellites have opened a whole new dimension to ocean resources monitoring}, comme reporté par la presse locale de l'époque:
+  \href{ https://news.google.com/newspapers?nid=1454&dat=19730320&id=Nmo0AAAAIBAJ&sjid=8QkEAAAAIBAJ&pg=897,4493586&hl=en}{\citetitle{macomber_1973}}, \cite{macomber_1973}.
+}.
+Ces premières expériences permettront le déploiement d'un premier capteur dédié à l'étude de la couleur de l'océan: \as{czcs} à bord de Nimbus-7, lancé en 1978 qui fonctionnera jusqu'en 1986.
+Ce n'est que dix plus tard, en 1997, que le lancement de \as{seawifs} marquera le début d'une observation ininterrompue de la couleur de l'océan par un ensemble de capteurs et satellites.
+
+Attardons nous brièvement sur le processus permettant d'obtenir une concentration en \al{chl} à partir des données de ces capteurs.
+Ce derniers mesurent l'intensité lumineuse renvoyée, ou réflectance (\as{rrs}), pour différentes bandes de longueurs d'ondes (entre 6 et 16 dans le visible).
+Nous voulons relier ces réflectances au contenu de la surface de la colonne d'eau.
+Une grande partie des algorithmes utilisés emploient des relations empiriques construites à partir d'un ensemble de mesures in"-situ.
+En toute rigueur, il faudrait relier les réflectances aux propriétés optiques de la colonne d'eau: c'est"-à"-dire l’absorption et la rétrodiffusion causées par le phytoplancton, mais aussi les particules non-algales (\as{nap}) et les matières organiques dissoute colorées (\as{cdom}) (\cite{werdell_2018}).
+Les algorithmes dits \emph{empiriques} font l'hypothèse que les quantitées de \as{nap} et \as{cdom} co"-varient avec le phytoplancton, et qu'ils ne jouent donc pas dans la relation entre \as{chl} et réflectances.
+Cette hypothèse est légitime dans l'océan ouvert où le phytoplancton domine optiquement, à l'inverse des régimes côtiers où la colonne d'eau est riche en sédiments (\cite{bailey_2006}).
+Et malgré l'utilisation opérationelle d'algorithmes empiriques, une prudence est à adopter si l'on s'intéresse à des tendances longues (\cite{dierssen_2010}).
+
+Certains algorithmes dits semi"-analytiques cherchent à représenter les effets de tous les composants optiques.
+Néanmoins, cela nécessite tout de même un certain nombre de simplifications pour pouvoir remonter aux valeurs d'intérêt (\cite{werdell_2018, werdell_2019}).
+
+Dans les deux cas, le satellite mesurant les réflectance en dehors de l'atmosphère, et non pas à la surface de l'eau, il est nécessaire d'apporter plusieurs corrections.
+Les contributions de l'écume et du reflet direct du soleil sont retirées.
+La diffusion de Rayleigh est corrigée assez simplement, mais l'absorption et diffusion par divers aérosols sont plus complexes, leurs répartitions (horizontale et verticale) étant variables (\cite{werdell_2018}).
+
+Nous décrivons ici rapidement deux exemples d'algorithmes empiriques, utilisés de manière opérationelle par le groupe NASA \as{obpg}.
+L'algorithme \abbrv{OC3/4} se base sur un polynôme d'ordre~4 du ratio des bandes verte~(\(V\)) et bleue~(\(B\)):
+\begin{equation} \label{eq:ocx}
+  \log_{10}\paren{\am{chl}} =
+  \sum_{i=1}^{4} a_i \paren{\log_{10}\paren{
+      \frac{ \am{rrs}^{max}\paren{\lambda_B} }
+           { \am{rrs}\paren{\lambda_V} }
+    }}^i ,
+\end{equation}
+où \(\am{rrs}^{max}\paren{\lambda_B}\) est la réflectance maximale parmis les bandes bleues, et \(a_i\) des coefficients empiriques adaptés à chaque capteur (\cite{oreilly_1998, oreilly_2000}).
+Ces coefficients, régulièrement mis à jour par le groupe NASA \as{obpg}\footnote{voir l'historique \url{https://oceancolor.gsfc.nasa.gov/reprocessing/}}, sont dérivés par regression de la relation ci"-dessus avec les données in-situ \as{nomad} (\cite{werdell_2005}).
+L'algorithme utilise au total 3~bandes pour \abbrv{OC3}, et 4 pour \abbrv{OC4}.
+
+Cependant, \abbrv{OC3/4} montre des limites dans les eaux oligotrophes, où la concentration de \as{chl} est faible.
+Dans ces cas là, l'algorithme CI (\eng{Color Index}) est utilisé (\cite{hu_2012}).
+Il utilise la différence entre la bande verte~(\(V\)) et une combinaison des bandes rouge~(\(R\)) et bleue~(\(B\)):
+\begin{equation}
+  \label{eq:CI}
+  \begin{split}
+    CI &= \am{rrs}\paren{\lambda_V} -
+         \paren{
+          \am{rrs}\paren{\lambda_B}
+          + \frac {\lambda_V - \lambda_B}
+                  {\lambda_R - \lambda_B}
+          \times \paren{\am{rrs}\paren{\lambda_R}
+                      - \am{rrs}\paren{\lambda_B}}
+         }
+    \\
+    \am{chl} &= 10^{\paren{a_0' + a_1' \times CI}},
+  \end{split}
+\end{equation}
+avec ici aussi des coefficients empiriques \(a_i'\).
+
+L'implémentation actuelle du groupe NASA \as{obpg} utilise \abbrv{OC3/4} pour les eaux où la \as{chl} est supérieure à~\qty{0.35}{\mgm}, et CI où elle est inférieure à~\qty{0.25}{\mgm}; entre ces deux valeurs, un mélange des résultats des deux algorithmes est utilisé assurant ainsi la continuité des valeurs de Chlorophylle (\cite{oreilly_2019}, \url{https://oceancolor.gsfc.nasa.gov/atbd/chlor_a/}).
+
+De nombreux autres algorithmes ont été développés dans les deux dernières décennies, on pourra citer par exemple l'ajout d'une bande violette pour \abbrv{OC5/6} (\cite{oreilly_2019}), ou l'utilisation de 5~bandes et des tables de références afin d'améliorer l'estimation de \as{chl} en zone côtière (\cite{gohin_2002}).
+
 Obs de la couleur présente des problèmes. Le lien avec le phytoplancton est indirect et imparfait (utilisation de la Chl-a comme proxy de biomasse). Limitation importante des observations par la couverture nuageuse. Et cela ne scanne que la composition de la surface (combien de m en vrai ?), pas accès à toute la colonne d'eau.
 
 Expliquer la méthode pour obtenir Chl-a depuis satellite. Et méthode de Roy également (rapidement).
@@ -339,6 +419,4 @@ Des résultats suggèrent que la salinité ne joue pas beaucoup (Flagg 2006, suc
 \label{sec:plan-de-these}
 
 Cette thèse en organisée en 6~chapitres, en comptant l'introduction ci"-dessus.
-Dans le \nref[chapitre]{chp:méthode}, nous commencons par détailler les différents ensembles de données que nous avons considérés, et expliciter le
-Le \nref[chapitre]{}
-comment gérer l'article
+Dans le \nref[chapitre]{chp:methodes}, nous commencons par détailler les différents ensembles de données que nous avons considérés, et expliciter le

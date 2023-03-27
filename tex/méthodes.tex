@@ -72,7 +72,7 @@ Ces données sont projetées sur une grille kilométrique globale, en reprenant 
 Les sections de fauchées, maintenant toutes sur la même grille spatiale, peuvent être moyennées jour par jour, pour obtenir un produit de niveau~\abbrv{L3}.
 \footnotetext{%
   \engquote{swath} en anglais, bande de terrain couverte par le satellite le long de son orbite.
-  \as{modis} \slashfrac{s}{}\,Aqua produit des fauchées d'environ~\qty{2300}{\km} de large, qui sont distribuées en sections d'environ la même longueur (\ab{cad} dans la direction de la trajectoire).
+  \as{modis} \sur~Aqua produit des fauchées d'environ~\qty{2300}{\km} de large, qui sont distribuées en sections d'environ la même longueur (\ab{cad} dans la direction de la trajectoire).
 }
 
 Cela permet donc d'obtenir des données à la limite de la résolution des capteurs, mais présente un certain nombre de désavantages majeurs.
@@ -193,7 +193,7 @@ Nous utilisons le produit global, MultiYear\footnote{%
 Les données sont récupérées sur \as{cmems}\footfullcite{chl_globcolour}.
 Elles sont de résolution spatiale~\resol{1}{24} (soit environ~\qty{4}{\km}), journalières, et comportent des nuages.
 
-Ce produit agrège les données optiques de plusieurs capteurs: \as{seawifs}, \as{modis} Aqua et Terra, \as{meris} à bord d'Envisat, \as{viirs} à bord de \as{snpp} et \as{noaa}[\textlf{-20}]\footnote{parfois indiqué par son nom avant lancement: \as{jpss}[\textlf{-1}]}, et enfin \as{olci} à bord de \textlf{Sentinel-3A et -3B}.
+Ce produit agrège les données optiques de plusieurs capteurs: \as{seawifs} à bord de OrbView-2, \as{modis} Aqua et Terra, \as{meris} à bord d'Envisat, \as{viirs} à bord de \as{snpp} et \as{noaa}[\textlf{-20}]\footnote{parfois indiqué par son nom avant lancement: \as{jpss}[\textlf{-1}]}, et enfin \as{olci} à bord de \textlf{Sentinel-3A et -3B}.
 Similairement au produit Modis, les valeurs de \as{chl} sont calculées à partir des réflectance en utilisant ici un mélange des algorithmes \abbrv{OC3/4}, CI, et \abbrv{OC5}.
 
 \begin{note}[label={note:merge-chl-or-rrs}]
@@ -409,8 +409,8 @@ pour ensuite calculer la norme~\(\mathbb{L}^2\) entre les deux distributions:
   \end{split}
 \end{equation}
 
-Ce principe de calcul de bimodalité s'apparente à celle de \textcite{cayula_1992} (voir \nref{sec:detection-front}).
-Bien que cette dernière soit appliquée avec succès pour la détection de front, il apparaît que cette méthode nécessite de construire un histogramme d'une résolution suffisante, ce qui s'avère difficile aux échelles où nous travaillons.
+Ce principe de calcul de bimodalité s'apparente à celle de \textcite{cayula_1992} (voir \nref{sec:detection-fronts}).
+Cependant, cette méthode nécessite un nombre conséquent de valeurs pour construire un histogramme de résolution suffisante, ce qui s'avère difficile aux échelles et à la résolution où nous travaillons.
 
 Notre méthode de calcul de la bimodalité est la première grande modification apportée à celle de \textcite{liu_2016}.
 Ces dernier·ère·s calculent également l'histogramme de la température, mais au lieu de directement le comparer avec une distribution gaussienne, iels ajustent l'histogramme par un polynôme de degré~5 avant de comparer ce dernier avec la gaussienne.
