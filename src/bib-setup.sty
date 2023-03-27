@@ -69,21 +69,21 @@
   \renewcommand*\finalnamedelim{,\space}
 
   \renewbibmacro*{begentry}{%
-    {
-      % Use & instead of and
-      \renewcommand*\finalnamedelim{\space\bibstring{and}\space}
+    {%
+      % Use and instead of &
+      \renewcommand*\finalnamedelim{\space\bibstring{and}\space}%
       % We are in bibliography but we want maxCITEnames
-      \c@maxnames\blx@maxcitenames\relax
-      \c@minnames\blx@mincitenames\relax
+      \c@maxnames\blx@maxcitenames\relax%
+      \c@minnames\blx@mincitenames\relax%
       % reset some variables to avoid cite to merge
-      \global\undef\cbx@lasthash
-      \global\undef\cbx@lastyear
+      \global\undef\cbx@lasthash%
+      \global\undef\cbx@lastyear%
       \DeclareFieldAlias{bibhyperref}{noformat}%
       \printtext[bold]{%
         \restorebibmacro{cite}%
         \lfstyle%
-        \usebibmacro{cite}\addspace:\space}%
-    }
+        \usebibmacro{cite}\addspace:\addspace}%
+    }%
     \c@maxnames\blx@maxbibnames\relax%
     \c@minnames\blx@minbibnames\relax%
     % \renewcommand*\mkbibnamefamily[1]{\bname{##1}}%

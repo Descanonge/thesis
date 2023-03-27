@@ -112,9 +112,6 @@ Chercheur junior CNRS
 ** Finir corrections méthodes
 ** (sub-)meso-échelle
 tirets ? pas tirets ?
-** Bib, use label instead of authoryear
-this is getting too complicated, I think labels will allow to make this simpler
-** Bib, set giveninits in small caps to lessen their importance
 
 * Recommendations de style
 ** GLS
