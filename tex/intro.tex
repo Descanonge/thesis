@@ -165,20 +165,24 @@ Ce n'est que dix plus tard, en 1997, que le lancement de \as{seawifs} marquera l
 
 Attardons nous brièvement sur le processus permettant d'obtenir une concentration en \al{chl} à partir des données de ces capteurs.
 Ce derniers mesurent l'intensité lumineuse renvoyée, ou réflectance (\as{rrs}), pour différentes bandes de longueurs d'ondes (entre 6 et 16 dans le visible).
-Nous voulons relier ces réflectances au contenu de la surface de la colonne d'eau.
-Une grande partie des algorithmes utilisés emploient des relations empiriques construites à partir d'un ensemble de mesures in"-situ.
-En toute rigueur, il faudrait relier les réflectances aux propriétés optiques de la colonne d'eau: c'est"-à"-dire l’absorption et la rétrodiffusion causées par le phytoplancton, mais aussi les particules non-algales (\as{nap}) et les matières organiques dissoute colorées (\as{cdom}) (\cite{werdell_2018}).
-Les algorithmes dits \emph{empiriques} font l'hypothèse que les quantitées de \as{nap} et \as{cdom} co"-varient avec le phytoplancton, et qu'ils ne jouent donc pas dans la relation entre \as{chl} et réflectances.
-Cette hypothèse est légitime dans l'océan ouvert où le phytoplancton domine optiquement, à l'inverse des régimes côtiers où la colonne d'eau est riche en sédiments (\cite{bailey_2006}).
-Et malgré l'utilisation opérationelle d'algorithmes empiriques, une prudence est à adopter si l'on s'intéresse à des tendances longues (\cite{dierssen_2010}).
-
-Certains algorithmes dits semi"-analytiques cherchent à représenter les effets de tous les composants optiques.
-Néanmoins, cela nécessite tout de même un certain nombre de simplifications pour pouvoir remonter aux valeurs d'intérêt (\cite{werdell_2018, werdell_2019}).
-
-Dans les deux cas, le satellite mesurant les réflectance en dehors de l'atmosphère, et non pas à la surface de l'eau, il est nécessaire d'apporter plusieurs corrections.
+Le satellite mesure les réflectances en dehors de l'atmosphère, et non pas à la surface de l'eau; il est nécessaire d'apporter plusieurs corrections.
 Les contributions de l'écume et du reflet direct du soleil sont retirées.
 La diffusion de Rayleigh est corrigée assez simplement, mais l'absorption et diffusion par divers aérosols sont plus complexes, leurs répartitions (horizontale et verticale) étant variables (\cite{werdell_2018}).
 
+Nous voulons maintenant relier ces réflectances au contenu de la surface de la colonne d'eau.
+En toute rigueur, il faudrait relier les réflectances aux propriétés optiques de la colonne d'eau: c'est"-à"-dire l’absorption et la rétrodiffusion causées par le phytoplancton, mais aussi les particules non-algales (\as{nap}) et les matières organiques dissoute colorées (\as{cdom}) (\cite{werdell_2018}).
+Certains algorithmes dits \emph{semi"-analytiques} s'attachent à résoudre ce problèmes inverse, ce qui nécessite un certain nombre de simplifications, mais permet en théorie de remonter à tous les composants optiques en jeux (\as{chl}, \as{nap}, \as{cdom}) (\cite{werdell_2019}).
+
+Cependant, dans la majorité de l'océan ouvert il est raisonnable de considérer que le contenu optique de la colonne d'eau est le seul fait du phytoplancton\footnotemark, et qu'il est donc possible de directement relier les réflectances à la concentration en \as{chl} (\cite{bailey_2006, brewin_2015a}).
+\footnotetext{C'est-à-dire qu'on fait l'hypothèse que les autres composantes (\as{nap} et \as{cdom}) sont des produits du phytoplancton, et co"-varient avec sa concentration.}
+Ainsi, un certain nombres d'algorithmes dits \emph{empiriques} infèrent la \as{chl} en s'appuyant sur une simple relation vérifiée empiriquement par des mesures in"-situ.
+Par exemple, les algorithmes \guil{OC} utilisent des polynômes de ratio entre les réflectances bleu et verte (voir plus bas).
+
+Cette hypothèse ne tient plus dans certains cas (classifiés comme les \engquote{case II waters}, où \guil{optiquement complexes}), par exemples les régimes côtiers où la colonne d'eau est riche en sédiments (\cite{bailey_2006, brewin_2015a}), mais certains algorithmes sont tout de même disponibles pour ces cas plus complexes (\cite{gohin_2002}).
+On gardera néanmoins en tête ces hypothèses, et le fait que ces relations empiriques (validées sur des données passées) pourraient perdre en validité face à des écosystèmes modifiés par le changement climatique (\cite{dierssen_2010}).
+Toutefois, ces modèles empiriques sont de manière générale plus performant que les modèles semi"-analytiques (\cite{brewin_2015a}), et sont donc employés pour les données opérationelles.
+
+%%% section plus technique
 Nous décrivons ici rapidement deux exemples d'algorithmes empiriques, utilisés de manière opérationelle par le groupe NASA \as{obpg}.
 L'algorithme \abbrv{OC3/4} se base sur un polynôme d'ordre~4 du ratio des bandes verte~(\(V\)) et bleue~(\(B\)):
 \begin{equation} \label{eq:ocx}
@@ -214,11 +218,26 @@ avec ici aussi des coefficients empiriques \(a_i'\).
 
 L'implémentation actuelle du groupe NASA \as{obpg} utilise \abbrv{OC3/4} pour les eaux où la \as{chl} est supérieure à~\qty{0.35}{\mgm}, et CI où elle est inférieure à~\qty{0.25}{\mgm}; entre ces deux valeurs, un mélange des résultats des deux algorithmes est utilisé assurant ainsi la continuité des valeurs de Chlorophylle (\cite{oreilly_2019}, \url{https://oceancolor.gsfc.nasa.gov/atbd/chlor_a/}).
 
-De nombreux autres algorithmes ont été développés dans les deux dernières décennies, on pourra citer par exemple l'ajout d'une bande violette pour \abbrv{OC5/6} (\cite{oreilly_2019}), ou l'utilisation de 5~bandes et des tables de références afin d'améliorer l'estimation de \as{chl} en zone côtière (\cite{gohin_2002}).
+À noter que de nombreux autres algorithmes ont été développés dans les deux dernières décennies, on pourra citer par exemple l'ajout d'une bande violette pour \abbrv{OC5/6} (\cite{oreilly_2019}), ou l'utilisation de 5~bandes et des tables de références afin d'améliorer l'estimation de \as{chl} en zone côtière (\cite{gohin_2002}).
+%%% fin
 
-Obs de la couleur présente des problèmes. Le lien avec le phytoplancton est indirect et imparfait (utilisation de la Chl-a comme proxy de biomasse). Limitation importante des observations par la couverture nuageuse. Et cela ne scanne que la composition de la surface (combien de m en vrai ?), pas accès à toute la colonne d'eau.
+Comme nous venons de le voir, la dérivation de la concentration de \as{chl} est un processus compliqué, comprenant de multiple sources d'incertitudes dans les valeurs absolues inférées.
+Ce processus comporte un certain nombre de limitations.
+Nous avons évoqué la difficulté à travailler dans des zones où d'autres éléments que le phytoplancton dicte le comportement optique, comme des sédiments en suspension par exemple.
+C'est souvent le cas près des côtes et des décharges fluviales.
+La faible profondeur en régime côtier apporte également une difficulté, puisque dans le cas où la lumière incidente pénètre suffisamment profond, la réflectance mesurée comportera la lumière réfléchie par le fond marin (et re"-traversant la colonne d'eau).
+Plus généralement, quelque soit la zone sondée, la profondeur jusqu'à laquelle pénètre la lumière est un point critique.
+En effet, la réflectance mesurée ne peut comporter des informations que sur cette couche éclairée.
+De plus, les modèles empiriques sont ajustés par des mesures in"-situ réalisées sur les premiers mètres.
+Les données satellite manquent ainsi une biomasse plus en profondeur, potentiellement importante.
 
-Expliquer la méthode pour obtenir Chl-a depuis satellite. Et méthode de Roy également (rapidement).
+\begin{note}
+  c'est une variable dérivée.
+  incertitude sur la réflectance déjà!
+  objectif de \pct{30}, qui est vérifié, RMSE de 0.26.
+\end{note}
+
+Obs de la couleur présente des problèmes. Le lien avec le phytoplancton est indirect et imparfait (utilisation de la Chl-a comme proxy de biomasse). Limitation importante des observations par la couverture nuageuse.
 
 C'est pour cela que les observations in-situ toujours très utiles (pour combler les trous, ou compléter les obs sat). Vision de toute la colonne d'eau. Associé à une obs de la densité (temp + salinité qui n'est pas dispo en sat. à petite échelle).
 Accès à la composition du phytoplancton (et zoo) grâce à différents outils (cytomètre, zooscan, HPLC, -omiques).
@@ -326,7 +345,7 @@ Important bloom (plus de détail, ref sur la phénologie, )
 \subsection{Détection des fronts sur images satellites}
 \label{sec:detection-fronts}
 
-Afin de mesurer l'impact des sub-mesoéchelle sur le phytoplancton, nous partons de l'idée de détecter les fronts de densité à partir de la SST afin de les colocaliser aux valeurs de \al{chl}.
+Afin de mesurer l'impact des fronts sur le phytoplancton, nous partons de l'idée de détecter les fronts de densité à partir de la SST afin de les colocaliser aux valeurs de \al{chl}.
 Nous nous concentrons dans cette section sur les méthodes existantes cherchant à détecter les fronts sur des images satellites de SST.
 
 Une première catégorie de méthodes s'appuie la dérivation spatiale du champ de SST, avec divers opérateurs: gradient (\cite{kazmin_1996, moore_1997, kostianoy_2004}), Sobel (\cite{sauter_1994}), ou Laplacien (\cite{holyer_1989}), etc.
@@ -372,7 +391,7 @@ Une méthode au fonctionnement similaire est proposée par \textcite{vazquez_199
 Cette configuration sera réutilisée à plusieurs reprises (\cite{lan_2012} \ab{par-ex}).
 
 Enfin, dans le but de quantifier les valeurs de \as{chl} dans les fronts de sub-mesoéchelle de la gyre subtropicale du Pacifique Nord, \textcite{liu_2016} propose une méthode inspirée de l'algorithme \as{cc}.
-Les auteur·ices définissent un indice d'hétérogénéité (\as{hi}) du champ de SST.
+Elles définissent un indice d'hétérogénéité (\as{hi}) du champ de SST.
 La valeur de cette indice est calculé en chaque pixel à partir de la distribution en température dans une fenêtre (glissante donc) autour de ce pixel.
 La valeur de l'indice est la somme (pondérée par des coefficient de normalisation) de la variance de la distribution, de sa bimodalité (calculée différement que dans les méthodes ci"-dessus), et de son asymétrie (afin de cibler les plus petits fronts).
 

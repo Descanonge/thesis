@@ -186,7 +186,7 @@
 % This might be doable a bit more nicely in latex3 (see t3token \peek_ functions)
 \g@addto@macro\UrlSpecials{\do\/{\Urlspaceyslash}}
 \newmuskip\Urlslashmuskip
-\Urlslashmuskip=1.5mu plus1.5mu minus1.5mu
+\Urlslashmuskip=1.mu plus1.mu minus1.mu
 \def\Urlspaceyslash{\futurelet\Urlssnext\finishUrlspaceyslash}
 \def\finishUrlspaceyslash{%
   \mathchar8239
@@ -401,11 +401,18 @@
 \newcommand*\norme[2][]{% [norme subscript, default none]{argument}
   \left\lVert#2\right\rVert_{#1}}
 
+\newcommand*\binary[1]{\textlf{#1}}
+
 % Table column types
 % automatic math env
 \newcolumntype{C}{>{$}c<{$}}
 \newcolumntype{R}{>{$}R<{$}}
 \newcolumntype{L}{>{$}L<{$}}
+
+% Bracket fill
+\newcommand*{\upbracketfill}{%
+\vrule height 4pt depth 0pt\hrulefill%
+\vrule height 4pt depth 0pt}
 
 % Format a row
 % at the column following $, the style is reset

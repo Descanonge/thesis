@@ -99,7 +99,7 @@ toc, section=section, symbols,
 \glsaddkey{doi}{none}{\glsentrydoi}{\Glsentrydoi}%
 {\glsdoiorg}{\Glsdoiorg}{\GLSdoiorg}
 
-\newcommand\newlink[4][]{% [options]{label}{name}{url}
+\NewDocumentCommand \newlink { O{} m m v } {
   \newglossaryentry{#2}{type=link, category=link,
     name={#3}, url={#4}, #1}}
 \newcommand\newdoi[4][]{% [options]{label}{name}{doi}

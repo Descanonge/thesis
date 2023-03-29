@@ -3,14 +3,64 @@
 \chapter{Variables drapeaux sur masque binaire}
 \label{ax:cf-flags}
 
-pourquoi : flags des variables chl
-obtenir les nuages et aussi les pixels 'land'.
+Dans cette section, je décris succinctement le principe de stockage des variables drapeau (\engquote{flags}), tel que défini par les conventions \as{cf}\footnote{%
+  \raggedleft%
+  section 3.5: {\scriptsize\glsurl{cf-flags}}
+}.
+Ayant besoin d'extraire des flags des données de Chlorophylle, et voyant qu'aucune implémentation n'était disponible pour \citesoft{xarray}, j'ai écrit une simple implémentation.
+Je l'ai ensuite adaptée et soumise au projet \citesoft{cf-xarray} pour qu'elle puisse être réutilisée.
 
-comment: expliquer les conventions cf (lien docu).
-surtout une question de compression. une variable booléenne c'est en réalité 8bits.
-première méthode: valeurs indépendantes. easy simple comparaison.
-deuxième méthode: masque binaire. ajouter un bitwise xor avant la comparaison.
-troisième: mélange des deux yaaas. enfait idem que 2ème. trop easy.
+Il est souvent utile voire nécessaire d'accompagner certaines quantités par des informations supplémentaires: pour des données satellites par exemple, la présence de nuages sur le pixel, la qualité de la mesure, ou encore le capteur qui a réalisé la mesure (pour un produit composite).
+Ces informations sont différentes pour chaque point de mesure, et doivent donc être stockées comme des variables (\as{ie} des tableaux multi"-dimensionnels).
+Par chance, ce type de variables \guil*{drapeaux} peut souvent être représenté de manière très simple: la présence de nuage peut être indiqué par un booléen (un seul bit), la qualité de la mesure est typiquement un petit entier (2 ou 3 bits), etc.
+
+Cependant, les outils informatiques ne permettent que rarement de manipuler des variables aussi petites. En raison de l'architecture des processeurs, la plus petite unité est aujourd'hui l'octet.
+Chaque variable drapeau est donc traitée, au minimum, comme un octet.
+On gâche alors de l'espace de stockage puisque seuls quelques bits sont utilisés sur les huits.
+
+Plutôt que d'utiliser plusieurs variables drapeaux, l'idée de cette technique est de réunir tous ces drapeaux sur une seule et même variable, en leur associant certains bits de cette variable.
+Prenons un exemple, nous voulons stocker les informations suivantes: la qualité de la mesure (un entier entre 1 et 3), l'algorithme utilisé pour calculer la Chlorophylle (\abbrv{OC4}, \abbrv{OC5}, ou CI), la présence de nuages (oui ou non), et la présence de glace de mer (oui ou non).
+On notera que ces informations sont indépendantes entre elles.
+
+On peut stocker chacune de ces informations de la manière suivante:
+\begin{itemize}
+  \item qualité, sur 2 bits entre \binary{01}~(bonne) et \binary{11}~(mauvaise),
+  \item algorithme, sur 2 bits: \binary{01}=\abbrv{OC4}, \binary{10}=\abbrv{OC5}, \binary{11}=\abbrv{CI},
+  \item nuage, sur 1 bit: \binary{0}=clair, \binary{1}=nuageux,
+  \item glace, sur 1 bit: \binary{0}=libre, \binary{1}=glace.
+\end{itemize}
+
+On les combine ensuite en une seule variable stockée sur 8~bits (le minimum nécessaire), en commençant par le bit le moins signifiant (par la droite ici): glace, nuage, algorithme, qualité.
+La représentation binaire de cette variable est donc:
+\begin{equation}
+  \overline{\textlf{00} \ \overline{qq} \ \overline{aa} \ \overline{n} \ \overline{g}},
+\end{equation}
+avec \(\overline{qq}\) les bits codant la qualité, \(\overline{aa}\) codant pour l'algorithme, \(\overline{n}\) les nuages, et \(\overline{g}\) la glace.
+Par exemple un pixel dont la valeur serait~44, dont la représentation binaire est \(\overline{\texttlf{00101100}}\), indique que la mesure est de qualité moyenne (2), effectuée avec l'algorithme CI, et ne comporte ni nuages, ni glace.
+Comparé à une approche naïve avec 4~variables séparées, nous avons gagné un facteur~4 en stockage.
+
+comment extraire ?
+
+Pour décrire ce stockage en suivant les conventions \as{cf}, il nous reste à définir les attributs suivants pour cette variable:
+
+\begin{center}
+  {%
+    \newcommand*\smolb{{\footnotesize b}}%
+    \lfstyle%
+    \begin{tabular}{>{\ttfamily\small}l *{10}{r}} \toprule
+      flag\_masks  & 1\smolb & 2\smolb \Repeat{3}{& 12\smolb} \Repeat{3}{& 48\smolb} \\
+      flag\_values & 1\smolb & 2\smolb & 4\smolb & 8\smolb & 12\smolb
+                             & 16\smolb & 32\smolb & 48\smolb \\
+      flag\_meanings & \multirow{1}*{\rotatebox[origin=r]{65}{nuage}}
+                             & \multirow{1}*{\rotatebox[origin=r]{65}{glace}}
+                                                  & \abbrv{OC4} & \abbrv{OC5} & CI
+                             & 1 & 2 & 3 \\
+                   & & & \multicolumn{3}{c}{\upbracketfill} & \multicolumn{3}{c}{\upbracketfill} \\
+                   & & & \multicolumn{3}{c}{algorithme} & \multicolumn{3}{c}{qualité} \\
+      \bottomrule
+    \end{tabular}
+  }%
+\end{center}
 
 implémentation.
 
