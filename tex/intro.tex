@@ -182,7 +182,7 @@ Cette hypothèse ne tient plus dans certains cas (classifiés comme les \engquot
 On gardera néanmoins en tête ces hypothèses, et le fait que ces relations empiriques (validées sur des données passées) pourraient perdre en validité face à des écosystèmes modifiés par le changement climatique (\cite{dierssen_2010}).
 Toutefois, ces modèles empiriques sont de manière générale plus performant que les modèles semi"-analytiques (\cite{brewin_2015a}), et sont donc employés pour les données opérationelles.
 
-%%% section plus technique
+\begin{technique}
 Nous décrivons ici rapidement deux exemples d'algorithmes empiriques, utilisés de manière opérationelle par le groupe NASA \as{obpg}.
 L'algorithme \abbrv{OC3/4} se base sur un polynôme d'ordre~4 du ratio des bandes verte~(\(V\)) et bleue~(\(B\)):
 \begin{equation} \label{eq:ocx}
@@ -219,7 +219,7 @@ avec ici aussi des coefficients empiriques \(a_i'\).
 L'implémentation actuelle du groupe NASA \as{obpg} utilise \abbrv{OC3/4} pour les eaux où la \as{chl} est supérieure à~\qty{0.35}{\mgm}, et CI où elle est inférieure à~\qty{0.25}{\mgm}; entre ces deux valeurs, un mélange des résultats des deux algorithmes est utilisé assurant ainsi la continuité des valeurs de Chlorophylle (\cite{oreilly_2019}, \url{https://oceancolor.gsfc.nasa.gov/atbd/chlor_a/}).
 
 À noter que de nombreux autres algorithmes ont été développés dans les deux dernières décennies, on pourra citer par exemple l'ajout d'une bande violette pour \abbrv{OC5/6} (\cite{oreilly_2019}), ou l'utilisation de 5~bandes et des tables de références afin d'améliorer l'estimation de \as{chl} en zone côtière (\cite{gohin_2002}).
-%%% fin
+\end{technique}
 
 Comme nous venons de le voir, la dérivation de la concentration de \as{chl} est un processus compliqué, comprenant de multiple sources d'incertitudes dans les valeurs absolues inférées.
 Ce processus comporte un certain nombre de limitations.
@@ -229,15 +229,15 @@ La faible profondeur en régime côtier apporte également une difficulté, puis
 Plus généralement, quelque soit la zone sondée, la profondeur jusqu'à laquelle pénètre la lumière est un point critique.
 En effet, la réflectance mesurée ne peut comporter des informations que sur cette couche éclairée.
 De plus, les modèles empiriques sont ajustés par des mesures in"-situ réalisées sur les premiers mètres.
-Les données satellite manquent ainsi une biomasse plus en profondeur, potentiellement importante.
+Les données satellite manquent ainsi une biomasse plus en profondeur, potentiellement importante [ref].
+Par ailleurs, nous nous sommes penchés sur la détection de la \al{chl}. Bien que ce soit le pigment majoritaire, ce n'est pas nécessairement un proxy parfait pour la biomasse présente dans la colonne d'eau [ref].
+Et enfin, la couverture nuageuse bloque cette télédétection.
 
-\begin{note}
-  c'est une variable dérivée.
-  incertitude sur la réflectance déjà!
-  objectif de \pct{30}, qui est vérifié, RMSE de 0.26.
-\end{note}
-
-Obs de la couleur présente des problèmes. Le lien avec le phytoplancton est indirect et imparfait (utilisation de la Chl-a comme proxy de biomasse). Limitation importante des observations par la couverture nuageuse.
+% \begin{note}
+%   c'est une variable dérivée.
+%   incertitude sur la réflectance déjà!
+%   objectif de \pct{30}, qui est vérifié, RMSE de 0.26.
+% \end{note}
 
 C'est pour cela que les observations in-situ toujours très utiles (pour combler les trous, ou compléter les obs sat). Vision de toute la colonne d'eau. Associé à une obs de la densité (temp + salinité qui n'est pas dispo en sat. à petite échelle).
 Accès à la composition du phytoplancton (et zoo) grâce à différents outils (cytomètre, zooscan, HPLC, -omiques).
@@ -353,7 +353,7 @@ Ces étapes de dérivation introduisent cependant du bruit qui impacte négative
 On notera d'ailleurs que la détection des fronts de fine échelle, qui nous intéresse ici, est plus sensible au bruit du fait de gradients plus faibles.
 Un filtrage préalable de l'image permet d'en limiter l'impact.
 C'est le cas de la méthode de détection de contours \emph{Canny} (\cite{canny_1986}), qui applique un filtre gaussien avant de calculer le gradient, et par ailleurs ajoute des traitements supplémentaire aux contours détectés.
-Initialement développée pour de la détection de contours en traitement d'image \encadra{domaine où elle demeure un standard, et où ses implémentations sont amplement disponibles}, elle a également été largement appliquée en océanographie à la détection de fronts en température, entre autres.
+Initialement développée pour de la détection de contours en traitement d'image \encadra{domaine où elle demeure un standard, et où ses implémentations sont amplement disponibles} elle a également été largement appliquée en océanographie à la détection de fronts en température, entre autres.
 % (cite{93-101}).
 
 Similairement, l'algorithme de Belkin--O'Reilly~(\cite{belkin_2009}) applique un filtre itératif contextuel capable de réduire le niveau de bruit de l'image d'entrée tout en préservant les forts gradients.
@@ -361,7 +361,9 @@ Un simple opérateur Sobel peut ensuite être utilisé.
 Il a été développé afin de repérer les fronts aussi bien à partir de la SST que de la Chorophylle.
 
 Il est également possible d'éviter l'utilisation du gradient, comme le fait la méthode de \al{cc}~(\as{cc}, \cite{cayula_1992}).
-L'algorithme que nous utiliserons par la suite, décrit dans le \nref[chapitre]{chp:methodes}~(\nref{sec:HI}), en est inspiré. Nous le décrivons donc succinctement dans la suite.
+
+\begin{technique}
+L'algorithme que nous utiliserons par la suite, décrit dans le \nref[chapitre]{chp:methodes} (\nref{sec:HI}), en est inspiré. Nous le décrivons donc succinctement ici.
 
 Le principe de l'algorithme \as{cc} est le suivant: Un front sépare deux masses d'eau de température différentes; il est raisonnable que la température des pixels à proximité du front soit distribuées de manière bimodale, chaque mode se situant autour de la température d'une des masses d'eau.
 Ainsi, afin de ne considérer les pixels que proche des fronts, la méthode utilise une fenêtre glissante dans laquelle on s'intéresse à l'histogramme des valeurs de SST.
@@ -373,11 +375,13 @@ Pour cette séparation optimale, un critère évaluant la séparation des deux m
 Une étape supplémentaire consiste à vérifier que la cohérence spatiale de chacune des masses d'eau dans la fenêtre est suffisante.
 Cela permet d'éviter les faux positifs, notamment sur des images bruitée ou contaminée par des nuages.
 
-\begin{note}
+% \begin{note}
   On notera que \textcite{cayula_1992} choisissent les seuils de cohérence spatiale de manière à ce que le cas le plus cohérent soit un front en ligne droite.
   Cela signifie qu'un front sinueux se vera attribuer une cohérence spatiale moindre, et pourrait être disqualifié.
   En fonction des structures à detecter, il sera nécessaire d'adapter les divers seuils de la méthode, éventuellement au détriment la spécificité de la méthode (éviter les faux positifs).
-\end{note}
+% \end{note}
+
+\end{technique}
 
 La méthode \as{cc} a largement été utilisée pour détecter des fronts de SST (voir les nombreux exemples dans la review de \cite{belkin_2021}), notamment à l'échelle globale (\cite{belkin_2009a, belkin_2007}).
 Elle a également été appliquée avec succès sur des données de Chlorophylle (\cite{stegmann_2004, kahru_2012, bontempi_2004}).

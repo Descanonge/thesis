@@ -136,8 +136,20 @@
   frame hidden, interior hidden,
   top=0pt, bottom=0pt, right=0pt,
   borderline west={2pt}{1em}{black},
-  before upper={\textbf{\textit{Note.}}\hspace{1em}},
+  title={Note}, coltitle={black}, fonttitle={\bfseries\itshape},
+  detach title, attach title to upper, after title={.\hspace{1em}}
   % title after break={\textbf{\textit{Note\ldots}}}, coltitle=black
+  #1
+}
+
+\newtcolorbox{technique}[1][]{
+  enhanced, breakable,
+  interior hidden, frame hidden,
+  title={Section technique}, fonttitle={\bfseries\itshape},
+  coltitle={black}, bottomtitle=-1ex,
+  enlarge top initially by=1ex, left=0pt, right=0pt,
+  borderline north={4pt}{-4pt}{white!80!black},
+  borderline south={4pt}{-1ex}{white!80!black},
   #1
 }
 
@@ -277,6 +289,8 @@
   \setlength{\footmarksep}{-\footmarkwidth}%
   \setlength{\footparindent}{\parindentFFN}%
   \makefootmark #1}%
+% Footnotes in minipage (default is italic, not suported by xcharter textsu)
+\renewcommand*\thempfootnote{\alph{mpfootnote}}
 
 % Equation number in lining style
 \renewcommand*\theequation{%
