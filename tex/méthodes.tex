@@ -512,6 +512,8 @@ Les histogrammes présentent également l'avantage de pouvoir facilement être c
 En effet, tous les histogrammes calculés sont stockés non"-normalisés, c'est-à-dire en nombre de pixel par intervalle. Ainsi plusieurs histogrammes peuvent être sommés entre eux avant d'être normalisés pour en extraire une valeur, comme la valeur médiane de la distribution résultante par exemple.
 Ce procédé est notamment utilisé pour calculer des diagnostics sur des périodes de temps autres que journalières, sans avoir besoin de refaire un calcul coûteux impliquant les pixels.
 
+\review{TODO: utilisation de flags et d'histogrammes 2D pour le calcul.}
+
 Dans la suite on détaille le processus de normalisation des histogrammes.
 On considère un histogramme qui compte~\(h_i\) valeurs d'une variable quelconque~\(x\), pour le i\ieme{}~intervalle~\(\left[x_i; x_{i+1} \right]\).
 

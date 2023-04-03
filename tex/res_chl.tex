@@ -67,9 +67,10 @@ Les résultats portant sur les valeurs de SST dans les fronts, présentés \nref
 \label{sec:sensibilite-parametres}
 
 L'implémentation de la détection des fronts avec l'\af{hi} nécessite de faire le choix d'un certain nombre de paramètres. Nous testons ici la variabilité des résultats finaux (\ab{ie} l'impact des fronts sur la \as{chl}) vis-à-vis de deux paramètres.
-D'une part, nous faisons varier la taille de la fenêtre glissante utilisée pour calculer les composantes du HI (\nref{sec:calcul-composantes}), nous testons trois tailles: \qty{20}{\km},~\qty{30}{\km} et~\qty{40}{\km}. La taille retenue est de~\qty{30}{\km}.
 
-Les coefficients de normalisations sont à recalculer pour chacune des tailles (tel que décrit figure~\ref{sec:coef-normalisation}) et sont listés dans la \nref[table]{tab:coefs}.
+D'une part, nous faisons varier la taille de la fenêtre glissante utilisée pour calculer les composantes du HI (\nref{sec:calcul-composantes}), nous testons trois tailles: \qty{20}{\km},~\qty{30}{\km} et~\qty{40}{\km}. La taille retenue est de~\qty{30}{\km}.
+Les coefficients de normalisations sont à recalculer pour chacune des tailles (comme décrit \nref{sec:coef-normalisation}, \nref{chp:methodes}), et sont listés dans la \nref[table]{tab:coefs}.
+
 D'autre part nous testons l'influence de ces coefficients. En prenant les composantes calculées avec une fenêtre de~\qty{30}{\km}, tour à tour nous doublons le coefficient d'une des composantes (et donc son poids statistique dans le HI). Le coefficient~\(K^4\) pour le HI doit être recalculé~(\nref{tab:coefs}).
 
 % chktex-file 2

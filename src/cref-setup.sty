@@ -11,9 +11,9 @@
 
 % Cross-ref while managing manually the citation name
 \ExplSyntaxOn
-\NewDocumentCommand \nref { O{ \namecref{#2} } m } {
+\NewDocumentCommand \nref { O{\namecref{#2}} m } {
   \hyperref [#2] {
-    #1 ~ \ref*{#2}
+    #1 \nobreakspace \ref*{#2}
     \bool_if:nT {\l_chthesis_print_bool && \l_chthesis_url_showpage_bool} {
       \raisebox {0.8ex}
         { \scriptsize\lfstyle |p. \pageref*{#2}| }
