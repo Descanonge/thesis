@@ -97,8 +97,7 @@ La biologie marine, à sa base, repose sur les conversions d'un certain nombre d
 Schématiquement, le phytoplancton converti par photosynthèse le carbone et les nutriments dissouts dans l'eau, en dioxygène et en matière organique (pour sa croissance).
 À la mort de ces organismes, ce stock de matière organique inerte plonge par gravité, et sera éventuellement reminéralisé plus en profondeur par d'autres organismes.
 Le carbone et autres nutriments libérés pourront alors être remontés à la surface et réutilisés, complétant la pompe biologique marine.
-Le phytoplancton joue un rôle clef dans
-
+\review{euh ?}
 
 \subsubsection{Définitions générale}
 \label{sec:phyto-def-gen}
@@ -106,29 +105,36 @@ Le phytoplancton joue un rôle clef dans
 Le phytoplancton étant au cœur de la problématique qui nous intéresse ici, je m'arrête ici brièvement sur ses caractéristiques.
 Le plancton \guil*{\hbox{πλαγκτόσ}}: il \guil*{divague}.
 C'est l'ensemble des organismes dont la motilité se lui permet guère plus que de se laisser dérivier au gré des courants.
-Bien que certains de ces organismes puissent se déplacer de manière significative par leurs propres moyens, concentrons"-nous plutôt sur le sous"-ensemble moins mobile du phytoplancton.
+Bien que certains de ces organismes puissent se déplacer de manière significative par leurs propres moyens (principalement sur la verticale), concentrons"-nous plutôt sur le sous"-ensemble (moins mobile) du phytoplancton.
 Cet ensemble d'organismes est remarquablement divers, totalisant environ \num{20 000}~espèces, dont les tailles varient de la fraction de micromètre à la fraction de millimètre. Cette diversité se retrouve aussi bien dans leurs formes, au grand bonheur des zoologues et photographes, que dans leurs fonctions écosystèmiques.
-Comme leur nom le suggère, les espèces de phytoplancton pratiquent la photosynthèse.
+Comme leur nom le suggère, les organismes phytoplanctoniques pratiquent la photosynthèse.
 Ils transforment le dioxyde de carbone et les nutriments (Nitrate, Phosphate, Silice, Fer,\dots) dissous, en oxygène et en matière organique.
 À l'instar des plantes terrestres, cette opération nécessite de capter de la lumière à l'aide de pigments, qui se trouvent être principalement la \al{chl}.
-Ce sont ces pigments qui affectent la couleur de l'océan comme nous l'avons vu dans le préambule (\nref{fig:oc-illustration}), mais nous reviendrons sur cet aspect plus loin.
+Ce sont ces pigments qui affectent la couleur de l'océan comme nous l'avons vu dans le préambule (\nref{fig:oc-illustration}), et sur lequel nous reviendrons plus loin.
 
 Cette production de matière organique à partir de carbone in"-organique (du CO2 dissous), est dite primaire.
 Le phytoplancton étant prédaté par le zooplancton, cette matière organique remonte éventuellement la chaîne (ou plutôt réseau) trophique: zooplancton, petits prédateurs, grands prédateurs, oiseaux marins, mamifères marins,\dots
 Le phytoplancton occupe donc une place centrale dans l'écosystème marin.
 Il est à la base de la chaîne alimentaire dans les océans, et il est estimé qu'il génère~\pct{50} de la productivité primaire mondiale.
 
-Pour croître: ont besoin de lumière, de nutriments, de certaines conditions environnementales (température, salinité?, acidité). Dans le détail il y a des spécificités selon chaque espèce.
-Sources de mortalité: vieillesse, virus, broutage par le phytoplancton
-Quelques mots sur le phytoplancton Plus gros. Migration diurne. Ici aussi grande variété, préférence de broutage: complexité supplémentaire.
+La croissance du phytoplancton est favorisée, selon les espèces, par des conditions environnementales comme la température, la salinité ou l'acidité (ref).
+Cependant les limitations principales à cette croissances restent la lumière et les nutriments.
+La lumière n'est pas distribuée identiquement dans les océans: l'ensoleillement dépend de la saison, de la latitude, de la présence de glace de mer, et surtout: de la profondeur.
+Elle ne pénètre en effet qu'en surface, dans la \emph{couche euphotique} profonde d'au maximum une centaine de mètres.
+Les nutriments, à l'inverse, sont rapidement consommés par le phytoplancton en surface et sont donc trouvés plus en profondeur, sous la \emph{nutricline}.
+Cette répartition des besoins induit dès lors une grande importance des échanges verticaux entre la surface ensoleillée, et les eaux profondes riches en nutriments.
 
-Les limitations majeures restent la lumière et les nutriments.
-La lumière n'est pas présente partout identiquement: latitude, saisonnalité, et surtout profondeur. Importance de la couche euphotique, en surface.
-Également limité en nutriments dans la quasi-totalité des eaux libres. Les eaux profondes (ou la lumière ne pénètre pas) contiennent des nutriments cependant. On peut définir une nutricline.
+Ces échanges verticaux sont conditionnés par les courants océaniques, à l'échelle des bassins, mais également à des échelles plus fines.
+Cette interaction bio"-physique
 
-Cette dualité des sources de croissance (lumière en surface, nutriments en profondeur) rend les échanges verticaux très importants.
-Or on considère généralement les courants océaniques à l'ordre 1 comme strictement horizontaux.
-Les petites et moyennes échelles ((sub-)mésoéchelles) présentent des moyens de créer des échanges verticaux (comme on le verra plus tard).
+\begin{figure}
+  \centering
+  \insertfig{pompe_biologique.pdf}
+  \captionT{Schéma de la pompe biologique}{%
+    Adapté de \textcite[fig.~1]{levy_2023}.
+  }
+  \label{fig:pompe-bio}
+\end{figure}
 
 \subsubsection{Mesurer le phytoplancton}
 \label{sec:teledetection}
@@ -233,15 +239,24 @@ Les données satellite manquent ainsi une biomasse plus en profondeur, potentiel
 Par ailleurs, nous nous sommes penchés sur la détection de la \al{chl}. Bien que ce soit le pigment majoritaire, ce n'est pas nécessairement un proxy parfait pour la biomasse présente dans la colonne d'eau [ref].
 Et enfin, la couverture nuageuse bloque cette télédétection.
 
-% \begin{note}
-%   c'est une variable dérivée.
-%   incertitude sur la réflectance déjà!
-%   objectif de \pct{30}, qui est vérifié, RMSE de 0.26.
-% \end{note}
+Pour toutes ces raisons, les mesures in"-situ constituent un outil nécessaire et complémentaire à la télédétection, à la fois pour l'observation opérationelle mais aussi pour mieux comprendre les processus en jeu.
+En effet, au-delà de pouvoir accéder directement aux variables que les satellites doivent inférer, parfois à travers des proxys, ces mesures peuvent explorer des dimensions invisibles aux satellites.
 
-C'est pour cela que les observations in-situ toujours très utiles (pour combler les trous, ou compléter les obs sat). Vision de toute la colonne d'eau. Associé à une obs de la densité (temp + salinité qui n'est pas dispo en sat. à petite échelle).
-Accès à la composition du phytoplancton (et zoo) grâce à différents outils (cytomètre, zooscan, HPLC, -omiques).
-Mais aussi limitations. Toutes ces obs sont compliquées à mettre en place. Avoir une vue de toute la colonne d'eau pour tous ces paramètres (physiques, bio phyto + zoo) est compliqué techniquement. Une obs est limitée à une très petite zone spatio-temporelle. Obligé de cibler une zone d'intérêt (supposé).
+D'abord, les mesures in"-situ ont accès à toute la colonne d'eau et non pas seulement la surface optiquement active.
+D'autres part, ces mesures offrent une vue beaucoup plus large et précise de la biodiversité présente, et ce grâce à différentes techniques de mesures.
+cytomètre,
+hplc,
+zooscan,
+omique,
+
+Par ailleurs, les mesures in"-situ offrent l'avantage de fournir une vision précise de la densité des masses d'eaux par mesure de la température et de la salinité.
+Les satellites actuels n'ayant accès à la salinité qu'à relativement basse résolution (\qtyrange{35}{50}{\km} pour \as{smos} \ab{par-ex}), ils ne peuvent estimer les variations de densité aux fines échelles qu'avec la température.
+
+Néanmoins, ces mesures présentent également un certain nombre de limitations, et de difficultés technique de mise en place.
+Sonder à une grande profondeur prend du temps, ce qui se répercute sur la distance d'échantillonage.
+Similairement, la fréquence d'échantillonage peut être dictée par certaines mesures biologiques longues (ref d'ogloli ?).
+Quand bien même, il leur est impossible de couvrir une large zone spatio"-temporelle.
+Il est usuel que les campagnes en mer ciblent une zone d'intérêt en particulier, par exemple un front ou un tourbillon, identifiée pendant la mission par images satellites.
 Heureusement ces dernières années de telles campagnes se multiplient, devant la nécessité d'avoir tous ces paramètres dans des zones précises pour mieux comprendre ce qu'il se passe.
 
 J'ai parlé que des obs mais des modèles numériques sont aussi dispo cependant.
