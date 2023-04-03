@@ -30,19 +30,22 @@ On peut stocker chacune de ces informations de la manière suivante:
   \item glace, sur 1 bit: \binary{0}=libre, \binary{1}=glace.
 \end{itemize}
 
-On les combine ensuite en une seule variable stockée sur 8~bits (le minimum nécessaire), en commençant par le bit le moins signifiant (par la droite ici): glace, nuage, algorithme, qualité.
+On les combine ensuite en une seule variable \(v\) stockée sur 8~bits (le minimum nécessaire), en commençant par le bit le moins signifiant (par la droite ici): glace, nuage, algorithme, qualité.
 La représentation binaire de cette variable est donc:
 \begin{equation}
-  \overline{\textlf{00} \ \overline{qq} \ \overline{aa} \ \overline{n} \ \overline{g}},
+  v = \overline{\textlf{00} \ \overline{qq} \ \overline{aa} \ \overline{n} \ \overline{g}},
 \end{equation}
 avec \(\overline{qq}\) les bits codant la qualité, \(\overline{aa}\) codant pour l'algorithme, \(\overline{n}\) les nuages, et \(\overline{g}\) la glace.
 Par exemple un pixel dont la valeur serait~44, dont la représentation binaire est \(\overline{\texttlf{00101100}}\), indique que la mesure est de qualité moyenne (2), effectuée avec l'algorithme CI, et ne comporte ni nuages, ni glace.
 Comparé à une approche naïve avec 4~variables séparées, nous avons gagné un facteur~4 en stockage.
 
-comment extraire ?
-
-Pour décrire ce stockage en suivant les conventions \as{cf}, il nous reste à définir les attributs suivants pour cette variable:
-
+Cette variable est facile à calculer à partir des valeurs des drapeaux que l'on veut encoder.
+Il suffit d'additionner les drapeaux entre eux, dont on aura décalé les bits vers la gauche un nombre de fois approprié.
+Une fois cette variable créée, les drapeaux individuels sont récupérés simplement en appliquant un masque binaire, ce qui correspond à une opération \guil*{et} bit à bit (\engquote{bitwise AND}, noté \textsf{\&} pour \citesoft{numpy}).
+Par exemple pour récupérer la valeur de qualité d'un pixel on fera l'opération: \(v \& 48 (\overline{00110000}) \).
+La valeur récupérée est encore décalée sur la gauche, ici de 4~bits (\as{ie} multipliée par 8), mais dans convention \as{cf} la signification des valeurs est stockée décalée, on aura donc directement 16: qualité~1, 32: qualité~2, 48: qualité~3.
+La valeur du masque binaire est aussi stockée.
+Ainsi, pour l'exemple ci"-dessus, il nous faudra définir les attributs suivants pour la variable~\(v\):
 \begin{center}
   {%
     \newcommand*\smolb{{\footnotesize b}}%
@@ -62,9 +65,147 @@ Pour décrire ce stockage en suivant les conventions \as{cf}, il nous reste à d
   }%
 \end{center}
 
-implémentation.
+\begin{note}
+  Si tous les drapeaux sont des booléens (et donc encodés sur un seul bit), l'attribut \textsf{flag\_values} peut être omis, à l'inverse si tous les drapeaux sont mutuellement exclusifs (\ab{par-ex} on ne stocke \emph{que} la qualité des pixels) l'attribut \textsf{flag\_masks} peut être omis.
+\end{note}
+\begin{note}
+  Pour les drapeaux autres que booléens, on fait ici commencer les valeurs à~1, comme dans les exemples donnés par la convention \as{cf}. Cela réserve la valeur~0 comme, par exemple, erreur on valeur non"-définie. Ce n'est pas une obligation.
+\end{note}
 
-ce qu'il reste à faire (doc, cache).
+Suit ici l'implémentation de l'extraction des drapeaux pour \citesoft{cf-xarray} plus en détail\footnote{Il s'agit ici d'une version un peu plus claire que celle soumise au projet. Elle est fonctionnellement identique, et sera incorporée plus tard dans le projet, d'autres corrections étant de toute façon requises.}.
+J'ai adapté une fonction déjà présente dans le module qui ne prenait en compte que les drapeaux mutuellement exclusifs.
+\begin{python}
+def create_flag_dict(da) -> Mapping[Hashable, Sequence]:
+    """Return possible flag meanings and associated bitmask/values.
+
+    The mapping values are a tuple containing a bitmask and a value.
+    Either can be None.
+    If only a bitmask: Independent flags.
+    If only a value: Mutually exclusive flags.
+    If both: Mix of independent and mutually exclusive flags.
+    """
+    if not da.cf.is_flag_variable:
+        raise ValueError(
+            "Comparisons are only supported for DataArrays that represent "
+            "CF flag variables .attrs must contain 'flag_meanings' and "
+            "'flag_values' or 'flag_masks'."
+        )
+
+    flag_meanings = da.attrs["flag_meanings"].split(" ")
+    n_flag = len(flag_meanings)
+
+    flag_values = da.attrs.get("flag_values", [None for _ in range(n_flag)])
+    flag_masks = da.attrs.get("flag_masks", [None for _ in range(n_flag)])
+
+    if not (n_flag == len(flag_values) == len(flag_masks)):
+        raise IndexError("Not as many flag meanings as values or masks.")
+
+    return dict(zip(flag_meanings, zip(flag_masks, flag_values)))
+\end{python}
+
+Je défini quelques méthodes supplémentaires à une classe d'\emph{Accessor}, ce qui les rendra accessibles à tous les objets XArray concernées (\as{ie} une variable \py{xarray.DataArray} contenant les drapeaux à extraire):
+\begin{python}
+@xr.register_dataarray_accessor("cf")
+class CFDataArrayAccessor(CFAccessor):
+    ...
+\end{python}
+
+D'abord, je défini une propriété qui servira de point d'accès publique pour les drapeaux:
+\begin{python}
+@property
+def flags(self) -> Dataset:
+    """Dataset containing boolean masks of available flags."""
+    return self._extract_flags()
+\end{python}
+Ainsi, pour une variable \py{da} et en reprenant l'exemple ci"-dessus, on peut accéder par exemple aux pixels nuageux avec \py{da.cf.flags.nuage}, ou ceux obtenus avec l'algorithme CI \py{da.cf.flags.CI}.
+Il s'agit d'un simple \eng{wrapper} autour d'une fonction plus compliquée:
+\begin{pythonFirst}
+def _extract_flags(
+        self, flags: Sequence[str] | None = None
+) -> DataArray | Dataset:
+    """Return dataset of boolean mask(s) corresponding to `flags`.
+
+    Parameters
+    ----------
+    flags: Sequence[str]
+        Flags to extract. If empty (string or list),
+        return all flags in `flag_meanings`.
+    """
+    flag_dict = create_flag_dict(self._obj)
+\end{pythonFirst}
+On récupère un dictionnaire qui contient pour chacune des signification de drapeau, la valeur associée et la valeur du masque binaire, ce qui correspond en fait à une colonne du tableau plus haut.
+
+On ne garde que les drapeaux qui sont à extraire (par défaut, tous):
+\begin{pythonMiddle}[]
+    if flags is None or len(flags) == 0:
+        flags = flag_dict.keys()
+    else:
+        for f in flags:
+            if f not in flag_dict:
+                raise ValueError(
+                    f"Flag meaning {f!r} is not "
+                    f"in known meanings {list(flag_dict.keys())!r}"
+                )
+        flag_dict = {f: flag_dict[f] for f in flags}
+\end{pythonMiddle}
+
+On vérifie si l'on est dans un cas simplifié. Si tous les drapeaux sont mutuellement exclusifs, pas besoin d'appliquer de masque binaire; si tous les drapeaux sont indépendants, pas besoin de faire une comparaison après l'application du masque.
+\begin{pythonMiddle}[]
+    all_mutually_excl = False
+    all_indep = False
+    for flag, (mask, value) in flag_dict.items():
+        if mask is None:
+            all_mutually_excl = True
+            break
+        if value is None:
+            all_indep = True
+            break
+\end{pythonMiddle}
+
+Si tous sont mutuellement exclusifs, il suffit d'appliquer une comparaison:
+\begin{pythonMiddle}[]
+    out = {}  # Output arrays
+
+    if all_mutually_excl:
+        for f, (_, value) in flag_dict.items():
+            out[f] = self._obj == value
+\end{pythonMiddle}
+
+Sinon, on doit appliquer un masque binaire. On le fait en une seule opération pour tous les drapeaux.
+Ensuite, on converti en booléen soit par comparaison avec la valeur appropriée soit par simple conversion:
+\begin{pythonMiddle}[]
+    else:
+        # We cast both masks and flag variable as integers to make the
+        # bitwise comparison. We could probably restrict the integer size
+        # but it's difficult to make it safely for mixed type flags.
+        masks = [m for m, _ in flag_dict.values()]
+        values = [v for _, v in flag_dict.values()]
+        bit_mask = DataArray(masks, dims=["_mask"]).astype("i")
+        x = self._obj.astype("i")
+        bit_comp = x & bit_mask  # Bitwise AND
+
+        for i, (flag, value) in enumerate(zip(flags, values)):
+            b = bit_comp.isel(_mask=i)
+            if all_indep:
+                out[f] = b.astype(bool)
+            else:  # ie value should not be None
+                out[f] = b == value
+\end{pythonMiddle}
+
+Il ne reste plus qu'à retourner l'ensemble des drapeaux:
+\begin{pythonLast}[]
+    return Dataset(out)
+\end{pythonLast}
+
+Cette implémentation, bien que fonctionnelle (une série de tests est définie), laisse encore de la place à des améliorations.
+Elle redéfinit un dataset à chaque appel, sans cache. Le nombre d'opération est relativement faible, mais il pourrait être souhaitable que ces dernières ne soient néanmoins appelées qu'une seule fois.
+À l'inverse, l'utilisateur pourrait vouloir contrôler les objets en mémoire, notamment au vu de leur importance dans des calculs de grands volumes de données avec \citesoft{dask}. Une fonction de type \engquote{getter} serait appropriée.
+
+Par ailleurs, on ne récupère que des signications individuelles. Il pourrait être intéressant de pouvoir extraire un ensemble de drapeaux mutuellement exclusifs.
+Par exemple, on voudrait pouvoir récupérer toutes les valeurs de qualité, ou d'algorithme utilisé (plutôt que seulement les pixels correspondant à \emph{un} algorithme, ou \emph{une} valeur de qualité).
+
+Enfin, la documentation de cette nouvelle fonctionalité n'a pas encore été rédigée.
+
 
 \chapter{Bilan carbone de la thèse}
 \label{ax:bilan-carbone}

@@ -60,13 +60,13 @@ Le travail effectué durant ma thèse et présenté dans ce manuscrit a donné l
   \renewcommand*\labelitemi{\adfrightarrowhead}
   \item un premier article présentant la méthode développée, et certains des résultats obtenus.
         Cet article est intégré à la structure de ce manuscrit, et inclus dans sa totalité au \nref[chapitre]{chp:res-chl}.
-        \textnote{\fullcite{haeck_2023}}
+        \textnote[title={}]{\fullcite{haeck_2023}}
 
   \item un second article décrivant l'étude effectuée par I.\ Mangolte dans la région du courant de Californie, et qui exploite en partie la méthode présentée dans cette thèse. Cet article est discuté dans le \hyperref[sec:CCE]{chapitre~\ref{chp:perspectives}} et resumé en \nref[annexe]{ax:article-cce}.
-        \textnote{\review{\articleCceTitle}}
+        \textnote[title={}]{\fullcite{mangolte_2023}}
 
   \item et un article de \eng{review} dans lequel s’inscrit ce travail, discuté dans le \hyperref[sec:review]{chapitre~\ref{chp:perspectives}} et résumé en \nref[annexe]{ax:article-review}.
-        \textnote{\review{\articleReviewTitle}}
+        \textnote[title={}]{\review{\articleReviewTitle}}
 
 \end{itemize}
 \endgroup
@@ -88,12 +88,12 @@ J'ai ainsi durant ma thèse publié publiquement les outils suivant:
   \item[FileFinder]
         est un paquet Python qui permet (entre autres) de trouver des fichiers grâce à la structure de leur nom de fichier, ce qui est particulièrement utile par exemple pour des fichiers dépendant de la date, ou de la valeur d'un paramètre, ou des deux.
         L'entièreté des fichiers de données utilisés pour cette thèse sont gérées grâce à cet outil.
-        \textnote{\citesoftfullPerso{filefinder}}
+        \textnote[title={}]{\citesoftfullPerso{filefinder}}
 
   \item[tol-colors]
         est un paquet Python qui donne accès à des assortiments de couleurs adaptés aux personnes atteintes de daltonisme.
         Les jeux de couleurs étaient pré-existants et ont été développés par \glsname{paultol}\footnote{voir~\glsurl{paultol}}; je les ai seulement rendus plus facilement accessibles via PyPI.
-        \textnote{\citesoftfullPerso{tol-colors}}
+        \textnote[title={}]{\citesoftfullPerso{tol-colors}}
 
   \item[Xarray-histogram]
         est un paquet Python\footnote{%
@@ -103,17 +103,18 @@ J'ai ainsi durant ma thèse publié publiquement les outils suivant:
         } qui permet de calculer des histogrammes de données gérées par \citesoft{xarray}.
         C'est une opération centrale dans les calculs effectués pour cette thèse (\nref{sec:extraction-hist}).
         Des solutions existent déjà, mais présentent certains désavantages (notamment de performances et de base de code complexe) que j'ai cherché à palier.
-        \textnote{\citesoftfullPerso{xarray-histogram}}
+        \textnote[title={}]{\citesoftfullPerso{xarray-histogram}}
 
   \item[dateloop]
         est une simple commande bash permettant de générer des ensembles de dates.
         Elle a surtout été utilisée au début de ce projet afin de faciliter la gestion et le téléchargement des fichiers de données par des scripts shell. Ces scripts ont progressivement été remplacés par des équivalents Python.
-        \textnote{\citesoftfullPerso{dateloop}}
+        \textnote[title={}]{\citesoftfullPerso{dateloop}}
 
 \end{description}
 
 De manière plus secondaire mais que je tiens néanmoins à noter, j'ai participé au projet \citesoft{cf-xarray} (visant à rendre accessible à \citesoft{xarray} les conventions de métadonnées \as{cf}) en y implémentant l'extraction de variables drapeaux sur masque binaire (\href{https://github.com/xarray-contrib/cf-xarray/pull/354}{\eng{pull request}~\textlf{\#354}}).
 Le principe est détaillé en \nref[annexe]{ax:cf-flags}.
+Cette technique sera d'ailleurs ré"-utilisée pour extraire certains résultats (\nref{sec:extraction-hist}).
 
 \bigskip
 

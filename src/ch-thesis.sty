@@ -62,6 +62,7 @@
 % \RequirePackage[defaultsans]{opensans}
 % More weights are available but I don't need it rn
 \setsansfont{NotoSans}[
+  NFSSFamily=NotoSans,
   Scale=MatchLowercase,
   Extension=.ttf,
   UprightFont={*-Regular},
@@ -70,15 +71,26 @@
   BoldItalicFont={*-BoldItalic}
 ]
 \setmonofont{NotoSansMono}[
+  NFSSFamily=NotoSansMono,
   Scale=MatchLowercase,
   Extension=.ttf,
   UprightFont={*-Regular},
-  BoldFont={*-Bold}
+  BoldFont={*-Bold},
+  Renderer=Basic, % microtype needs it to disable ligatures
 ]
 % \setsansfont{Roboto-Regular}[Scale=MatchLowercase, ScaleAgain=0.96]
 % \setmonofont{RobotoMono-Regular}[Scale=MatchLowercase, ScaleAgain=0.96]
 
+% Define mono font italic version (used by minted)
+% to avoid a warning otherwise
+% Must load font file beforehand
+{\ttfamily}
+\DeclareFontShape{\encodingdefault}{\ttdefault}{m}{it}{<->ssub*\ttdefault/m/n}{}
+
 \RequirePackage[babel]{microtype}
+% this can be very ugly otherwise
+\DisableLigatures[-]{family=tt*}
+
 % This removes warnings in logs, but
 % I have no idea what I'm doing
 \SetProtrusion{
@@ -91,7 +103,6 @@
 } {}
 
 %%% Localization
-\RequirePackage{csquotes}
 \frenchsetup{
   ItemLabels=\textendash,
   ThinColonSpace
@@ -124,22 +135,36 @@
   {\color{red}#1}}
 
 
+%%% Listings
+\RequirePackage[
+final,
+outputdir=texbuild,
+cachedir=minted]{minted}
+\usemintedstyle{default}
+\newmintinline[py]{python}{fontsize=\normalsize, fontfamily=NotoSans}
+
 %%% Framed environments
 \RequirePackage{tcolorbox}
-\tcbuselibrary{skins, breakable}
+\tcbuselibrary{skins, breakable, minted}
+
+\tcbset{
+  note/.style={
+    enhanced, skin=enhancedmiddle,
+    frame hidden, interior hidden,
+    top=0pt, bottom=0pt, right=0pt,
+    borderline west={2pt}{1em}{black},
+    title={Note}, coltitle={black}, fonttitle={\bfseries\itshape},
+    detach title, attach title to upper, after title={.\hspace{1em}}
+  }
+}
+
 \newcounter{note}
-\newtcolorbox[
-  use counter={note},
-  number format={}
-]{note}[1][]{
-  enhanced, skin=enhancedmiddle,
-  frame hidden, interior hidden,
-  top=0pt, bottom=0pt, right=0pt,
-  borderline west={2pt}{1em}{black},
-  title={Note}, coltitle={black}, fonttitle={\bfseries\itshape},
-  detach title, attach title to upper, after title={.\hspace{1em}}
-  % title after break={\textbf{\textit{Note\ldots}}}, coltitle=black
-  #1
+\newtcolorbox[use counter={note}, number format={}]
+{note}[1][]{
+  note, #1
+}
+\DeclareDocumentCommand\textnote{ O{} +m }{
+  \begin{note} [#1] #2 \end{note}
 }
 
 \newtcolorbox{technique}[1][]{
@@ -152,6 +177,48 @@
   borderline south={4pt}{-1ex}{white!80!black},
   #1
 }
+
+\tcbset{
+  python/.style={
+    enhanced, breakable, listing only,
+    frame hidden, interior hidden,
+    left=1mm, right=1mm,
+    listing engine=minted, minted language=python,
+    minted options={tabsize=2, fontsize=\scriptsize, breaklines, autogobble=false, gobble=0},
+  }
+}
+
+\newtcblisting{python}[1][]{
+  python,
+  borderline={0.5pt}{0pt}{black}, sharp corners,
+  #1
+}
+\newtcblisting{pythonFirst}[1][]{
+  python,
+  borderline north={0.5pt}{0pt}{black},
+  borderline west={0.5pt}{0pt}{black},
+  borderline east={0.5pt}{0pt}{black},
+  borderline south={0.5pt}{0pt}{black,dashed},
+  #1
+}
+\newtcblisting{pythonMiddle}[1][]{
+  python,
+  borderline north={0.5pt}{0pt}{black,dashed},
+  borderline west={0.5pt}{0pt}{black},
+  borderline east={0.5pt}{0pt}{black},
+  borderline south={0.5pt}{0pt}{black,dashed},
+  #1
+}
+\newtcblisting{pythonLast}[1][]{
+  python,
+  borderline north={0.5pt}{0pt}{black,dashed},
+  borderline west={0.5pt}{0pt}{black},
+  borderline east={0.5pt}{0pt}{black},
+  borderline south={0.5pt}{0pt}{black},
+  #1
+}
+
+\RequirePackage{csquotes}
 
 %%% Shorthands
 % Watch at, this messes lua interpretation
@@ -512,13 +579,6 @@
   \addvspace{#3}
   \@afterheading
   \IfBooleanTF{#1}{\@afterindenttrue}{\@afterindentfalse}
-}
-
-% Front matter citations
-\NewDocumentCommand \textnote { O{before~upper={}} +m } {
-  \begin{note} [#1]
-    #2
-  \end{note}
 }
 
 % Command for repeating stuff
