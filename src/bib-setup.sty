@@ -3,8 +3,8 @@
 
 \RequirePackage[style=authoryear-comp]{biblatex}
 
-\addbibresource{references/software.bib}
 \addbibresource{references/zotero_export.bib}
+\addbibresource{references/software.bib}
 \addbibresource{references/custom.bib}
 \ExecuteBibliographyOptions{
   abbreviate = true,
@@ -209,7 +209,8 @@
     \DeclareNameAlias{sortname}{default}%
     \c@maxnames\blx@maxbibnames\relax%
     \c@minnames\blx@minbibnames\relax%
-  }
+    \renewcommand*\finalnamedelim{,\space}%
+  }%
   {\thefield{entrytype}}%
 }
 {\multicitedelim}
