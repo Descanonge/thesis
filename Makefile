@@ -1,7 +1,7 @@
 
 PROJECT := thesis
 
-BUILD_DIR := texbuild
+BUILD_DIR := build
 RES := resources
 REF := references
 
@@ -19,7 +19,7 @@ INCLUDE_DEF := tex/front_page, tex/front_matter, tex/annexes_autres
 export TEXINPUTS := .:src:
 export LUAINPUTS := .:src:
 
-.PHONY: all clean $(PROJECT) $(SUB_NAMES) html checkbib
+.PHONY: all clean $(PROJECT) $(SUB_NAMES) html checkcites
 
 all: $(PROJECT)
 

@@ -1,6 +1,6 @@
 
-$success_cmd = 'src/parse_log.sh texbuild/%R.log';
-$failure_cmd = 'src/parse_log.sh texbuild/%R.log';
+$success_cmd = 'src/parse_log.sh build/%R.log';
+$failure_cmd = 'src/parse_log.sh build/%R.log';
 
 add_cus_dep('glo', 'gls', 0, 'run_makeglossaries');
 add_cus_dep('acn', 'acr', 0, 'run_makeglossaries');

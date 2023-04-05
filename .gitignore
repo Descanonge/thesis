@@ -1,8 +1,6 @@
 
-texbuild/
+build/
 *.fls
 .auctex-auto
 
 resources
-references/tmp.bib
-references/processed.bib
