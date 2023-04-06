@@ -127,8 +127,8 @@
 % Utiliser * si la phrase se termine par un tiret (il n'est alors pas inséré)
 \NewDocumentCommand \encadra { s +m } {%
   \IfBooleanTF{#1}%
-  {\ --~#2}%
-  {\ --~#2~--}}
+  {--~#2}%
+  {--~#2~--}}
 
 % Notes pour relecture
 \NewDocumentCommand \review { +m }{%
@@ -221,12 +221,14 @@ cachedir=minted]{minted}
 \RequirePackage{csquotes}
 
 %%% Shorthands
-% Watch at, this messes lua interpretation
+% Watch out, this can mess lua interpretation
 \useshorthands*{"}
 % Hard hyphen, no breaks (but word after is breakable)
 \defineshorthand{"~}{\babelhyphen{nobreak}}
 % Hard hyphen, breakable (word after also breakable)
-\defineshorthand{"-}{\babelhyphen{hard}}
+% \defineshorthand{"-}{\babelhyphen{hard}}
+% Hard hyphen, breakable (word not breakable)
+\defineshorthand{"-}{\babelhyphen*{hard}}
 
 \RequirePackage{bib-setup}
 
@@ -549,9 +551,6 @@ cachedir=minted]{minted}
   \bname{#2}\ \bsc{#3}\textsuperscript{#1}}
 \newcommand\affil[2][1]{\textsuperscript{#1}{#2}}
 
-\setparaheadstyle{\bfseries\raggedright}
-\setsubparaheadstyle{\itshape\raggedright}
-
 \newenvironment{articleBlock}[1]% {name}
 {\paragraph{#1.}}{}
 \newenvironment{articleSubBlock}[1]% {name}
@@ -618,6 +617,9 @@ cachedir=minted]{minted}
       \subsection_old {##1}
       \markright{[Article]\ \thesubsection\ ##1}
     }
+
+    \setparaheadstyle{\bfseries\raggedright}
+    \setsubparaheadstyle{\itshape\raggedright}
 
     \selectlanguage {english}
     \setlength \parindent {0pt}
