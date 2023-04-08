@@ -285,7 +285,17 @@ Il en découle que des échanges verticaux sont nécessaires pour équilibrer la
 \textnote{Un découplage temporel existe également, de quelques mois à quelques années, entre la photosynthèse et la reminéralisation.}
 
 Ces cruciaux échanges verticaux sont fortement dictés par la circulation générale des océans, et donc particulièrement importants dans les régions de convection, de subduction, et d'upwelling.
-Ces contrastes dans les approvisionnements façonnent le paysage biogéochimique global, fait de provinces biogéochimiques à l'échelle des bassins (\cite{williams_2011}).
+Ces contrastes dans les approvisionnements façonnent le paysage biogéochimique global, fait de provinces biogéochimiques à l'échelle des bassins (\nref{fig:nutricline-globale}, \cite{williams_2011}).
+
+\begin{figure}
+  \centering
+  \insertfig[0.9]{nutricline.pdf}
+  \captionT{Répartition du Nitrate à l'échelle globale}{%
+    Profondeur à partir de laquelle la concentration de Nitrate dépasse \qty{2}{\micro\mole\per\liter}.
+    Données climatologiques annuelles du \eng{\emph{World Ocean Atlas}} (\cite{garcia_2019}).
+  }
+  \label{fig:nutricline-globale}
+\end{figure}
 
 Cependant il apparaît que les échanges à grande échelle seuls ne peuvent expliquer entièrement les flux des éléments entre les différents blocs de la pompe biologique.
 L'observation d'écarts entre l'apport de nutriments et l'export de matière \encadra{observé par exemple dans la gyre subtropical oligotrophe de l'Atlantique Nord} suggère que des injections locales de nutriments à des échelles non résolues sont nécessaires pour clôturer le budget (\cite{mcgillicuddy_1998, oschlies_2002}).
@@ -294,19 +304,17 @@ L'hypothèse d'abord considérée fut celle de nutriments entraînés par des to
 A néanmoins émergé la nécessité de considérer les vitesses verticales associées aux courants de submésoéchelle, dont les valeurs sont bien plus importantes qu'aux mésoéchelles (\cite{klein_2009}).
 Ces courants de submésoéchelle, créés par ceux de mésoéchelle, se présentent sous forme de fronts et filaments de densité, ou de tourbillons, de taille comprise entre \qty{1}{\km} et \qty{10}{\km}.
 
-À cette échelle \encadra{typiquement en dessous du rayon de déformation de Rossby} apparaissent des phénomènes dynamiques particuliers, aujourd'hui relativement bien compris (\cite{mcwilliams_2016, mcwilliams_2019, gula_2022, taylor_2023}).
-L'évaluation de l'impact ces phénomènes sur les cycles biogéochimiques reste cependant encore un défi, à la fois lorsque l'on considère leur impact local, et encore plus si l'on se penche sur les conséquences sur le paysage biogéochimique global évoqué plus haut.
+Les courants de mésoéchelle forcent ceux de submésoéchelle, mais cette interaction fonctionne également dans le sens inverse, des petites vers les grandes échelles.
+Les phénomènes de submésoéchelle, bien que locaux, influencent donc les circulations océaniques de plus grande échelle (\cite{sasaki_2020, balwada_2022, naveiragarabato_2022, taylor_2023}).
 
-\begin{note}
-  Les courants de mésoéchelle forcent ceux de submésoéchelle, mais cette interaction fonctionne également dans le sens inverse, des petites vers les grandes échelles.
-  Les deux échelles sont fortement couplées (\cite{sasaki_2020, balwada_2022, naveiragarabato_2022, taylor_2023}).
-  Il est d'ailleurs parfois difficile d'isoler leurs impacts respectifs (\cite{uchida_2019, freilich_2019, balwada_2021}), et sont ainsi parfois groupées sous l’appellation \guil*{fines échelles}.
-\end{note}
+\textnote{
+  Les méso- et submésoéchelles  étant fortement couplées, il est parfois difficile d'isoler leurs impacts respectifs (\cite{uchida_2019, freilich_2019, balwada_2021}), et elles sont ainsi parfois groupées sous l’appellation de \guil*{fines échelles}.}
 
-effets subméso sur circulation moyenne (upscale connection)
+Même si les phénomènes aux fines échelles sont relativement bien compris sur le plan dynamique (\cite{mcwilliams_2016, mcwilliams_2019, gula_2022, taylor_2023}), l'évaluation de leurs impacts sur les cycles biogéochimiques reste cependant encore un défi.
+À la fois si l'on considère leur impact local, et encore plus si l'on se penche sur les conséquences qu'ils entraînent sur le paysage biogéochimique global, du fait de la nécessité de résoudre ces fines échelles sur de larges domaines, avec des observations comme des modèles numériques (\cite{fox-kemper_2019}; \review{Lévy et al. 2023}).
 
-Regardons les effets de la subméso sur la biogéochimie.
-(Notamment deux en particuliers.)
+Nous nous penchons dans la suite sur quelques de ces phénomènes et leurs impacts sur les cycles biogéochimiques.
+En particulier l'apport de nutriments par upwelling aux fronts, et le décalage du bloom du fait de la restratification aux fronts.
 
 \subsubsection{Mélange horizontal}
 
@@ -318,8 +326,6 @@ De récentes études montrent qu'une large part de la variabilité (spatiale et 
 
 \review{isopycnal mixing ? \cite{abernathey_2022}}
 
-%%
-
 Downscale connection / bloom advance
 
 Nutrient vertical eddy-fluxes
@@ -330,8 +336,35 @@ Upscale feedback
 
 tous les effets en général
 
+\subsubsection{Les fronts de submésoéchelle}
+
+Les fronts de submésoéchelle \encadra{c'est-à-dire les gradients de densité forcés par les courants de mésoéchelle et les processus atmosphériques (vent, précipitation,\dots)} sont d'une importance particulière pour la biologie, de par leur capacité à générer d'importantes vitesses verticales.
+En effet, pour des gradients suffisamment importants, des circulations secondaires agéostrophiques se créent en travers des fronts, dans le sens contribuant à applanir le isopycnes (\cite{thomas_2008}).
+Ainsi des vitesses ascendantes (\eng{upwelling}) apparaissent du côté moins dense (plus chaud et/ou moins salé) du front, et à l'inverse descendantes (\eng{downwelling}) du côté plus dense.
+
+Les fronts de submésoéchelle sont généralement confinés à la couche de mélange.
+En été, lorsque la couche de mélange est peu profonde, l'énergie potentielle qui leur est disponible est faible.
+En revanche en hiver les forts gradients de densité se prolongent sur toute la hauteur de la couche de mélange, alors plus profonde, l'énergie potentielle de ces structure est d'autant plus grande (\cite{callies_2015, mensa_2013, sasaki_2020}).
+
 \subsubsection{Apport de nutriments aux fronts}
 \label{sec:upwelling-nutriments}
+
+\begin{figure}
+  \centering
+  \insertfig[0.7]{mahadevan_2016_fig7.pdf}
+  \captionT{Apport de nutriment par les vitesses verticales}{%
+    Tiré de \textcite{mahadevan_2016}, figure~7.
+
+    \foreignblockquote{english}{
+      A vertical section from a simulation performed with the Process Study Ocean Model, showing the vertical nutrient flux in an oligotrophic setting representative of the subtropical gyres.
+      The model uses a horizontal resolution of \qty{1}{\km} and a vertical resolution varying between a few meters near the surface to tens of meters at depth.
+      The model was initialized with a typical nutrient profile throughout the domain and a horizontal density gradient that becomes unstable and generates an eddying flow field.
+      (a)~Nutrient~\(c\) in the model is upwelled along sloping isopycnals (black contours) at fronts.
+      (b)~The vertical velocity~\(w\) is enhanced at fronts.
+      The nutrient flux is maximal where an upward (positive) velocity covaries with a positive nutrient anomaly.}
+  }
+  \label{fig:nutrient-upwell}
+\end{figure}
 
 Comme dit plus haut, les échanges verticaux sont important pour la bio.
 Or aux petites échelles on voit apparaître des vitesses verticales de grande magnitude.
@@ -394,18 +427,19 @@ Importance de la sub-méso donc pour créer des échanges verticaux.
 
 Eaux au nord du GS très productives.
 Également importances à cause de pêcheries.
-Important bloom (plus de détail, ref sur la phénologie, )
+Important bloom (plus de détail, ref sur la phénologie)
 
 \begin{figure}
   \centering
   \insertfig[0.7]{sarmiento_2004_fig2b.png}
   \captionT{Délimitations des biomes par des processus physiques}{%
-    Figure tirée de \textcite[figure 2b]{sarmiento_2004}.
+    Tiré de \textcite{sarmiento_2004}, figure~2b.
     Les biomes de notre zone d'étude correspondent dans la nomenclature de cet article à: subpolaire~(``SP'', jaune); subtropical saisonnier~(``ST-SS'', bleu); et subtropical permanent~(``ST-PS'', rose).
 
-    \foreignblockquote{english}{Biome classification scheme calculated using mixed layer depths obtained from observed density and from upwelling calculated from the wind stress divergence using observed winds.
-    The equatorially influenced biome covers the area between \latlon{5S}~and~\latlon{5N}, and is colored a dirty light blue in areas where upwelling occurs (labeled~``Eq-U'' on the color bar) and dark pink in areas where downwelling occurs (labeled~``Eq-D'').
-    Outside of this band, the region labeled ``Ice''~(red) is the marginal sea ice biome, the region labeled ``SP''~(yellow) is the subpolar biome, the region labeled ``LL-U''~(light blue) is the low-latitude upwelling biome , the region labeled ``ST-SS''~(dark blue) is the seasonally mixed subtropical gyre biome, and the region labeled ``ST-PS''~(pink) is the permanently stratified subtropical gyre biome.}
+    \foreignblockquote{english}{
+      Biome classification scheme calculated using mixed layer depths obtained from observed density and from upwelling calculated from the wind stress divergence using observed winds.
+      The equatorially influenced biome covers the area between \latlon{5S} and \latlon{5N}, and is colored a dirty light blue in areas where upwelling occurs (labeled~``Eq-U'' on the color bar) and dark pink in areas where downwelling occurs (labeled~``Eq-D'').
+      Outside of this band, the region labeled ``Ice''~(red) is the marginal sea ice biome, the region labeled ``SP''~(yellow) is the subpolar biome, the region labeled ``LL-U''~(light blue) is the low-latitude upwelling biome , the region labeled ``ST-SS''~(dark blue) is the seasonally mixed subtropical gyre biome, and the region labeled ``ST-PS''~(pink) is the permanently stratified subtropical gyre biome.}
   }
 \label{fig:sarmiento}
 \end{figure}
