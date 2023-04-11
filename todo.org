@@ -139,6 +139,12 @@ question: quels sont les impacts des fronts ?
 - dans la région Gulf Stream (correspond hi faible / fort)
 - dans la région subpolaire (bloom)
 
+* Traduction
+- mixed layer instability
+** mots d'emprunts
+swaths, upwelling, downwelling
+sea surface temperature
+
 * Recommendations de style
 ** GLS
 On se dit que pas de \ab ?

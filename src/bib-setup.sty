@@ -22,17 +22,21 @@
   maxsortnames = 2,
   minsortnames = 1,
   mergedate = false,
+  nohasothers = true,
   pluralothers = false,
   % refsection = chapter,
   sorting = nyt,
   sortcites = false, % watch out, I rely on this (for footnotes for ex.)
-  uniquename = mininit,
+  uniquename = false,
   uniquelist = minyear,
   url = false
 }
 
 % Space between items with different starting letter
 \setlength\bibinitsep{\baselineskip}
+
+% Citations separated by comma
+\renewcommand*\multicitedelim{\addcomma\space}
 
 % Add filter for 'normal entries'
 \defbibfilter{normal}{%
