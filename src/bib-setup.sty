@@ -19,16 +19,18 @@
   minbibnames = 6,
   maxcitenames = 2,
   mincitenames = 1,
-  maxsortnames = 2,
+  maxsortnames = 1,
   minsortnames = 1,
   mergedate = false,
-  nohasothers = true,
+  nohashothers = false,
+  nosortothers = false,
   pluralothers = false,
   % refsection = chapter,
   sorting = nyt,
   sortcites = false, % watch out, I rely on this (for footnotes for ex.)
+  labeldateparts = true,
   uniquename = false,
-  uniquelist = minyear,
+  uniquelist = false,
   url = false
 }
 
@@ -49,6 +51,7 @@
 
 \newcommand*\bibsoftwareTitle{Logiciels}
 \newcommand*\bibdataTitle{Données}
+\newcommand*\bibillustrationTitle{Illustrations}
 
 % Remove small caps in family names
 \DefineBibliographyExtras{french}{\restorecommand\mkbibnamefamily}

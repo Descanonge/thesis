@@ -114,6 +114,8 @@ Chercheur junior CNRS
 tirets ? pas tirets ?
 ** intro mesure: figure jolie image chl fines échelles ?
 ** intro mesure: schéma explicatif de la télédetection de chl
+** problème \ab{par-ex}
+avec tous les acronymes 'others', un espace est mis avant
 ** Séparer article en chapitre standalone
 comme ça:
 chp méthodes
