@@ -155,7 +155,7 @@ Ce phénomène, compris depuis longtemps, fut testé avec succès par des mesure
   Je conseille d'ailleurs l'article suivant qui s'attarde sur sa carrière scientifique passionnante (qui inclut un passage par le projet Manhattan !): \citetitle{marshall_2010}, \cite{marshall_2010}.},
 en coopération avec le capitaine Cousteau à bord du Calypso\footnote{%
   Ce dernier commentera d'ailleurs: \engquote{The space-age satellites have opened a whole new dimension to ocean resources monitoring}, comme reporté par la presse locale de l'époque:
-  \href{ https://news.google.com/newspapers?nid=1454&dat=19730320&id=Nmo0AAAAIBAJ&sjid=8QkEAAAAIBAJ&pg=897,4493586&hl=en}{\citetitle{macomber_1973}}, \cite{macomber_1973}.
+  \citetitleurl{macomber_1973}, \cite{macomber_1973}.
 }.
 Ces premières expériences permettront le déploiement d'un premier capteur dédié à l'étude de la couleur de l'océan: \as{czcs} à bord de Nimbus-7, lancé en 1978 qui fonctionnera jusqu'en 1986.
 Ce n'est que dix plus tard, en 1997, que le lancement de \as{seawifs} marquera le début d'une observation ininterrompue de la couleur de l'océan par un ensemble de capteurs et satellites.
@@ -273,7 +273,12 @@ Il en découle que des échanges verticaux sont nécessaires pour équilibrer la
 \textnote{Un découplage temporel existe également, de quelques mois à quelques années, entre la photosynthèse et la reminéralisation.}
 
 Ces cruciaux échanges verticaux sont fortement dictés par la circulation générale des océans, et donc particulièrement importants dans les régions de convection, de subduction, et d'upwelling.
-Ces contrastes dans les approvisionnements façonnent le paysage biogéochimique global, fait de provinces biogéochimiques à l'échelle des bassins (\nref{fig:nutricline-globale}, \cite{williams_2011}).
+Ces contrastes dans les approvisionnements façonnent le paysage biogéochimique global, fait de provinces biogéochimiques à l'échelle des bassins (\nref{fig:nutricline-globale}, \cite{longhurst_2007,vichi_2011a,williams_2011,bock_2022}).
+
+Par exemple, le rotationnel négatif des vents au-dessus des gyres subtropicales engendre un approfondissement de la thermocline et la nutricline, donnant ainsi un biome où la productivité est faible tout au long de l'année.
+À l'inverse, les plus hautes latitudes \encadra{où la nutricline est moins profonde et le rotationnel des vents positif} sont soumises à une forte évolution saisonnière.
+En hiver le mélange vertical est important, des nutriments sont remontés en surface par convection mais la productivité reste relativement faible du fait du faible ensoleillement et par dilution, la couche de mélange étant alors profonde.
+Au printemps, la réduction du mélange vertical maintient du phytoplancton dans la zone éclairée en surface occasionnant un bloom: un forte croissance s'appuyant les nutriments remontés en hiver (\cite{wilson_2005,siegel_2002,taylor_2011a,williams_2011}).
 
 \begin{figure}
   \centering
@@ -360,10 +365,10 @@ Les fronts de submésoéchelle sont généralement confinés à la couche de mé
 En été, lorsque la couche de mélange est peu profonde, l'énergie potentielle qui leur est disponible est faible.
 En revanche en hiver les forts gradients de densité se prolongent sur toute la hauteur de la couche de mélange, alors plus profonde, et l'énergie potentielle de ces structure en est d'autant plus grande (\cite{mensa_2013,callies_2015,buckingham_2016,sasaki_2020}).
 Cette dernière est convertie en énergie cinétique par le biais de l'instabilité de couche de mélange (\engquote{Mixed Layer Instability} ou parfois \engquote{Mixed Layer Eddies}) (\cite{boccaletti_2007,fox-kemper_2008}).
-Cette instabilité de type barocline tend à aplanir les isopycnes sur toute la hauteur de la couche de mélange en créant des tourbillons de submésoéchelles.
+Cette instabilité de type barocline tend à aplanir les isopycnes sur toute la hauteur de la couche de mélange en créant des tourbillons de submésoéchelles, réduisant ainsi le mélange vertical et favorisant la restratification.
 
 \begin{note}
-  Le mode de croissance maximale de cette instabilité est de taille \(L = \frac{NH}{f}\), avec \(N \simeq \qty{e-3}{s^{-1}}\) la fréquence de Brunt-Väisälä relative à la couche de mélange, \(H \simeq \qty{200}{\meter}\) la hauteur de la couche de mélange, et \(f \simeq \qty{1e-4}{s^{-1}}\) le paramètres de Coriolis aux moyennes latitudes.
+  Le mode de croissance maximale de cette instabilité est de taille \(L = \frac{NH}{f}\), avec \(N \simeq \qty{e-3}{s^{-1}}\) la fréquence de Brunt-Väisälä relative à la couche de mélange, \(H \simeq \qty{200}{\meter}\) la hauteur de la couche de mélange, et \(f \simeq \qty{e-4}{s^{-1}}\) le paramètres de Coriolis aux moyennes latitudes.
   Ce qui donne donc typiquement \(L \simeq \OM(\qty{1}{\km})\).
   Le temps caractéristique de croissance est celui de l'advection horizontale \(T = U/L\). Étant aux échelles où le nombre de Rossby \(\am{rossby} = \frac{U}{Lf}\) est d'ordre \OM(1), ces tourbillons se développent donc en quelques jours.
 \end{note}
@@ -417,33 +422,79 @@ Cela a également pour effet d'exporter du carbone organique (\cite{levy_2001,om
 Nuançons cependant ces effets en commençant par rappeler que les zones d'upwelling et de downwelling sont séparées spatialement, les nutriments remontés ne sont donc pas directement renvoyés en profondeur.
 Par ailleurs, le gradient vertical en nutriment \encadra{maintenu par la consommation rapide des nutriments en surface} assure que les eaux remontées sont riches en nutriments, et que les eaux exportées en profondeur sont pauvres en nutriments (\cite{mahadevan_2016}).
 
-Effets sur la communauté.
+\review{Effets sur la communauté.}
 
-L'effet de l'apport de nutriments aux fronts
+L'effet \emph{local} de l'apport de nutriments aux fronts, a été largement observé dans les études ci"-dessus.
+Cependant il est difficile de quantifier précisemment cet effet sur les cycles biogéochimiques à plus grand échelle.
+Les observations in-situ ne peuvent observer qu'un nombre limité de structures, et ont d'ailleurs tendances à cibler les plus intenses.
+Les modèles numériques peuvent résoudre les circulations de submésoéchelles mais contre un fort coût calculatoire qui limite leur étude avec des modèles régionaux ou globaux\footnote{%
+  En particulier, la modification de la circulation grande échelle par rétroaction des dynamiques de fines échelles nécessite un long temps de spin-up.
+} (\cite{kessouri_2020,hewitt_2022}).
+Les données satellites offrent une vue globale synoptique avec une résolution temporelle journalière, et une résolution spatiale qui s'approche du kilomètre.
+Malgré certaines lacunes discutées précédemment (\nref{sec:teledetection}), elles offrent l'opportunité de mesurer les effets de fine échelle sur de larges zone et de longues périodes.
 
-Quantification.
+Une première tentative d'analyse géostatistique à partir de données de \al{chl} à une résolution de \qty{9}{\km}, par \textcite{doney_2003} puis étendue par \textcite{glover_2018}, vise à évaluer l'évolution de la variance spatiale en fonction de la distance.
+L'impact des processus frontaux n'apparaît pas à cette résolution, mais la méthodologie confirme le rôle important des tourbillons de mésoéchelle dans le mélange des gradients grande échelle.
 
+\Textcite{jonsson_2011} ont proposé un cadre lagrangien dans lequel les données satellitaires de couleur de l'océan\footnote{%
+  La \al{chl} est combinée avec l'atténuation (\(K_{490}\)) pour estimer le carbone organique et son évolution (\ab{ie} la production nette).
+} sont projetées sur des trajectoires calculées à partir d'un modèle numérique opérationel haute résolution.
+Ils ont pu évaluer le changement de biomasse le long des trajectoire et le relier aux apports de nutriments.
+Un inconvénient majeur est que la méthode est fortement limitée par la quantité de données satellites disponibles le long des trajectoires (sans nuages).
+\Textcite{zhang_2019} contourne ce problème moyennant sur un grille de \ang{2}, en utilisant par ailleurs des données globales de dériveurs de surface, d'altimétrie et de couleur de l'océan.
+Leur analyse révélent une corrélation positive entre le taux de cisaillement de l'écoulement et la croissance du phytoplancton.
+
+D'autre part, le rôle des fronts a été évalué à l'aide de trois méthodes différentes.
+\Textcite{guo_2019} ont combiné des données de couleur de l'océan avec des données d'altimétrie et de flotteurs dérivants, et ont estimé que, dans les gyres subtropicales, les dynamiques de mésoéchelle et les dynamiques frontales de submésoéchelle contribuaient de manière comparable aux anomalies positives de \as{chl}.
+\Textcite{keerthi_2022} ont proposé une approche basée sur la déconvolution des séries temporelles de \as{chl} (obtenue par satellite), en différentes échelles temporelles; ils ont observé que les échelles temporelles sub-saisonnières contribuaient à environ \pct{30} de la variance totale de \as{chl} et étaient associées à de petites échelles spatiales (\qty{<100}{\km}) \encadra*{qui comprenennent à la fois la mésoéchelle et la submésoéchelle}.
+
+Enfin, l'approche la plus quantitative, et la seule s'appuyant à une colocalisation directe avec les fronts, a été proposée par \textcite{liu_2016}, qui l'ont appliquée à la gyre subtropicale du Pacifique Nord.
+Ils ont détecté les fronts de température en calculant un indice mesurant l'hétérogénéité locale du champ de SST à partir de données satellitaires.
+Ils ont ensuite pu comparer les valeurs de \as{chl} (satellite) dans les zones impactées par les fronts (caractérisées par une valeur élevée de l'indice d'hétérogénéité) avec les valeurs dans les zones non touchées.
+Ils ont constaté une augmentation de la \as{chl} dans les fronts, négligeable en été mais qui atteignait près de \pct{40} en hiver.
 
 \subsubsection{Modification de la phénologie du bloom}
 \label{sec:modif-phenologie}
 
-Les gradients de densité existant (créés par mélange par courants méso ou forçages atmos) sont des réservoirs d'énergie potentielle. À un front les isopycnes sont penchées et des circulations sub-méso se créent et transforment l'énergie potentielle en énergie cinétique (tourbillons), ce faisant ramenant les isopycnes à l'horizontale.
-Ces tourbillons formés par l'instabilité de Mixed-Layer (?) s'étendent sur la hauteur de la ML. Ce sont les Mixed-Layer Eddies.
-À travers ces instabilités la sub-mesoéchelle contribue fortement à re-stratifier la couche  de surface, et réduire le mélange.
-C'est un processus local et on s'attend donc à un soulèvement local de la couche de mélange au niveau des fronts.
+Nous avons abordé plus haut le déclenchement d'un bloom au printemps, aux hautes latitudes, du fait de la réduction du mélange vertical.
+Cette hausse de productivité a précédemment été reliée à l'abattement des vents et au réchauffement de la surface par échange avec l'atmosphère (\cite{henson_2006,taylor_2011a}).
+Les fronts de submésoéchelle favorisent également la restratification, et peuvent ainsi provoquer des blooms, localement, avant la restratification saisonnière à l'échelle du biome (\cite{taylor_2011,karleskind_2011,mahadevan_2012}).
 
+Cet aspect de l'impact des fronts a été quantifié par \textcite{mahadevan_2012} en comparant l'évolution de la \al{chl} dans deux catégories de simulations numériques forcées de manière à correspondre à des observations récoltés dans l'Atlantique Nord. Les simulations de l'une de ces catégorie sont initialisées avec un gradient horizontal de densité de grande échelle, ce qui entraîne une restratification par instabilité de couche de mélange.
+Les simulations avec gradient (donc restratifiées par la dynamique de submésoéchelle) présentent un bloom en accord avec les observations, et qui survient entre 20 et 30~jours avant les simulations sans gradient (\nref{fig:early-bloom-mahadevan}).
 
-Expliquer lancement du bloom printanier par réduction mélange.
+\begin{figure}
+  \centering
+  \insertfig[0.6]{mahadevan_2012_fig3.pdf}
+  \captionT{Estimation de l'avance du bloom dans un modèle}{%
+    Tiré de \textcite{mahadevan_2012}, figure~3G.
 
-On s'attend à un départ du bloom d'abord dans les fronts.
-
-exemples de détection précédentes (mahadevan 2020).
-
+    \foreignblockquote{english}{%
+      Model chlorophyll concentration in the upper \qty{100}{\m} (average) [from runs with
+      lateral density gradient (shaded gray) and without (purple)].
+      Chlorophyll from the combination of observations [\dots] is overlaid.
+    }
+  }
+  \label{fig:early-bloom-mahadevan}
+\end{figure}
 
 \subsection{Région d'étude: Extension du Gulf Stream}
 \label{sec:region-detude}
 
-Notre zone d'étude: 15°N-55°N, 82°W-40°W
+Dans la section précédente, nous avons relié les dynamiques de submésoéchelle à des surplus de productivité dans les fronts, et à la modification de la phénologie du bloom.
+Ce surplus de productivité dû à un front est dépendant de l'intensité de ce front et de la distribution verticale locale en nutriments.
+Nous pouvons nous attendre à des variations saisonnières et régionales de cet effet.
+En particulier il est attendu que ce dernier soit maximal dans les biomes oligotrophes où les apports de nutriments (autres que par advection verticale dans les fronts) sont faibles.
+En outre la dynamique du submésoéchelle est sujette à des variations saisonnières (\cite{callies_2015}) et régionales (\cite{mauzole_2022}).
+
+Nous visons à explorer et quantifier les impacts des fines échelles sur la \al{chl} \emph{à l'échelle des biomes}, et leurs fluctuations \emph{au cours de l'année}, \emph{pour différents biomes}, et \emph{pour différents intensité de fronts}.
+À cette fin nous nous concentrons sur la région de l'Atlantique Nord autour du Gulf Stream, qui comporte dans une zone restreinte plusieurs biomes contrastés, et des fronts d'intensité variée (\cite{bock_2022}): \latlonRange{15}{55N}, \latlonRange{82}{40W} (\nref{fig:region}).
+
+\begin{figure}
+  \centering
+  \captionT{Région d'étude}{}
+  \label{fig:region}
+\end{figure}
 
 \subsubsection{La physique}
 \label{sec:gs-physique}

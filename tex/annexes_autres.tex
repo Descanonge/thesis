@@ -5,20 +5,21 @@
 
 Dans cette section, je décris succinctement le principe de stockage des variables drapeau (\engquote{flags}), tel que défini par les conventions \as{cf}\footnote{%
   \raggedleft%
-  section 3.5: {\scriptsize\glsurl{cf-flags}}
+  section 3.5: {\glsurl{cf-flags}}
 }.
 Ayant besoin d'extraire des flags des données de Chlorophylle, et voyant qu'aucune implémentation n'était disponible pour \citesoft{xarray}, j'ai écrit une simple implémentation.
-Je l'ai ensuite adaptée et soumise au projet \citesoft{cf-xarray} pour qu'elle puisse être réutilisée.
+Je l'ai ensuite adaptée et soumise au projet \citesoft{cf-xarray} pour qu'elle puisse être réutilisée\footnote{%
+  \url{https://github.com/xarray-contrib/cf-xarray/pull/354}}.
 
 Il est souvent utile voire nécessaire d'accompagner certaines quantités par des informations supplémentaires: pour des données satellites par exemple, la présence de nuages sur le pixel, la qualité de la mesure, ou encore le capteur qui a réalisé la mesure (pour un produit composite).
-Ces informations sont différentes pour chaque point de mesure, et doivent donc être stockées comme des variables (\as{ie} des tableaux multi"-dimensionnels).
-Par chance, ce type de variables \guil*{drapeaux} peut souvent être représenté de manière très simple: la présence de nuage peut être indiqué par un booléen (un seul bit), la qualité de la mesure est typiquement un petit entier (2 ou 3 bits), etc.
+Ces informations sont différentes pour chaque point de mesure, et doivent donc être stockées comme des variables (\as{ie} des tableaux multi-dimensionnels).
+Ce type d'information (que nous appelerons drapeaux) peut souvent être représenté de manière très simple: la présence de nuage peut être indiqué par un booléen (un seul bit), la qualité de la mesure est typiquement un petit entier (2 ou 3 bits), etc.
 
-Cependant, les outils informatiques ne permettent que rarement de manipuler des variables aussi petites. En raison de l'architecture des processeurs, la plus petite unité est aujourd'hui l'octet.
-Chaque variable drapeau est donc traitée, au minimum, comme un octet.
+Cependant, du fait de l'architecture des processeurs, les outils informatiques ne permettent généralement pas de manipuler des variables aussi petites.
+Chaque variable drapeau ne peut être traitée et stockée que sur un octet, au minimum.
 On gâche alors de l'espace de stockage puisque seuls quelques bits sont utilisés sur les huits.
 
-Plutôt que d'utiliser plusieurs variables drapeaux, l'idée de cette technique est de réunir tous ces drapeaux sur une seule et même variable, en leur associant certains bits de cette variable.
+Plutôt que d'utiliser plusieurs variables drapeaux, l'idée de cette technique est de réunir tous ces drapeaux sur une seule et même variable, en associant à chaque drapeau certains bits de cette variable.
 Prenons un exemple, nous voulons stocker les informations suivantes: la qualité de la mesure (un entier entre 1 et 3), l'algorithme utilisé pour calculer la Chlorophylle (\abbrv{OC4}, \abbrv{OC5}, ou CI), la présence de nuages (oui ou non), et la présence de glace de mer (oui ou non).
 On notera que ces informations sont indépendantes entre elles.
 
@@ -30,22 +31,23 @@ On peut stocker chacune de ces informations de la manière suivante:
   \item glace, sur 1 bit: \binary{0}=libre, \binary{1}=glace.
 \end{itemize}
 
-On les combine ensuite en une seule variable \(v\) stockée sur 8~bits (le minimum nécessaire), en commençant par le bit le moins signifiant (par la droite ici): glace, nuage, algorithme, qualité.
+On les combine ensuite en une seule variable \(v\) stockée sur 8~bits (le minimum nécessaire), en commençant par le bit le moins signifiant (le plus à droite ici): glace, nuage, algorithme, qualité.
 La représentation binaire de cette variable est donc:
 \begin{equation}
-  v = \overline{\textlf{00} \ \overline{qq} \ \overline{aa} \ \overline{n} \ \overline{g}},
+  v = \overline{\texttosf{00} \ \overline{qq} \ \overline{aa} \ \overline{n} \ \overline{g}},
 \end{equation}
 avec \(\overline{qq}\) les bits codant la qualité, \(\overline{aa}\) codant pour l'algorithme, \(\overline{n}\) les nuages, et \(\overline{g}\) la glace.
-Par exemple un pixel dont la valeur serait~44, dont la représentation binaire est \(\overline{\texttlf{00101100}}\), indique que la mesure est de qualité moyenne (2), effectuée avec l'algorithme CI, et ne comporte ni nuages, ni glace.
+Par exemple un pixel de valeur~44, dont la représentation binaire est \(\overline{\textosf{00101100}}\), indique que la mesure est de qualité moyenne (2), effectuée avec l'algorithme CI, et ne comporte ni nuages, ni glace.
 Comparé à une approche naïve avec 4~variables séparées, nous avons gagné un facteur~4 en stockage.
 
 Cette variable est facile à calculer à partir des valeurs des drapeaux que l'on veut encoder.
 Il suffit d'additionner les drapeaux entre eux, dont on aura décalé les bits vers la gauche un nombre de fois approprié.
-Une fois cette variable créée, les drapeaux individuels sont récupérés simplement en appliquant un masque binaire, ce qui correspond à une opération \guil*{et} bit à bit (\engquote{bitwise AND}, noté \textsf{\&} pour \citesoft{numpy}).
-Par exemple pour récupérer la valeur de qualité d'un pixel on fera l'opération: \(v \& 48 (\overline{00110000}) \).
-La valeur récupérée est encore décalée sur la gauche, ici de 4~bits (\as{ie} multipliée par 8), mais dans convention \as{cf} la signification des valeurs est stockée décalée, on aura donc directement 16: qualité~1, 32: qualité~2, 48: qualité~3.
+Une fois cette variable créée, les drapeaux individuels sont récupérés simplement en appliquant un masque binaire, ce qui correspond à une opération \guil*{et} bit à bit (\engquote{bitwise AND}, notée~\textsf{\&} pour \citesoft{numpy}).
+Ce sont toutes des opérations élémentaires facilement applicables à tout un tableau.
+Par exemple pour récupérer la valeur de qualité d'un pixel on fera l'opération: \(v \mathbin{\&} 48 (\overline{\textosf{00110000}})\).
+La valeur récupérée est encore décalée sur la gauche, ici de 4~bits (\as{ie} multipliée par 8), mais dans la convention \as{cf} la signification des valeurs est stockée décalée, on aura donc directement 16: qualité~1, 32: qualité~2, 48: qualité~3.
 La valeur du masque binaire est aussi stockée.
-Ainsi, pour l'exemple ci"-dessus, il nous faudra définir les attributs suivants pour la variable~\(v\):
+Ainsi, pour l'exemple ci-dessus, il nous faudra définir les attributs suivants pour la variable~\(v\):
 \begin{center}
   {%
     \newcommand*\smolb{{\footnotesize b}}%
@@ -69,11 +71,11 @@ Ainsi, pour l'exemple ci"-dessus, il nous faudra définir les attributs suivants
   Si tous les drapeaux sont des booléens (et donc encodés sur un seul bit), l'attribut \textsf{flag\_values} peut être omis, à l'inverse si tous les drapeaux sont mutuellement exclusifs (\ab{par-ex} on ne stocke \emph{que} la qualité des pixels) l'attribut \textsf{flag\_masks} peut être omis.
 \end{note}
 \begin{note}
-  Pour les drapeaux autres que booléens, on fait ici commencer les valeurs à~1, comme dans les exemples donnés par la convention \as{cf}. Cela réserve la valeur~0 comme, par exemple, erreur on valeur non"-définie. Ce n'est pas une obligation.
+  Pour les drapeaux autres que booléens, on fait ici commencer les valeurs à~1, comme dans les exemples donnés par la convention \as{cf}. Cela réserve la valeur~0 comme, par exemple, erreur on valeur non-définie. Ce n'est pas une obligation.
 \end{note}
 
 Suit ici l'implémentation de l'extraction des drapeaux pour \citesoft{cf-xarray} plus en détail\footnote{Il s'agit ici d'une version un peu plus claire que celle soumise au projet. Elle est fonctionnellement identique, et sera incorporée plus tard dans le projet, d'autres corrections étant de toute façon requises.}.
-J'ai adapté une fonction déjà présente dans le module qui ne prenait en compte que les drapeaux mutuellement exclusifs.
+J'ai adapté une fonction déjà présente dans le module qui ne fonctionnait que pour des drapeaux tous mutuellement exclusifs.
 \begin{python}
 def create_flag_dict(da) -> Mapping[Hashable, Sequence]:
     """Return possible flag meanings and associated bitmask/values.
@@ -103,7 +105,7 @@ def create_flag_dict(da) -> Mapping[Hashable, Sequence]:
     return dict(zip(flag_meanings, zip(flag_masks, flag_values)))
 \end{python}
 
-Je défini quelques méthodes supplémentaires à une classe d'\emph{Accessor}, ce qui les rendra accessibles à tous les objets XArray concernées (\as{ie} une variable \py{xarray.DataArray} contenant les drapeaux à extraire):
+Je défini quelques méthodes supplémentaires à une classe d'\emph{Accessor}, ce qui les rendra accessibles aux objets Xarray concernés (\as{ie} des variables \py{xarray.DataArray} contenant les drapeaux à extraire):
 \begin{python}
 @xr.register_dataarray_accessor("cf")
 class CFDataArrayAccessor(CFAccessor):
@@ -117,7 +119,7 @@ def flags(self) -> Dataset:
     """Dataset containing boolean masks of available flags."""
     return self._extract_flags()
 \end{python}
-Ainsi, pour une variable \py{da} et en reprenant l'exemple ci"-dessus, on peut accéder par exemple aux pixels nuageux avec \py{da.cf.flags.nuage}, ou ceux obtenus avec l'algorithme CI \py{da.cf.flags.CI}.
+Ainsi, pour une variable \py{da} et en reprenant l'exemple ci-dessus, on peut accéder par exemple aux pixels nuageux avec \py{da.cf.flags.nuage}, ou ceux obtenus avec l'algorithme CI \py{da.cf.flags.CI}.
 Il s'agit d'un simple \eng{wrapper} autour d'une fonction plus compliquée:
 \begin{pythonFirst}
 def _extract_flags(
@@ -197,7 +199,7 @@ Il ne reste plus qu'à retourner l'ensemble des drapeaux:
     return Dataset(out)
 \end{pythonLast}
 
-Cette implémentation, bien que fonctionnelle (une série de tests est définie), laisse encore de la place à des améliorations.
+Cette implémentation, bien que fonctionnelle (une série de tests est définie) laisse encore de la place pour des améliorations.
 Elle redéfinit un dataset à chaque appel, sans cache. Le nombre d'opération est relativement faible, mais il pourrait être souhaitable que ces dernières ne soient néanmoins appelées qu'une seule fois.
 À l'inverse, l'utilisateur pourrait vouloir contrôler les objets en mémoire, notamment au vu de leur importance dans des calculs de grands volumes de données avec \citesoft{dask}. Une fonction de type \engquote{getter} serait appropriée.
 
@@ -214,23 +216,23 @@ Enfin, la documentation de cette nouvelle fonctionalité n'a pas encore été r�
 Dans cette section, j'estime le coût carbone engendré par mon travail de thèse.
 Commencons par les voyages professionels, typiquement un grand poste émetteur dans les carrières scientifiques.
 
-Le premier est un aller"-retour Paris--Venise, en avion, pour assister à la 7\ieme~conférence \abbrv(LAPCOD)~(Lagrangian Analysis and Prediction of Coastal and Ocean Dynamics).
+Le premier est un aller-retour Paris--Venise, en avion, pour assister à la 7\ieme~conférence \abbrv(LAPCOD)~(Lagrangian Analysis and Prediction of Coastal and Ocean Dynamics).
 Réalisé pendant mon stage de master, je n'étais alors que peu sensibilisé à ces questions. Avec plus de prévoyance, il aurait pu être effectué en train.
 Ce trajet comptabilise~\qty{266 \pm 27}{\kg\carbone} (sans compter les traînées) selon l'outil \abbrv{GES}~1point5, développé par le collectif \href{https://labos1point5.org/}{\textit{Labos~1point5}} (\cite{mariette_2022}).
 En train, ce trajet aurait coûté~\qty{55 \pm 24}{\kg\carbone}.
 
-Le second trajet est un aller"-retour Paris--Vienne, en train, pour assister l'assemblée générale 2022 de l'\abbrv{EGU}.
+Le second trajet est un aller-retour Paris--Vienne, en train, pour assister l'assemblée générale 2022 de l'\abbrv{EGU}.
 Selon le même outil, ce trajet a comptabilisé~\qty{75 \pm 33}{\kg\carbone}.
 En avion il aurait coûté~\qty{230}{\kg\carbone}.
 Je dois ici remercier les collègues chercheurs et le personnel administratif du laboratoire ayant rendu ce trajet quelque peu aventureux possible, et agréable.
 
-J'estime \encadra{toujours avec \abbrv{GES}~1point5} mes trajets domicile"-travail effectués (le plus généralement) en bus et métro à~\qty{162 \pm 96}{\kg\carbone} par an.
+J'estime \encadra{toujours avec \abbrv{GES}~1point5} mes trajets domicile-travail effectués (le plus généralement) en bus et métro à~\qty{162 \pm 96}{\kg\carbone} par an.
 Ce coût est en dessous de celui préconisé pour respecter les accords de Paris (\qty{0.3}{\tonne\carbone} selon \textcite{dugast_2019}).
 Enfin les 5~repas journaliers (végétariens), pris au self du personnel, et les très nécessaires tasses de café et thé sont estimés à~\qty{420}{\kg\carbone} annuels par l'outil \href{https://nosgestesclimat.fr}{Nos Gestes Climat}.
 
 Côté informatique, nous n'avons pas réalisé d'achats de matériel.
 La majorité des calculs sont réalisés sur les machines du mésocentre de l'\ab{ipsl}; les données y sont également stockées (\qty{<1}{\To}).
-Ces calculs sont pour leur vaste majorité de nombreux processus, courts (quelques minutes), et utilisent peu de ressources (un seul processeur et quelques~\unit{\Go} de mémoire vive) \encadra*{en contraste à une situation plus \guil*{simple}, par exemple, de quelques calculs très intensifs qui représenteraient la quasi"-totalité du bilan carbone}.
+Ces calculs sont pour leur vaste majorité de nombreux processus, courts (quelques minutes), et utilisent peu de ressources (un seul processeur et quelques~\unit{\Go} de mémoire vive) \encadra*{en contraste à une situation plus \guil*{simple}, par exemple, de quelques calculs très intensifs qui représenteraient la quasi-totalité du bilan carbone}.
 Il est donc compliqué d'estimer le coût de tous ces calculs dont l'historique n'a pas été conservé, en plus des difficultés usuelles de ce genre d'estimation sur des ressources informatiques partagé.
 
 \begin{table}

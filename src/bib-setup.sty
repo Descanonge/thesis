@@ -68,7 +68,7 @@
 \DefineBibliographyStrings{french}{
   and = {\&},
   version = {ver\adddot},
-  byeditor = {edité par}{ed\adddotspace par}
+  byeditor = {{edité par}{ed\adddotspace par}}
 }
 
 % Customize bibliography: Start by the 'label', ie the
@@ -185,6 +185,18 @@
 \DeclareFieldFormat[software]{type}{\mkbibparens{#1}}
 \DeclareFieldFormat[software]{url}{\mkbibacro{url}\addcolon~\url{#1}}
 \DeclareFieldFormat[software]{pypi}{\mkbibacro{pypi}\addcolon~\href{https://pypi.org/project/#1}{#1}}
+
+% Citation command for title linked to entry url
+% (used one time for newspaper lol)
+\DeclareCiteCommand{citetitleurl}
+{\boolfalse{citetracker}%
+ \boolfalse{pagetracker}%
+ \usebibmacro{prenote}}
+{\href
+  {\csfield{url}}
+  {\printfield[citetitle]{labeltitle}}}
+{\multicitedelim}
+{\usebibmacro{postnote}}
 
 % Citation command for software
 % (too much hassle to rewrite textcite or cite)
