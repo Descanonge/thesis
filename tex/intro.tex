@@ -354,7 +354,7 @@ Ces vitesses peuvent atteindre des valeurs de l'ordre de \OM(\qty{100}{\meter\pe
 
 \begin{figure}
   \centering
-  % \insertfig[0.6]{front_circulation.pdf}
+  \insertfig[0.6]{front_circulation.pdf}
   \captionT{Frontogénèse et circulation de retournement}{%
     Schéma 3D d'un front avec circulation secondaire
   }
@@ -488,52 +488,72 @@ En particulier il est attendu que ce dernier soit maximal dans les biomes oligot
 En outre la dynamique du submésoéchelle est sujette à des variations saisonnières (\cite{callies_2015}) et régionales (\cite{mauzole_2022}).
 
 Nous visons à explorer et quantifier les impacts des fines échelles sur la \al{chl} \emph{à l'échelle des biomes}, et leurs fluctuations \emph{au cours de l'année}, \emph{pour différents biomes}, et \emph{pour différents intensité de fronts}.
-À cette fin nous nous concentrons sur la région de l'Atlantique Nord autour du Gulf Stream, qui comporte dans une zone restreinte plusieurs biomes contrastés, et des fronts d'intensité variée (\cite{bock_2022}): \latlonRange{15}{55N}, \latlonRange{82}{40W} (\nref{fig:region}).
+À cette fin nous nous concentrons sur la région de l'Atlantique Nord autour du Gulf Stream, qui comporte dans une zone restreinte plusieurs biomes contrastés, et des fronts d'intensité variée (\cite{bock_2022}).
+Elle s'étend de \latlon{15N} à \latlon{55N}, et de la côte américaine (\latlon{82W}) jusqu'à \latlon{40W} (\nref{fig:region}).
 
 \begin{figure}
   \centering
-  \captionT{Région d'étude}{}
+  \insertfig{zone.pdf}
+  \captionT{Région d'étude}{%
+    Climatologies annuelles de la température de surface (SST satellite)~(à gauche), et de la \al{chl} satellite~(à droite).
+    Les isobathes sont surimposés en gris.
+  }
   \label{fig:region}
 \end{figure}
 
 \subsubsection{La physique}
 \label{sec:gs-physique}
 
-Gyre subtropicale Atlantique Nord.
+Cette région d'étude est caractérisée par la présence du Gulf Stream, un courant de bord ouest.
+Ce courant de surface intense, forcé par les vents dominants et la topographie (\cite{fieux_2010}), remonte des eaux chaudes et salées vers le pôle le long de la côte est américaine avant de s'en décrocher à Cap Hatteras (\latlon{35N}, \latlon{75W}, cercle bleu \nref{fig:region}).
+Le jet continue alors vers l'est. Instable, il forme de larges méandres qui se détachent parfois en formant des tourbillons de mésoéchelle.
+Le jet est encadré au nord et au sud par deux contre-courants.
 
-Courant de bord ouest chaud et salé qui remonte des caraïbes le long de la Floride
-Se détache à Cape Hatteras, quitte le plateau continentale et méandre vers l'est.
-Plume énergétique autour de ces méandres (surtout au sud).
+Les tourbillons froids (cycloniques) formées par le jet dérivent vers le sud puis l'ouest avant de rejoindre le Gulf Stream, formant ainsi une recirculation.
+Ces tourbillons transportent une importante énergie cinétique dans la mer des Sargasses (\nref{fig:biomes}a, \cite{wunsch_1998,zhai_2008}).
+Nous pouvons donc nous attendre à la production de fronts de submésoéchelle éphèmeres mais intenses, forcés par la circulation énergétique de mésoéchelle.
 
-Au nord du jet, courant retour (slope current) avec notamment un jet sur le shelf break.
-Entre le Gulf Stream North Wall et le shelf: slope seas. Très froid, plutôt fraîche (plus salé que sur le shelf néanmoins).
-Ce courant froid plonge. Fait partie de la circulation d'overturning de l'atlantique.
+Au nord du jet, les eaux chaudes rencontrent les eaux de pentes, bien plus froides et fraîches.
+La limite entre les deux, le \engquote{North wall}, est marquée par une variation dramatique de la température (jusqu'à une douzaine de degrés Celsius en quelques dizaines de kilomètres à peine), mais aussi de la salinité et du niveau de la mer.
+Les eaux au nord, les \engquote{slope waters}, font partie d'une circulation orientée vers l'équateur et qui s'étire le long de la côte nord-est américaine et rejoint le courant du Labrador (\cite{fieux_2010,townsend_2004}).
+En particulier cette circulation présente un jet et front permanent le long du talus continental (\cite{linder_1998,flagg_2006}).
+Comme nous nous intéressons à l'océan ouvert nous ne détaillons pas plus en profondeur la dynamique sur le plateau continental.
+
+Enfin cette région englobe une partie de la gyre subtropicale.
+Cette dernière, forcée par les Alizées au sud et les vents d'ouest au nord, ne présente pas de limite très marquée.
+Du fait du rotationnel négatif des vents dominants, le cœur de la gyre, loin de l'influence du Gulf Stream, est caractérisé une circulation anticyclonique et un approfondissement de la thermocline et de la nutricline.
 
 \subsubsection{La biologie}
 \label{sec:gs-biologie}
 
-Gyre très pauvre en nutriment et productivité faible.
-Pourquoi ?
-Pas de circulation méso qui permette l'apport de nutriment en surface.
-Importance de la sub-méso donc pour créer des échanges verticaux.
+Comme expliqué ci-dessus, la gyre subtropicale présente une nutricline profonde, sans dynamique particulière permettant un apport important de nutriment.
+La concentration en nutriments, la productivité et l'abondance en phytoplancton y sont basses tout au long de l'année.
+Nous désignons ainsi cette région comme le biome subtropical permanent (PSB) (\nref{fig:biomes}), aussi désigné par le passé comme le \engquote{subtropical gyre permanently stratified biome} (\cite{sarmiento_2004}).
 
-Eaux au nord du GS très productives.
-Également importances à cause de pêcheries.
-Important bloom (plus de détail, ref sur la phénologie)
+À l'inverse, les eaux de pentes au nord du Gulf Stream sont riches en nutriments et très productives.
+Cette production est accrue lors d'un bloom printanier lié à la restratification de la couche de mélange.
+Nous qualifions cette région entre la limite nord du Gulf Stream et le talus continental comme le biome subpolaire (PB), aussi désigné par \engquote{subpolar waters} (\cite{sarmiento_2004}) ou \engquote{high chlorophyll bloom} (\cite{bock_2022}).
+
+Entre les deux précédents se trouve le biome subtropical saisonnier (SSB), ou \engquote{subtropical gyre seasonally stratified biome} (\cite{sarmiento_2004}).
+Il présente des concentration de \al{chl} et des températures intermédiaires.
+La productivité y est légèrement accrue en hiver, du fait d'une convection saisonnière plus profonde que dans la gyre subtropicale.
 
 \begin{figure}
   \centering
+  \insertfig[0.7]{zhai_2008_fig1.png}
   \insertfig[0.7]{sarmiento_2004_fig2b.png}
   \captionT{Délimitations des biomes par des processus physiques}{%
-    Tiré de \textcite{sarmiento_2004}, figure~2b.
-    Les biomes de notre zone d'étude correspondent dans la nomenclature de cet article à: subpolaire~(``SP'', jaune); subtropical saisonnier~(``ST-SS'', bleu); et subtropical permanent~(``ST-PS'', rose).
+    (a)~Tiré de \textcite{zhai_2008}, figure 1b. Climatologie de l'énergie cinétique de tourbillon (EKE) en hiver, en échelle logarithmique, et calculée à partir de données d'altimétrie TOPEX/Poseidon et \as{ers}[\textlf{-1/2}].
 
-    \foreignblockquote{english}{
-      Biome classification scheme calculated using mixed layer depths obtained from observed density and from upwelling calculated from the wind stress divergence using observed winds.
-      The equatorially influenced biome covers the area between \latlon{5S} and \latlon{5N}, and is colored a dirty light blue in areas where upwelling occurs (labeled~``Eq-U'' on the color bar) and dark pink in areas where downwelling occurs (labeled~``Eq-D'').
-      Outside of this band, the region labeled ``Ice''~(red) is the marginal sea ice biome, the region labeled ``SP''~(yellow) is the subpolar biome, the region labeled ``LL-U''~(light blue) is the low-latitude upwelling biome , the region labeled ``ST-SS''~(dark blue) is the seasonally mixed subtropical gyre biome, and the region labeled ``ST-PS''~(pink) is the permanently stratified subtropical gyre biome.}
+    (b)~Tiré de \textcite{sarmiento_2004}, figure~2b.
+    \engquote{Biome classification scheme calculated using mixed layer depths obtained from observed density and from upwelling calculated from the wind stress divergence using observed winds.}
+    Les biomes de notre zone d'étude correspondent dans la nomenclature de cet article à: subpolaire~(\eng{subpolar}, ``SP'', jaune); subtropical saisonnier~(\eng{seasonally mixed subtropical gyre}, ``ST-SS'', bleu); et subtropical permanent~(\eng{permanently stratified subtropical gyre biome}, ``ST-PS'', rose).
+
+    % \foreignblockquote{english}{
+    %   The equatorially influenced biome covers the area between \latlon{5S} and \latlon{5N}, and is colored a dirty light blue in areas where upwelling occurs (labeled~``Eq-U'' on the color bar) and dark pink in areas where downwelling occurs (labeled~``Eq-D'').
+    %   Outside of this band, the region labeled ``Ice''~(red) is the marginal sea ice biome, the region labeled ``SP''~(yellow) is the subpolar biome, the region labeled ``LL-U''~(light blue) is the low-latitude upwelling biome , the region labeled ``ST-SS''~(dark blue) is the seasonally mixed subtropical gyre biome, and the region labeled ``ST-PS''~(pink) is the permanently stratified subtropical gyre biome.}
   }
-\label{fig:sarmiento}
+\label{fig:biomes}
 \end{figure}
 
 

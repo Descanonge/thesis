@@ -127,6 +127,7 @@ chp phénologie
 chp discussion
     (discussion + concl article)
     compléments ?
+** Remplacer version production article
 
 * Présentation soutenance
 ** idée plan
