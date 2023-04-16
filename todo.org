@@ -110,6 +110,8 @@ Chercheur junior CNRS
 * Inbox
 ** Quel est le timerange des produits que j'utilise ?
 ** Finir corrections méthodes
+** Questions Inès
+- différence entre nutriments (inorganiques)
 ** Séparer article en chapitre standalone
 comme ça:
 chp méthodes
@@ -127,8 +129,6 @@ chp phénologie
 chp discussion
     (discussion + concl article)
     compléments ?
-** Remplacer version production article
-
 * Présentation soutenance
 ** idée plan
 question: quels sont les impacts des fronts ?
