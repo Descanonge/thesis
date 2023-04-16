@@ -15,7 +15,6 @@
     \framebox[\figwidth]{\insertfig{illustration/illus_preamble_smol.jpg}}
   }%
   \captionT{Les couleurs du Gulf Stream par satellite}{%
-    \small
     Image en fausses couleurs de l'océan Atlantique Nord, prises par \as{modis} \sur~Terra le \frenchdate{2020}{02}{23}, inspiré par le travail de Norman Kuring pour \glshref{eo-illustration}.
   }
   \label{fig:oc-illustration}
@@ -60,30 +59,28 @@ La restratification étant un facteur fort dans le démarrage du bloom printanie
 Enfin, bien que les effets de la submésoéchelle soient locaux, ils peuvent néanmoins avoir une rétroaction sur les échelles supérieures, modifiant la circulation de grande échelle, ou la productivité d'un bassin océanique (\cite{levy_2012a,balwada_2022}).
 
 Les effets de la submésoéchelle sur les cycles biogéochimiques présentés ci-dessus ne sont toutefois pas encore complétement élucidés, malgré les efforts des dernières décennies dans ce domaine.
-En effet, l'étude des processus à ces échelles présente des difficultés.
-Les diverses méthodologies usuelles peinent à donner une vue entière du problème.
-Les structures qui nous intéressent sont fines et ont une courte période de vie, ce qui rend leur échantillonage (physique mais aussi biologique) un défi technique certain.
-Capturer les variations rapide de la biologie en travers d'un front lors d'une campagne in-situ présente un défi technique certain (\cite{marrec_2018,tzortzis_2021}).
-De plus, la courte période de vie des structures d'intérêt rend la tâche d'autant plus ardue.
+En effet, à ces échelles, les diverses méthodologies usuelles peinent à donner une vue entière du problème.
+Les structures qui nous intéressent sont fines et ont une courte période de vie, ce qui rend leur échantillonage  un défi technique certain.
+Les campagnes in-situ doivent déployer des moyens importants pour échantilloner les variables physiques et biologiques, ainsi que des techniques nouvelles (comme l'échantillonage lagrangien ou un cytomètre de flux automatisé \cite{thyssen_2015,marrec_2018,tzortzis_2021}).
 Il en va de même pour l'imagerie satellite, pour laquelle la couverture nuageuse rend difficile de suivre temporellement une structure.
 Par ailleurs, il est compliqué pour les satellites d'accéder à toute la biodiversité du phytoplancton, ainsi qu'au delà des premiers mètres en surface.
 Enfin, les simulations numériques peuvent résoudre ces fines échelles, mais à un coût calculatoire élevé et prohibitif sur de trop longues durées (des projections climatiques \ab{par-ex}) (\cite{fox-kemper_2019}).
 
-Malgré les limites évoquées, l'imagerie satellite donne l'opportunité d'observer ces effets à une large échelle (spatiale et temporelle), et permettrait d'en fournir une quantification.
-Une telle démarche a été entreprise par \textcite{liu_2016}, dans la gyre subtropicale du Pacifique Nord.
-Les autrices \encadra{en colocalisant les valeurs satellites de la \al{chl} avec les positions de fronts détectés à partir de la température de surface satellite} ont montré une augmentation des valeurs de \as{chl} dans les fronts par rapport au reste de la zone.
-Nous étendons leur méthode, et l'appliquons à la région de l'Atlantique Nord, autour du Gulf Stream.
+Malgré les limites évoquées, l'imagerie satellite donne l'opportunité d'observer ces effets de fine échelle, sur de larges régions et de longs temps, et permettrait ainsi de quantifier leurs effets globaux.
+Une telle démarche a été entreprise par \textcite{liu_2016} dans la gyre subtropicale du Pacifique Nord.
+Les autrices \encadra{en colocalisant les valeurs satellites de la \al{chl} avec les positions de fronts détectés à partir de la SST (température en surface)} ont montré une augmentation des valeurs de \as{chl} dans les fronts par rapport au reste de la zone.
+Nous reprenons leur méthode de détection des fronts, consistant à calculer un indice d'hétérogénéité de la SST, et l'appliquons à la région de l'Atlantique Nord, autour du Gulf Stream.
 
 Cette zone comprend trois régimes biogéochimiques différents (\cite{bock_2022}):
 Au sud, notre zone d'étude englobe une partie de la gyre subtropicale de l'Atlantique Nord, caractérisée par un régime oligotrophe et une faible productivité tout au long de l'année.
 Au nord du jet du Gulf Stream se trouve un régime subpolaire plus productif, caractérisé par une bloom printanier.
 Entre les deux est présent un régime modérément productif, avec une productivité maximale en hiver.
 
-Par ailleurs cette zone présente deux fronts permanents intenses, un front le long du talus continental, et le Gulf Stream, tous deux associés à des circulations verticales fortes et profondes \cite{flagg_2006,liao_2022}.
-Mais l'on peut également trouver dans le reste de la zone des fronts éphémères en constante évolution (\cite{drushka_2019,sanchez-rios_2020}).
+Par ailleurs cette zone présente deux fronts permanents intenses, un front le long du talus continental, et le Gulf Stream, tous deux associés à des circulations verticales fortes et profondes (\cite{flagg_2006,liao_2022}).
+Mais l'on peut également trouver dans le reste de la zone des fronts moins intenses, d'une durée de vie de l'ordre de la semaine, et en constante évolution (\cite{drushka_2019,sanchez-rios_2020}).
 
 Afin de mieux définir nos objectifs, et avant de les présenter, nous dressons dans la section suivante un état de l'art des sujets concernés.
-Nous exposerons ensuite le plan de ce manuscript.
+Nous exposerons ensuite le plan de ce manuscrit.
 
 \section{État de l'art}
 \label{sec:etat-de-lart}
@@ -97,7 +94,7 @@ Nous exposerons ensuite le plan de ce manuscript.
 % Le carbone et autres nutriments libérés pourront alors être remontés à la surface et réutilisés, complétant la pompe biologique marine.
 
 Commençons par définir notre objet d'étude principal: le phytoplancton.
-Conforme à sa construction éthymologique, ce terme désigne un ensemble d'organismes pratiquant la photosynthèse (\emph{phyto-}) et dérivant au gré des courants (de \guil*{\hbox{\emph{πλαγκτόσ}}}: errer).
+Conforme à sa construction étymologique, ce terme désigne un ensemble d'organismes pratiquant la photosynthèse c'est-à-dire des plantes (\emph{phyto-}), et dérivant au gré des courants (de \emph{plankton}: errer).
 Comme pour les plantes terrestres, ces organismes sont influencés par leur environment.
 Cependant cet environment est en perpétuel changement du fait des mouvements des masses d'eaux dans l'océan.
 Dans cette section, on décrira d'abord succinctement les caractéristiques biologiques générales du phytoplancton et les moyens de l'observer.

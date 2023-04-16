@@ -112,6 +112,8 @@ Chercheur junior CNRS
 ** Finir corrections méthodes
 ** Questions Inès
 - différence entre nutriments (inorganiques)
+- simulation num ont des paramétrisation, même si on résout la SMS ?
+- Michelle Fieux dit une gyre :)
 ** Séparer article en chapitre standalone
 comme ça:
 chp méthodes
