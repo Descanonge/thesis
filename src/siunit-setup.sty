@@ -57,8 +57,8 @@
 }
 
 % Shortcut for percent value
-\NewDocumentCommand \pct { o m } {
-  \qty [#1] {#2} {\percent}
+\NewDocumentCommand \pct { O{} m } {
+  \qty [number-mode=math, #1] {#2} {\percent}
 }
 
 % Shortcut for temperature value
