@@ -110,11 +110,12 @@ Chercheur junior CNRS
 * Inbox
 ** Quel est le timerange des produits que j'utilise ?
 ** Finir corrections méthodes
+** Finir corrections intro inès
+** Annexe sur création image préambule
 ** Questions Inès
 - différence entre nutriments (inorganiques)
-- simulation num ont des paramétrisation, même si on résout la SMS ?
-- Michelle Fieux dit une gyre :)
-** Séparer article en chapitre standalone
+- Michelle Fieux dit une gyre :) euh vérifier
+** Séparer article en chapitre standalone ?
 comme ça:
 chp méthodes
 chp article (en gros, tous les résultats principaux)
@@ -131,6 +132,7 @@ chp phénologie
 chp discussion
     (discussion + concl article)
     compléments ?
+
 * Présentation soutenance
 ** idée plan
 question: quels sont les impacts des fronts ?
@@ -139,10 +141,8 @@ question: quels sont les impacts des fronts ?
 - dans la région subpolaire (bloom)
 
 * Traduction
-- mixed layer instability
+- mixed layer instability -> instabilité de couche de mélange ?
 ** mots d'emprunts
-swaths, upwelling, downwelling
-sea surface temperature
 
 * Recommendations de style
 ** GLS
