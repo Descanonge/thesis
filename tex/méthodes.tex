@@ -606,17 +606,17 @@ on calcule les valeurs moyennes:
 avec~\(N\) le nombre d'années.
 Le calcul est identique pour l'écart de durée~\as{lag-duree}.
 
-
 {
-  \clearpage
-  \makeevenhead{thesis}{\leftmark}{}{Récapitulatif}
-  \makeoddhead{thesis}{\leftmark}{}{Récapitulatif}
-  \phantomsection
-  \addcontentsline{toc}{section}{Récapitulatif}
-  \vspace{\stretch{1}}
-  \centerline{
-    \includegraphics{recap.pdf}
-  }
-  \vspace{\stretch{1}}
-  \clearpage
+  \clearpage%
+  \makeevenhead{thesis}{\leftmark}{}{Récapitulatif}%
+  \makeoddhead{thesis}{\leftmark}{}{Récapitulatif}%
+  \phantomsection%
+  \addcontentsline{toc}{section}{Récapitulatif}%
+  \vfill
+  \adjustimage{
+    center,
+    max size={\paperwidth-8cm}{0.99\textheight}
+  }{recap_tight.pdf}%
+  \vfill
+  \clearpage%
 }

@@ -244,6 +244,7 @@ cachedir=minted]{minted}
 \RequirePackage{bib-setup}
 
 \RequirePackage{graphicx}
+\RequirePackage{adjustbox}
 \graphicspath{{resources}}
 
 \RequirePackage{amsmath}
@@ -397,9 +398,11 @@ cachedir=minted]{minted}
 \dim_new:N \figwidth
 \dim_set:Nn \figwidth {398pt}
 \NewDocumentCommand \insertfig { O{1} m }{%
-  \centerline{
-    \includegraphics [width=\dim_eval:n {#1\figwidth}] {#2}
+  \adjustbox{center}{%
+    \includegraphics [width=\dim_eval:n {#1\figwidth}] {#2}%
   }}
+  % \makebox[\textwidth][c]{%
+  %   \includegraphics [width=\dim_eval:n {#1\figwidth}] {#2}%}
 \ExplSyntaxOff
 
 %%% Sections styles
