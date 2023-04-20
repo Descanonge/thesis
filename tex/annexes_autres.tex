@@ -214,9 +214,9 @@ Enfin, la documentation de cette nouvelle fonctionalité n'a pas encore été r�
 % \suppressfloats[t]
 
 Dans cette section, j'estime le coût carbone engendré par mon travail de thèse.
-Commencons par les voyages professionels, typiquement un grand poste émetteur dans les carrières scientifiques.
+Commencons par les voyages professionels, typiquement un grand poste émetteur personnel dans les carrières scientifiques.
 
-Le premier est un aller-retour Paris--Venise, en avion, pour assister à la 7\ieme~conférence \abbrv(LAPCOD)~(Lagrangian Analysis and Prediction of Coastal and Ocean Dynamics).
+Le premier est un aller-retour Paris--Venise, en avion, pour assister à la 7\ieme~conférence \abbrv{LAPCOD}~(Lagrangian Analysis and Prediction of Coastal and Ocean Dynamics).
 Réalisé pendant mon stage de master, je n'étais alors que peu sensibilisé à ces questions. Avec plus de prévoyance, il aurait pu être effectué en train.
 Ce trajet comptabilise~\qty{266 \pm 27}{\kg\carbone} (sans compter les traînées) selon l'outil \abbrv{GES}~1point5, développé par le collectif \href{https://labos1point5.org/}{\textit{Labos~1point5}} (\cite{mariette_2022}).
 En train, ce trajet aurait coûté~\qty{55 \pm 24}{\kg\carbone}.
@@ -224,16 +224,20 @@ En train, ce trajet aurait coûté~\qty{55 \pm 24}{\kg\carbone}.
 Le second trajet est un aller-retour Paris--Vienne, en train, pour assister l'assemblée générale 2022 de l'\abbrv{EGU}.
 Selon le même outil, ce trajet a comptabilisé~\qty{75 \pm 33}{\kg\carbone}.
 En avion il aurait coûté~\qty{230}{\kg\carbone}.
-Je dois ici remercier les collègues chercheurs et le personnel administratif du laboratoire ayant rendu ce trajet quelque peu aventureux possible, et agréable.
+Je dois ici remercier les collègues chercheurs et le personnel administratif du laboratoire ayant rendu ce trajet quelque peu aventureux en train, possible et agréable.
 
 J'estime \encadra{toujours avec \abbrv{GES}~1point5} mes trajets domicile-travail effectués (le plus généralement) en bus et métro à~\qty{162 \pm 96}{\kg\carbone} par an.
-Ce coût est en dessous de celui préconisé pour respecter les accords de Paris (\qty{0.3}{\tonne\carbone} selon \textcite{dugast_2019}).
+Ce coût est en dessous de celui préconisé pour respecter les accords de Paris (\qty{0.3}{\tonne\carbone} selon \cite{dugast_2019}).
 Enfin les 5~repas journaliers (végétariens), pris au self du personnel, et les très nécessaires tasses de café et thé sont estimés à~\qty{420}{\kg\carbone} annuels par l'outil \href{https://nosgestesclimat.fr}{Nos Gestes Climat}.
 
+Je comptabilise également les coûts communs liés au fonctionnement du laboratoire (consommation énérgétique, entretien bâtiment, mails,\dots) qui ont été estimés par le groupe Climaction-LOCEAN pour l'année 2018\footnote{\url{https://climactions.ipsl.fr/groupes-de-travail/locean-climactions/}}.
+Individuellement, cela représente environ \qty{1}{\tcarbone} annuelle.
+
 Côté informatique, nous n'avons pas réalisé d'achats de matériel.
-La majorité des calculs sont réalisés sur les machines du mésocentre de l'\ab{ipsl}; les données y sont également stockées (\qty{<1}{\To}).
+La majorité des calculs sont réalisés sur les machines du mésocentre de l'\ab{ipsl}; les données y sont également stockées (\(\lesssim \qty{1}{\To}\)).
 Ces calculs sont pour leur vaste majorité de nombreux processus, courts (quelques minutes), et utilisent peu de ressources (un seul processeur et quelques~\unit{\Go} de mémoire vive) \encadra*{en contraste à une situation plus \guil*{simple}, par exemple, de quelques calculs très intensifs qui représenteraient la quasi-totalité du bilan carbone}.
-Il est donc compliqué d'estimer le coût de tous ces calculs dont l'historique n'a pas été conservé, en plus des difficultés usuelles de ce genre d'estimation sur des ressources informatiques partagé.
+Il est donc compliqué d'estimer le coût de tous ces calculs dont l'historique n'a pas été conservé, en plus des difficultés usuelles de ce genre d'estimation sur des ressources informatiques partagées.
+
 
 \begin{table}
   \centering
@@ -249,9 +253,10 @@ Il est donc compliqué d'estimer le coût de tous ces calculs dont l'historique 
 
     Domicile-travail     & 162    & 648                                  \\
     Alimentation         & 420    & 1680                                 \\
+    Fonctionnement       & 1000   & 4000                                 \\
 
     \midrule
-    Total                &        & \bfseries 2669                       \\
+    Total                &        & \bfseries 6669                       \\
     \bottomrule
   \end{tabular}
 \end{table}

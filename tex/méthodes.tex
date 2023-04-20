@@ -134,18 +134,18 @@ Ce produit donne ainsi un champ de SST sans nuages, estimé par une combinaison 
 L'absence de couverture nuageuse et la simplicité d'usage se fait au détriment du lissage inévitable des structures les plus fines.
 
 Une estimation quantitative du lissage due à l'interpolation est compliqué, car la paramétrisation de cette dernière dépend de la variabilité du champ de température à~\abbrv{J"~1}.
-On peut néanmoins imaginer que le champ de SST produit est plus lissé dans les zones normalement nuageuses, et de plus potentiellement plus éloigné de la réalité (voir \nref{sec:donnees-sst_reanalyses}).
+On peut néanmoins imaginer que le champ de SST produit est plus lissé dans les zones normalement nuageuses, et de plus potentiellement plus éloigné de la réalité (voir \nref{sec:donnees-sst_glorys}).
 Il est tout de même possible de mitiger ces effets en ne comptabilisant dans nos statistiques seulement les pixels non-nuageux, ce que nous faisons pour tous les résultats présentés.
 Nous utilisons pour cela les données de \as{chl} qui identifient les pixels nuageux.
 % À noter qu'il serait également possible d'utiliser les erreurs d'intégration associées à chaque pixel, mais cela n'a pas été exploré.
 % -> c'est pas vraiment possible, les erreurs d'inté sont données avec une résolution très faible
 
 \subsubsection{GLORYS}
-\declareDataset{sst_reanalyses}
+\declareDataset{sst_glorys}
 
 Une solution pour s'affranchir de la couverture nuageuse est de s'appuyer sur des produits de réanalyses.
 Tôt dans ce projet, certaines pistes de travail (\ab{par-ex} le suivi temporel des fronts) nous ont poussé à tester l'utilisation de tels produits.
-Nous utilisons ici une réanalyse globale (désignée par \dataname{sst_reanalyses}), délivrée par \as{cmems}\footfullcite{sst_reanalyses} et produite par \glshref{mercator}.
+Nous utilisons ici une réanalyse globale (désignée par \dataname{sst_glorys}), délivrée par \as{cmems}\footfullcite{sst_glorys} et produite par \glshref{mercator}.
 Cette réanalyse est faite sur une grille \engquote{eddy-resolving}, au \resol{1}{12} soit environ~\qty{8}{\km}, et sur 50~niveaux verticaux. Les données sont disponibles en résolution journalière.
 Le noyau \abbrv{nemo} est forcé en surface par les réanalyses \abbrv{ERA}-Interim et \abbrv{ERA-5} du centre \as{ecmwf}.
 Le modèle fait de l'assimilation de données d'observations: altimétrie, SST \guil{Reynolds}~\resol{1}{4} (seulement \as{avhrr}), concentration en glace de mer, et profiles in-situ de températures et profils de salinité~\as{cora}.
@@ -155,7 +155,7 @@ Le modèle fait de l'assimilation de données d'observations: altimétrie, SST \
 \begin{figure}
   \insertfig{comparaison_sst.pdf}
   \captionT{Comparaison des produits de SST}{%
-    Zoom sur une même fenêtre, le \frenchdate{2007}{04}{22}, de la SST pour quatres produits considérés: \dataname{sst_esacci}~(a), \dataname{sst_modis}~(b), \dataname{sst_mur}~(c), et \dataname{sst_reanalyses}~(d).
+    Zoom sur une même fenêtre, le \frenchdate{2007}{04}{22}, de la SST pour quatres produits considérés: \dataname{sst_esacci}~(a), \dataname{sst_modis}~(b), \dataname{sst_mur}~(c), et \dataname{sst_glorys}~(d).
   }
   \label{fig:comparaison-sst}
 \end{figure}
@@ -163,7 +163,7 @@ Le modèle fait de l'assimilation de données d'observations: altimétrie, SST \
 Nous illustrons ici notre comparaison entre les différents produits de SST en nous appuyant sur un instantané (\nref{fig:comparaison-sst}).
 Seul le produit \dataname{sst_modis}~(b) n'est pas issu d'une interpolation ou d'une réanalyse, on peut le considérer comme étant le plus proche d'une \engquote{ground truth} (en dehors des pixels nuageux bien sûr).
 
-On notera pour le produit de réanalyses \dataname{sst_reanalyses}~(d), outre sa résolution assez faible, des différences importantes dans les structures présentes sur les autres produits, qui ne sont visiblement pas due à un simple lissage du champ de SST.
+On notera pour le produit de réanalyses \dataname{sst_glorys}~(d), outre sa résolution assez faible, des différences importantes dans les structures présentes sur les autres produits, qui ne sont visiblement pas due à un simple lissage du champ de SST.
 Ce produit manque les caractéristiques de certaines structures, mais surtout manque leur position exacte.
 
 Les produits issus d'interpolations de plusieurs capteurs semblent moins souffrir de ce problème.
@@ -612,6 +612,7 @@ Le calcul est identique pour l'écart de durée~\as{lag-duree}.
   \makeoddhead{thesis}{\leftmark}{}{Récapitulatif}%
   \phantomsection%
   \addcontentsline{toc}{section}{Récapitulatif}%
+  \addcontentsline{lof}{figure}{Récapitulatif}%
   \vfill
   \adjustimage{
     center,
