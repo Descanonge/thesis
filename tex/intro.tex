@@ -219,15 +219,20 @@ L'implémentation actuelle du groupe NASA \as{obpg} utilise \abbrv{OC3/4} pour l
 
 Comme nous venons de le voir, la dérivation de la concentration de \as{chl} est un processus compliqué, comprenant de multiple sources d'incertitudes dans les valeurs absolues inférées.
 Ce processus comporte un certain nombre de limitations.
-Nous avons évoqué la difficulté à travailler dans des zones où d'autres éléments que le phytoplancton dicte le comportement optique, comme des sédiments en suspension par exemple.
+Bien sûr en premier lieu, la couverture nuageuse bloque la télédétection dans le domaine visible.
+Ensuite, nous avons évoqué la difficulté à travailler dans des zones où d'autres éléments que le phytoplancton dicte le comportement optique, comme des sédiments en suspension par exemple.
 C'est souvent le cas près des côtes et des décharges fluviales.
 La faible profondeur en régime côtier apporte également une difficulté, puisque dans le cas où la lumière incidente pénètre suffisamment profond, la réflectance mesurée comportera la lumière réfléchie par le fond marin (et re-traversant la colonne d'eau).
+
 Plus généralement, quelque soit la zone sondée, la profondeur jusqu'à laquelle pénètre la lumière est un point critique.
 En effet, la réflectance mesurée ne peut comporter des informations que sur cette couche éclairée.
 De plus, les modèles empiriques sont ajustés par des mesures in-situ réalisées sur les premiers mètres.
-Les données satellite manquent ainsi une biomasse plus en profondeur, potentiellement importante [ref].
-Par ailleurs, nous nous sommes penchés sur la détection de la \al{chl}. Bien que ce soit le pigment majoritaire, ce n'est pas nécessairement un proxy parfait pour la biomasse présente dans la colonne d'eau [ref].
-Et enfin, la couverture nuageuse bloque cette télédétection.
+Les données satellite manquent ainsi la biomasse plus en profondeur, potentiellement importante (\as{ie} le \engquote{Deep Chlorophyll Maximum}).
+
+Par ailleurs, nous nous sommes penchés sur la détection de la \al{chl}. Bien que ce soit le pigment majoritaire, ce n'est pas nécessairement un proxy parfait pour la biomasse présente dans la colonne d'eau.
+La relation entre la quantité de \al{chl} et la biomasse, exprimée par le ratio \hbox{\as{chl}:C}, peut varier selon les espèces et les conditions environnementales (\cite{behrenfeld_2015,halsey_2015,inomura_2022}).
+
+% Des efforts sont conduits pour extraire la composition de la communauté phytoplanctonique des données de télédétection.
 
 \subsubsection{Observations in-situ et modèles numériques}
 
@@ -235,21 +240,20 @@ Pour toutes ces raisons, les mesures in-situ constituent un outil nécessaire et
 En effet, au-delà de pouvoir accéder directement aux variables que les satellites doivent inférer, parfois à travers des proxys, ces mesures peuvent explorer des dimensions invisibles aux satellites.
 
 D'abord, les mesures in-situ ont accès à toute la colonne d'eau et non pas seulement la surface optiquement active.
-D'autres part, ces mesures offrent une vue beaucoup plus large et précise de la biodiversité présente, et ce grâce à différentes techniques de mesures.
-cytomètre,
-hplc,
-zooscan,
-omique,
+D'autre part, ces mesures offrent une vue beaucoup plus large et précise de la biodiversité présente.
+Les mesures \as{hplc}\marginnote{\al{hplc}} permettent par exemple d'accéder à la concentration exacte de la \al{chl} mais également d'autres pigments auxiliaires, donnant ainsi une meilleure idée de la composition de la communauté phytoplanctonique.
+D'autres techniques permettent d'explorer d'autres communauté, comme le cytomètre de flux pour les plus petits organismes (cyanobactéries et bactéries hétérotrophes), ou le zooscan pour les plus gros organismes (essentiellement le zooplancton).
+L'application plus récente des sciences -omiques (génomique, métagénomique, transcriptomique,\dots) fourni également de nouvelles perspectives sur les écosystèmes (\cite{bork_2015,richter_2019,sunagawa_2020}).
 
 Par ailleurs, les mesures in-situ offrent l'avantage de fournir une vision précise de la densité des masses d'eau par mesure de la température et de la salinité.
 Les satellites actuels n'ayant accès à la salinité qu'à relativement basse résolution (\qtyrange{35}{50}{\km} pour \as{smos} \ab{par-ex}), ils ne peuvent estimer les variations de densité aux fines échelles qu'avec la température.
 
 Néanmoins, ces mesures présentent également un certain nombre de limitations, et de difficultés technique de mise en place.
-Sonder à une grande profondeur prend du temps, ce qui se répercute sur la distance d'échantillonage.
-Similairement, la fréquence d'échantillonage peut être dictée par certaines mesures biologiques longues (ref d'ogloli ?).
+Certaines mesures, physique ou biologiques \encadra{notamment les profils en profondeur} prennent du temps, ce qui se répercute sur la distance d'échantillonage.
+Des techniques sont mises en place pour contrer ce problème, comme le cytomètre de flux automatique (\cite{thyssen_2015}).
 Quand bien même, il leur est impossible de couvrir une large zone spatio-temporelle.
-Il est usuel que les campagnes en mer ciblent une zone d'intérêt en particulier, par exemple un front ou un tourbillon, identifiée pendant la mission par images satellites.
-Heureusement ces dernières années de telles campagnes se multiplient, devant la nécessité d'avoir tous ces paramètres dans des zones précises pour mieux comprendre ce qu'il se passe.
+Il est usuel que les campagnes en mer ciblent une zone d'intérêt en particulier, par exemple un front ou un tourbillon, identifiée pendant la mission par images satellites (un échantillonage dit \guil{Lagrangien}, \cite{marrec_2018,tzortzis_2021}).
+Heureusement ces dernières années de telles campagnes se multiplient, déployant un éventail de méthodes de mesures, devant la nécessité d'obtenir une large gamme de paramètres (physiques et biologiques) à de fines échelles (\cite{shulman_2015,barcelo-llull_2021,marrec_2018,freilich_2021,tzortzis_2021,wilson_2021}).
 
 J'ai parlé que des obs mais des modèles numériques sont aussi dispo cependant.
 Tous les modèles sont faux. Tous les modèles bio sont très faux.
@@ -412,8 +416,8 @@ La mesure des vitesses verticales en jeu est également compliquée.
 Ces courants ascendants n'occupent pas une surface importante et sont clairsemés, même le long d'un front.
 En outre, les vitesses verticales dans ces sites d'upwelling sont \encadra{bien qu'importantes relativement au reste de l'océan} trop faibles pour être directement mesurées facilement.
 Ces vitesses sont généralement plutôt inférées à partir d'autres mesures sur le terrain (\ab{par-ex} \cite{dasaro_2018,tarry_2021,comby_2022,cutolo_2022}).
-Notamment, elles peuvent être déterminée à partir du champ de vitesses horizontales en utilisant l'équation \guil{omega} (\cite{hoskins_1978}).
-La mission \as{swot}, lancée en décembre 2022, promet d'ailleurs de pouvoir accéder à ce champ de vitesses horizontales à une résolution sans précédent (\cite{dovidio_2019}).
+Notamment, elles peuvent être déterminée à partir du champ de vitesses horizontales en utilisant l'équation \guil{omega} (\cite{hoskins_1978,pietri_2021}).
+La mission \as{swot}, lancée en décembre 2022, promet d'ailleurs de pouvoir accéder à ce champ de vitesses horizontales à une résolution sans précédent (\cite{dovidio_2019,morrow_2019,barcelo-llull_2021}).
 
 Au-delà de la magnitude des vitesses verticales, cet apport de nutriment est également conditionné par l'extension en profondeur des circulations agéostrophiques.
 Les fronts les plus intenses s'étendent jusque sous la nutricline, permettant le transport de nutriments (\cite{levy_2001,thomas_2013,pasquerondefommervault_2015,capet_2016}).
