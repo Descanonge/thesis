@@ -433,8 +433,8 @@ Par ailleurs, le gradient vertical en nutriment \encadra{maintenu par la consomm
 
 \review{Effets sur la communauté.}
 
-L'effet \emph{local} de l'apport de nutriments aux fronts, a été largement observé dans les études ci-dessus.
-Cependant il est difficile de quantifier précisemment cet effet sur les cycles biogéochimiques à plus grand échelle.
+L'effet \emph{local} de l'apport de nutriments aux fronts a été largement observé dans les études ci-dessus.
+Cependant il est difficile de quantifier précisemment cet effet sur les cycles biogéochimiques à plus grande échelle.
 Les observations in-situ ne peuvent observer qu'un nombre limité de structures, et ont d'ailleurs tendances à cibler les plus intenses.
 Les modèles numériques peuvent résoudre les circulations de submésoéchelles mais contre un fort coût calculatoire qui limite leur étude avec des modèles régionaux ou globaux\footnote{%
   En particulier, la modification de la circulation grande échelle par rétroaction des dynamiques de fines échelles nécessite un long temps de spin-up.
@@ -611,14 +611,14 @@ La méthode \as{cc} a largement été utilisée pour détecter des fronts de SST
 Elle a également été appliquée avec succès sur des données de chlorophylle (\cite{stegmann_2004,kahru_2012,bontempi_2004}).
 Diverses dérivations en ont été proposées.
 \textcite{cayula_1995} proposent une version travaillant sur plusieurs images consécutives.
-Plutôt que d'utiliser des images à des instants différents, \textcite{nieto_2012} applique l'algorithme \as{cc} sur quatres fenêtre glissantes décalées en longitude et latitude et fusionnent les résultats des pixels se chevauchant.
+Plutôt que d'utiliser des images à des instants différents, \textcite{nieto_2012} appliquent l'algorithme \as{cc} sur quatres fenêtre glissantes décalées en longitude et latitude et fusionnent les résultats des pixels se chevauchant.
 \textcite{miller_2009} combine les résultats de l'algorithme \as{cc} pour des produits SST et \as{chl} afin d'augmenter la couverture disponible.
 
-Une méthode au fonctionnement similaire est proposée par \textcite{vazquez_1999}, qui pour quantifier la séparation des deux distributions en température (de part et d'autre d'un éventuel front) utilise une mesure entropique: la divergence de Jensen--Shannon (\cite{barranco-lopez_1995}).
-\textcite{shimada_2005} reprendra cette méthode et l'adjoindra d'un algorithme de morphologie mathématique (\cite{jiang_1997}).
+Une méthode au fonctionnement similaire est proposée par \textcite{vazquez_1999}, qui pour quantifier la séparation des deux distributions en température (de part et d'autre d'un éventuel front) utilisent une mesure entropique: la divergence de Jensen--Shannon (\cite{barranco-lopez_1995}).
+\textcite{shimada_2005} reprendront cette méthode et l'adjoindront d'un algorithme de morphologie mathématique (\cite{jiang_1997}).
 Cette configuration sera réutilisée à plusieurs reprises (\cite{lan_2012} \ab{par-ex}).
 
-Enfin, dans le but de quantifier les valeurs de \as{chl} dans les fronts de submésoéchelle de la gyre subtropicale du Pacifique Nord, \textcite{liu_2016} propose une méthode inspirée de l'algorithme \as{cc}.
+Enfin, dans le but de quantifier les valeurs de \as{chl} dans les fronts de submésoéchelle de la gyre subtropicale du Pacifique Nord, \textcite{liu_2016} proposent une méthode inspirée de l'algorithme \as{cc}.
 Elles définissent un indice d'hétérogénéité (\as{hi}) du champ de SST.
 La valeur de cette indice est calculé en chaque pixel à partir de la distribution en température dans une fenêtre (glissante donc) autour de ce pixel.
 La valeur de l'indice est la somme (pondérée par des coefficient de normalisation) de la variance de la distribution, de sa bimodalité (calculée différement que dans les méthodes ci-dessus), et de son asymétrie (afin de cibler les plus petits fronts).

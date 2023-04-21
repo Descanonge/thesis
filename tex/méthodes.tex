@@ -67,8 +67,8 @@ Ce sont les données utilisées par \textcite{liu_2016} \encadra{et produites pa
   \end{flexlabelled}
 \end{note}
 
-Les données sont téléchargées au niveau~\abbrv{L2} depuis le \af{cmr}\footfullcite{sst_modis} en sélectionnant les sections de fauchées\footnotemark{} intersectant notre région d'étude, collectés de jour, et pour les courtes longueurs d'onde infrarouges~(\qty{11}{\um}).
-Ces données sont projetées sur une grille kilométrique globale, en reprenant les outils utilisés par \citeauthor{liu_2016}, à savoir les programmes présents dans le paquet de l'\href{https://oceandata.sci.gsfc.nasa.gov/ocssw}{\as{ocssw}}, version~v7.5, qui est maintenu par l'\al{obpg} et notamment distribué à travers l'outil \href{https://seadas.gsfc.nasa.gov/}{SeaDAS}.
+Les données sont téléchargées au niveau~\abbrv{L2} depuis le \as{cmr}\footfullcite{sst_modis}\marginnote{\al{cmr}} en sélectionnant les sections de fauchées\footnotemark{} intersectant notre région d'étude, collectés de jour, et pour les courtes longueurs d'onde infrarouges~(\qty{11}{\um}).
+Ces données sont projetées sur une grille kilométrique globale, en reprenant les outils utilisés par \citeauthor{liu_2016}, à savoir les programmes présents dans le paquet de l'\href{https://oceandata.sci.gsfc.nasa.gov/ocssw}{OCSSW}\marginnote{\al{ocssw}}, version~v7.5, qui est maintenu par l'\al{obpg} et notamment distribué à travers l'outil \href{https://seadas.gsfc.nasa.gov/}{SeaDAS}.
 Les sections de fauchées, maintenant toutes sur la même grille spatiale, peuvent être moyennées jour par jour, pour obtenir un produit de niveau~\abbrv{L3}.
 \footnotetext{%
   \engquote{swath} en anglais, bande de terrain couverte par le satellite le long de son orbite.
@@ -95,18 +95,19 @@ Les difficultés évoquées ci-dessus motivent à trouver un produit nécessitan
 \subsubsection{MUR}
 \declareDataset{sst_mur}
 
-Le produit suivant, désigné ici \af{mur} est développé et distribué par le \as{ghrsst} au JPL \eng{Physical Oceanography} \as{daac}\footfullcite{sst_mur}.
+Le produit suivant, désigné ici \af{mur} est développé et distribué par le \as{ghrsst}\marginnote{Group for High Res.\ SST} au JPL \eng{Physical Oceanography} \as{daac}\footfullcite{sst_mur}\marginnote{\al{daac}}.
 Il présente les avantages d'être distribué à une résolution kilométrique et sans nuages grâce à une méthode d'interpolation par vaguelettes (\cite{chin_2017}).
 Il intègre de nombreuses sources provenant de plusieurs capteurs infrarouges et micro-ondes, ainsi que de mesures in-situ.
-La grande couverture spatiale de ce produit se fait donc par l'utilisation de mesures non-contraintes par la couverture nuageuse (\ab{cad} micro-ondes et in-situ), mais qui présentent une résolution bien plus faible.
+La grande couverture spatiale de ce produit se fait donc par l'utilisation de mesures non-contraintes par la couverture nuageuse (\al{cad} micro-ondes et in-situ), mais qui présentent une résolution bien plus faible.
 Le champ de SST se retrouve donc lissé à la fois par l'interpolation et par l'inclusion de ces mesures.
 L'utilisation du produit suivant cherche à palier à ce problème.
 
 \subsubsection{ESA-SST-CCI / \textlf{C3S}}
 \declareDataset{sst_esacci}
 
-Ce produit est distribué conjointement par l'\as{esa}-\abbrv{SST}-\as{cci} et le \as{c3s}\footnote{%
-  l'ESA-CCI pour la période 1981--2016 et le \abbrv{C3S} après 2017}.
+Ce produit est distribué conjointement par l'\as{esa}-\abbrv{SST}-\as{cci}\marginnote{\al{cci}} et le \as{c3s}\footnote{%
+  l'ESA-CCI pour la période 1981--2016 et le \abbrv{C3S} après 2017
+}\footfullcite{sst_esacci}\marginnote{\al{c3s}}.
 Il~agglomère les mesures de tous les capteurs infrarouges disponibles depuis~1981, ce qui comprend 11~\as{avhrr} à bord des satellites \as{metop}["~A] et \as{noaa} (entre les itérations 6 et~19) et trois \as{atsr} à bord de \as{ers} 1~et~2, et Envisat. \review{Ajouter SLSTR.}
 Cela donne au moins deux capteurs en fonctionnement simultané, et au moins trois depuis~1992.
 Outre la bonne couverture obtenue, l'uniformité des capteurs permet d'obtenir un jeu de données stable dans le temps, pouvant servir à la détection de tendances climatiques~(\cite{merchant_2019}).
@@ -129,7 +130,7 @@ Ces données sont projetées capteur par capteur sur une grille régulière, à 
 
 Les données sont regroupées par famille d'instrument pour le produit~\abbrv{L3C}. Une légère perte de précision est attendue, mais les produits \abbrv{L3U} et~\abbrv{L3C} peuvent néanmoins tous deux être utilisés dans l'étude de structures fines et où la présence de nuages n'est pas rédhibitoire~(\cite{merchant_2019}).
 
-Enfin, le produit~\abbrv{L4} regroupe l'ensemble des capteurs en utilisant le schéma d'intégration variationnelle \abbrv{NEMOVAR} intégré dans le système \as{ostia} (\cite{good_2020}).
+Enfin, le produit~\abbrv{L4} regroupe l'ensemble des capteurs en utilisant le schéma d'intégration variationnelle \abbrv{NEMOVAR} intégré dans le système \as{ostia}\marginnote{Operational SST and Sea Ice Analysis} (\cite{good_2020}).
 Ce produit donne ainsi un champ de SST sans nuages, estimé par une combinaison des observations satellites, et de la prévision d'un modèle numérique d'un jour sur l'autre.
 L'absence de couverture nuageuse et la simplicité d'usage se fait au détriment du lissage inévitable des structures les plus fines.
 
@@ -147,7 +148,7 @@ Une solution pour s'affranchir de la couverture nuageuse est de s'appuyer sur de
 Tôt dans ce projet, certaines pistes de travail (\ab{par-ex} le suivi temporel des fronts) nous ont poussé à tester l'utilisation de tels produits.
 Nous utilisons ici une réanalyse globale (désignée par \dataname{sst_glorys}), délivrée par \as{cmems}\footfullcite{sst_glorys} et produite par \glshref{mercator}.
 Cette réanalyse est faite sur une grille \engquote{eddy-resolving}, au \resol{1}{12} soit environ~\qty{8}{\km}, et sur 50~niveaux verticaux. Les données sont disponibles en résolution journalière.
-Le noyau \abbrv{nemo} est forcé en surface par les réanalyses \abbrv{ERA}-Interim et \abbrv{ERA-5} du centre \as{ecmwf}.
+Le noyau \abbrv{NEMO} est forcé en surface par les réanalyses \abbrv{ERA}-Interim et \abbrv{ERA-5} du centre \as{ecmwf}.
 Le modèle fait de l'assimilation de données d'observations: altimétrie, SST \guil{Reynolds}~\resol{1}{4} (seulement \as{avhrr}), concentration en glace de mer, et profiles in-situ de températures et profils de salinité~\as{cora}.
 
 \subsubsection{Comparaison des produits de SST}
@@ -197,20 +198,17 @@ Ce produit agrège les données optiques de plusieurs capteurs: \as{seawifs} à 
 Similairement au produit Modis, les valeurs de \as{chl} sont calculées à partir des réflectance en utilisant ici un mélange des algorithmes \abbrv{OC3/4}, CI, et \abbrv{OC5}.
 
 \begin{note}[label={note:merge-chl-or-rrs}]
-  Cette aggrégation se fait selon le traitement dit Copernicus-GlobColour: les données de reflectance de chaque capteur sont transformées en concentration de \as{chl} avant d'être fusionnées en seul produit~(\cite{garnesson_2019}).
-  À l'inverse, le produit (\as{esa})~OC-\as{cci}/\as{c3s} du même projet \as{octac}, développé par le Plymouth Marine Laboratory, fusionne les reflectances des différents capteurs avant la conversion en \as{chl}.
-  Aggréger les valeurs de Chlorophylle plutôt que de réflectance permet \encadra{entre autres} un ajout de nouveaux capteurs facilité (à ce jour le produit OC-\as{cci} n'intègre pas le capteur de \as{noaa}[-\textlf{20}] par ex.), ainsi qu'une meilleur couverture spatiale~(\cite{garnesson_2019}).
-\end{note}
+  L'aggrégation des capteurs se fait selon le traitement dit Copernicus-GlobColour: les données de reflectance de chaque capteur sont transformées en concentration de \as{chl} \emph{avant} d'être fusionnées en seul produit~(\cite{garnesson_2019}).
+  À l'inverse, le produit (\as{esa})~OC-\as{cci}/\as{c3s} développé par le Plymouth Marine Laboratory pour le même projet \as{octac}, fusionne les reflectances des différents capteurs avant la conversion en \as{chl}.
 
-Produits vont par pairs.
-Autant garder ceux à 4km.
-Ce produit présente essentiellement les même avantages et inconvénients que son homologue pour SST.
+  Aggréger les valeurs de Chlorophylle plutôt que de réflectance permet \encadra{entre autres} un ajout de nouveaux capteurs facilité (à ce jour le produit OC-\as{cci} n'intègre pas encore le capteur de \as{noaa}[-\textlf{20}] par ex.), ainsi qu'une meilleur couverture spatiale~(\cite{garnesson_2019}).
+\end{note}
 
 \begin{figure}
   \centering
   \insertfig{comparaison_chl.pdf}
   \captionT{Comparaison des produits de Chl-\textit{a}}{%
-    Zoom sur une même fenêtre, le \frenchdate{2007}{04}{22}, de la \as{chl} pour les deux produits considérés: Copernicus-GlobColour~(a), et \abbrv{Modis-L3}~{b}.
+    Zoom sur une même fenêtre, le \frenchdate{2007}{04}{22}, de la \as{chl} pour les deux produits considérés: Copernicus-GlobColour~(a), et \abbrv{Modis-L3}~(b).
   }
   \label{fig:comparaison-chl}
 \end{figure}
@@ -231,7 +229,7 @@ Sachant que les produits de composition du phytoplancton dont nous disposions (n
 \declareDataset{etopo1}
 
 Nous utilisons les données de bathymétrie \abbrv{ETOPO1}\footfullcite{etopo1}, fournies par \as{noaa}.
-Les données sont distribuées sur une grille plate-carrée à une résolution d'une minute d'arc~(\resol{1}{60}), soit trois fois trop pour nous.
+Les données sont distribuées sur une grille plate-carrée à une résolution d'une minute d'arc~(\resol{1}{60}), soit environ trois fois supérieure à celle de nos données SST et \as{chl}.
 Nous sous-échantillonnons les données en appliquant une moyenne à chaque groupe de \qtyproduct{3x3}{\pixels}, puis en interpolant le résultat sur la même grille que le reste des données de la même manière que pour la SST.
 La bathymétrie nous permet d'exclure de nos résultats le plateau continental (\nref{fig:bathymetrie}), pour des raisons discutées ci-dessous.
 
