@@ -5,6 +5,7 @@
 \RequirePackage{expl3}
 \RequirePackage{xparse}
 \RequirePackage{l3keys2e}
+\RequirePackage{calc}
 
 \directlua{chthesis = require("ch-thesis")}
 
@@ -107,7 +108,8 @@
 %%% Localization
 \frenchsetup{
   ItemLabels=\textendash,
-  ThinColonSpace
+  ThinColonSpace,
+  AutoSpaceFootnotes=false,
 }
 \addto\extrasenglish{\sisetup{locale = US}}
 \addto\extrasfrench{\sisetup{locale = FR, output-decimal-marker=.}}
@@ -295,7 +297,7 @@ cachedir=minted]{minted}
 \RequirePackage[depth=4]{bookmark}
 \bookmarksetup{numbered}
 \pdfstringdefDisableCommands{%
-  \def\textlf#1{}%
+  \def\textlf#1{#1}%
 }
 
 %%% Page style
@@ -373,6 +375,9 @@ cachedir=minted]{minted}
   \makefootmark #1}%
 % Footnotes in minipage (default is italic, not suported by xcharter textsu)
 \renewcommand*\thempfootnote{\alph{mpfootnote}}
+% Footnote separator for XCharter
+\renewcommand*\multfootsep{\textsu{,}}
+
 
 % Equation number in lining style
 \renewcommand*\theequation{%

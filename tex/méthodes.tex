@@ -67,8 +67,8 @@ Ce sont les données utilisées par \textcite{liu_2016} \encadra{et produites pa
   \end{flexlabelled}
 \end{note}
 
-Les données sont téléchargées au niveau~\abbrv{L2} depuis le \as{cmr}\footfullcite{sst_modis}\marginnote{\al{cmr}} en sélectionnant les sections de fauchées\footnotemark{} intersectant notre région d'étude, collectés de jour, et pour les courtes longueurs d'onde infrarouges~(\qty{11}{\um}).
-Ces données sont projetées sur une grille kilométrique globale, en reprenant les outils utilisés par \citeauthor{liu_2016}, à savoir les programmes présents dans le paquet de l'\href{https://oceandata.sci.gsfc.nasa.gov/ocssw}{OCSSW}\marginnote{\al{ocssw}}, version~v7.5, qui est maintenu par l'\al{obpg} et notamment distribué à travers l'outil \href{https://seadas.gsfc.nasa.gov/}{SeaDAS}.
+Les données sont téléchargées au niveau~\abbrv{L2} depuis le \as{cmr}\footfullcite{sst_modis}\marginnote{\al*{cmr}} en sélectionnant les sections de fauchées\footnotemark{} intersectant notre région d'étude, collectés de jour, et pour les courtes longueurs d'onde infrarouges~(\qty{11}{\um}).
+Ces données sont projetées sur une grille kilométrique globale, en reprenant les outils utilisés par \citeauthor{liu_2016}, à savoir les programmes présents dans le paquet de l'\href{https://oceandata.sci.gsfc.nasa.gov/ocssw}{OCSSW}\marginnote{\al*{ocssw}}, version~v7.5, qui est maintenu par l'\al{obpg} et notamment distribué à travers l'outil \href{https://seadas.gsfc.nasa.gov/}{SeaDAS}.
 Les sections de fauchées, maintenant toutes sur la même grille spatiale, peuvent être moyennées jour par jour, pour obtenir un produit de niveau~\abbrv{L3}.
 \footnotetext{%
   \engquote{swath} en anglais, bande de terrain couverte par le satellite le long de son orbite.
@@ -95,7 +95,7 @@ Les difficultés évoquées ci-dessus motivent à trouver un produit nécessitan
 \subsubsection{MUR}
 \declareDataset{sst_mur}
 
-Le produit suivant, désigné ici \af{mur} est développé et distribué par le \as{ghrsst}\marginnote{Group for High Res.\ SST} au JPL \eng{Physical Oceanography} \as{daac}\footfullcite{sst_mur}\marginnote{\al{daac}}.
+Le produit suivant, désigné ici \af{mur} est développé et distribué par le \as{ghrsst}\marginnote{Group for High Res.\ SST} au JPL \eng{Physical Oceanography} \as{daac}\footfullcite{sst_mur}\marginnote{\al*{daac}}.
 Il présente les avantages d'être distribué à une résolution kilométrique et sans nuages grâce à une méthode d'interpolation par vaguelettes (\cite{chin_2017}).
 Il intègre de nombreuses sources provenant de plusieurs capteurs infrarouges et micro-ondes, ainsi que de mesures in-situ.
 La grande couverture spatiale de ce produit se fait donc par l'utilisation de mesures non-contraintes par la couverture nuageuse (\al{cad} micro-ondes et in-situ), mais qui présentent une résolution bien plus faible.
@@ -105,9 +105,9 @@ L'utilisation du produit suivant cherche à palier à ce problème.
 \subsubsection{ESA-SST-CCI / \textlf{C3S}}
 \declareDataset{sst_esacci}
 
-Ce produit est distribué conjointement par l'\as{esa}-\abbrv{SST}-\as{cci}\marginnote{\al{cci}} et le \as{c3s}\footnote{%
+Ce produit est distribué conjointement par l'\as{esa}-\abbrv{SST}-\as{cci}\marginnote{\al*{cci}} et le \as{c3s}\footnote{\fullcite{sst_esacci}}\multfootsep\footnote{%
   l'ESA-CCI pour la période 1981--2016 et le \abbrv{C3S} après 2017
-}\footfullcite{sst_esacci}\marginnote{\al{c3s}}.
+}\marginnote{\al*{c3s}}.
 Il~agglomère les mesures de tous les capteurs infrarouges disponibles depuis~1981, ce qui comprend 11~\as{avhrr} à bord des satellites \as{metop}["~A] et \as{noaa} (entre les itérations 6 et~19) et trois \as{atsr} à bord de \as{ers} 1~et~2, et Envisat. \review{Ajouter SLSTR.}
 Cela donne au moins deux capteurs en fonctionnement simultané, et au moins trois depuis~1992.
 Outre la bonne couverture obtenue, l'uniformité des capteurs permet d'obtenir un jeu de données stable dans le temps, pouvant servir à la détection de tendances climatiques~(\cite{merchant_2019}).
@@ -130,7 +130,7 @@ Ces données sont projetées capteur par capteur sur une grille régulière, à 
 
 Les données sont regroupées par famille d'instrument pour le produit~\abbrv{L3C}. Une légère perte de précision est attendue, mais les produits \abbrv{L3U} et~\abbrv{L3C} peuvent néanmoins tous deux être utilisés dans l'étude de structures fines et où la présence de nuages n'est pas rédhibitoire~(\cite{merchant_2019}).
 
-Enfin, le produit~\abbrv{L4} regroupe l'ensemble des capteurs en utilisant le schéma d'intégration variationnelle \abbrv{NEMOVAR} intégré dans le système \as{ostia}\marginnote{Operational SST and Sea Ice Analysis} (\cite{good_2020}).
+Enfin, le produit~\abbrv{L4} regroupe l'ensemble des capteurs en utilisant le schéma d'intégration variationnelle \abbrv{NEMOVAR} intégré dans le système \as{ostia}\marginnote{\al*{ostia}} (\cite{good_2020}).
 Ce produit donne ainsi un champ de SST sans nuages, estimé par une combinaison des observations satellites, et de la prévision d'un modèle numérique d'un jour sur l'autre.
 L'absence de couverture nuageuse et la simplicité d'usage se fait au détriment du lissage inévitable des structures les plus fines.
 
@@ -162,15 +162,15 @@ Le modèle fait de l'assimilation de données d'observations: altimétrie, SST \
 \end{figure}
 
 Nous illustrons ici notre comparaison entre les différents produits de SST en nous appuyant sur un instantané (\nref{fig:comparaison-sst}).
-Seul le produit \dataname{sst_modis}~(b) n'est pas issu d'une interpolation ou d'une réanalyse, on peut le considérer comme étant le plus proche d'une \engquote{ground truth} (en dehors des pixels nuageux bien sûr).
+Seul le produit \dataname{sst_modis} n'est pas issu d'une interpolation ou d'une réanalyse, on peut le considérer comme étant le plus proche d'une \engquote{ground truth} (en dehors des pixels nuageux bien sûr).
 
-On notera pour le produit de réanalyses \dataname{sst_glorys}~(d), outre sa résolution assez faible, des différences importantes dans les structures présentes sur les autres produits, qui ne sont visiblement pas due à un simple lissage du champ de SST.
+On notera pour le produit de réanalyses \dataname{sst_glorys}, outre sa résolution assez faible, des différences importantes dans les structures présentes sur les autres produits, qui ne sont visiblement pas due à un simple lissage du champ de SST.
 Ce produit manque les caractéristiques de certaines structures, mais surtout manque leur position exacte.
 
 Les produits issus d'interpolations de plusieurs capteurs semblent moins souffrir de ce problème.
-Les données \dataname{sst_mur}~(c), malgré leur haute résolution présentent des zones très lissées, par exemple dans le secteur~\latlonRange{68}{64W}; \latlonRange{40}{42N}.
+Les données \dataname{sst_mur}, malgré leur haute résolution présentent des zones très lissées, par exemple dans le secteur~\latlonRange{68}{64W}; \latlonRange{40}{42N}.
 On peut émettre l'hypothèse que l'inclusion de données basse-résolution (in-situ et micro-ondes) en est (au moins partiellement) la cause.
-À l'inverse, les données \dataname{sst_esacci}~(a) semblent capturer avec plus de régularité les structures visibles sur les données plus brutes de \dataname{sst_modis}, excepté les plus fines évidemment.
+À l'inverse, les données \dataname{sst_esacci} semblent capturer avec plus de régularité les structures visibles sur les données plus brutes de \dataname{sst_modis}, excepté les plus fines évidemment.
 
 Le produit \dataname{sst_esacci} semble être le plus approprié parmi ceux présentés.
 Il permet d'accéder au champ de SST simplement, ce avec une résolution convenable.
@@ -611,11 +611,16 @@ Le calcul est identique pour l'écart de durée~\as{lag-duree}.
   \phantomsection%
   \addcontentsline{toc}{section}{Récapitulatif}%
   \addcontentsline{lof}{figure}{Récapitulatif}%
-  \vfill
-  \adjustimage{
-    center,
-    max size={\paperwidth-8cm}{0.99\textheight}
-  }{recap_tight.pdf}%
-  \vfill
+  \centering%
+  \includegraphics[
+  width=\textwidth,
+  height=\textheight-1mm,
+  keepaspectratio=true]{recap_tight.pdf}%
+  % \vfill
+  % \adjustimage{
+  %   center,
+  %   max size={\paperwidth-8cm}{0.99\textheight}
+  % }{recap_tight.pdf}%
+  % \vfill
   \clearpage%
 }

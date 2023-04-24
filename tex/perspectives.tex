@@ -26,50 +26,8 @@ Néanmoins, des groupes de phytoplancton utilisent des pigments auxiliaires diag
 
 Le travail présenté ici pourrait ainsi quantifier les impacts des fronts sur la composition du phytoplancton, à une échelle synoptique de la même manière que pour la biomasse.
 Nous avons réalisé quelques étapes préliminaires dans ce sens, en utilisant la méthode avancée par \textcite{elhourany_2019,elhourany_2019a}.
-Succinctement, cette technique s'appuie sur un type de réseau neuronal, les \asp{som}\marginnote{\al{som}}, entraînées sur des colocalisations entre des mesures satellites (réflectances pour 4~longueurs d'ondes, \as{chl}, et SST), et des mesures in-situ (\as{hplc}).
-Cette méthode permet l'obtention de cartes synoptiques de la concentration de 9~pigments diagnostiques, que nous associons à 8~groupes fonctionnels (\as{pft}\marginnote{\al{pft}}) en suivant des relations empiriques (\nref{tab:pig2pft}, \cite{vidussi_2001,hirata_2011})
-
-\begin{table}
-  \centering
-  \renewcommand\arraystretch{1.3}
-  \newcommand*\sumdp{ΣDP}
-  \caption[Conversion des pigments diagnostiques en proportion de PFT]{%
-    Conversion des concentrations de pigments diagnostiques~(DP) en proportion de groupes fonctionnels et groupes de tailles, d'après \textcite{hirata_2011,brewin_2010,uitz_2006}.
-  }
-  \label{tab:pig2pft}
-  \begin{tabular}{r!{\hspace{2em}} l}
-    \toprule
-    \multicolumn{1}{c}{Groupes} & \multicolumn{1}{c}{Formule} \\
-    \midrule
-    \textbf{Microplancton}
-        & 1.41 (Fuco + Perid) / \sumdp \\
-    Diatomées & 1.41 Fuco / \sumdp \\
-    Dinoflagellées & 1.41 Perid / \sumdp \\
-
-    \midrule
-    \multirow[t]{2}*{\textbf{Nanoplancton}}
-        & (1.27\,\(X\) Hex + 1.01 Chl-\textit{b} \\
-        & \hspace{3em}       + 0.35 But + 0.60 Allo) / \sumdp \\
-    Algues vertes & 1.01 Chl-\textit{b} / \sumdp \\
-    Prymnésiophytes & Nanoplancton \textminus{} Algues vertes \\
-
-    \midrule
-    \textbf{Picoplancton}
-            & (0.86 Zea + 1.27\,\(Y\) Hex) / \sumdp \\
-    Procaryotes & 0.86 Zea / \sumdp \\
-    Pico-eucaryotes & Picoplancton \textminus{} Procaryotes \\
-    Prochlorococcus & 0.74 Dvchl-\textit{a} / Chl-\textit{a} \\
-    \bottomrule
-  \end{tabular}
-  \begin{minipage}{0.9\textwidth}
-    \scriptsize%
-    \setlength{\parindent}{0pt} \setlength{\parskip}{0pt}
-    \par Fuco:~Fucoxanthine, Perid:~Péridinine, Hex:~19\babelhyphen{hard}Hexanoyloxyfucoxanthine, But:~19\babelhyphen{hard}Butanoyloxyfucoxanthine, Allo:~Alloxanthine, Zea:~Zeaxanthine, Dvchl"~\textit{a}:~Divinyl Chlorophylle"~\textit{a}.
-    \par \sumdp = 1.41Fuco + 1.41Perid + 1.27Hex + 0.35But + 0.60Allo + 1.01Chl"~\textit{b} + 0.86Zea.
-    \par \(X\) évolue avec la concentration de \as{chl}, il vaut 1 quand \(\am{chl}=\qty{0.08}{\mgm}\) et diminue linéairement jusqu'à 0 pour une concentration de \qty{0.01}{\mgm}. \(X\)~est constant en dehors de ces bornes. \(Y = 1-X\).
-  \end{minipage}
-\end{table}
-
+Succinctement, cette technique s'appuie sur un type de réseau neuronal, les \asp{som}\marginnote{\al*{som}}, entraînées sur des colocalisations entre des mesures satellites (réflectances pour 4~longueurs d'ondes, \as{chl}, et SST), et des mesures in-situ (\as{hplc}).
+Cette méthode permet l'obtention de cartes synoptiques de la concentration de 9~pigments diagnostiques, que nous associons à 7~groupes fonctionnels (\as{pft}\marginnote{\al*{pft}}) en suivant des relations empiriques (\nref{ax:pig2pft}, \cite{vidussi_2001,uitz_2006,brewin_2010,hirata_2011})
 
 \section{Vers une applications à l'échelle globale}
 \label{sec:appl-globale}
@@ -77,6 +35,8 @@ Cette méthode permet l'obtention de cartes synoptiques de la concentration de 9
 Dans les chapitres précédents, ainsi que dans l'article publié, nous nous sommes concentrés sur la région de l'Atlantique Nord autour du Gulf Stream.
 Nous avons ainsi étendu les résultats de \textcite{liu_2016}, qui se concentraient sur la seule biorégion de la gyre subtropicale du Pacifique Nord, à deux biomes supplémentaires: un biome oligotrophe avec un mélange profond saisonnier, et un biome subpolaire comprenant un bloom printanier.
 Cette première étude nous a permis de valider la méthode de détection des fronts et de colocalisation avec la \as{chl}, et de préciser la trajectoire à adopter dans l'optique d'une quantification de ces même effets à l'échelle globale.
+
+\subsection{Défis techniques}
 
 % from 961x1008 -> 4320x8640 =
 Nous avons pu remarquer pendant cette étude un ensemble de défis techniques, dont certains pourraient devenir contraignants dans une étude à l'échelle globale.
@@ -90,6 +50,8 @@ Cet outil automatise la parallélisation des calculs, et facilite leur applicati
 En pratique cependant, son utilisation n'est pas triviale et garantir son bon fonctionnement pour les calculs plus complexes demande une certaine expertise.
 
 % Au delà d'un simple confort, l'optimisation des calculs ainsi que la mise en place d'outils efficaces et flexibles ont permis de mener une étude exploratoire, avec de nombreuses itérations.
+
+\subsection{Variations spatiales}
 
 Nous avons montré précédemment qu'il existe des différences importantes entre les biorégions de notre zone d'étude, dans la prévalence des fronts selon leur intensité ainsi que dans la réponse du phytoplancton à ces fronts.
 Des calculs préliminaire du HI à l'échelle globale confirment cette variabilité dans la répartition des fronts (\nref{fig:global-fronts}).
@@ -113,24 +75,43 @@ De même, la normalisation des composantes du HI a été réalisée pour notre r
 L'étude de sensibilité que nous avons réalisée indique néanmoins que les résultats \encadra{\emph{concernant la distribution de \as{chl} dans les fronts}} ne sont pas significativement affectés par les valeurs de ces coefficients.
 La prochaine étape vers une étude globale apparaît donc être l'application de méthodes présentées dans d'autres régions que l'Atlantique Nord.
 
+\subsection{Première application: courant de Californie}
 \label{sec:cce}
-La méthode du HI a d'ores et déjà été appliquée autour du courant de Californie par \textcite{mangolte_2023}, afin de délimiter sur des images de SST les fronts ciblés par un ensemble de campagnes in-situ.
-résumé de l'article ?
-Le travail réalisé pour cette étude \encadra{bien que cela ne soit pas son objectif premier} constitue un premier effort de validation dans une autre région, ainsi qu'avec des données biologiques in-situ.
-En effets les fronts détectés par HI sont comparés aux transects de températures in-situ.
-L'étude fait également usages des \eng{backward} \as{fsle}\marginnote{\al{fsle}} afin de repérer les structures cohérentes liées au mélange horizontal.
-Cet recoupement de diverse méthodes de détection, ainsi que des transects de mesures biologiques offre
+
+La méthode du HI a d'ores et déjà été appliquée autour du courant de Californie dans le cadre de l'étude de \textcite{mangolte_2023} (\nref{ax:article-cce}), afin de délimiter sur des images de SST les fronts ciblés par un ensemble de campagnes in-situ.
+
+Cette étude analyse les données de 8~transects haute résolution (espacement entre \qtyrange[range-phrase={ et }]{1}{5}{\km}) ciblant des fronts au large de la côte californienne.
+Ces transects combinent des données de température et de salinité, ainsi que 24~groupes de bactéries, phytoplancton, et zooplancton, en surface et en profondeur.
+
+Les stations frontales sont identifiés à partir des mesures in-situ, et le contexte régional menant à la formation du front est étudié avec des données satellitaires.
+Les fronts sont aussi repérés sur les images de SST en calculant le HI (taille de fenêtre de \qty{20}{\km} et seuil à \num{10}).
+Les \eng{backward} \as{fsle}\marginnote{\al*{fsle}} (calculés à partir des champs de vitesses géostrophiques dérivés par altimétrie et des courants d'Ekman dérivés du vent) sont utilisés afin de repérer les structures cohérentes liées au mélange horizontal.
 
 \textnote{Ici le seuil utilisé pour discriminer les fronts est élevé (\(\am{hi}>10\)), bien qu'il s'agisse de fronts de submésoéchelle éphémères.}
 
+\Textcite{mangolte_2023} montrent que la majorité des fronts échantillonnés comportent un pic élevé de biomasse, en opposition à une simple séparation entre deux populations.
+Le ciblage de fronts relativement stables et intenses par les campagnes peuvent biaiser ce résultat cependant.
+Ces pics de biomasse sont généralement moins larges (\qtyrange{1}{5}{\km}) que les fronts (\qtyrange{20}{30}{\km}), et sont décalés par rapport au maximum de gradient de densité jusqu'à \qty{10}{\km}, majoritairement du côté froid.
+Les espèces favorisées constituant les pics sont presque systématiquement les diatomées et \eng{pico-grazers}, avec néanmoins des variations plus fines à l'échelle du taxon.
 
-% Voir \cref{ax:article-cce}.
+Le travail réalisé pour cette étude \encadra{bien que cela ne soit pas son objectif premier} constitue un premier effort de validation dans une autre région, et avec des données biologiques in-situ.
+L'exploration des données de l'étude révèlent que le HI identifie correctement la position des fronts mais \emph{surestime leur largeur} par rapport aux données in-situ.
+À l'inverse, les valeurs élevées de \as{fsle} sont décalées par rapport aux fronts in-situ, les données d'altimétrie et de vent ne permettant pas de représenter complétement la dynamique des fronts.
 
 % med.\ projet 4E-med
 
-\section{Choix dans la méthode}
+\section{Améliorer la méthode}
 
 La méthode de détection des fronts que nous avons utilisée \encadra{calculer l'index d'hétérogénéité HI et sélectionner les valeurs supérieures à un seuil} est conditionnée par un certain nombre de variables.
+Attardons-nous ici sur les variables qu'il serait possible de changer.
+
+La surestimation de la largeur des fronts par le HI, soulevée plus haut suite à l'étude de \textcite{mangolte_2023}, permet d'exposer deux leviers d'actions. D'une part le choix des produits satellitaires, d'autre part la méthode de calcul du HI et de ses composantes.
+
+\subsection{Choix des produits satellitaires}
+
+La largeur des fronts pourrait être surestimée avec le HI, simplement du fait de la résolution du produit de SST utilisé (\datasect{sst_esacci}, \qty{4}{\km}).
+Nous l'avons mentionné en présentant les données utilisées, nous utilisons le produit \datasect{sst_esacci} au niveau \abbrv{L4}, pour lequel les données des capteurs sont interpolées spatialement avec le système \glsmargin{ostia}.
+Il en résulte un champ de SST de résolution \qty{4}{\km} légèrement lissé par l'interpolation.
 
 résolution du produit
 1km vs 4km

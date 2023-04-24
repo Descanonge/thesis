@@ -102,8 +102,24 @@ trophic interactions at ocean fronts}
 
 \chapter{Article: \articleCceTitle}
 \label{ax:article-cce}
+{%
+  \graphicspath{{resources/}}%
+  \markboth{\memUChead{\appendixname\ \thechapter}}{}
+  \clearpage%
+  \centering%
+  \includegraphics[
+  width=\textwidth,
+  height=\textheight-1mm,
+  keepaspectratio=true,
+  viewport=51 42 545 740
+  ]{mangolte_2023_frontpage.pdf}
+  \clearpage
+}
+
 \chapter{Article: \articleReviewTitle}
 \label{ax:article-review}
+
+\selectlanguage{french}
 \include{tex/annexes_autres}
 
 \end{appendices}

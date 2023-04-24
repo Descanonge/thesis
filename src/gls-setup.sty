@@ -12,6 +12,12 @@ toc, section=section, symbols,
 
 \ifFinal{\makeglossaries}
 
+\ExplSyntaxOn
+\NewDocumentCommand \glsmargin { O{as} O{al*} m }{
+  \use:c{#1} {#3} \marginnote{\use:c{#2}{#3}}%
+}
+\ExplSyntaxOff
+
 \renewcommand*\glsabbrvdefaultfont[1]{\textlf{#1}}
 
 \NewDocumentCommand \abbrv { m } {%
