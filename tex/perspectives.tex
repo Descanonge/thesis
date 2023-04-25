@@ -8,6 +8,8 @@
 \minitoc%
 \clearpage
 
+petite intro qui ref \cite{levy_2023}.
+
 \section{Étendre à la composition du phytoplankton}
 \label{sec:persp-pft}
 
@@ -55,7 +57,7 @@ En pratique cependant, son utilisation n'est pas triviale et garantir son bon fo
 
 Nous avons montré précédemment qu'il existe des différences importantes entre les biorégions de notre zone d'étude, dans la prévalence des fronts selon leur intensité ainsi que dans la réponse du phytoplancton à ces fronts.
 Des calculs préliminaire du HI à l'échelle globale confirment cette variabilité dans la répartition des fronts (\nref{fig:global-fronts}).
-Les fronts forts (\(\am{hi}>10\)) semblent se confiner aux courants de mésoéchelle les plus intenses \encadra{les courants de bord ouest que sont le Gulf Stream, le Kuroshio, le courant du Brésil, le courant des Aiguilles, et dans une moindre mesure le courant Est Autralien}.
+Les fronts forts (\(\am{hi}>10\)) semblent se confiner aux courants de mésoéchelle les plus intenses \encadra*{les courants de bord ouest que sont le Gulf Stream, le Kuroshio, le courant du Brésil, le courant des Aiguilles, et dans une moindre mesure le courant Est Autralien}.
 Les fronts faibles, bien que présents sur un plus grande surface, semblent tout de même survenir dans des zones énergétiques limitées.
 On notera par exemple les recirculations du Gulf Stream et du Kuroshio, la zone de convergence intertropicale du Pacifique, ou le courant circumpolaire Antarctique.
 
@@ -113,19 +115,62 @@ La largeur des fronts pourrait être surestimée avec le HI, simplement du fait 
 Nous l'avons mentionné en présentant les données utilisées, nous utilisons le produit \datasect{sst_esacci} au niveau \abbrv{L4}, pour lequel les données des capteurs sont interpolées spatialement avec le système \glsmargin{ostia}.
 Il en résulte un champ de SST de résolution \qty{4}{\km} légèrement lissé par l'interpolation.
 
-résolution du produit
-1km vs 4km
-gap filling or not
-single sensor / merged product
+Les capteurs agrégés pour ce produit permettent cependant une résolution plus élevée (\qty{1}{\km}), à laquelle sont distribués les produits mono-capteurs \abbrv{L3}.
+Si ces derniers sont recommandés pour l'étude des structures les plus fines (\cite{merchant_2019}), leur utilisation est cependant accompagné d'une perte importante de couverture spatiale.
+Pour éviter de perdre en couverture, il serait nécessaire de détecter les fronts sur la SST de chaque capteur, avant de réunir tous ces résultats.
+Cette étape supplémentaire a déjà été accomplie dans des situations similaires (\cite{miller_2009,nieto_2012}), mais une méthode précise resterait à être choisie et implémentée.
+Par ailleurs, le volume de données à traiter augmenterait, du fait de l'augmentation de la résolution bien entendu, mais aussi pour chaque capteur à traiter individuellement.
+Enfin, soit le produit de \as{chl} devrait être de résolution kilométrique, soit les fronts obtenus devraient être sous-échantillonnés pour s'adapter à la résolution plus faible du produit de \as{chl}.
 
-discussion sur les méthodes de détection des fronts ?
+Un travail est nécessaire sur l'influence sur nos résultats de la résolution et du choix du produit (mono- ou multicapteur, avec ou sans nuages).
+Il pourrait être réalisé dans une région limitée, afin de mitiger les difficultés évoquées..
 
-impact des composantes du hi (individuellement)
+\subsection{Choix sur la méthode de détection}
 
-largeur front
+En second lieu, la largeur des fronts détectés peut être affectée par la méthode utilisée pour calculer les valeurs du HI, ainsi que le seuil à partir duquel on classifie un pixel comme \guil{front}.
 
+Assez naturellement, le seuil choisi impacte la surface occupée par les fronts, puisqu'on va classifier plus ou moins de pixels comme frontaux.
+D'une part, le seuil permet de sélectionner des fronts plus ou moins intenses, les valeurs du HI étant plus élevées sur les fronts plus marqués.
+Nous avons ainsi fait la distinctions entre fronts faibles, et fronts forts.
+Mais d'autre part, abaisser le seuil aura également pour effet de sélectionner plus largement autour des fronts.
+Les valeurs du HI étant (à peu près) les plus élevées au centre du front puis diminue lorsque l'on s'en éloigne.
+Notre méthode comporte donc un couplage fort entre présence du front, intensité du front, et largeur du front.
 
-\section{Article review}
-\label{sec:review}
+cela vient du fait qu'on calcule un indice, au contraire des méthodes comme celle de CC (voir intro).
 
-Voir \cref{ax:article-review}.
+Intéressons-nous donc plus en détail à la méthode de calcul des valeurs du HI.
+En particulier, trois points sont d'intérết: la taille de la fenêtre glissante, les coefficients de normalisation des composantes (\ab{ie} l'importance relative de chaque componsante), et les composantes à inclure.
+
+La bimodalité a fait ses preuves à travers son utilisation pour la méthode de \al{cc}~(\as{cc}) (voir \nref{sec:detection-fronts}).
+On utilise ici pour le HI une implémentation plus simple, principalement du fait de la taille de la fenêtre glissante limitant le nombre de pixels disponibles.
+\textnote{\Textcite{cayula_1992} utilisent des données kilométriques et une fenêtre de taille entre \qtyrange[range-phrase={ et }]{20}{30}{\km}.}
+
+L'écart-type est relié au gradient de SST. Une des critique qu'on peut émettre c'est que c'est trop proche du gradient justement, et qui peut prendre des valeurs très élevées si on a un gradient de grande échelle.
+
+Enfin asymétrie, justification par LL est que ça repère l'asymétrie de température générée par les plus petits filaments.
+Est-ce que ça joue vraiment un rôle sur des données 4km (alors que LL travaillent sur des données kilométriques).
+La principale contribution de l'asymétrie semble être les pixels \emph{autour} du fronts.
+En effet, en travers du front, l'asymétrie est nulle au maximum de gradient en température, et maximale autour (\nref{fig:asymetrie}).
+D'un côté on peut se questionner sur le bien fondé de cette composante, de l'autre ça participe à l'élargissement des fronts.
+
+\begin{figure}
+  \centering
+  \insertfig{asymétrie.pdf}
+  \captionT{Illustration de l'asymétrie en travers des fronts}{%
+    Ici la température (calculée à partir de la fonction d'erreur \(\operatorname{erf}\)) suit une évolution identique du côté chaud et du côté froid.
+    L'asymétrie passe donc par zéro au point d'inflexion et de gradient maximum.
+  }
+  \label{fig:asymetrie}
+\end{figure}
+
+En parlant de l'élargissement des frnots, on a vu son impact sur les distributions de \as{chl}.
+on l'a vu chp res, en variant les paramètres (coef et taille de fenêtre), on faisait varier légèrement la surface, ainsi que la distrib de chl.
+
+points clés
+1km possible, mais rend l'étude bien plus difficile
+global possible
+
+% \section{Article review}
+% \label{sec:review}
+
+% Voir \cref{ax:article-review}.
