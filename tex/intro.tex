@@ -42,7 +42,7 @@ Une telle séparation à grande échelle entre deux biomes est par exemple bien 
 Toutefois, sur cette même image, il est également évident que des processus façonnent le paysage biologique à de plus petites échelles.
 Par exemple, deux tourbillons formés dans les méandres du Gulf Stream apparaissent en bleu foncé, ayant capturé des eaux du sud.
 
-De tels tourbillons se forment partout dans l'océan, aux \emph{mésoéchelles} \OM(\qtyrange{10}{100}{\km}), et leurs effets sont multiples.
+De tels tourbillons, aux tailles de \emph{mésoéchelles} \OM(\qtyrange{10}{100}{\km}), se forment partout dans l'océan, et leurs effets sont multiples.
 Comme on l'a vu dans l'exemple ci-dessus, ils peuvent \guil*{capturer} des masses d'eau et les transporter sur de larges distances (ici en transportant des masses d'eaux chaudes et oligotrophes vers le nord, c'est-à-dire dans un milieu plus froid, productif, et riche en nutriments) (\cite{lehahn_2011}).
 Ces tourbillons amplifient localement les échanges entre surface et profondeur, à la fois en générant des vitesses verticales, et en déplacant les isopycnes (\cite{mcgillicuddy_1998}).
 Néanmoins, ces échelles ne suffisent pas à décrire toute la variabilité biologique observée. De plus, leur contributions (estimées) à la pompe biologique ne permettent pas de clôturer le budget de cette dernière.
@@ -255,14 +255,21 @@ Quand bien même, il leur est impossible de couvrir une large zone spatio-tempor
 Il est usuel que les campagnes en mer ciblent une zone d'intérêt en particulier, par exemple un front ou un tourbillon, identifiée pendant la mission par images satellites (un échantillonage dit \guil{Lagrangien}, \cite{marrec_2018,tzortzis_2021}).
 Heureusement ces dernières années de telles campagnes se multiplient, déployant un éventail de méthodes de mesures, devant la nécessité d'obtenir une large gamme de paramètres (physiques et biologiques) à de fines échelles (\cite{shulman_2015,barcelo-llull_2021,marrec_2018,freilich_2021,tzortzis_2021,wilson_2021}).
 
-J'ai parlé que des obs mais des modèles numériques sont aussi dispo cependant.
-Tous les modèles sont faux. Tous les modèles bio sont très faux.
-La très grande variabilité des organismes est mal représentée (faute de puissance entre autre). Les petites échelles qui sont pourtant si importantes à la bio (subméso) sont très coûteuses à faire tourner et on est limité à de petites régions géographiques. Impossible de quantifier les effets convenablement avec des modèles.
-On a pas de paramétrisation des processus bio. Est-ce que c'est seulement possible sachant qu'on peut avoir des effets non-locaux potentiellement ?
-Les modèles climatiques sont, du coup, très incertains en ce qui concerne la bio.
-Grosses barres d'erreurs dans les projections pour le prochain siècle.
+Parallèment aux observations in-situ, un effort est mené pour inclure les phénomènes biogéochimiques dans les modèles numériques d'océans.
+Cela comprend un certains nombre d'obstacles.
+Nous avons souligné la grande diversité des organismes qui nous intéressent, laquelle est difficile à représenter numériquement.
+Chaque compartiment biologique ajoute un traceur à prendre en compte (\ab{ie} à advecter, diffuser,\dots). Le nombre de compartiment est ainsi limité par la puissance de calcul.
+Par ailleurs, il existe un grand nombre de paramétrisation des processus purement biologiques, liés à de fortes incertitudes.
 
-Difficile de séparer les trois: processus dynamiques, mélange horizontal, et biologie, car ils ont les même temps caractéristiques.
+Ensuite, et c'est un point que nous allons développer par la suite, la biologie présente une grande variabilité aux fines échelles.
+Ces dernières sont cependant coûteuses à intégrer, ce qui limite leur application à de petits régions géographiques ou à des temps d'intégration courts (\cite{kessouri_2020,hewitt_2022}).
+En particulier, ces échelles sont absentes des modèles utilisés pour les projections biogéochimiques à long termes (\cite{bopp_2013}), et sont représentées par des paramétrisations encore en évolution (\cite{fox-kemper_2019}).
+
+% Les modèles climatiques sont, du coup, très incertains en ce qui concerne la bio.
+% Grosses barres d'erreurs dans les projections pour le prochain siècle.
+% Est-ce que c'est seulement possible sachant qu'on peut avoir des effets non-locaux potentiellement ?
+
+% Difficile de séparer les trois: processus dynamiques, mélange horizontal, et biologie, car ils ont les même temps caractéristiques.
 
 \subsection{Interactions biophysiques}
 \label{sec:interactions-biophys}
@@ -479,8 +486,7 @@ Les simulations avec gradient (donc restratifiées par la dynamique de subméso�
     Tiré de \textcite{mahadevan_2012}, figure~3G.
 
     \foreignblockquote{english}{%
-      Model chlorophyll concentration in the upper \qty{100}{\m} (average) [from runs with
-      lateral density gradient (shaded gray) and without (purple)].
+      Model chlorophyll concentration in the upper \qty{100}{\m} (average) [from runs with lateral density gradient (shaded gray) and without (purple)].
       Chlorophyll from the combination of observations [\dots] is overlaid.
     }
   }
@@ -532,7 +538,7 @@ Enfin cette région englobe une partie de la gyre subtropicale.
 Cette dernière, forcée par les Alizées au sud et les vents d'ouest au nord, ne présente pas de limite très marquée.
 Du fait du rotationnel négatif des vents dominants, le cœur de la gyre, loin de l'influence du Gulf Stream, est caractérisé une circulation anticyclonique et un approfondissement de la thermocline et de la nutricline.
 
-\subsubsection{La biologie}
+\subsubsection{Productivité primaire}
 \label{sec:gs-biologie}
 
 Comme expliqué ci-dessus, la gyre subtropicale présente une nutricline profonde, sans dynamique particulière permettant un apport important de nutriment.
@@ -568,7 +574,7 @@ La productivité y est légèrement accrue en hiver, du fait d'une convection sa
 
 \subsection{Détection des fronts sur images satellites}
 
-\subsection{Historique des méthodes existantes}
+\subsubsection{Historique des méthodes existantes}
 \label{sec:detection-fronts}
 
 Afin de mesurer l'impact des fronts sur le phytoplancton, nous partons de l'idée de détecter les fronts de densité à partir de la SST afin de les colocaliser aux valeurs de \al{chl}.
