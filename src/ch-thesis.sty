@@ -122,6 +122,7 @@
   sub-meso-scale sub-meso-scales
   up-welling down-welling
   sea sur-face tem-per-a-ture
+  back-ground
 }
 
 % Insérer du texte anglais, sans et avec guillements
@@ -401,7 +402,7 @@ cachedir=minted]{minted}
   \ifnum \c@chapter>\z@ \thechapter.\fi \textlf{\arabic{equation}}}
 
 %%% Margins notes
-\newcommand*\marginnotefont{\sffamily\scriptsize\itshape}
+\newcommand*\marginnotefont{\sffamily\scriptsize\itshape\color{black}}
 \newcommand*\marginparform{%
   \ifmemtortm\raggedright\else\raggedleft\fi}
 \NewDocumentCommand \marginnote { +m } {%
