@@ -136,26 +136,27 @@ Mais d'autre part, abaisser le seuil aura également pour effet de sélectionner
 Les valeurs du HI étant (à peu près) les plus élevées au centre du front puis diminue lorsque l'on s'en éloigne.
 Notre méthode comporte donc un couplage fort entre présence du front, intensité du front, et largeur du front.
 
-cela vient du fait qu'on calcule un indice, au contraire des méthodes comme celle de CC (voir intro).
-
 Intéressons-nous donc plus en détail à la méthode de calcul des valeurs du HI.
 En particulier, trois points sont d'intérết: la taille de la fenêtre glissante, les coefficients de normalisation des composantes (\ab{ie} l'importance relative de chaque componsante), et les composantes à inclure.
+Nous avons démontré l'influence relativement faible sur les distributions de \as{chl} du choix de la taille de fenêtre et des coefficients de normalisation (\nref{sec:sensibilite-parametres}, \nref{fig:ts-sensitivity}), mais nous n'avons pas discuté plus en détail le choix des composantes en soit.
 
 La bimodalité a fait ses preuves à travers son utilisation pour la méthode de \al{cc}~(\as{cc}) (voir \nref{sec:detection-fronts}).
 On utilise ici pour le HI une implémentation plus simple, principalement du fait de la taille de la fenêtre glissante limitant le nombre de pixels disponibles.
 \textnote{\Textcite{cayula_1992} utilisent des données kilométriques et une fenêtre de taille entre \qtyrange[range-phrase={ et }]{20}{30}{\km}.}
 
-L'écart-type est relié au gradient de SST. Une des critique qu'on peut émettre c'est que c'est trop proche du gradient justement, et qui peut prendre des valeurs très élevées si on a un gradient de grande échelle.
+L'écart-type des valeurs de SST dans la fenêtre est relié au gradient moyen dans cette fenêtre.
+Le gradient est utilisé avec succès dans d'autres techniques de détection de fronts.
+% Une des critique qu'on peut émettre c'est que c'est trop proche du gradient justement, et qui peut prendre des valeurs très élevées si on a un gradient de grande échelle.
 
-Enfin asymétrie, justification par LL est que ça repère l'asymétrie de température générée par les plus petits filaments.
-Est-ce que ça joue vraiment un rôle sur des données 4km (alors que LL travaillent sur des données kilométriques).
-La principale contribution de l'asymétrie semble être les pixels \emph{autour} du fronts.
-En effet, en travers du front, l'asymétrie est nulle au maximum de gradient en température, et maximale autour (\nref{fig:asymetrie}).
-D'un côté on peut se questionner sur le bien fondé de cette composante, de l'autre ça participe à l'élargissement des fronts.
+Enfin l'inclusion de l'asymétrie est justifiée par \textcite{liu_2016} par sa capacité à repérer les fins filaments de SST dont la distribution en température serait unimodale et asymétrique.
+Nous pouvons nous interroger sur la contribution de ces filaments lorsque l'on travaille à des résolution plus faibles (\citeauthor{liu_2016} utilisent des données kilométriques).
+En outre, il apparaît que pour nos données et notre région, l'asymétrie montre essentiellement de forte valeurs \emph{autour} des fronts.
+En effet, en se déplaçant en travers du front, l'asymétrie est maximale de chaque côté du front et de signe opposée, et passe donc par zéro au centre du front, lorsque la fenêtre glissante contient autant de valeurs chaudes que froides (\nref{fig:asymetrie}).
+L'asymétrie semble donc principalement participer à élargir les fronts.
 
 \begin{figure}
   \centering
-  \insertfig{asymétrie.pdf}
+  \insertfig[0.7]{asymétrie.pdf}
   \captionT{Illustration de l'asymétrie en travers des fronts}{%
     Ici la température (calculée à partir de la fonction d'erreur \(\operatorname{erf}\)) suit une évolution identique du côté chaud et du côté froid.
     L'asymétrie passe donc par zéro au point d'inflexion et de gradient maximum.
@@ -163,8 +164,16 @@ D'un côté on peut se questionner sur le bien fondé de cette composante, de l'
   \label{fig:asymetrie}
 \end{figure}
 
-En parlant de l'élargissement des frnots, on a vu son impact sur les distributions de \as{chl}.
-on l'a vu chp res, en variant les paramètres (coef et taille de fenêtre), on faisait varier légèrement la surface, ainsi que la distrib de chl.
+Nous avons montré l'impact potentiel de la surface de fronts détectés sur les distributions de \as{chl}.
+En faisant varier les paramètres (coefficients de normalisation et taille de fenêtre), la surface impactée par les fronts varie légèrement et avec la distribution de \as{chl} dans les fronts (\nref{sec:sensibilite-parametres}, \nref{fig:sensibilite-surface}).
+Pour une augmentation de la surface des fronts, on observe une diminution des valeurs de \as{chl}.
+Il est probable que cela soit le fait d'un élargissement des fronts et donc une sélection de pixels plus éloignés du centre du front, aux valeurs de \as{chl} plus faible.
+On assiste ainsi à une sorte de dillution des valeurs de \as{chl}.
+
+Ce résultat souligne l'impact potentiel des choix dans la méthode sur les qualités des fronts détectés (positionnement, intensité, largeur), et donc sur les valeurs de \as{chl} sélectionnées.
+Ces couplages pourraient être mieux qualifiés par des études approfondie sur l'influence de chaque composante, de manière individuelle, sur ces qualités.
+
+\textnote{Il serait intéressant de se pencher sur des méthodes ne reposant pas sur une variable dont il faudrait prendre le seuil, comme celle de \textcite{cayula_1995} par exemple. L'intensité et la largeur des fronts serait ainsi à déterminer de manière indépendante, par des méthodes à définir.}
 
 points clés
 1km possible, mais rend l'étude bien plus difficile
