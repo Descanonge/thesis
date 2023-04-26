@@ -50,6 +50,7 @@
 % as well for Old-style numbers (I feel the kerning is all over the place there)
 \directlua{chthesis.addFeatKern()}
 
+\RequirePackage{xcolor}
 \RequirePackage[T1]{fontenc}
 \RequirePackage{fontspec}
 
@@ -256,13 +257,29 @@ cachedir=minted]{minted}
 
 \RequirePackage{siunit-setup}
 
+
 %%% Hyperref
 \RequirePackage{hyperref}
+\colorlet{linkcolor}{black!70!red}
+\colorlet{anchorcolor}{black}
+\colorlet{citecolor}{black!70!red}
+\colorlet{filecolor}{black!70!green}
+\colorlet{menucolor}{black}
+\colorlet{runcolor}{black}
+\colorlet{urlcolor}{black!60!blue}
 \hypersetup{
-  hidelinks,
   draft = false,
   unicode = true,
   linktoc = section,
+  % hidelinks,
+  colorlinks=true,
+  linkcolor=linkcolor,
+  anchorcolor=anchorcolor,
+  citecolor=citecolor,
+  filecolor=filecolor,
+  menucolor=menucolor,
+  runcolor=runcolor,
+  urlcolor=urlcolor,
 }
 \AtEndPreamble{
   \hypersetup{
