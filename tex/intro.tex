@@ -241,7 +241,7 @@ En effet, au-delà de pouvoir accéder directement aux variables que les satelli
 
 D'abord, les mesures in-situ ont accès à toute la colonne d'eau et non pas seulement la surface optiquement active.
 D'autre part, ces mesures offrent une vue beaucoup plus large et précise de la biodiversité présente.
-Les mesures \as{hplc}\marginnote{\al*{hplc}} permettent par exemple d'accéder à la concentration exacte de la \al{chl} mais également d'autres pigments auxiliaires, donnant ainsi une meilleure idée de la composition de la communauté phytoplanctonique.
+Les mesures \glsmargin{hplc} permettent par exemple d'accéder à la concentration exacte de la \al{chl} mais également d'autres pigments auxiliaires, donnant ainsi une meilleure idée de la composition de la communauté phytoplanctonique.
 D'autres techniques permettent d'explorer d'autres communauté, comme le cytomètre de flux pour les plus petits organismes (cyanobactéries et bactéries hétérotrophes), ou le zooscan pour les plus gros organismes (essentiellement le zooplancton).
 L'application plus récente des sciences -omiques (génomique, métagénomique, transcriptomique,\dots) fourni également de nouvelles perspectives sur les écosystèmes (\cite{bork_2015,richter_2019,sunagawa_2020}).
 
@@ -567,6 +567,8 @@ La productivité y est légèrement accrue en hiver, du fait d'une convection sa
 
 
 \subsection{Détection des fronts sur images satellites}
+
+\subsection{Historique des méthodes existantes}
 \label{sec:detection-fronts}
 
 Afin de mesurer l'impact des fronts sur le phytoplancton, nous partons de l'idée de détecter les fronts de densité à partir de la SST afin de les colocaliser aux valeurs de \al{chl}.
@@ -638,14 +640,14 @@ Par cette construction orientée vers une mesure graduelle des fronts, cette mé
 
 \subsubsection{Vers des fronts de densité}
 
-Lien entre densité et température.
-La salinité intervient aussi. La salinité par satellite est très basse résolution (SMOS) donc on a pas vraiment accès.
+Dans la section précédente, la majorité des méthodes opèrent sur les données satellite de températures, qui est utilisée comme proxy de la densité.
+Cette dernière varie cependant aussi avec la salinité, qui n'est disponible par satellite qu'à basse résolution (entre \qtyrange[range-phrase={ et }]{35}{50}{\km} pour \as{SMOS} par exemple).
 
-On ne peut qu'espérer que la salinité ne joue pas un rôle trop grand dans la densité, ie que les fronts ne soient pas trop compensés.
-Pour vérifier cela on doit passer par les campagnes en mer.
+Il est donc possible que pour certains fronts thermique, la variation de température \guil{compensée} par une variation de salinité, donnant ainsi une densité constante.
+Dans la région de l'Atlantique Nord, des transects sont réalisés régulièrement par un navire d'opportunité, l'Oleander.
+Des résultats suggèrent que la salinité n'intervient que peu dans les variations de densité (\cite{flagg_2006}).
 
-Dans la région Nord-Atlantique des transects sont réalisé régulièrement par un navire d'opportunité, l'Oleander.
-Des résultats suggèrent que la salinité ne joue pas beaucoup (Flagg 2006, succinct).
+\textnote{Dans d'autres régions, il peut être nécessaire d'avoir recours à d'autres proxy de la densité, comme par exemple la hauteur d'eau (SSH) dans les régions polaires.}
 
 \section{Motivation et objectifs}
 \label{sec:problematique}

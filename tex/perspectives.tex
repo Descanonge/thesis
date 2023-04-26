@@ -28,8 +28,8 @@ Néanmoins, des groupes de phytoplancton utilisent des pigments auxiliaires diag
 
 Le travail présenté ici pourrait ainsi quantifier les impacts des fronts sur la composition du phytoplancton, à une échelle synoptique de la même manière que pour la biomasse.
 Nous avons réalisé quelques étapes préliminaires dans ce sens, en utilisant la méthode avancée par \textcite{elhourany_2019,elhourany_2019a}.
-Succinctement, cette technique s'appuie sur un type de réseau neuronal, les \asp{som}\marginnote{\al*{som}}, entraînées sur des colocalisations entre des mesures satellites (réflectances pour 4~longueurs d'ondes, \as{chl}, et SST), et des mesures in-situ (\as{hplc}).
-Cette méthode permet l'obtention de cartes synoptiques de la concentration de 9~pigments diagnostiques, que nous associons à 7~groupes fonctionnels (\as{pft}\marginnote{\al*{pft}}) en suivant des relations empiriques (\nref{ax:pig2pft}, \cite{vidussi_2001,uitz_2006,brewin_2010,hirata_2011})
+Succinctement, cette technique s'appuie sur un type de réseau neuronal, les \glsmargin[asp]{som}, entraînées sur des colocalisations entre des mesures satellites (réflectances pour 4~longueurs d'ondes, \as{chl}, et SST), et des mesures in-situ (\as{hplc}).
+Cette méthode permet l'obtention de cartes synoptiques de la concentration de 9~pigments diagnostiques, que nous associons à 7~groupes fonctionnels (\glsmargin{pft}) en suivant des relations empiriques (\nref{ax:pig2pft}, \cite{vidussi_2001,uitz_2006,brewin_2010,hirata_2011})
 
 \section{Vers une applications à l'échelle globale}
 \label{sec:appl-globale}
@@ -87,7 +87,7 @@ Ces transects combinent des données de température et de salinité, ainsi que 
 
 Les stations frontales sont identifiés à partir des mesures in-situ, et le contexte régional menant à la formation du front est étudié avec des données satellitaires.
 Les fronts sont aussi repérés sur les images de SST en calculant le HI (taille de fenêtre de \qty{20}{\km} et seuil à \num{10}).
-Les \eng{backward} \as{fsle}\marginnote{\al*{fsle}} (calculés à partir des champs de vitesses géostrophiques dérivés par altimétrie et des courants d'Ekman dérivés du vent) sont utilisés afin de repérer les structures cohérentes liées au mélange horizontal.
+Les \eng{backward} \glsmargin{fsle} (calculés à partir des champs de vitesses géostrophiques dérivés par altimétrie et des courants d'Ekman dérivés du vent) sont utilisés afin de repérer les structures cohérentes liées au mélange horizontal.
 
 \textnote{Ici le seuil utilisé pour discriminer les fronts est élevé (\(\am{hi}>10\)), bien qu'il s'agisse de fronts de submésoéchelle éphémères.}
 
@@ -111,7 +111,7 @@ La surestimation de la largeur des fronts par le HI, soulevée plus haut suite �
 
 \subsection{Choix des produits satellitaires}
 
-La largeur des fronts pourrait être surestimée avec le HI, simplement du fait de la résolution du produit de SST utilisé (\datasect{sst_esacci}, \qty{4}{\km}).
+La largeur des fronts pourrait être surestimée avec le HI, simplement du fait de la résolution du produit de SST utilisé (\dataname{sst_esacci}, \qty{4}{\km}).
 Nous l'avons mentionné en présentant les données utilisées, nous utilisons le produit \datasect{sst_esacci} au niveau \abbrv{L4}, pour lequel les données des capteurs sont interpolées spatialement avec le système \glsmargin{ostia}.
 Il en résulte un champ de SST de résolution \qty{4}{\km} légèrement lissé par l'interpolation.
 
@@ -175,9 +175,9 @@ Ces couplages pourraient être mieux qualifiés par des études approfondie sur 
 
 \textnote{Il serait intéressant de se pencher sur des méthodes ne reposant pas sur une variable dont il faudrait prendre le seuil, comme celle de \textcite{cayula_1995} par exemple. L'intensité et la largeur des fronts serait ainsi à déterminer de manière indépendante, par des méthodes à définir.}
 
-points clés
-1km possible, mais rend l'étude bien plus difficile
-global possible
+% points clés
+% 1km possible, mais rend l'étude bien plus difficile
+% global possible
 
 % \section{Article review}
 % \label{sec:review}
