@@ -1,0 +1,213 @@
+\chapter{Submeso-color: code}
+\selectlanguage{english}
+
+\section{Arguments}
+\label{sec:org-args}
+
+All scripts are written with a command-line use in mind.
+To change some parameters, command-line arguments are retrieved. As always, things are quite automated.
+All the magic happens in \linkfile{lib/__init__.py}{lib.get_args()}.
+
+\subsection{Usage}
+Typically a script is written as:
+\begin{python}
+import lib
+
+def main(args):
+    some computations
+    return result
+
+if __name__ == '__main__':
+    args = lib.get_args(['region', 'days', 'fixes'])
+
+    main(args)
+\end{python}
+
+\lit{args} is a dictionnary containing arguments name and their values.
+
+\subsection{Default arguments}
+The list of arguments names passed above (region, days, fixes) are from a list of default arguments.
+Thoses are defined globally in \linkfile{lib/conf.ini}{lib/conf.ini}.
+This file must be created; it can be copied from \linkfile{lib/conf_example.ini}{lib/conf_example.ini}.
+Each default argument should have a name, type, and value. See the example conf file for more details.
+The default values can be overidden when creating a dataset: see \titleref{sec:org-datasets}.
+
+The following arguments go through some processing.
+
+\subsubsection{date}
+
+date is a YYYY/MM[/DD] format argument. The `/' separator can also be `-', a space, or nothing.
+\lit{args['date_str']} is a tuple of the strings of year, month, and eventually day\@. \lit{args['date']} stores a datetime object.
+
+\subsubsection{fixes}
+Fixes are supplied as \lit{-fix <matcher> <string>}. They can then be found as a dictionnary with the matchers name as keys. %chktex 44
+See \titleref{sec:org-fixes} below.
+
+\subsection{Fixes}
+\label{sec:org-fixes}
+Fixes are a important feature of the filefinder package.
+When \hyperref[sec:org-preregex]{finding datafiles}, one can \guil*{fix} a matcher (part of the filename that vary, the date for daily files for instance) to a certain value.
+That can be a string (which can be a regex!), or a value. Quick example: we only want the month of may:
+\begin{python}
+finder = lib.data.dataset.get_finder()
+finder.fix_matchers(m=5)
+\end{python}
+
+Now, we can do this automatically from the command line by supplying the appropriate argument: \shell{python script.py -fix m 05} (from the command line we can only supply a string, so it must match the date format). This will end up in the args dictionnary, where it can be passed to \lit{get_finder()} or \lit{get_data()}. So:
+\begin{python}
+args = lib.get_args(['fixes'])
+ds = lib.data.dataset.get_data(args)
+\end{python}
+`\lit{ds}' will only have data for the month of may. Convenient when testing a script on smaller data.
+
+\subsection{Adding other arguments}
+Other arguments can be retrieved like so:
+\begin{python}
+def add_args(parser):
+    parser.add_argument('-argument_name', type=int, default=0)
+
+args = lib.get_args(['...'], add_args)
+\end{python}
+
+\subsection{Argument processing}
+\label{sec:org-arg-processing}
+
+You may have noticed that the function described in \titleref{sec:org-created-funcs} have the following signature \py{(args: Dict = None, **kwargs: Any)}.
+Thoses functions process thoses arguments using \py{lib.data.process_args(args_names, args, replace_defaults=None, **kwargs)}.
+The idea is that we define the arguments the function *needs* with \lit{args_names}.
+We then supply both args and kwargs. From those are only kept the needed arguments.
+If arguments are missing a default value is used (either defined with \lit{/lib/conf.ini} or \lit{replace_defaults}).
+Arguments found in kwargs will replace those from \lit{args}.
+Users should not need to use \lit{lib.data.process_args} directly, argument processing is done automatically on functions defined by \hyperref[sec:org-datasets]{dataset creation}.
+
+This system is a bit heavy but convenient, as the variable \lit{args} can be passed to all functions regardless of the dataset without worrying about who needs what. And if arguments are missing or must be overwritten, \lit{kwargs} can still be used.
+
+\section{Datasets}
+\label{sec:org-datasets}
+
+To access data, I rely on datasets defined in modules in lib/data.
+Each module gives access to one dataset through some functions.
+As the functions are always (or nearly always) the same, they are automatically defined from user given information found in those module files. The process of creating those functions is documented below.
+
+For examples, the reader is invited to look at existing datasets.
+Some straightforward ones such as \linkfile{lib/data/globcolour.py}{lib/data/globcolour.py} or \linkfile{lib/data/ostia.py}{lib/data/ostia.py}, or more complex ones like \linkfile{lib/data/hists.py}{lib/data/hists.py}.
+
+\subsection{Location}
+All data files are found in \shell{$SMC_DATA_DIR/[Region]/[dataset name / abbreviation]}.
+The region folder is made to be able to work on different locations at the same time.
+For now I am personally using `GS' for `Gulf-Stream'.
+
+\subsection{Module file}
+To load a dataset in memory, its corresponding python file can be used. It can be found in \lit{lib/data/[module].py}.
+In those files are defined some basic information about the data.
+\lit{lib.data.create_dataset()} is then used to automatically create a number of functions that can be used to access the data.
+\subsubsection{The basic information}
+\paragraph{Arguments names / Dataset parameters}
+Each dataset can depend on different parameters, set dynamically when calling functions (see \titleref{sec:org-args}).
+The list of argument names used by the dataset must be supplied as a set.
+Typically:
+\begin{python}
+ARGS = {'region', 'days'}
+\end{python}
+/ie/ the region, and the temporal resolution.
+Datasets are typically available daily, as n-days average, or as climatology.
+Each variation has its own subfolder of form `1days', `\{n\}days', `climato'.
+For more on the climatology, see \linkfile{docs/climato.html}{docs/climato.html}.
+
+The \lit{fixes} and \lit{climato} arguments are automatically added.
+
+\paragraph{Root directory function}
+To create a dataset, we need a function that can return the root directory containing the data (which can depend on those parameters defined above).
+The function receives the processed arguments (again, see \titleref{sec:org-args}).
+It should return a list of folders names that will be transformed into a path. Example:
+\begin{python}
+def ROOT(args):
+    root = [lib.root_data, args['region'], 'NAME', lib.data.get_time_folder(args)]
+\end{python}
+\lit{lib.data.get_time_folder} automatically generates the temporal resolution folder name from the `days' and `climatology' arguments (see paragraph above).
+
+We can do even faster, the example above is the same as:
+\begin{python}
+def ROOT(args):
+    return lib.data.get_default_directory(args, 'NAME')
+\end{python}
+
+\paragraph{Pre-regex function}
+\label{sec:org-preregex}
+Typically, each dataset consists in multiple data files: one per time step, or one per set of parameters for instance.
+We could loop through files, or use globbing, but this is nowhere near as fun as what we do here.
+We use the \hyperref{https://github.com/Descanonge/filefinder}{filefinder} package.
+It allows to find in the root directory and its subfolders all files corresponding to a specific filename structure, specified with the pre-regex.
+See the package readme and documentation to see what are its features, or look through the existing dataset files to see working examples.
+
+To define the pre-regex (the structure of the filenames), as for the root directory, we define a function taking processed arguments.
+It should return the pre-regex as a string:
+\begin{python}
+def PREGEX(args):
+    return "%(Y)/DATA_%(Y)%(m)%(d).nc"
+\end{python}
+
+You can see that the names of the matchers (here Y, m, and d) corresponds to what we are `fixing' in \titleref{sec:org-fixes}.
+
+\subsubsection{The created functions}
+\label{sec:org-created-funcs}
+
+With the information given above, we can automatically create a number of useful functions, detailled below.
+All functions take as arguments \py{(args=None, **kwargs)} (see \titleref{sec:org-arg-processing}).
+\paragraph{\texttt{get\_root}}
+This simply returns the directory containing all data.
+
+\paragraph{\texttt{get\_pregex}}
+This simply returns the pre-regex string.
+
+\paragraph{\texttt{get\_finder}}
+This returns the \lit{Finder} (object from the \lit{filefinder} package).
+This object is in charge of finding files corresponding to our selection.
+
+\paragraph{\texttt{get\_filename}}
+This returns a filename for given arguments.
+Here the arguments correspond to the matchers name: as we define our filename structure with the pre-regex, we must fill in the blanks in it.
+So for the pre-regex example of above:
+\begin{python}
+lib.data.name.get_filename(Y=2007, m=3, d=8)
+\end{python}
+Any matcher that was fixed in the \lit{fixes} argument does not need to be specified here again.
+
+\paragraph{\texttt{get\_data}}
+This returns a dataset created with \hyperref{https://xarray.pydata.org/en/stable/generated/xarray.open_mfdataset.html}{\lit{xarray.open_mfdataset()}}
+The files are supplied by the Finder object.
+Other arguments to the function are supplied by the \lit{lib.data.}\-\lit{OPEN_MF_KW_DEF} dictionnary, completed by the argument \lit{open_mf_kw} of the \lit{lib.data.create_dataset} and \lit{lib.data.<dataset>.get_data} functions (see below).
+
+\subsubsection{\texttt{lib.data.create\_dataset()}}
+This function automatically populates the module with the functions above.
+It also returns a namespace containing those functions; this is useful if one desires to have a more specific implementation of one of the functions.
+
+This function also takes a \lit{open_mf_kw} dictionnary argument, its members are passed to \lit{xr.open_mfdataset()} as keyword arguments.
+Regarding the \lit{preprocess} argument, it can be useful to have a preprocessing function that take advantage of the information found in the filename (that can be retrieved by the Finder).
+To setup such a function, special arguments in the dictionnary can be used:
+\lit{preprocess_finder} should be a callable that takes in the XArray dataset to process, the corresponding filename, and the finder object, and it should return a XArray dataset.
+The \lit{preprocess_finder_args} and \lit{preprocess_finder_kwargs} members are passed as additionnal arguments to this callable.
+
+Another argument to \lit{open_mf_kw} is \lit{postprocess_func} which is run on the merged dataset.
+It can automatically rectify some things.
+
+\subsection{Metadata on creation}
+It is useful to know when and how the datafiles originated.
+To this end, the function \lit{lib.setup_metadata} can be used.
+It adds to a dataset various global attributes:
+\begin{itemize}
+  \item \lit{"created_with"}: The name of the script, and the machine hostname
+  \item \lit{"created_with_args"}: The args dictionnary as a string
+  \item \lit{"created_on"}: The date and time of file creation
+  \item \lit{"created_on_commit"}: The hash of the current commit/HEAD
+\end{itemize}
+
+\begin{python}
+lib.setup_metadata(ds, args)
+ds.to_netcdf(ofile, ds)
+\end{python}
+
+\subsection{Zones}
+We define some static `zones', this dataset is quite special and have its own doc \linkfile{docs/zones.html}{here}.
+
+\selectlanguage{french}

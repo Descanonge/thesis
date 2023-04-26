@@ -156,7 +156,8 @@ final,
 outputdir=build,
 cachedir=minted]{minted}
 \usemintedstyle{default}
-\newmintinline[py]{python}{fontsize=\normalsize, fontfamily=NotoSans}
+\newmintinline[py]{python}{fontsize=\normalsize, fontfamily=NotoSans, breaklines}
+\newmintinline[shell]{bash}{fontsize=\normalsize, fontfamily=NotoSans, breaklines}
 
 %%% Framed environments
 \RequirePackage{tcolorbox}
@@ -725,6 +726,14 @@ cachedir=minted]{minted}
 \NewDocumentCommand \anysize { m O{1.1} +m }{%
   \dim_set:Nn \l_tmpa_dim {#1}
   {\fontsize {#1} {\dim_eval:n{\l_tmpa_dim*#2}} \selectfont #3}
+}
+
+%%% Commandes pour annexes documentation code
+\newcommand*\mylit[1]{\textsf{#1}}
+\NewDocumentCommand \lit { v } {\mylit{#1}}
+\NewDocumentCommand \linkfile { v v } {%
+  \href{https://gitlab.in2p3.fr/clement.haeck/submeso-color/-/blob/develop/#1}
+  {\mylit{#2}}%
 }
 
 \ExplSyntaxOff

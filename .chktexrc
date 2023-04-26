@@ -17,7 +17,8 @@ UserWarnRegex {
 
 WipeArg {
     \latlon:[]{} \latlonRange:[]{}
-    \py:[]{}
+    \py:[]{} \shell:[]{}
+    \lit:{}
 }
 
 VerbEnvir {
