@@ -636,7 +636,7 @@ La valeur de l'indice est la somme (pondérée par des coefficient de normalisat
 
 On notera dans cette dernière étude une différence d'approche, essentiellement sémantique mais qui reste néanmoins d'intérêt.
 C'est bien l'indice de l'\al{hi} qui apparaît comme au cœur de cette étude, qui finalement cherche plus à quantifier l'hétérogénéité spatiale de la SST pour chaque pixel, qu'à \guil{détecter les fronts}.
-Par ailleurs, bien qu'elle reprenne l'utilisation d'une fenêtre glissante, cette méthode se démarque de celle de \as{cc} et ses variations, en donnant un résultat nuancé plutôt que purement dichotomique (front / pas-front).
+Par ailleurs, bien qu'elle reprenne l'utilisation d'une fenêtre glissante, cette méthode se démarque de celle de \as{cc} et ses variations, en donnant un résultat nuancé plutôt que purement dichotomique (front / background).
 De plus, bien que nous les avons omises des descriptions ci-dessus, la plupart des méthodes incluent une étape algorithmique permettant d'obtenir en sortie uniquement la position des fronts, représentée par une ligne d'épaisseur nulle (ou 1~pixel).
 En revanche, le positionement des fronts par \citeauthor{liu_2016} est réalisé par un simple\footnotemark{} seuil sur le HI.
 \footnotetext{Bien que le choix du seuil soit fait de manière non-triviale par \textcite{liu_2016}, nous montrons dans notre implémentation qu'un seuil fixe suffit à notre étude.}
@@ -651,27 +651,34 @@ Par cette construction orientée vers une mesure graduelle des fronts, cette mé
 
 Dans la section précédente, la majorité des méthodes opèrent sur les données satellite de températures, qui est utilisée comme proxy de la densité.
 Cette dernière varie cependant aussi avec la salinité, qui n'est disponible par satellite qu'à basse résolution (entre \qtyrange[range-phrase={ et }]{35}{50}{\km} pour \as{smos} par exemple).
-
-Il est donc possible que pour certains fronts thermique, la variation de température \guil{compensée} par une variation de salinité, donnant ainsi une densité constante.
+Il est donc possible que pour certains fronts thermique, la variation de température soit \emph{compensée} par une variation de salinité, donnant ainsi une densité constante.
 Dans la région de l'Atlantique Nord, des transects sont réalisés régulièrement par un navire d'opportunité, l'Oleander.
-Des résultats suggèrent que la salinité n'intervient que peu dans les variations de densité (\cite{flagg_2006}).
+Les résultats qui en découlent suggèrent que pour cette région, la salinité n'intervient que peu dans les variations de densité (\cite{flagg_2006}).
 
 \textnote{Dans d'autres régions, il peut être nécessaire d'avoir recours à d'autres proxy de la densité, comme par exemple la hauteur d'eau (SSH) dans les régions polaires.}
 
-\section{Motivation et objectifs}
+\section{Objectifs}
 \label{sec:problematique}
 
-\begingroup
-\defaultlists
-\begin{itemize}
-        \setlength{\topsep}{\baselineskip}
-        \setlength{\itemsep}{\baselineskip}
-        \renewcommand*\labelitemi{\adfrightarrowhead}
-  \item question uno
-  \item question dos
-  \item question tres
-\end{itemize}
-\endgroup
+De multiples indices pointent vers le fait que les processus de fine échelle \OM(\qtyrange{1}{100}{\km}) ont une grande influence sur le phytoplancton (ainsi que de manière plus large sur les cycles biogéochimiques dans lesquels ce dernier s'inscrit).
+Cependant la quantification précise de leurs effets sur le paysage biogéochimique général pose un certain nombre de difficultés non-résolues, et ainsi la place exacte de ces processus reste un sujet d'étude actif.
+Un sujet d'autant plus important qu'il est étroitement lié au cycle du carbone et à la chaîne trophique de l'océan, et sur lequel l'impact du changement climatique n'est pas non plus connu avec certitude.
+Parmi les efforts déployés pour cette quantification, les images satellites offrent la possibilité de couvrir de larges régions spatio-temporelles, tout en résolvant les échelles qui nous intéressent ici.
+
+Nous nous penchons donc dans ce travail sur les moyens de quantifications par satellite des effets de ces processus sur le phytoplancton; en particulier ceux des \emph{fronts de submésoéchelle} sur la \emph{\al{chl}}, que nous utilisons comme proxy de la biomasse totale de ce dernier.
+Pour développer et valider nos méthodes de quantification, nous nous limitons à la région autour du Gulf Stream ce qui facilite le travail d'exploration tout en gardant néanmoins une diversité dans les régimes biogéochimiques présents.
+Nous cherchons à répondre aux questions suivantes:
+{
+  \defaultlists
+  \begin{itemize}
+          \setlength{\topsep}{\baselineskip}
+          \setlength{\itemsep}{\baselineskip}
+          \renewcommand*\labelitemi{\adfrightarrowhead}
+    \item Comment quantifier la réponse de la \al{chl} aux dynamiques frontales dans la région du Gulf Stream ?
+    \item Comment est-ce que l'augmentation de \al{chl} est conditionné par l'intensité des fronts ?
+    \item Peut-on détecter un bloom précoce dans les fronts depuis des données satellites ?
+  \end{itemize}
+}
 
 \section{Plan de thèse}
 \label{sec:plan-de-these}
