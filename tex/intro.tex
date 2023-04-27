@@ -85,10 +85,7 @@ Mais l'on peut également trouver dans le reste de la zone des fronts moins inte
 Afin de mieux définir nos objectifs, et avant de les présenter, nous dressons dans la section suivante un état de l'art des sujets concernés.
 Nous exposerons ensuite le plan de ce manuscrit.
 
-\section{État de l'art}
-\label{sec:etat-de-lart}
-
-\subsection{Le phytoplancton dans le système terre}
+\section{Le phytoplancton dans le système terre}
 \label{sec:phyto-ds-sys-terre}
 
 % La biologie marine, à sa base, repose sur les conversions d'un certain nombre d'éléments entre eux.
@@ -103,7 +100,7 @@ Cependant cet environment est en perpétuel changement du fait des mouvements de
 Dans cette section, on décrira d'abord succinctement les caractéristiques biologiques générales du phytoplancton et les moyens de l'observer.
 Dans la section suivante, on s'intéressera plus en détail aux intéractions biophysiques entre le phytoplancton et les courants océaniques.
 
-\subsubsection{Définition générale}
+\subsection{Définition générale}
 \label{sec:phyto-def-gen}
 
 Le plancton est donc l'ensemble des organismes dont la motilité ne leur permet guère plus que de se laisser dériver au gré des courants.
@@ -131,14 +128,23 @@ Cette répartition des ressources induit dès lors une grande importance des éc
 
 \begin{figure}
   \centering
-  \insertfig{levy_2023_fig1.pdf}
+  \insertfig[0.8]{levy_2023_fig1.pdf}
   \captionT{Schéma de la pompe biologique}{%
     Tiré de \cite{levy_2023}, fig.~1.
+
+    \engquote{%
+      Illustration of the influence of finescales on marine biogeochemical cycles~(red colors).
+      (Top, surface view)~Sea surface chlorophyll on 22/04/2007 from \as{modis}-aqua ocean color satellite \abbrv{L2} data binned on \qty{1}{\km} grid.
+      Stirring by mesoscale eddies and submesoscale fronts creates finescale patterns in the phytoplankton distribution.
+      Overlaid are the model grids used in high-resolution Ocean General Circulation Models (OGCMs), and in coarse resolution Earth System Models (ESMs).
+      The scales resolved by monitoring plateforms (in yellow) is also shown.
+      (Bottom, cutaway view)~Schematic representation of ocean biogeochemical cycles driven by the large scale circulation~(large grey loop).
+      Finescales impact these cycles through local eddy-fluxes and through upcale feedback which modifies the large-scale transport.}
   }
   \label{fig:pompe-bio}
 \end{figure}
 
-\subsubsection{Télédétection}
+\subsection{Télédétection}
 \label{sec:teledetection}
 
 L'observation du phytoplancton comporte un certain nombre de défis que nous allons rapidement évoquer dans les sections suivantes.
@@ -237,7 +243,7 @@ La relation entre la quantité de \al{chl} et la biomasse, exprimée par le rati
 
 % Des efforts sont conduits pour extraire la composition de la communauté phytoplanctonique des données de télédétection.
 
-\subsubsection{Observations in-situ et modèles numériques}
+\subsection{Observations in-situ et modèles numériques}
 
 Pour toutes ces raisons, les mesures in-situ constituent un outil nécessaire et complémentaire à la télédétection, à la fois pour l'observation opérationelle mais aussi pour mieux comprendre les processus en jeu.
 En effet, au-delà de pouvoir accéder directement aux variables que les satellites doivent inférer, parfois à travers des proxys, ces mesures peuvent explorer des dimensions invisibles aux satellites.
@@ -274,10 +280,10 @@ En particulier, ces échelles sont absentes des modèles utilisés pour les proj
 
 % Difficile de séparer les trois: processus dynamiques, mélange horizontal, et biologie, car ils ont les même temps caractéristiques.
 
-\subsection{Interactions biophysiques}
+\section{Interactions biophysiques}
 \label{sec:interactions-biophys}
 
-\subsubsection{Importance des fines échelles}
+\subsection{Importance des fines échelles}
 
 Comme nous l'avons évoqué précédemment, les cycles biogéochimiques marins sont particuliers en ce que la production organique et la reminéralisation de la matière organique détritique y sont fortement découplées.
 Horizontalement d'une part, un découplage résulte du transport des matières organiques et inorganiques par les courants océaniques (\cite{chabert_2021}).
@@ -342,7 +348,7 @@ En outre, il est nécessaire \encadra{à la fois pour quantifier leur impact sur
 Nous nous penchons dans la suite sur quelques uns de ces phénomènes et leurs impacts sur les cycles biogéochimiques.
 En particulier l'apport de nutriments par upwelling aux fronts, et le décalage du bloom du fait de la restratification aux fronts.
 
-\subsubsection{Mélange horizontal}
+\subsection{Mélange horizontal}
 
 Abordons d'abord rapidement le mélange horizontal du phytoplancton par advection.
 Les masses  d'eau, et donc les traceurs biogéochimiques qu'elles contiennent, sont entrainées par les courants, largement horizontaux.
@@ -355,7 +361,7 @@ De récentes études montrent qu'une large part de la variabilité (spatiale et 
 % \review{isopycnal mixing ? \cite{abernathey_2022}}
 
 
-\subsubsection{Les fronts de submésoéchelle}
+\subsection{Les fronts de submésoéchelle}
 
 Les fronts (de submésoéchelle) sont des gradients de densité forcés par les courants de mésoéchelle, et des processus atmosphériques (flux de chaleur et d'eau douce) spatialement hétérogènes.
 Les fronts sont renforcés par frontogenèse (\cite{thomas_2008,mcwilliams_2016}).
@@ -393,7 +399,7 @@ Cette instabilité de type barocline tend à aplanir les isopycnes sur toute la 
 
 Les fronts de submésoéchelles causent donc des vitesses verticales importantes, et tendent à restratifier localement la couche de mélange en créant des tourbillons.
 
-\subsubsection{Apport de nutriments aux fronts}
+\subsection{Apport de nutriments aux fronts}
 \label{sec:upwelling-nutriments}
 
 La dynamique de submésoéchelle affectent également les cycles biogéochimiques par les circulations verticales qui se développent aux fronts.
@@ -472,7 +478,7 @@ Ils ont détecté les fronts de température en calculant un indice mesurant l'h
 Ils ont ensuite pu comparer les valeurs de \as{chl} (satellite) dans les zones impactées par les fronts (caractérisées par une valeur élevée de l'indice d'hétérogénéité) avec les valeurs dans les zones non touchées.
 Ils ont constaté une augmentation de la \as{chl} dans les fronts, négligeable en été mais qui atteignait près de \pct{40} en hiver.
 
-\subsubsection{Modification de la phénologie du bloom}
+\subsection{Modification de la phénologie du bloom}
 \label{sec:modif-phenologie}
 
 Nous avons abordé plus haut le déclenchement d'un bloom au printemps, aux hautes latitudes, du fait de la réduction du mélange vertical.
@@ -496,7 +502,7 @@ Les simulations avec gradient (donc restratifiées par la dynamique de subméso�
   \label{fig:early-bloom-mahadevan}
 \end{figure}
 
-\subsection{Région d'étude: Extension du Gulf Stream}
+\section{Région d'étude: Extension du Gulf Stream}
 \label{sec:region-detude}
 
 Dans la section précédente, nous avons relié les dynamiques de submésoéchelle à des surplus de productivité dans les fronts, et à la modification de la phénologie du bloom.
@@ -519,7 +525,7 @@ Elle s'étend de \latlon{15N} à \latlon{55N}, et de la côte américaine (\latl
   \label{fig:region}
 \end{figure}
 
-\subsubsection{La physique}
+\subsection{La physique}
 \label{sec:gs-physique}
 
 Cette région d'étude est caractérisée par la présence du Gulf Stream, un courant de bord ouest.
@@ -541,7 +547,7 @@ Enfin cette région englobe une partie de la gyre subtropicale.
 Cette dernière, forcée par les Alizées au sud et les vents d'ouest au nord, ne présente pas de limite très marquée.
 Du fait du rotationnel négatif des vents dominants, le cœur de la gyre, loin de l'influence du Gulf Stream, est caractérisé une circulation anticyclonique et un approfondissement de la thermocline et de la nutricline.
 
-\subsubsection{Productivité primaire}
+\subsection{Productivité primaire}
 \label{sec:gs-biologie}
 
 Comme expliqué ci-dessus, la gyre subtropicale présente une nutricline profonde, sans dynamique particulière permettant un apport important de nutriment.
@@ -575,9 +581,9 @@ La productivité y est légèrement accrue en hiver, du fait d'une convection sa
 \end{figure}
 
 
-\subsection{Détection des fronts sur images satellites}
+\section{Détection des fronts sur images satellites}
 
-\subsubsection{Historique des méthodes existantes}
+\subsection{Historique des méthodes existantes}
 \label{sec:detection-fronts}
 
 Afin de mesurer l'impact des fronts sur le phytoplancton, nous partons de l'idée de détecter les fronts de densité à partir de la SST afin de les colocaliser aux valeurs de \al{chl}.
@@ -647,7 +653,7 @@ Par cette construction orientée vers une mesure graduelle des fronts, cette mé
   Bien que nous les ayons pas considérées ou décrites ici, ces dernières années, diverses méthodes ont été proposée (voir la review de \cite{liu_2022}).
 \end{note}
 
-\subsubsection{Vers des fronts de densité}
+\subsection{Vers des fronts de densité}
 
 Dans la section précédente, la majorité des méthodes opèrent sur les données satellite de températures, qui est utilisée comme proxy de la densité.
 Cette dernière varie cependant aussi avec la salinité, qui n'est disponible par satellite qu'à basse résolution (entre \qtyrange[range-phrase={ et }]{35}{50}{\km} pour \as{smos} par exemple).
@@ -668,17 +674,33 @@ Parmi les efforts déployés pour cette quantification, les images satellites of
 Nous nous penchons donc dans ce travail sur les moyens de quantifications par satellite des effets de ces processus sur le phytoplancton; en particulier ceux des \emph{fronts de submésoéchelle} sur la \emph{\al{chl}}, que nous utilisons comme proxy de la biomasse totale de ce dernier.
 Pour développer et valider nos méthodes de quantification, nous nous limitons à la région autour du Gulf Stream ce qui facilite le travail d'exploration tout en gardant néanmoins une diversité dans les régimes biogéochimiques présents.
 Nous cherchons à répondre aux questions suivantes:
-{
-  \defaultlists
-  \begin{itemize}
-          \setlength{\topsep}{\baselineskip}
-          \setlength{\itemsep}{\baselineskip}
-          \renewcommand*\labelitemi{\adfrightarrowhead}
-    \item Comment quantifier la réponse de la \al{chl} aux dynamiques frontales dans la région du Gulf Stream ?
-    \item Comment est-ce que l'augmentation de \al{chl} est conditionné par l'intensité des fronts ?
+
+\begin{tcolorbox}[
+  enhanced,
+  frame hidden, interior hidden,
+  borderline={1.pt}{3pt}{black}, arc=2.mm,
+  borderline north={1.2pt}{0pt}{black},
+  borderline south={1.2pt}{0pt}{black},
+  borderline west={1.2pt}{0pt}{black},
+  borderline east={1.2pt}{0pt}{black},
+  top=2\onelineskip,
+  bottom=2\onelineskip,
+  ]
+  \begin{list}{}{
+      \setlength{\labelsep}{0.5em}
+      \setlength{\itemindent}{0pt}
+      \setlength{\leftmargin}{2em}
+      \setlength{\labelwidth}{0.5em}
+      \setlength{\listparindent}{0pt}
+      \setlength{\parsep}{\parskip}
+      \setlength{\itemsep}{\onelineskip}
+      \setlength{\topsep}{\onelineskip}
+      \renewcommand*\makelabel[1]{\adfrightarrowhead}}
+    \item Comment quantifier la réponse de la chl aux dynamiques frontales dans la région du Gulf Stream ?
+    \item Comment est-ce que l'augmentation de chl est conditionné par l'intensité des fronts ?
     \item Peut-on détecter un bloom précoce dans les fronts depuis des données satellites ?
-  \end{itemize}
-}
+  \end{list}
+\end{tcolorbox}
 
 \section{Plan de thèse}
 \label{sec:plan-de-these}
