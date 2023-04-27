@@ -69,6 +69,7 @@ trophic interactions at ocean fronts}
 %%% TOC
 \clearpage
 {
+  \hypersetup{hidelinks}
   \setlength{\baselineskip}{1.03\onelineskip}
   \tableofcontents*
   % phantomsection already called by \tableofcontents
@@ -78,7 +79,10 @@ trophic interactions at ocean fronts}
 %%% LOF
 \clearpage
 
-\listoffigures*
+{
+  \hypersetup{hidelinks}
+  \listoffigures*
+}
 % phantomsection already called by \listoffigures
 \addcontentsline{toc}{section}{\listfigurename}
 
