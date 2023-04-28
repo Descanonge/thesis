@@ -176,7 +176,19 @@ On assiste ainsi à une sorte de dillution des valeurs de \as{chl}.
 Ce résultat souligne l'impact potentiel des choix dans la méthode sur les qualités des fronts détectés (positionnement, intensité, largeur), et donc sur les valeurs de \as{chl} sélectionnées.
 Ces couplages pourraient être mieux qualifiés par des études approfondie sur l'influence de chaque composante, de manière individuelle, sur ces qualités.
 
-\textnote{Il serait intéressant de se pencher sur des méthodes ne reposant pas sur une variable dont il faudrait prendre le seuil, comme celle de \textcite{cayula_1995} par exemple. L'intensité et la largeur des fronts serait ainsi à déterminer de manière indépendante, par des méthodes à définir.}
+\subsection{Utiliser d'autres méthodes}
+
+Il pourrait être intéressant de se pencher sur des méthodes ne reposant pas sur une variable dont il faudrait prendre le seuil, comme celle de \textcite{cayula_1995} par exemple.
+L'intensité et la largeur des fronts serait ainsi à déterminer de manière indépendante, par des méthodes à définir.
+
+Changer de méthode serait néanmoins loin d'être trivial.
+Les algorithmes ne sont pas nécessairement distribués tel qu'il est usuel dans le domaine de l'open-source, et/ou pas nécessairement implémenté de manière à permettre une réutilisation facile et pour de grands volumes de données.
+J'entends en fait ce qui a été fait pour cette thèse, à savoir un dépôt ouvert et communautaire pour le code et la documentation, et une implémentation en Python s'appuyant sur \citesoft{xarray} et \citesoft{dask}, dont les parties les plus intensives sont écrites en language compilé\footnote{le calcul des composantes du HI à proprement parler est fait en Fortran, lancé directement depuis Python}.
+Par exemple, l'algorithme Belkin--O'Reilly est distribué pour R (adapté d'un code IDL), et l'algorithme Cayula--Cornillon en Matlab\dots
+
+On pourra noter un effort dans cette direction par le projet \citesoft{juno}, qui distribue les algorithmes de Canny, \as{cc}, et \as{boa}, implémentés en Python.
+On déplorera néanmoins l'absence de version en language compilé, et un support seulement partiel pour Xarray (qui simplifierait pourtant le calcul \as{boa}! voir \nref[annexe]{ax:boa}).
+
 
 % points clés
 % 1km possible, mais rend l'étude bien plus difficile
