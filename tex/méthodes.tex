@@ -11,7 +11,7 @@
   \clearpage
 }
 
-Maintenant que les objectifs de ce projet ont été précisés, nous détaillons dans ce chapitre l'ensemble des outils nécessaire à leur accomplissement.
+Maintenant que les objectifs de ce projet ont été précisés, nous détaillons dans ce chapitre l'ensemble des outils nécessaires à leur accomplissement.
 Nous décrivons dans les sections qui suivent les données utilisées, puis les méthodes utilisées pour séparer notre zone d'étude en sous-régions, pour repérer les fronts, et pour extraire nos résultats.
 
 \section{Données}
@@ -19,7 +19,7 @@ Nous décrivons dans les sections qui suivent les données utilisées, puis les 
 
 Dans cette section sont décrits les jeux de données utilisés pour ce projet.
 Le choix de ces données s'est avéré être une question importante et difficile dès le départ.
-Nous savions qu'il allait être nécessaire de combiner plusieurs jeux de données: la SST avec la \as{chl}, puis avec des données de composition de la communauté de phytoplancton.
+Nous savions qu'il allait être nécessaire de combiner deux jeux de données: la SST avec la \as{chl}.
 Cela a donc informé le choix des données, ainsi que la création des outils nécessaires à la gestion de plusieurs sets de données.
 Plusieurs options ont été considérées, notamment pour la SST.
 Elles sont reportées ci-dessous, même si elles ne sont pas utilisées pour le reste des résultats présentés.
@@ -159,7 +159,7 @@ Le modèle fait de l'assimilation de données d'observations: altimétrie, SST \
 \begin{figure}
   \insertfig{comparaison_sst.pdf}
   \captionT{Comparaison des produits de SST}{%
-    Zoom sur une même fenêtre, le \frenchdate{2007}{04}{22}, de la SST pour quatres produits considérés: \dataname{sst_esacci}~(a), \dataname{sst_modis}~(b), \dataname{sst_mur}~(c), et \dataname{sst_glorys}~(d).
+    Instantanné de la SST le \frenchdate{2007}{04}{22}: \dataname{sst_esacci}~(a), \dataname{sst_modis}~(b), \dataname{sst_mur}~(c), et \dataname{sst_glorys}~(d).
   }
   \label{fig:comparaison-sst}
 \end{figure}
@@ -216,7 +216,7 @@ Similairement au produit Modis, les valeurs de \as{chl} sont calculées à parti
   \label{fig:comparaison-chl}
 \end{figure}
 
-\subsection{Accord entre les produits de SST et Chl-\textit{a}}
+\subsection{Colocalisation entre SST et Chl-\textit{a}}
 
 Il est à noter qu'il est difficile de trouver des produits de \al{chl} à des résolutions supérieures à~\qty{4}{\km}, en tout cas au niveau global.
 Cela motive à utiliser un produit SST de résolution légèrement moindre afin d'éviter une étape supplémentaire de \engquote{downsampling} une fois les fronts repérés sur le champ de SST.
@@ -224,8 +224,7 @@ Cela renforce notre choix pour les données \dataname{sst_esacci}, en défaveur 
 
 Les deux jeux choisis pour la SST et \as{chl} ont des résolutions spatiales similaires mais néanmoins légèrement différentes.
 Les deux grilles sont plate-carrées (régulières en latitude et longitude) mais le champ de \as{chl} est défini sur une grille \glshref{epsg-chl} de résolution~\resol{1}{24}~(\tapprox\qty{4.6}{\km}); et le champ de SST sur une grille \glshref{epsg-sst} de résolution~\resol{1}{20}~(\tapprox\qty{5.6}{\km}).
-
-Sachant que les produits de composition du phytoplancton dont nous disposions (non décrits ici) sont définis sur la même grille que la Chlorophylle, nous adaptons la SST sur la grille de la \as{chl} par une simple interpolation bi-linéaire.
+Nous adaptons la SST sur la grille de la \as{chl} par une simple interpolation bi-linéaire.
 
 \subsection{Bathymétrie}
 \label{sec:donnees-bathymetrie}
@@ -245,11 +244,11 @@ La bathymétrie nous permet d'exclure de nos résultats le plateau continental (
   \label{fig:bathymetrie}
 \end{figure}
 
-\section{Délimitations des biomes, ou sous-régions d'étude}
+\section{Délimitations des sous-régions d'étude}
 \label{sec:delimitations-regions}
 
-Comme détaillé plus en profondeur en introduction (\nref{sec:region-detude}, \cref*{chp:introduction}) notre région d'étude est fortement hétérogène, aussi bien concernant les propriétés physiques que biologiques.
-Il est ainsi nécessaire de séparer notre zone d'étude en (sous-)régions afin d'extraire des résultats sur des zones homogènes.
+Comme détaillé en introduction (\nref{sec:region-detude}, \cref*{chp:introduction}) notre région d'étude est fortement hétérogène, aussi bien concernant les propriétés physiques que biologiques.
+Il est ainsi nécessaire de séparer notre zone d'étude en (sous-)régions afin d'extraire des résultats sur des zones plus homogènes.
 Nous définissons donc trois biomes.
 Le biome subtropical permanent, le plus au sud, correspond à un régime largement oligotrophe.
 Le biome subpolaire, le plus au nord, comprend les eaux froides et productives au nord du Gulf Stream.
@@ -259,16 +258,16 @@ Dans cette section, nous décrivons plus précisément la méthode utilisée pou
 \subsection{Séparation des biomes}
 
 La séparation entre les deux biomes subtropicaux est faite par une limite zonale fixée à~\latlon{32N} (trait noir pointillé \nref{fig:regions}).
-Cette limite correspond approximativement à un saut visible des valeurs de \as{chl} à cette latitude (isocontour~\qty{0.1}{\mgm} de la moyenne annuelle de \as{chl}) qui ne varie que peu au cours de l'année.
-Cette séparation est en accord avec la limite entre les biomes tels que délimités par \textcite{sarmiento_2004}~(\nref{fig:biomes}b).
+Cette limite correspond approximativement à fort gradient méridional de \as{chl} à cette latitude (isocontour~\qty{0.1}{\mgm} de la moyenne annuelle de \as{chl}) qui ne varie que peu au cours de l'année.
+Cette frontière géographique à celle délimitée par \textcite{sarmiento_2004}~(\nref{fig:biomes}b).
 
 \begin{figure}
   \centering
   \insertfig{régions.pdf}
-  \captionT{Résultat de la séparation de la zone d'étude en biomes}{%
-    La zone est découpée en trois biomes: le biome subtropical permanent~(PSB) au sud de du trait pointillé à~\latlon{32N}; le biome subtropical saisonnier~(SSB) entre~\latlon{32N} et la limite (sinueuse) nord du Gulf Stream dénotée par le contour noir; et le biome subpolaire~(PB) au nord du Gulf Stream.
+  \captionT{Séparation de la zone d'étude en trois biomes}{%
+    Le biome subtropical permanent~(PSB) au sud de \latlon{32N}; le biome subtropical saisonnier~(SSB) entre~\latlon{32N} et la limite (sinueuse) nord du Gulf Stream dénotée par le contour noir; et le biome subpolaire~(PB) au nord du Gulf Stream.
 
-    Clichés de SST~(a) et \as{chl}~(b) au \frenchdate{2007}{04}{22}, et les distributions de SST~(c) et (d)~\as{chl} pour chacuns des biomes, le même jour (subpolaire:~bleu, subtropical saisonnier:~jaune, subtropical permenant:~rouge).
+    Clichés de SST~(a) et \as{chl}~(b) au \frenchdate{2007}{04}{22}, et les distributions de SST~(c) et \as{chl}~(d) pour chacuns des biomes, le même jour (subpolaire:~bleu, subtropical saisonnier:~jaune, subtropical permenant:~rouge).
     La ligne noire verticale sur~(c) marque la température détectée comme seuil de la limite nord du Gulf Stream.
     Les axes des abscisses des distributions correspondent aux barres de couleurs.
     La ligne rouge suit l'isobath~\qty{1500}{\m}. Le plateau continental~(\qty{<1500}{\m}) n'est pas considéré et est masqué.
@@ -276,8 +275,8 @@ Cette séparation est en accord avec la limite entre les biomes tels que délimi
   \label{fig:regions}
 \end{figure}
 
-On sépare ensuite le reste de la région au nord de~\latlon{32N} en prenant comme limite le front nord du jet du Gulf Stream (le \engquote{North wall}).
-Cette délimitation est donc dynamique et déterminée chaque jour à partir de l'image de température.
+On sépare ensuite le reste de la région au nord de~\latlon{32N} en prenant comme frontière physique le front nord du jet du Gulf Stream (le \engquote{North wall}).
+Cette frontière est donc dynamique et déterminée chaque jour à partir de l'image de température.
 En effet, il apparaît que la distribution de la SST (au nord de~\latlon{32N}) suffit à repérer de manière fiable et robuste une température seuil permettant de séparer les deux biomes (contour sinueux noir plein \nref[figure]{fig:regions}).
 Sur cette distribution apparaît clairement un pic dans des valeurs élevées correspondant au eaux du jet.
 Il est aisé de repérer le pic et l'ajuster par une gaussienne.
@@ -290,7 +289,7 @@ La valeur journalière de ce seuil est filtrée temporellement par un filtre mé
   \captionT{Délimitation des biomes subtropical permanent et subpolaire par température seuil}{%
     Sur la distribution des valeurs en température au nord de~\latlon{32N}~(en noir) pour le \frenchdate{2007}{04}{22}, le pic \encadra{ici autour de~\tC{18}} correspond aux eaux du jet. Il est ajusté par un fit gaussien (en rouge) dans un intervalle de~\tC{5} de large.
     La température de seuil~(en bleu) entre les deux biomes est définie comme la température moyenne du pic~(trait fin pointillé) moins deux fois son écart-type.
-    C'est ainsi que nous définissons la limite nord du Gulf Stream.
+    Cela correspond à notre critère de définition de la limite nord du Gulf Stream.
   }
   \label{fig:temp-seuil-distrib}
 \end{figure}
@@ -298,8 +297,8 @@ La valeur journalière de ce seuil est filtrée temporellement par un filtre mé
 \begin{figure}
   \insertfig{separation_evol_month.pdf}
   \captionT{Variation temporelle de la délimitation entre biomes}{%
-    La position limite entre les biomes subtropical saisonnier et subpolaire n'évolue que peu au cours de l'année vis à vis des larges méandres du Gulf Stream.
-    Néanmoins en été, la limite est moins marquée après le détachement du jet~(\latlonRange{75}{70W}).
+    La position limite entre les biomes subtropical saisonnier et subpolaire évolue principalement du fait des méandres du Gulf Stream, et moins du fait d'une variation saisonnière.
+    Néanmoins en été, la limite est moins marquée directement après le détachement du jet~(\latlonRange{75}{70W}).
 
     L'isotherme séparant les deux biomes est tracé le 15~de chaque mois pour l'année~2007.
     La couleur de chaque contour correspond au jour de l'année comme dénoté par la barre de couleur dans l'inset.
@@ -310,15 +309,13 @@ La valeur journalière de ce seuil est filtrée temporellement par un filtre mé
 
 \subsection{Exclusion du plateau continental}
 
-Par ailleurs, il est également nécessaire d'éviter de considérer les pixels trop près des côtes dans notre étude.
-D'une part la \as{chl} atteint dans les kilomètres les plus proches de côtes des valeurs très élevées (jusqu'à~\qty{10}{\mgm}) pour des raisons qui ne concernent pas notre étude et qui pourraient fausser les distributions mesurées.
-D'autre part, nous cherchons à éviter deux zones qui ne correspondent pas aux biomes définis plus haut.
+Afin de concentrer l'étude sur l'océan ouvert, nous avons exclu les pixels situés sur le plateau continental.
+La \as{chl} atteint dans les kilomètres les plus proches de côtes des valeurs très élevées (jusqu'à~\qty{10}{\mgm}) pour des raisons qui ne concernent pas notre étude et qui pourraient fausser les distributions mesurées.
 
-Premièrement, le jet du Gulf Stream prend forme au sud de notre zone, le long de la côte de Floride. On trouve donc sur le plateau continental à ces latitudes~(\tapprox\latlon{28N}) de forts courants qu'on ne retrouve pas dans le reste du biome subtropical permanent.
-Deuxièmement, plus au nord dans l'anse Nord-Est Américaine de l'Atlantique (\engquote{Mid-Atlantic Bight}), on trouve une séparation nette entre les eaux au nord du Gulf Stream (la \engquote{slope sea}), et les eaux sur le plateau continental.
+Le jet du Gulf Stream prend forme au sud de notre zone, le long de la côte de Floride. On trouve sur le plateau continental à ces latitudes~(\tapprox\latlon{28N}) de forts courants qu'on ne retrouve pas dans le reste du biome subtropical permanent.
+Plus au nord dans l'anse Nord-Est Américaine de l'Atlantique (\engquote{Mid-Atlantic Bight}), on trouve une séparation nette entre les eaux au nord du Gulf Stream (la \engquote{slope sea}), et les eaux sur le plateau continental.
 Un jet marque cette séparation le long du talus continental~(\cite{flagg_2006}).
 
-Dans les deux cas, imposer une limite haute à la bathymétrie sur notre région d'étude permet de supprimer ces zones problématiques.
 Ainsi, pour calculer nos résultats, nous ne considérons que les pixels où la profondeur n'excède pas~\qty{1500}{\m}.
 Nous utilisons pour cela les données de bathymétrie \dataname{etopo1}~(voir \datasect{etopo1}).
 
@@ -410,7 +407,7 @@ Nous proposons donc une méthode plus facile à implémenter, plus robuste, et a
 \subsection{Implémentation: Coefficients de normalisation}
 \label{sec:coef-normalisation}
 
-Avant de pouvoir réunir les trois composantes il est nécessaire de leur appliquer un poids statistique équivalent à chacune. Cela est accompli par calcule de coefficients constants de normalisation.
+Avant de pouvoir réunir les trois composantes il est nécessaire de leur appliquer un poids statistique. Cela est accompli par calcul de coefficients de normalisation constants.
 Alors que \citeauthor{liu_2016} proposent de normaliser chaque composante~\(C^n\) par ses valeurs minimales et maximales (prises sur toutes les valeurs disponibles) selon:
 \begin{equation}
   \norm{C_i^n} = \frac {C_i^n - \min(C^n)} {\max(C^n) - \min(C^n)} ;
@@ -470,8 +467,8 @@ Nous avons réalisé des test de sensibilité à certains paramètres de cette m
   \insertfig{exemples_fronts.pdf}
   \captionT{Exemples de structures fines}{%
     Champs de SST~(colonne gauche), \as{chl}~(colonne centre), et HI~(colonne droite) pour trois exemples de structures: \textlf{1}\ier~exemple~(1a--c) le \frenchdate{2007}{04}{07}, \textlf{2}\ieme~exemple~(2a--c) le \frenchdate{2007}{02}{23}, et \textlf{3}\ieme~exemple~(3a--c) le \frenchdate{2007}{02}{28}.
-    Chaque fenêtre représente une surface d'environ~\qtyproduct{200x200}{\km}.
-    Deux valeurs seuil de HI sont contourées, à 5~(trait plein) et 10~(trait pointillé).
+    Chaque fenêtre représente une surface d'environ \qtyproduct{200x200}{\km}.
+    Deux valeurs seuil de HI sont contourées, à 5 (trait plein) et 10~(trait pointillé).
   }
   \label{fig:exemples-fronts}
 \end{figure}
@@ -480,9 +477,10 @@ Nous avons réalisé des test de sensibilité à certains paramètres de cette m
 \section{Compression des calculs par utilisation d'histogrammes}
 \label{sec:extraction-hist}
 
+Afin d'optimiser les calculs et le stockage, j'ai transformé chaque image \abbrv{2D} de SST et de \as{chl} en une serie d'histogrammes.
 Une fois le HI calculé, il devient possible de catégoriser chaque pixel par la biome auquel il appartient (subtropical permanent, subtropical saisonnier, subpolaire), ainsi que par sa valeur de HI.
 On cherche ensuite à extraire des informations de ces ensembles de pixels ainsi constitués.
-Le nombre total de pixels étant conséquent, et parce que l'établissement des ensembles est compliqué et coûteux, les ensembles de pixels sont chacun réduits à des histogrammes de variables d'intérêt (SST, \as{chl}, ou les \asp{pft}).
+Le nombre total de pixels étant conséquent, et parce que l'établissement des ensembles est compliqué et coûteux, les ensembles de pixels sont chacun réduits à des histogrammes de variables d'intérêt (SST ou \as{chl}).
 Cela diminue les étapes de calcul ainsi que la quantité de données à traiter pour obtenir un diagnostic.
 
 Prenons l'exemple d'une seule image. Pour notre région d'étude, cela représente \qtyproduct{1000 x 1000}{\pixels}.
@@ -565,8 +563,8 @@ Afin d'estimer l'incertitude de cette mesure, nous prenons l'écart-type de l'en
 \begin{figure}
   \centering
   \insertfig{phenologie_méthode_2015_N:45-50.pdf}
-  \captionT{Mesure du timing du bloom entre fronts et background}{%
-    Les dates de démarrage du bloom et sa durée sont obtenues à partir des séries temporelles de la médiane de \as{chl}~(a) et de sa dérivé~(b). Les données proviennent de l'année~2015 et la bande de latitude~\latlonRange{40}{45N}.
+  \captionT{Mesure des dates de début et de fun du bloom}{%
+    Séries temporelles de la médiane de \as{chl}~(a) et de sa dérivé~(b), pour l'année~2015 et la bande de latitude~\latlonRange{40}{45N}.
 
     Le processus est illustré sur la série correspondant aux fronts faibles:
     \textcircled{1}\,Nous déterminons l'instant pour lequel la \as{chl} est maximale, puis \textcircled{2}\,prenons pour démarrage du bloom l'instant antérieur à ce dernier et pour lequel la dérivée de \as{chl} est maximale.
@@ -575,22 +573,23 @@ Afin d'estimer l'incertitude de cette mesure, nous prenons l'écart-type de l'en
   \label{fig:methode-timing-bloom}
 \end{figure}
 
-\begin{figure}
-  \centering
-  \insertfig{phenologie_frt-bkg_2015_N:45-50.pdf}
-  \captionT{Mesure du timing du bloom entre fronts et background}{%
-    Les dates de démarrage du bloom et sa durée sont obtenues à partir des séries temporelles de la médiane de \as{chl}~(a) et de sa dérivé~(b). Les résultats pour les trois séries temporelles correspondant au \eng{background}~(rouge), fronts faibles~(bleu), et fronts forts~(vert) sont superposés; le timing du bloom pour chaque série est représenté par une flèche horizontale.
-    Les données proviennent de l'année~2015 et la bande de latitude~\latlonRange{40}{45N}.
-  }
-  \label{fig:bloom-lag}
-\end{figure}
-
 Enfin, nous prenons comme date de fin du bloom la date la plus tardive pour laquelle la \as{chl} est supérieure à~\pct{75} de sa valeur maximale (étape\,\textcircled{3}, en vert, \nref{fig:methode-timing-bloom}a).
 Pour obtenir une incertitude nous prenons ici l'écart-type de l'ensemble des dates pour lesquelles la \as{chl} est comprise dans un intervalle de~\pct{5} autour du seuil (\ab{cad}~\pct{75\pm2.5}).
 La durée~\as{duree} du bloom est prise entre les dates de démarrage et de fin ci-dessus.
 
+Le processus est répété pour chacune des séries temporelles, à savoir pour le background, les fronts faibles, et les fronts forts (\nref{fig:bloom-lag}).
 Il est légitime de questionner le détail de ces méthodes \encadra{d'autant plus pour certaines années ou le démarrage du bloom est étalé sur une longue période, ou fragmenté en plusieurs pics}, cependant on s'intéresse ici aux différences entre les valeurs trouvées dans les fronts et dans le \eng{background} (\nref{fig:bloom-lag}).
 Étant donné que l'on effectue ces mesures de manière identique dans les deux cas, on s'attend néanmoins à trouver des différences de valeurs pertinentes.
+
+\begin{figure}
+  \centering
+  \insertfig{phenologie_frt-bkg_2015_N:45-50.pdf}
+  \captionT{Différences de phénologie du bloom entre fronts et background}{%
+    Séries temporelles de la médiane de \as{chl}~(a) et de sa dérivé~(b), pour le \eng{background}~(rouge), les fronts faibles~(bleu), et les fronts forts~(vert), pour l'année~2015 et la bande de latitude~\latlonRange{40}{45N}.
+    La date de démarrages et la durée du bloom pour chaque série est représenté par une flèche horizontale.
+  }
+  \label{fig:bloom-lag}
+\end{figure}
 
 Les variables retenues pour l'étude de la phénologie du bloom sont donc le retard au démarrage du bloom (\(\am{lag} = \am{onset}_\frt - \am{onset}_\bkg \), \enquote{lag} dans l'article), et l'écart de durée (\(\am{lag-duree} = \am{duree}_\frt - \am{duree}_\bkg\)).
 Leurs valeurs annuelles (ainsi que les incertitudes associées) sont moyennées avec pondération.
@@ -609,12 +608,12 @@ Le calcul est identique pour l'écart de durée~\as{lag-duree}.
 
 {
   \clearpage%
-  \makeevenhead{thesis}{\leftmark}{}{Récapitulatif}%
-  \makeoddhead{thesis}{\leftmark}{}{Récapitulatif}%
+  \centering%
+  {\large\bfseries Récapitulatif}
   \phantomsection%
   \addcontentsline{toc}{section}{Récapitulatif}%
   \addcontentsline{lof}{figure}{Récapitulatif}%
-  \centering%
+  \vspace{2\onelineskip}
   \includegraphics[
   width=\textwidth,
   height=\textheight-1mm,

@@ -1,6 +1,6 @@
 % chktex-file 13
 
-\chapter{Impact des fronts sur le budget de Chlorophylle-\textit{a}}
+\chapter{Impact des fronts sur la quantité de Chlorophylle-\textit{a}}
 \addChpLof
 \label{chp:res-chl}
 \graphicspath{{resources/res_chl}}
@@ -50,15 +50,13 @@ Nos résultats suggèrent que l'impact spectaculaire des fronts à l'échelle lo
 \subsection{Vérification des distributions}
 \label{sec:verif-hist}
 
-Un certain nombre de diagnostiques présentés dans ce manuscrit reposent sur les valeurs médianes de différentes variables (la \as{chl} notamment).
-Cet indicateur permet de représenter la distribution d'une variable en une valeur unique, néanmoins, pour que cette représentation soit pertinente il est nécessaire de vérifier que la distribution de laquelle il est extrait soit adaptée.
-
-Les distributions de valeurs de la \as{chl} s'avèrent être invariablement unimodales, avec des queues de valeurs élevées plus ou moins prononcées (\nref{fig:verif-hist}).
+Un certain nombre de diagnostiques présentés dans ce manuscrit reposent sur les valeurs médianes de la \as{chl}.
+Cet indicateur permet de représenter la distribution d'une variable en une valeur unique, néanmoins pour que cette représentation soit pertinente il est nécessaire de vérifier que la distribution de laquelle elle est extraite soit adaptée.
+Les distributions de valeurs de la \as{chl} s'avèrent être invariablement unimodales, avec des queues de valeurs élevées plus ou moins prononcées (\cref{fig:hist-chl,fig:verif-hist}).
 Il semble donc pertinent de qualifier ces distributions par leur valeur médiane.
+
 Les distributions de SST sont également unimodale, à l'exception du biome subpolaire, qui présente des distributions largement bimodales (\nref{fig:verif-hist}).
 Une séparation en bande de latitude de~\ang{5} de large (\nref{fig:hists-sst-latbands}) ne suffit pas; les valeurs de SST étant encore distribuées de manière bimodale entre décembre et mai dans les bandes de latitude \latlonRange{40}{45N}.
-
-, indiquant la présence de deux masses d'eau de températures distinctes.
 Les résultats portant sur les valeurs de SST dans les fronts, présentés \nref[section]{sec:res-sst}, omettent donc le biome subpolaire par soucis de simplicité.
 
 \begin{figure}
@@ -77,9 +75,7 @@ Les résultats portant sur les valeurs de SST dans les fronts, présentés \nref
   \centering
   \insertfig{hists_sst_latbands.pdf}
   \captionT{Histogrammes de SST par bande de latitude dans le biome subpolaire}{%
-    Les distributions de valeurs sont indiquées pour l'année~2007 par tranches de trois mois~(colonnes), par bande de latitude~(ligne0), et pour les \eng{background}~(rouge), fronts faibles~(bleu), et fronts forts~(vert).
-
-    \review{en annexe ?}
+    Les distributions de valeurs sont indiquées pour l'année~2007 par tranches de trois mois~(colonnes), par bande de latitude~(lignes), et pour les \eng{background}~(rouge), fronts faibles~(bleu), et fronts forts~(vert).
   }
   \label{fig:hists-sst-latbands}
 \end{figure}
@@ -89,7 +85,8 @@ Les résultats portant sur les valeurs de SST dans les fronts, présentés \nref
 
 L'implémentation de la détection des fronts avec l'\af{hi} nécessite de faire le choix d'un certain nombre de paramètres. Nous testons ici la variabilité des résultats finaux (\ab{ie} l'impact des fronts sur la \as{chl}) vis-à-vis de deux paramètres.
 
-D'une part, nous faisons varier la taille de la fenêtre glissante utilisée pour calculer les composantes du HI (\nref{sec:calcul-composantes}), nous testons trois tailles: \qty{20}{\km},~\qty{30}{\km} et~\qty{40}{\km}. La taille retenue est de~\qty{30}{\km}.
+D'une part, nous faisons varier la taille de la fenêtre glissante utilisée pour calculer les composantes du HI (\nref{sec:calcul-composantes}).
+Nous testons trois tailles: \qty{20}{\km},~\qty{30}{\km} et~\qty{40}{\km}. La taille retenue est de~\qty{30}{\km}.
 Les coefficients de normalisations sont à recalculer pour chacune des tailles (comme décrit \nref{sec:coef-normalisation}, \nref{chp:methodes}), et sont listés dans la \nref[table]{tab:coefs}.
 
 D'autre part nous testons l'influence de ces coefficients. En prenant les composantes calculées avec une fenêtre de~\qty{30}{\km}, tour à tour nous doublons le coefficient d'une des composantes (et donc son poids statistique dans le HI). Le coefficient~\(K^4\) pour le HI doit être recalculé~(\nref{tab:coefs}).
@@ -159,27 +156,49 @@ Il en ressort les mêmes résultats que sur la climatologie, avec une variabilit
 Dans cette étude de sensibilité nous n'avons pas considéré l'impact du seuil en HI choisi, ayant déjà couvert l'évolution de la \as{chl} avec le HI (\nref{fig:chl-vs-hi}).
 Il en resortait que les valeurs de \as{chl} tendent à augmenter avec celles du HI, et ce sur toute l'amplitude du HI.
 Le choix du seuil importe donc peu vis-à-vis des tendances observées.
-Néanmoins il est possible que la variation de la \as{chl} avec les paramètres du HI soit plus le fait du seuil choisi en rapport avec la distribution de HI \encadra{le seuil restant fixé à~5 quelque soit les paramètres} que d'un changement dans l'emplacement des fronts détectés.
+Néanmoins il est possible que la variation de la \as{chl} avec les paramètres du HI soit plus le fait du seuil choisi en rapport avec la distribution de HI \encadra{les seuils restant fixés à 5 et 10 quelque soit les paramètres} que d'un changement dans l'emplacement des fronts détectés.
 Autrement dit, il est possible que la variation en \as{chl} (dans les fronts) soit autant dûe à la \emph{quantité} de fronts détectés qu'à leur \guil*{\emph{qualité}}.
 
-Pour étudier cet éventuel lien entre la surface des fronts et les valeurs de \as{chl} dans ces fronts, nous prenons les valeurs climatologiques mensuelles de la fraction de surface impactée par les fronts \emph{faibles}, et de la valeur médiane de \as{chl} dans ces même fronts, pour tous les paramètres testés (et les trois régions).
-Nous éliminons la dépendance de ces deux variables en temps et en région, en leur soustrayant leur valeur moyennée sur l'ensemble des paramètres testés.
-Nous obtenons donc la relation (relative) entre la fraction de surface de fronts détectés et la médiane de \as{chl} dans les fronts (\nref{fig:sensibilite-surface}).
-Comme attendu, la médiane de \as{chl} est bien (négativement) corrélée à la fraction de surface: le coefficient de corrélation de Pearson entre les deux variables est de~\num{-0.73}.
-Un seuil situé trop bas augmente la surface de fronts détectés et \guil*{dilue} les valeurs de \as{chl} dans ces fronts.
+Pour étudier cet éventuel lien entre la surface des fronts et les valeurs de \as{chl} dans ces fronts, nous prenons les valeurs climatologiques mensuelles de la fraction de surface impactée par les fronts faibles, et de la valeur médiane de \as{chl} dans ces même fronts, pour tous les paramètres testés (et les trois régions). Nous remarquons ainsi qu'en faisant varier les paramètres, la \as{chl} diminue lorsque la surface augmente.
+À cela s'ajoutent des variations dues à la région et à la saisonnalité.
+Nous éliminons la dépendance de la \as{chl} et de la surface en temps et en région, en leur soustrayant leur valeur moyennée sur l'ensemble des paramètres testés.
+Pour chaque mois dans chaque région, nous obtenons autant de valeurs de \as{chl} autour de \num{0} que de paramètres: \(\Delta\am{chl}_p(\text{région, mois}) = \am{chl}_p(\text{région, mois}) - \moy{\am{chl}_p(\text{région, mois})}_p\) (\emph{idem} pour la surface).
+Nous obtenons ainsi une relation (relative) entre la fraction de surface de fronts détectés et la médiane de \as{chl} dans ces fronts (\nref{fig:sensibilite-surface}).
 
 \begin{figure}
   \centering
-  \insertfig[0.7]{sensibilité_surface.pdf}
+  \insertfig{sensibilité_surface.pdf}
   \captionT{Corrélation de l'augmentation de Chl-\textit{a} avec la surface couverte par les fronts}{%
     Les valeurs médianes de \as{chl} dans les fronts sont négativement corrélées à la surface occupée par les fronts.
     La moyenne sur l'ensemble des paramètres testés de ces variables leur est soustraite afin passer outre leur dépendances en temps et région.
-
-    \review{Je viens de rajouter les fronts forts par curiosité et dans le biome subpolaire c'est correlé dans l'autre sens, je l'ai pas discuté. J'ai pas mis de fit non plus j'ai pas eu le temps.}
   }
   \label{fig:sensibilite-surface}
 \end{figure}
 
+La médiane de \as{chl} est bien négativement corrélée à la fraction de surface (le coefficient de corrélation de Pearson entre les deux variables est de~\num{-0.73}), ce qui peut se comprendre.
+Les fronts entraînent la présence d'un pic (local donc) de \as{chl}.
+Une variation dans les paramètres du HI génère des valeurs plus élevée pour un seuil fixe, donc augmente la surface de fronts détectés, et ce-faisant \guil*{dilue} les valeurs du pic de \as{chl}.
+
+\review{effet inverse pour les fronts forts dans le biome subpolaire ??}
+
+\begin{note}
+  Cette expérience est très similaire à l'exploration de la dépendance des valeurs de \as{chl} à celle du HI.
+  Cependant il ne s'agit pas ici d'une simple variation du seuil, qui bien entendu aurait une influence sur la surface des fronts détectée et sur la valeur de \as{chl} à l'intérieur, ce qui est déjà documenté \nref[figure]{fig:chl-vs-hi}.
+  Il est question ici de regarder le lien entre surface et \as{chl} pour \emph{différentes version du HI}, obtenues en faisant varier les paramètres du HI.
+\end{note}
 
 \subsection{Impact sur la SST}
 \label{sec:res-sst}
+
+Impact des nuages (pas pris en compte ici, c'est seulement du L4 esa-cci/c3s).
+importance lat bands parce que gradient grande échelle (très visible subtrop perm).
+sinon peu d'impact. les fronts sont plutôt chauds.
+contraire à ce qu'observe liu et levine, mais peut être gradient grande échelle ? pas listé comme biais dans l'article.
+
+\begin{figure}
+  \centering
+  \insertfig{ts_cli_sst.pdf}
+  \captionT{Climatologie de la température dans les fronts}{%
+  }
+  \label{fig:ts-cli-sst}
+\end{figure}

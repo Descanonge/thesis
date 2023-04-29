@@ -112,27 +112,6 @@ Chercheur junior CNRS
 ** Finir corrections méthodes
 ** Finir corrections intro inès
 ** Annexe sur création image préambule
-** Questions Inès
-- différence entre nutriments (inorganiques)
-- Michelle Fieux dit une gyre :) euh vérifier
-** Séparer article en chapitre standalone ?
-comme ça:
-chp méthodes
-chp article (en gros, tous les résultats principaux)
-chp complément impact budget
-chp complément phénologie
-
-sinon
-chp impact budget
-    (première partie de l'article :/)
-    compléments
-chp phénologie
-    (2nde partie de l'article)
-    compléments
-chp discussion
-    (discussion + concl article)
-    compléments ?
-
 * Présentation soutenance
 ** idée plan
 question: quels sont les impacts des fronts ?
