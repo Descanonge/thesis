@@ -37,7 +37,7 @@ The following arguments go through some processing.
 
 \subsubsection{date}
 
-date is a YYYY/MM[/DD] format argument. The `/' separator can also be `-', a space, or nothing.
+date is a \lit{YYYY/MM[/DD]} format argument. The `/' separator can also be `-', a space, or nothing.
 \lit{args['date_str']} is a tuple of the strings of year, month, and eventually day\@. \lit{args['date']} stores a datetime object.
 
 \subsubsection{fixes}
@@ -75,7 +75,7 @@ args = lib.get_args(['...'], add_args)
 
 You may have noticed that the function described in \titleref{sec:org-created-funcs} have the following signature \py{(args: Dict = None, **kwargs: Any)}.
 Thoses functions process thoses arguments using \py{lib.data.process_args(args_names, args, replace_defaults=None, **kwargs)}.
-The idea is that we define the arguments the function *needs* with \lit{args_names}.
+The idea is that we define the arguments the function \textbf{needs} with \lit{args_names}.
 We then supply both args and kwargs. From those are only kept the needed arguments.
 If arguments are missing a default value is used (either defined with \lit{/lib/conf.ini} or \lit{replace_defaults}).
 Arguments found in kwargs will replace those from \lit{args}.
@@ -110,7 +110,7 @@ Typically:
 \begin{python}
 ARGS = {'region', 'days'}
 \end{python}
-/ie/ the region, and the temporal resolution.
+ie the region, and the temporal resolution.
 Datasets are typically available daily, as n-days average, or as climatology.
 Each variation has its own subfolder of form `1days', `\{n\}days', `climato'.
 For more on the climatology, see \linkfile{docs/climato.html}{docs/climato.html}.
