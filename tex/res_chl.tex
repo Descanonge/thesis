@@ -190,15 +190,25 @@ Cet effet est consistent pour les différents biomes et types de fronts, à l'ex
 \subsection{Impact sur la SST}
 \label{sec:res-sst}
 
-Impact des nuages (pas pris en compte ici, c'est seulement du L4 esa-cci/c3s).
-importance lat bands parce que gradient grande échelle (très visible subtrop perm).
-sinon peu d'impact. les fronts sont plutôt chauds.
-contraire à ce qu'observe liu et levine, mais peut être gradient grande échelle ? pas listé comme biais dans l'article.
+Nous nous penchons ici sur l'impact local des fronts sur la SST. Seuls les biomes subtropicaux permanent et saisonnier sont considérés.
+Les nuages ne sont pas pris en compte ici, seules les données \abbrv{L4} (interpolées) sont utilisées.
+Dans le biome suptropical permanent, les fronts n'ont pas d'impact significatifs la valeur locale de SST (\nref{fig:ts-cli-sst}).
+Une différence entre fronts et background est notable pour la valeur médiane sur tout le biome, mais qui est due au gradient en température et à la répartition des fronts à grande échelle.
 
 \begin{figure}
   \centering
   \insertfig{ts_cli_sst.pdf}
-  \captionT{Climatologie de la température dans les fronts}{%
+  \captionT{Climatologie de la température dans, et hors des fronts}{%
+    Valeurs médianes de la températures dans les fronts faibles (bleu), les fronts forts (vert), et le background (rouge), pour les biomes suptropicaux permanent (à gauche) et saisonnier (à droite).
+    Les valeurs sont calculés pour le biome entier (a et b), puis par bandes de latitude dans chacun des biomes (c-h).
+    Les lignes pleines représentent la moyenne climatologique, et les enveloppes la déviation standard sur la période 2000--2020.
   }
   \label{fig:ts-cli-sst}
 \end{figure}
+
+Dans le biome suptropical saisonnier, les températures sont légèrement plus chaudes dans les fronts que le background.
+Cette différence est à son maximum au printemps et atteint alors \tC{1.8} dans la bande \latlonRange{32}{35N} pour les fronts forts, et \tC{1.0} dans la bande \latlonRange{35}{40N} pour les fronts faibles.
+On notera que c'est également autour de ces latitudes que l'impact des fronts faibles sur la \as{chl} est maximum (\nref{fig:recap}).
+
+Ce résultat est contraire à ce qui est observé par \textcite{liu_2016} dans la gyre subtropicale du Pacifique Nord, à savoir une température plus faible dans les fronts, à son maximum au printemps de \tC{-1.7}.
+Cependant, le biais d'un gradient de grande échelle de la température et de la répartition des fronts n'y est pas discuté et pourrait être à l'origine des valeurs observées.
