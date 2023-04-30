@@ -11,13 +11,13 @@
   % \clearpage
 }
 
-\review{%
-  préambule
+% \review{%
+%   préambule
 
-  motivation.
-  Résultat attendu sur la biomasse, la composition.
-  Permet de valider la méthode aussi.
-}
+%   motivation.
+%   Résultat attendu sur la biomasse, la composition.
+%   Permet de valider la méthode aussi.
+% }
 
 \section{Résumé de l'article}
 \label{sec:resume-article}
@@ -120,7 +120,7 @@ Les résultats sont très peu sensibles aux choix des paramètres.
 Les évolutions climatologiques des valeurs médianes et du surplus sont très peu affectés. La fraction de surface impactée par les fronts est plus sensible mais néanmoins les tendances restent identiques (\nref{fig:ts-sensitivity}).
 Pour quantifier plus en détail cette variation, nous calculons l'écart-type des valeurs médiane de \as{chl} sur l'ensemble des paramètres (les trois tailles de fenêtres et trois configurations de coefficients), semaine par semaine sur les 20~années de données, puis en prenons la moyenne temporelle.
 Il en ressort les mêmes résultats que sur la climatologie, avec une variabilité élevée dans les fronts forts (entre~\qty{4.4}{\mugm} et~\qty{11.4}{\mugm}), moyenne dans les fronts faibles (entre~\qty{2.0}{\mugm} et~\qty{3.3}{\mugm}), et plus faible dans le \eng{background} (entre~\qty{0.07}{\mugm} et~\qty{3.8}{\mugm}) (\nref{tab:sensibilite-mediane}).
-\review{Rajouter discussion des valeurs relatives.}
+% \review{Rajouter discussion des valeurs relatives.}
 
 \begin{table}
   \centering
@@ -168,9 +168,9 @@ Nous obtenons ainsi une relation (relative) entre la fraction de surface de fron
 \begin{figure}
   \centering
   \insertfig{sensibilité_surface.pdf}
-  \captionT{Corrélation de l'augmentation de Chl-\textit{a} avec la surface couverte par les fronts}{%
+  \captionT{Corrélation de l'augmentation de Chl-\textit{a} avec la surface couverte par les fronts pour différentes configuration du HI}{%
     Les valeurs médianes de \as{chl} dans les fronts sont négativement corrélées à la surface occupée par les fronts.
-    La moyenne sur l'ensemble des paramètres testés de ces variables leur est soustraite afin passer outre leur dépendances en temps et région.
+    On soustrait à ces variables leur moyenne sur l'ensemble des configurations testées (taille de fenêtre et coefficients de normalisation) afin passer outre leur dépendances en temps et région.
   }
   \label{fig:sensibilite-surface}
 \end{figure}
@@ -179,7 +179,7 @@ La médiane de \as{chl} est bien négativement corrélée à la fraction de surf
 Les fronts entraînent la présence d'un pic (local donc) de \as{chl}.
 Une variation dans les paramètres du HI génère des valeurs plus élevée pour un seuil fixe, donc augmente la surface de fronts détectés, et ce-faisant \guil*{dilue} les valeurs du pic de \as{chl}.
 
-\review{effet inverse pour les fronts forts dans le biome subpolaire ??}
+Cet effet est consistent pour les différents biomes et types de fronts, à l'exception des fronts forts dans le biome subpolaire, pour lesquels on observe la tendance inverse (\ab{ie} une augmentation de la \as{chl} avec la surface).
 
 \begin{note}
   Cette expérience est très similaire à l'exploration de la dépendance des valeurs de \as{chl} à celle du HI.

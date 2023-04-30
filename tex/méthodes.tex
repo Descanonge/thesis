@@ -38,11 +38,11 @@ Brièvement ces autres paramètres sont (entre autres) la disponibilité des aut
   Par facilité d'obtention j'entends le téléchargement des données mais aussi et surtout les traitements supplémentaires nécessaires, comme le repérage des pixels nuageux \ab{par-ex}},
 ou encore la couverture spatio-temporelle.
 
-% Éventuellement à déplacer à une mention antérieure des résolutions
-\begin{note}[label={note:approx-lat-km}]
-  Bien que notre zone d'étude s'étende à de (relativement) hautes latitudes~(\tapprox\latlon{55N}), nous ne considérons pas les différences de distances zonales et méridionales.
-  Nous faisons donc une correspondance simple entre fraction de degré et kilomètres, quelque soit la distance considérée, notamment pour la taille des pixels et des fenêtres.
-\end{note}
+% % Éventuellement à déplacer à une mention antérieure des résolutions
+% \begin{note}[label={note:approx-lat-km}]
+%   Bien que notre zone d'étude s'étende à de (relativement) hautes latitudes~(\tapprox\latlon{55N}), nous ne considérons pas les différences de distances zonales et méridionales.
+%   Nous faisons donc une correspondance simple entre fraction de degré et kilomètres, quelque soit la distance considérée, notamment pour la taille des pixels et des fenêtres.
+% \end{note}
 
 \subsubsection{Modis-L3}
 \declareDataset{sst_modis}
@@ -466,7 +466,7 @@ Nous avons réalisé des test de sensibilité à certains paramètres de cette m
   \centering
   \insertfig{exemples_fronts.pdf}
   \captionT{Exemples de structures fines}{%
-    Champs de SST~(colonne gauche), \as{chl}~(colonne centre), et HI~(colonne droite) pour trois exemples de structures: \textlf{1}\ier~exemple~(1a--c) le \frenchdate{2007}{04}{07}, \textlf{2}\ieme~exemple~(2a--c) le \frenchdate{2007}{02}{23}, et \textlf{3}\ieme~exemple~(3a--c) le \frenchdate{2007}{02}{28}.
+    Champs de SST~(colonne gauche), \as{chl}~(colonne centre), et HI~(colonne droite) pour trois exemples de structures: \textlf{1}\ier~exemple~(1a--c) le \frenchdate{2007}{04}{07}, \textlf{2}\ieme~exemple~(2a--c) le 23 février 2007, et \textlf{3}\ieme~exemple~(3a--c) le \frenchdate{2007}{02}{28}.
     Chaque fenêtre représente une surface d'environ \qtyproduct{200x200}{\km}.
     Deux valeurs seuil de HI sont contourées, à 5 (trait plein) et 10~(trait pointillé).
   }
@@ -497,9 +497,13 @@ Les histogrammes présentent également l'avantage de pouvoir facilement être c
 En effet, tous les histogrammes calculés sont stockés non-normalisés, c'est-à-dire en nombre de pixel par intervalle. Ainsi plusieurs histogrammes peuvent être sommés entre eux avant d'être normalisés pour en extraire une valeur, comme la valeur médiane de la distribution résultante par exemple.
 Ce procédé est notamment utilisé pour calculer des diagnostics sur des périodes de temps autres que journalières, sans avoir besoin de refaire un calcul coûteux impliquant les pixels.
 
-\review{TODO: utilisation de flags et d'histogrammes 2D pour le calcul.}
+\begin{note}[title={Note technique}, label={note:flags-hist}]
+  Nous avons besoin de calculer des histogrammes pour chaque combinaisons de type de fronts et de région.
+  Pour éviter de répéter certains calculs, j'encode le type de front et la biorégion sur un seul entier grâce à la technique présentée en \nref[annexe]{ax:cf-flags}, et que je stocke ensuite sur disque.
+  En réalisant un histogramme \abbrv{2D} de cet indice et de la variable d'intérêt (SST ou \as{chl}), on obtient tous les histogrammes dont nous avons besoin.
+\end{note}
 
-Dans la suite on détaille le processus de normalisation des histogrammes.
+Dans la suite nous détaillons le processus de normalisation des histogrammes.
 On considère un histogramme qui compte~\(h_i\) valeurs d'une variable quelconque~\(x\), pour le i\ieme{}~intervalle~\(\left[x_i; x_{i+1} \right]\).
 
 Pour un histogramme donné (\ab{par-ex} pour une région à une date et un type de front donné), on extrait facilement le nombre de pixels total:
@@ -618,11 +622,5 @@ Le calcul est identique pour l'écart de durée~\as{lag-duree}.
   width=\textwidth,
   height=\textheight-1mm,
   keepaspectratio=true]{recap_tight.pdf}%
-  % \vfill
-  % \adjustimage{
-  %   center,
-  %   max size={\paperwidth-8cm}{0.99\textheight}
-  % }{recap_tight.pdf}%
-  % \vfill
   \clearpage%
 }
