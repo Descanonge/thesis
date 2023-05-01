@@ -13,7 +13,7 @@
 
 % petite intro qui ref \cite{levy_2023}.
 
-\section{Étendre à la composition du phytoplankton}
+\section{Impact des fronts sur la composition du phytoplankton}
 \label{sec:persp-pft}
 
 % Est-ce que la somme des PFT en sortie de l'algo de Roy est contrainte à être égale à 1?
@@ -34,7 +34,7 @@ Nous avons réalisé quelques étapes préliminaires dans ce sens, en utilisant 
 Succinctement, cette technique s'appuie sur un type de réseau neuronal, les \glsmargin[asp]{som}, entraînées sur des colocalisations entre des mesures satellites (réflectances pour 4~longueurs d'ondes, \as{chl}, et SST), et des mesures in-situ (\as{hplc}).
 Cette méthode permet l'obtention de cartes synoptiques de la concentration de 9~pigments diagnostiques, que nous associons à 7~groupes fonctionnels (\glsmargin{pft}) en suivant des relations empiriques (\nref{ax:pig2pft}, \cite{vidussi_2001,uitz_2006,brewin_2010,hirata_2011})
 
-\section{Vers une applications à l'échelle globale}
+\section{Vers une application à l'échelle globale}
 \label{sec:appl-globale}
 
 Dans les chapitres précédents, ainsi que dans l'article publié, nous nous sommes concentrés sur la région de l'Atlantique Nord autour du Gulf Stream.
@@ -175,7 +175,7 @@ On assiste ainsi à une sorte de dillution des valeurs de \as{chl}.
 Ce résultat souligne l'impact potentiel des choix dans la méthode sur les qualités des fronts détectés (positionnement, intensité, largeur), et donc sur les valeurs de \as{chl} sélectionnées.
 Ces couplages pourraient être mieux qualifiés par des études approfondie sur l'influence de chaque composante, de manière individuelle, sur ces qualités.
 
-\subsection{Utiliser d'autres méthodes}
+\subsection{Tester d'autres méthodes existantes}
 
 Il pourrait être intéressant de se pencher sur des méthodes ne reposant pas sur une variable dont il faudrait prendre le seuil, comme celle de \textcite{cayula_1995} par exemple.
 L'intensité et la largeur des fronts serait ainsi à déterminer de manière indépendante, par des méthodes à définir.
