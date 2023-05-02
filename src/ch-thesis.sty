@@ -315,7 +315,13 @@ cachedir=minted]{minted}
 
 %%% Bookmarks
 \RequirePackage[depth=4]{bookmark}
-\bookmarksetup{numbered}
+\bookmarksetup{
+  numbered,
+  addtohook={%
+\ifnum\bookmarkget{level}=0%chapter
+\bookmarksetup{bold, open}%
+\fi}
+}
 \pdfstringdefDisableCommands{%
   \def\textlf#1{#1}%
 }
@@ -504,7 +510,7 @@ cachedir=minted]{minted}
   \addtocontents{lof}{\protect{%
       \bookmark[
       dest=\@currentHref,
-      level=\toclevel@section]{\thechapter\ \@currentlabelname}}}%
+      level=\toclevel@subsection]{\thechapter\ \@currentlabelname}}}%
   \fi
 }
 
@@ -630,7 +636,8 @@ cachedir=minted]{minted}
   \addtocontents{lof}{\protect{%
       \bookmark[
       dest=\@currentHref,
-      rellevel=1, keeplevel]{\thefigure: \@currentlabelname}}}%
+      italic,
+      rellevel=1, keeplevel]{\thefigure\ \@currentlabelname}}}%
 }{}{\errmessage{Patching \noexpand\endfigure failed}}
 
 
