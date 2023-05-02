@@ -49,7 +49,29 @@ En effet, si dans la bande \latlonRange{35}{40N} 14~blooms sur 21 (\pct{67}) dur
 
 Une augmentation de la durée du bloom dans les fronts peut s'expliquer par l'apport supplémentaire en nutriments par les fronts (\cite{simoes-sousa_2022}).
 
-% \subsection{Inversion du flux de chaleur}
-% \label{sec:flux-chaleur}
+\subsection{Inversion du flux de chaleur}
+\label{sec:flux-chaleur}
 
-% \review{on rajoute qq chose ?}
+Dans une première tentative d'observation du démarrage du bloom, nous avons tenté d'utiliser l'inversion du flux de chaleur en surface comme référence.
+\Textcite{ferrari_2015} avait déjà montré que le démarrage du bloom dans l'Atlantique Nord \encadra{repéré à partir de la \al{chl} satellite (données \as{modis})} coïncide avec l'inversion du flux de chaleur (de négatif vers positif).
+Le flux de chaleur, comme pour \textcite{ferrari_2015}, est extrait de la réanalyse \as{ecmwf} \abbrv{ERA-Interim}.
+Similairement à cette étude, nous cherchions à regarder la distribution de la dérivée de \as{chl} par rapport au jour d'inversion du flux de chaleur, et ensuite voir si il y avait une différence dans ces distribution dans les fronts et dans le background.
+Afin d'éviter des erreurs dues à la propagation du bloom, nous réalisions ces diagnostiques dans des boîtes de \qtyproduct{5x5}{\degree}.
+Les résultats obtenus ne présentaient pas de synchronicité significative entre l'inversion du flux de chaleur et la dérivé de \as{chl} (\nref{fig:inv-hf}).
+
+\begin{figure}
+  \centering
+  \insertfig{inversion_boxes.png}
+  \captionT{Démarrage du bloom à l'inversion du flux de chaleur}{%
+    La médiane de \as{chl} (en haut) et sa dérivée (en bas), à partir du jour d'inversion du flux de chaleur, pour deux boîtes à \latlonRange{50}{55N}, \latlonRange{52}{47W} (à gauche) et \latlonRange{50}{55N}, \latlonRange{47}{42W} (à droite).
+    Chaque ligne de couleur représente une année (entre 2006 et 2014), et la ligne épaisse noire la moyenne de toutes ces années.
+  }
+  \label{fig:inv-hf}
+\end{figure}
+
+Dans la méthode finalement retenue, nous nous sommes concentrés sur la différence entre front et background, plutôt que de chercher un point de référence supplémentaire.
+Nous avons utilisé des bandes de latitudes plutôt que des boîtes. Comme nous travaillons sur des données journalières il est possible de manquer de données sur une boîte ce qui affecte négativement les séries temporelles de \as{chl}.
+Enfin, nous avons également limité cette étude au biome subpolaire.
+
+Dans l'ensemble, obtenir ces résultats a nécessité de l'exploration, notamment dans le découpage des données.
+Nous réitérons ici notre remarque sur la difficulté à observer un bloom se propageant de manière lagrangienne, à partir de quantités eulériennes.
