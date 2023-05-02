@@ -6,6 +6,7 @@
 \RequirePackage{xparse}
 \RequirePackage{l3keys2e}
 \RequirePackage{calc}
+\RequirePackage{etoolbox}
 
 \directlua{chthesis = require("ch-thesis")}
 
@@ -500,6 +501,10 @@ cachedir=minted]{minted}
   \else
   \addcontentsline{lof}{chapter}{%
     \protect\chapternumberline{\thechapter}\f@rtoc}%
+  \addtocontents{lof}{\protect{%
+      \bookmark[
+      dest=\@currentHref,
+      level=\toclevel@section]{\thechapter\ \@currentlabelname}}}%
   \fi
 }
 
@@ -619,7 +624,14 @@ cachedir=minted]{minted}
 
 %%% Captions
 \newcommand\captionT[2]{% {Title}{text}
-  \caption[#1]{\emph{#1}. #2}}
+  \caption[#1]{\emph{#1}. #2}}%
+
+\pretocmd\endfigure{%
+  \addtocontents{lof}{\protect{%
+      \bookmark[
+      dest=\@currentHref,
+      rellevel=1, keeplevel]{\thefigure: \@currentlabelname}}}%
+}{}{\errmessage{Patching \noexpand\endfigure failed}}
 
 
 %%% Article
