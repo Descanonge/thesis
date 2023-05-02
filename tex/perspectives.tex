@@ -30,9 +30,22 @@ La compréhension des intéractions entre les fines échelles et la composition 
 Néanmoins, des groupes de phytoplancton utilisent des pigments auxiliaires diagnostiques (c'est-à-dire qui permettent leur identification de manière univoque) potentiellement identifiable par imagerie satellitaire, ce qui motive donc un certain nombre de méthodes visant à inférer leur concentration (\cite{uitz_2006,uitz_2010,uitz_2012,pan_2010,pan_2010,organelli_2013,chase_2013,chase_2017,bracher_2015a,xi_2020,xi_2021}).
 
 Le travail présenté ici pourrait ainsi quantifier les impacts des fronts sur la composition du phytoplancton, à une échelle synoptique de la même manière que pour la biomasse.
-Nous avons réalisé quelques étapes préliminaires dans ce sens, en utilisant la méthode avancée par \textcite{elhourany_2019,elhourany_2019a}.
+Nous avons réalisé quelques étapes préliminaires dans ce sens, en utilisant la méthode développée par \textcite{elhourany_2019,elhourany_2019a}.
 Succinctement, cette technique s'appuie sur un type de réseau neuronal, les \glsmargin[asp]{som}, entraînées sur des colocalisations entre des mesures satellites (réflectances pour 4~longueurs d'ondes, \as{chl}, et SST), et des mesures in situ (\as{hplc}).
 Cette méthode permet l'obtention de cartes synoptiques de la concentration de 9~pigments diagnostiques, que nous associons à 7~groupes fonctionnels (\glsmargin{pft}) en suivant des relations empiriques (\nref{ax:pig2pft}, \cite{vidussi_2001,uitz_2006,brewin_2010,hirata_2011})
+
+Les résultats préliminaires obtenus soulignent des réponses de magnitude différentes selon le type fonctionnel (\nref{fig:ts-pft}). Par exemple dans le biome subtropical permanent, le surplus causé par les fronts suit la même saisonalité mais avec des amplitudes différentes: les prymnésiophytes ont la réponse la plus importante (\pct{5}), puis les diatomées (\pct{4}), et enfin les procaryotes (\pct{1.8}, \nref{fig:ts-pft} g2"~h2"~i2).
+Dans le biome subpolaire (a2"~b2"~c2), les procaryotes sont perdants dans les fronts, présentant ici un surplus négatif, contrairement aux deux autres groupes.
+On retrouve ici le concept de \guil{gagnants} et \guil{perdants} décrit par \textcite{mangolte_2022}.
+
+\begin{figure}
+  \centering
+  \insertfig{ts_pft.pdf}
+  \captionT{Impact des fronts sur la composition du phytoplancton}{%
+    Moyennes climatologiques des valeurs médiane de concentration (a1--i1) et du surplus (a2--i2) pour trois types fonctionnels (colonnes), pour les trois biomes (lignes), dans le background (rouge), les fronts faibles (bleu), et les fronts forts (vert).
+  }
+  \label{fig:ts-pft}
+\end{figure}
 
 \section{Vers une application à l'échelle globale}
 \label{sec:appl-globale}
