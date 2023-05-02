@@ -100,8 +100,8 @@ Les difficultés évoquées ci-dessus motivent à trouver un produit nécessitan
 
 Le produit suivant, désigné ici \af{mur} est développé et distribué par le \as{ghrsst}\marginnote{Group for High Res.\ SST} au JPL \eng{Physical Oceanography} \as{daac}\footfullcite{sst_mur}\marginnote{\al*{daac}}.
 Il présente les avantages d'être distribué à une résolution kilométrique et sans nuages grâce à une méthode d'interpolation par vaguelettes (\cite{chin_2017}).
-Il intègre de nombreuses sources provenant de plusieurs capteurs infrarouges et micro-ondes, ainsi que de mesures in-situ.
-La grande couverture spatiale de ce produit se fait donc par l'utilisation de mesures non-contraintes par la couverture nuageuse (\al{cad} micro-ondes et in-situ), mais qui présentent une résolution bien plus faible.
+Il intègre de nombreuses sources provenant de plusieurs capteurs infrarouges et micro-ondes, ainsi que de mesures in situ.
+La grande couverture spatiale de ce produit se fait donc par l'utilisation de mesures non-contraintes par la couverture nuageuse (\al{cad} micro-ondes et in situ), mais qui présentent une résolution bien plus faible.
 Le champ de SST se retrouve donc lissé à la fois par l'interpolation et par l'inclusion de ces mesures.
 L'utilisation du produit suivant cherche à palier à ce problème.
 
@@ -152,7 +152,7 @@ Tôt dans ce projet, certaines pistes de travail (\ab{par-ex} le suivi temporel 
 Nous utilisons ici une réanalyse globale (désignée par \dataname{sst_glorys}), délivrée par \as{cmems}\footfullcite{sst_glorys} et produite par \glshref{mercator}.
 Cette réanalyse est faite sur une grille \engquote{eddy-resolving}, au \resol{1}{12} soit environ~\qty{8}{\km}, et sur 50~niveaux verticaux. Les données sont disponibles en résolution journalière.
 Le noyau \abbrv{NEMO} est forcé en surface par les réanalyses \abbrv{ERA}-Interim et \abbrv{ERA-5} du centre \as{ecmwf}.
-Le modèle fait de l'assimilation de données d'observations: altimétrie, SST \guil{Reynolds}~\resol{1}{4} (seulement \as{avhrr}), concentration en glace de mer, et profiles in-situ de températures et profils de salinité~\as{cora}.
+Le modèle fait de l'assimilation de données d'observations: altimétrie, SST \guil{Reynolds}~\resol{1}{4} (seulement \as{avhrr}), concentration en glace de mer, et profiles in situ de températures et profils de salinité~\as{cora}.
 
 \subsubsection{Comparaison des produits de SST}
 
@@ -172,7 +172,7 @@ Ce produit manque les caractéristiques de certaines structures, mais surtout ma
 
 Les produits issus d'interpolations de plusieurs capteurs semblent moins souffrir de ce problème.
 Les données \dataname{sst_mur}, malgré leur haute résolution présentent des zones très lissées, par exemple dans le secteur~\latlonRange{68}{64W}; \latlonRange{40}{42N}.
-On peut émettre l'hypothèse que l'inclusion de données basse-résolution (in-situ et micro-ondes) en est (au moins partiellement) la cause.
+On peut émettre l'hypothèse que l'inclusion de données basse-résolution (in situ et micro-ondes) en est (au moins partiellement) la cause.
 À l'inverse, les données \dataname{sst_esacci} semblent capturer avec plus de régularité les structures visibles sur les données plus brutes de \dataname{sst_modis}, excepté les plus fines évidemment.
 
 Le produit \dataname{sst_esacci} semble être le plus approprié parmi ceux présentés.

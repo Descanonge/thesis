@@ -65,7 +65,7 @@ Enfin, bien que les effets de la submésoéchelle soient locaux, ils peuvent né
 Les effets de la submésoéchelle sur les cycles biogéochimiques présentés ci-dessus ne sont toutefois pas encore complétement élucidés, malgré les efforts des dernières décennies dans ce domaine.
 En effet, à ces échelles, les diverses méthodologies usuelles peinent à donner une vue entière du problème.
 Les structures qui nous intéressent sont fines et ont une courte période de vie, ce qui rend leur échantillonage  un défi technique certain.
-Les campagnes in-situ doivent déployer des moyens importants pour échantilloner les variables physiques et biologiques, ainsi que des techniques nouvelles (comme l'échantillonage lagrangien ou un cytomètre de flux automatisé \cite{thyssen_2015,marrec_2018,tzortzis_2021}).
+Les campagnes in situ doivent déployer des moyens importants pour échantilloner les variables physiques et biologiques, ainsi que des techniques nouvelles (comme l'échantillonage lagrangien ou un cytomètre de flux automatisé \cite{thyssen_2015,marrec_2018,tzortzis_2021}).
 Il en va de même pour l'imagerie satellite, pour laquelle la couverture nuageuse rend difficile de suivre temporellement une structure.
 Par ailleurs, il est compliqué pour les satellites d'accéder à toute la biodiversité du phytoplancton, ainsi qu'au delà des premiers mètres en surface.
 Enfin, les simulations numériques peuvent résoudre ces fines échelles, mais à un coût calculatoire élevé et prohibitif sur de trop longues durées (des projections climatiques \ab{par-ex}) (\cite{fox-kemper_2019}).
@@ -179,7 +179,7 @@ Certains algorithmes dits \emph{semi-analytiques} s'attachent à résoudre ce pr
 
 Cependant, dans la majorité de l'océan ouvert il est raisonnable de considérer que le contenu optique de la colonne d'eau est le seul fait du phytoplancton\footnotemark, et qu'il est donc possible de directement relier les réflectances à la concentration en \as{chl} (\cite{bailey_2006,brewin_2015a}).
 \footnotetext{C'est-à-dire qu'on fait l'hypothèse que les autres composantes (\as{nap} et \as{cdom}) sont des produits du phytoplancton, et co-varient avec sa concentration.}
-Ainsi, un certain nombres d'algorithmes dits \emph{empiriques} infèrent la \as{chl} en s'appuyant sur une simple relation vérifiée empiriquement par des mesures in-situ.
+Ainsi, un certain nombres d'algorithmes dits \emph{empiriques} infèrent la \as{chl} en s'appuyant sur une simple relation vérifiée empiriquement par des mesures in situ.
 Par exemple, les algorithmes \guil{OC} utilisent des polynômes de ratio entre les réflectances bleu et verte (voir plus bas).
 
 Cette hypothèse ne tient plus dans certains cas (classifiés comme les \engquote{case~II waters}, où \guil{optiquement complexes}), par exemples les régimes côtiers où la colonne d'eau est riche en sédiments (\cite{bailey_2006,brewin_2015a}), mais certains algorithmes sont tout de même disponibles pour ces cas plus complexes (\cite{gohin_2002}).
@@ -197,7 +197,7 @@ L'algorithme \abbrv{OC3/4} se base sur un polynôme d'ordre~4 du ratio des bande
     }}^i ,
 \end{equation}
 où \(\am{rrs}^{max}\paren{\lambda_B}\) est la réflectance maximale parmis les bandes bleues, et \(a_i\) des coefficients empiriques adaptés à chaque capteur (\cite{oreilly_1998,oreilly_2000}).
-Ces coefficients, régulièrement mis à jour par le groupe NASA \as{obpg}\footnote{voir l'historique \url{https://oceancolor.gsfc.nasa.gov/reprocessing/}}, sont dérivés par regression de la relation ci-dessus avec les données in-situ \as{nomad} (\cite{werdell_2005}).
+Ces coefficients, régulièrement mis à jour par le groupe NASA \as{obpg}\footnote{voir l'historique \url{https://oceancolor.gsfc.nasa.gov/reprocessing/}}, sont dérivés par regression de la relation ci-dessus avec les données in situ \as{nomad} (\cite{werdell_2005}).
 L'algorithme utilise au total 3~bandes pour \abbrv{OC3}, et 4 pour \abbrv{OC4}.
 
 Cependant, \abbrv{OC3/4} montre des limites dans les eaux oligotrophes, où la concentration de \as{chl} est faible.
@@ -234,7 +234,7 @@ La faible profondeur en régime côtier apporte également une difficulté, puis
 
 Plus généralement, quelque soit la zone sondée, la profondeur jusqu'à laquelle pénètre la lumière est un point critique.
 En effet, la réflectance mesurée ne peut comporter des informations que sur cette couche éclairée.
-De plus, les modèles empiriques sont ajustés par des mesures in-situ réalisées sur les premiers mètres.
+De plus, les modèles empiriques sont ajustés par des mesures in situ réalisées sur les premiers mètres.
 Les données satellite manquent ainsi la biomasse plus en profondeur, potentiellement importante (\as{ie} le \engquote{Deep Chlorophyll Maximum}) (\cite{morel_1989,uitz_2006}).
 
 Par ailleurs, nous nous sommes penchés sur la détection de la \al{chl}. Bien que ce soit le pigment majoritaire, ce n'est pas nécessairement un proxy parfait pour la biomasse présente dans la colonne d'eau.
@@ -242,18 +242,18 @@ La relation entre la quantité de \al{chl} et la biomasse, exprimée par le rati
 
 % Des efforts sont conduits pour extraire la composition de la communauté phytoplanctonique des données de télédétection.
 
-\subsection{Observations in-situ et modèles numériques}
+\subsection{Observations in situ et modèles numériques}
 
-Pour toutes ces raisons, les mesures in-situ constituent un outil nécessaire et complémentaire à la télédétection, à la fois pour l'observation opérationelle mais aussi pour mieux comprendre les processus en jeu.
+Pour toutes ces raisons, les mesures in situ constituent un outil nécessaire et complémentaire à la télédétection, à la fois pour l'observation opérationelle mais aussi pour mieux comprendre les processus en jeu.
 En effet, au-delà de pouvoir accéder directement aux variables que les satellites doivent inférer, parfois à travers des proxys, ces mesures peuvent explorer des dimensions invisibles aux satellites.
 
-D'abord, les mesures in-situ ont accès à toute la colonne d'eau et non pas seulement la surface optiquement active.
+D'abord, les mesures in situ ont accès à toute la colonne d'eau et non pas seulement la surface optiquement active.
 D'autre part, ces mesures offrent une vue beaucoup plus large et précise de la biodiversité présente.
 Les mesures \glsmargin{hplc} permettent par exemple d'accéder à la concentration exacte de la \al{chl} mais également d'autres pigments auxiliaires, donnant ainsi une meilleure idée de la composition de la communauté phytoplanctonique.
 D'autres techniques permettent d'explorer d'autres communauté, comme le cytomètre de flux pour les plus petits organismes (cyanobactéries et bactéries hétérotrophes), ou le zooscan pour les plus gros organismes (essentiellement le zooplancton).
 L'application plus récente des sciences -omiques (génomique, métagénomique, transcriptomique,\dots) fourni également de nouvelles perspectives sur les écosystèmes (\cite{bork_2015,richter_2022,sunagawa_2020}).
 
-Par ailleurs, les mesures in-situ offrent l'avantage de fournir une vision précise de la densité des masses d'eau par mesure de la température et de la salinité.
+Par ailleurs, les mesures in situ offrent l'avantage de fournir une vision précise de la densité des masses d'eau par mesure de la température et de la salinité.
 Les satellites actuels n'ayant accès à la salinité qu'à relativement basse résolution (\qtyrange{35}{50}{\km} pour \as{smos} \ab{par-ex}), ils ne peuvent estimer les variations de densité aux fines échelles qu'avec la température.
 
 Néanmoins, ces mesures présentent également un certain nombre de limitations, et de difficultés technique de mise en place.
@@ -263,7 +263,7 @@ Quand bien même, il leur est impossible de couvrir une large zone spatio-tempor
 Il est usuel que les campagnes en mer ciblent une zone d'intérêt en particulier, par exemple un front ou un tourbillon, identifiée pendant la mission par images satellites (un échantillonage dit \guil{Lagrangien}, \cite{marrec_2018,tzortzis_2021}).
 Heureusement ces dernières années de telles campagnes se multiplient, déployant un éventail de méthodes de mesures, devant la nécessité d'obtenir une large gamme de paramètres (physiques et biologiques) à de fines échelles (\cite{shulman_2015,barcelo-llull_2021,marrec_2018,freilich_2021,tzortzis_2021,wilson_2021}).
 
-Parallèment aux observations in-situ, un effort est mené pour inclure les phénomènes biogéochimiques dans les modèles numériques d'océans.
+Parallèment aux observations in situ, un effort est mené pour inclure les phénomènes biogéochimiques dans les modèles numériques d'océans.
 Cela comprend un certains nombre d'obstacles.
 Nous avons souligné la grande diversité des organismes qui nous intéressent, laquelle est difficile à représenter numériquement.
 Chaque compartiment biologique ajoute un traceur à prendre en compte (\ab{ie} à advecter, diffuser,\dots). Le nombre de compartiment est ainsi limité par la puissance de calcul.
@@ -422,7 +422,7 @@ La branche ascendante de ces circulation peut potentiellement remonter des nutri
   \label{fig:nutrient-upwell}
 \end{figure}
 
-L'impact local de ces vitesses verticales a largement été observé in-situ, grâce à des mesures de nutriments, ou de productivité (\cite{mourino_2004,allen_2005,johnson_2010,li_2012,shulman_2015,marrec_2018,little_2018,verneil_2019,ruiz_2019,uchida_2020,kessouri_2020,tzortzis_2021,wilson_2021}).
+L'impact local de ces vitesses verticales a largement été observé in situ, grâce à des mesures de nutriments, ou de productivité (\cite{mourino_2004,allen_2005,johnson_2010,li_2012,shulman_2015,marrec_2018,little_2018,verneil_2019,ruiz_2019,uchida_2020,kessouri_2020,tzortzis_2021,wilson_2021}).
 Ces campagnes sont difficiles à réaliser, étant donné qu'il est nécessaire d'échantilloner à haute résolution spatiale et temporelle pour capturer la variabilité de submésoéchelle.
 Il est également nécessaire de cibler précisemment les structures d'intérêt (ici les fronts) qui sont, par essence, éphémères et en constante évolution.
 La structure doit donc être repérée et suivie, par le biais \encadra{en temps réel} d'observations satellites, de leur analyses (en appliquant une détection de fronts \ab{par-ex}), ou de simulations numériques (stratégie du \engquote{Lagrangian sampling} \cite{marrec_2018,tzortzis_2021}).
@@ -450,7 +450,7 @@ Par ailleurs, le gradient vertical en nutriment \encadra{maintenu par la consomm
 
 L'effet \emph{local} de l'apport de nutriments aux fronts a été largement observé dans les études ci-dessus.
 Cependant il est difficile de quantifier précisemment cet effet sur les cycles biogéochimiques à plus grande échelle.
-Les observations in-situ ne peuvent observer qu'un nombre limité de structures, et ont d'ailleurs tendances à cibler les plus intenses.
+Les observations in situ ne peuvent observer qu'un nombre limité de structures, et ont d'ailleurs tendances à cibler les plus intenses.
 Les modèles numériques peuvent résoudre les circulations de submésoéchelles mais contre un fort coût calculatoire qui limite leur étude avec des modèles régionaux ou globaux\footnote{%
   En particulier, la modification de la circulation grande échelle par rétroaction des dynamiques de fines échelles nécessite un long temps de spin-up.
 } (\cite{kessouri_2020,hewitt_2022}).

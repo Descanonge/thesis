@@ -31,7 +31,7 @@ Néanmoins, des groupes de phytoplancton utilisent des pigments auxiliaires diag
 
 Le travail présenté ici pourrait ainsi quantifier les impacts des fronts sur la composition du phytoplancton, à une échelle synoptique de la même manière que pour la biomasse.
 Nous avons réalisé quelques étapes préliminaires dans ce sens, en utilisant la méthode avancée par \textcite{elhourany_2019,elhourany_2019a}.
-Succinctement, cette technique s'appuie sur un type de réseau neuronal, les \glsmargin[asp]{som}, entraînées sur des colocalisations entre des mesures satellites (réflectances pour 4~longueurs d'ondes, \as{chl}, et SST), et des mesures in-situ (\as{hplc}).
+Succinctement, cette technique s'appuie sur un type de réseau neuronal, les \glsmargin[asp]{som}, entraînées sur des colocalisations entre des mesures satellites (réflectances pour 4~longueurs d'ondes, \as{chl}, et SST), et des mesures in situ (\as{hplc}).
 Cette méthode permet l'obtention de cartes synoptiques de la concentration de 9~pigments diagnostiques, que nous associons à 7~groupes fonctionnels (\glsmargin{pft}) en suivant des relations empiriques (\nref{ax:pig2pft}, \cite{vidussi_2001,uitz_2006,brewin_2010,hirata_2011})
 
 \section{Vers une application à l'échelle globale}
@@ -82,12 +82,12 @@ La prochaine étape vers une étude globale apparaît donc être l'application d
 \subsection{Première application: courant de Californie}
 \label{sec:cce}
 
-La méthode du HI a d'ores et déjà été appliquée autour du courant de Californie dans le cadre de l'étude de \textcite{mangolte_2023} (\nref{ax:article-cce}), afin de délimiter sur des images de SST les fronts ciblés par un ensemble de campagnes in-situ.
+La méthode du HI a d'ores et déjà été appliquée autour du courant de Californie dans le cadre de l'étude de \textcite{mangolte_2023} (\nref{ax:article-cce}), afin de délimiter sur des images de SST les fronts ciblés par un ensemble de campagnes in situ.
 
 Cette étude analyse les données de 8~transects haute résolution (espacement entre \qtyrange[range-phrase={ et }]{1}{5}{\km}) ciblant des fronts au large de la côte californienne.
 Ces transects combinent des données de température et de salinité, ainsi que 24~groupes de bactéries, phytoplancton, et zooplancton, en surface et en profondeur.
 
-Les stations frontales sont identifiés à partir des mesures in-situ, et le contexte régional menant à la formation du front est étudié avec des données satellitaires.
+Les stations frontales sont identifiés à partir des mesures in situ, et le contexte régional menant à la formation du front est étudié avec des données satellitaires.
 Les fronts sont aussi repérés sur les images de SST en calculant le HI (taille de fenêtre de \qty{20}{\km} et seuil à \num{10}).
 Les \eng{backward} \glsmargin{fsle} (calculés à partir des champs de vitesses géostrophiques dérivés par altimétrie et des courants d'Ekman dérivés du vent) sont utilisés afin de repérer les structures cohérentes liées au mélange horizontal.
 
@@ -98,9 +98,9 @@ Le ciblage de fronts relativement stables et intenses par les campagnes peuvent 
 Ces pics de biomasse sont généralement moins larges (\qtyrange{1}{5}{\km}) que les fronts (\qtyrange{20}{30}{\km}), et sont décalés par rapport au maximum de gradient de densité jusqu'à \qty{10}{\km}, majoritairement du côté froid.
 Les espèces favorisées constituant les pics sont presque systématiquement les diatomées et \eng{pico-grazers}, avec néanmoins des variations plus fines à l'échelle du taxon.
 
-Le travail réalisé pour cette étude \encadra{bien que cela ne soit pas son objectif premier} constitue un premier effort de validation dans une autre région, et avec des données biologiques in-situ.
-L'exploration des données de l'étude révèlent que le HI identifie correctement la position des fronts mais \emph{surestime leur largeur} par rapport aux données in-situ (\nref{}).
-À l'inverse, les valeurs élevées de \as{fsle} sont décalées par rapport aux fronts in-situ, les données d'altimétrie et de vent ne permettant pas de représenter complétement la dynamique des fronts.
+Le travail réalisé pour cette étude \encadra{bien que cela ne soit pas son objectif premier} constitue un premier effort de validation dans une autre région, et avec des données biologiques in situ.
+L'exploration des données de l'étude révèlent que le HI identifie correctement la position des fronts mais \emph{surestime leur largeur} par rapport aux données in situ (\nref{fig:comp-hi-fsle}).
+À l'inverse, les valeurs élevées de \as{fsle} sont décalées par rapport aux fronts in situ, les données d'altimétrie et de vent ne permettant pas de représenter complétement la dynamique des fronts.
 
 \begin{figure}
   \centering
