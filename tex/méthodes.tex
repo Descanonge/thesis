@@ -1,5 +1,6 @@
 % chktex-file 13
 
+\addtocontents{toc}{\protect\newpage}
 \chapter{Méthodes}
 \addChpLof
 \label{chp:methodes}
@@ -280,7 +281,7 @@ Cette frontière est donc dynamique et déterminée chaque jour à partir de l'i
 En effet, il apparaît que la distribution de la SST (au nord de~\latlon{32N}) suffit à repérer de manière fiable et robuste une température seuil permettant de séparer les deux biomes (contour sinueux noir plein \nref[figure]{fig:regions}).
 Sur cette distribution apparaît clairement un pic dans des valeurs élevées correspondant aux eaux du jet.
 Il est aisé de repérer le pic et l'ajuster par une gaussienne.
-À~partir de là, la température seuil entre les biomes est prise comme la base froide de ce pic, \ab{cad} plus précisemment en soustrayant à la température moyenne du pic deux fois son écart-type (\nref{fig:temp-seuil-distrib}).
+À~partir de là, la température seuil entre les biomes est prise comme la base froide de ce pic, \al{cad} plus précisemment en soustrayant à la température moyenne du pic deux fois son écart-type (\nref{fig:temp-seuil-distrib}).
 La valeur journalière de ce seuil est filtrée temporellement par un filtre médian glissant (avec une fenêtre de largeur 8~jours) afin d'éviter d'éventuelles anomalies de détection.
 
 \begin{figure}
@@ -322,7 +323,7 @@ Nous utilisons pour cela les données de bathymétrie \dataname{etopo1}~(voir \d
 \section{Heterogeneity Index (HI)}
 \label{sec:HI}
 
-Comme précisé en introduction, pour quantifier l'effet des fronts sur le phytoplancton il est nécessaire de détecter les fronts, \al{cad} de classer chaque pixel comme appartenant à un front ou non (\ab{cad} à l'arrière-plan ou au \engquote{background}).
+Comme précisé en introduction, pour quantifier l'effet des fronts sur le phytoplancton il est nécessaire de détecter les fronts, \al{cad} de classer chaque pixel comme appartenant soit à un front, soit à l'arrière-plan (ci-après \engquote{background}).
 La méthode retenue ici suit celle présentée par \textcite{liu_2016} \encadra*{qui par son utilisation d'une fenêtre glissante s'apparente elle-même à celle de \textcite{cayula_1992}}.
 Cette section définit cette méthode et notre implémentation, tout en indiquant les modifications que nous y avons apportées.
 
