@@ -11,7 +11,6 @@ SUB_FILES = $(foreach sn,$(SUB_NAMES),tex/$(sn).tex)
 
 AUXDIR_FLAGS := -auxdir="$(BUILD_DIR)" -emulate-aux-dir
 LMK_FLAGS := -lualatex -shell-escape -interaction=batchmode -recorder -quiet
-# LMK_FLAGS := -lualatex -interaction=nonstopmode -recorder
 
 # Always put those in the \includeonly
 INCLUDE_DEF := tex/front_page, tex/front_matter, tex/annexes_autres

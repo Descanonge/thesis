@@ -100,6 +100,23 @@
   }
 }
 
+% Add titleaddon just after title (no punct.)
+% essentially for [in press] or [in review]
+\newbibmacro*{title}{%
+  \ifboolexpr{
+    test {\iffieldundef{title}}
+    and
+    test {\iffieldundef{subtitle}}
+  }
+    {}
+    {\printtext[title]{%
+       \printfield[titlecase]{title}%
+       \setunit{\subtitlepunct}%
+       \printfield[titlecase]{subtitle}}%
+   }%
+   \setunit{\addspace}
+   \printfield{titleaddon}}
+
 % Manage old-style figures
 \DeclareFieldFormat
   [software,dataset]
