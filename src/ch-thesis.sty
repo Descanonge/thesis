@@ -409,15 +409,12 @@ cachedir=minted]{minted}
   \ifnum \c@chapter>\z@ \thechapter.\fi \textlf{\arabic{equation}}}
 
 %%% Margins notes
-\newcommand*\marginnotefont{\sffamily\scriptsize\itshape\color{black}}
+\newcommand*\marginnotefont{\sffamily\scriptsize\itshape}
 \newcommand*\marginparform{%
   \ifmemtortm\raggedright\else\raggedleft\fi}
 \NewDocumentCommand \marginnote { +m } {%
   \strictpagecheck%
-  \marginpar{%
-    \marginparform%
-    \marginnotefont%
-    #1}}
+  \marginpar{\marginparform\marginnotefont\textcolor{black}{#1}}}
 
 \setlxvchars
 \typeout{lxvchars: \the\lxvchars}
@@ -426,7 +423,7 @@ cachedir=minted]{minted}
 % A4 297x210mm (global a4paper option)
 \settrims{0pt}{0pt} % no trim needed
 % Fix width/height for comfort
-\settypeblocksize{210mm}{400pt}{*}
+\settypeblocksize{225mm}{400pt}{*}
 % Upper/Lower margins, fix upper, lower has what's left (enough hopefully)
 \setulmargins{*}{*}{*}
 % Left/Right margins, set ratio so that spine is smaller than edge

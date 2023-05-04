@@ -102,7 +102,7 @@
 
 % Add titleaddon just after title (no punct.)
 % essentially for [in press] or [in review]
-\newbibmacro*{title}{%
+\renewbibmacro*{title}{%
   \ifboolexpr{
     test {\iffieldundef{title}}
     and
