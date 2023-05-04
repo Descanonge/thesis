@@ -301,8 +301,8 @@ La valeur journalière de ce seuil est filtrée temporellement par un filtre mé
     Néanmoins en été, la limite est moins marquée directement après le détachement du jet~(\latlonRange{75}{70W}).
 
     L'isotherme séparant les deux biomes est tracé le 15~de chaque mois pour l'année~2007.
-    La couleur de chaque contour correspond au jour de l'année comme dénoté par la barre de couleur dans l'inset.
-    Dans l'inset est tracé la température de seuil au long de l'année~2007. Les cercles marquent les jours et températures utilisées pour chaque contour.
+    La couleur de chaque contour correspond au jour de l'année comme dénoté par la barre de couleur dans l’insert.
+    Dans l'insert est tracé la température de seuil au long de l'année~2007. Les cercles marquent les jours et températures utilisées pour chaque contour.
   }
   \label{fig:var-delim}
 \end{figure}
@@ -477,7 +477,7 @@ Nous avons réalisé des test de sensibilité à certains paramètres de cette m
 \section{Compression des calculs par utilisation d'histogrammes}
 \label{sec:extraction-hist}
 
-Afin d'optimiser les calculs et le stockage, j'ai transformé chaque image \abbrv{2D} de SST et de \as{chl} en une serie d'histogrammes.
+Afin d'optimiser les calculs et le stockage, j'ai transformé chaque image \abbrv{2D} de SST et de \as{chl} en une série d'histogrammes.
 Une fois le HI calculé, il devient possible de catégoriser chaque pixel par la biome auquel il appartient (subtropical permanent, subtropical saisonnier, subpolaire), ainsi que par sa valeur de HI.
 On cherche ensuite à extraire des informations de ces ensembles de pixels ainsi constitués.
 Le nombre total de pixels étant conséquent, et parce que l'établissement des ensembles est compliqué et coûteux, les ensembles de pixels sont chacun réduits à des histogrammes de variables d'intérêt (SST ou \as{chl}).

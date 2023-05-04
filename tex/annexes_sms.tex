@@ -24,14 +24,14 @@ if __name__ == '__main__':
     main(args)
 \end{python}
 
-\lit{args} is a dictionnary containing arguments name and their values.
+\lit{args} is a dictionary containing arguments name and their values.
 
 \subsection{Default arguments}
 The list of arguments names passed above (region, days, fixes) are from a list of default arguments.
 Thoses are defined globally in \linkfile{lib/conf.ini}{lib/conf.ini}.
 This file must be created; it can be copied from \linkfile{lib/conf_example.ini}{lib/conf_example.ini}.
 Each default argument should have a name, type, and value. See the example conf file for more details.
-The default values can be overidden when creating a dataset: see \titleref{sec:org-datasets}.
+The default values can be overridden when creating a dataset: see \titleref{sec:org-datasets}.
 
 The following arguments go through some processing.
 
@@ -41,7 +41,7 @@ date is a \lit{YYYY/MM[/DD]} format argument. The `/' separator can also be `-',
 \lit{args['date_str']} is a tuple of the strings of year, month, and eventually day\@. \lit{args['date']} stores a datetime object.
 
 \subsubsection{fixes}
-Fixes are supplied as \lit{-fix <matcher> <string>}. They can then be found as a dictionnary with the matchers name as keys. %chktex 44
+Fixes are supplied as \lit{-fix <matcher> <string>}. They can then be found as a dictionary with the matchers name as keys. %chktex 44
 See \titleref{sec:org-fixes} below.
 
 \subsection{Fixes}
@@ -54,7 +54,7 @@ finder = lib.data.dataset.get_finder()
 finder.fix_matchers(m=5)
 \end{python}
 
-Now, we can do this automatically from the command line by supplying the appropriate argument: \shell{python script.py -fix m 05} (from the command line we can only supply a string, so it must match the date format). This will end up in the args dictionnary, where it can be passed to \lit{get_finder()} or \lit{get_data()}. So:
+Now, we can do this automatically from the command line by supplying the appropriate argument: \shell{python script.py -fix m 05} (from the command line we can only supply a string, so it must match the date format). This will end up in the args dictionary, where it can be passed to \lit{get_finder()} or \lit{get_data()}. So:
 \begin{python}
 args = lib.get_args(['fixes'])
 ds = lib.data.dataset.get_data(args)
@@ -153,7 +153,7 @@ You can see that the names of the matchers (here Y, m, and d) corresponds to wha
 \subsubsection{The created functions}
 \label{sec:org-created-funcs}
 
-With the information given above, we can automatically create a number of useful functions, detailled below.
+With the information given above, we can automatically create a number of useful functions, detailed below.
 All functions take as arguments \py{(args=None, **kwargs)} (see \titleref{sec:org-arg-processing}).
 \paragraph{\texttt{get\_root}}
 This simply returns the directory containing all data.
@@ -177,17 +177,17 @@ Any matcher that was fixed in the \lit{fixes} argument does not need to be speci
 \paragraph{\texttt{get\_data}}
 This returns a dataset created with \hyperref{https://xarray.pydata.org/en/stable/generated/xarray.open_mfdataset.html}{\lit{xarray.open_mfdataset()}}
 The files are supplied by the Finder object.
-Other arguments to the function are supplied by the \lit{lib.data.}\-\lit{OPEN_MF_KW_DEF} dictionnary, completed by the argument \lit{open_mf_kw} of the \lit{lib.data.create_dataset} and \lit{lib.data.<dataset>.get_data} functions (see below).
+Other arguments to the function are supplied by the \lit{lib.data.}\-\lit{OPEN_MF_KW_DEF} dictionary, completed by the argument \lit{open_mf_kw} of the \lit{lib.data.create_dataset} and \lit{lib.data.<dataset>.get_data} functions (see below).
 
 \subsubsection{\texttt{lib.data.create\_dataset()}}
 This function automatically populates the module with the functions above.
 It also returns a namespace containing those functions; this is useful if one desires to have a more specific implementation of one of the functions.
 
-This function also takes a \lit{open_mf_kw} dictionnary argument, its members are passed to \lit{xr.open_mfdataset()} as keyword arguments.
+This function also takes a \lit{open_mf_kw} dictionary argument, its members are passed to \lit{xr.open_mfdataset()} as keyword arguments.
 Regarding the \lit{preprocess} argument, it can be useful to have a preprocessing function that take advantage of the information found in the filename (that can be retrieved by the Finder).
-To setup such a function, special arguments in the dictionnary can be used:
+To setup such a function, special arguments in the dictionary can be used:
 \lit{preprocess_finder} should be a callable that takes in the XArray dataset to process, the corresponding filename, and the finder object, and it should return a XArray dataset.
-The \lit{preprocess_finder_args} and \lit{preprocess_finder_kwargs} members are passed as additionnal arguments to this callable.
+The \lit{preprocess_finder_args} and \lit{preprocess_finder_kwargs} members are passed as additional arguments to this callable.
 
 Another argument to \lit{open_mf_kw} is \lit{postprocess_func} which is run on the merged dataset.
 It can automatically rectify some things.
@@ -198,7 +198,7 @@ To this end, the function \lit{lib.setup_metadata} can be used.
 It adds to a dataset various global attributes:
 \begin{itemize}
   \item \lit{"created_with"}: The name of the script, and the machine hostname
-  \item \lit{"created_with_args"}: The args dictionnary as a string
+  \item \lit{"created_with_args"}: The args dictionary as a string
   \item \lit{"created_on"}: The date and time of file creation
   \item \lit{"created_on_commit"}: The hash of the current commit/HEAD
 \end{itemize}

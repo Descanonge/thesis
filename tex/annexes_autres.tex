@@ -12,11 +12,11 @@ Je l'ai ensuite adaptée et soumise au projet \citesoft{cf-xarray} pour qu'elle 
 
 Il est souvent utile voire nécessaire d'accompagner certaines quantités par des informations supplémentaires: pour des données satellites par exemple, la présence de nuages sur le pixel, la qualité de la mesure, ou encore le capteur qui a réalisé la mesure (pour un produit composite).
 Ces informations sont différentes pour chaque point de mesure, et doivent donc être stockées comme des variables (\as{ie} des tableaux multi-dimensionnels).
-Ce type d'information (que nous appelerons drapeaux) peut souvent être représenté de manière très simple: la présence de nuage peut être indiqué par un booléen (un seul bit), la qualité de la mesure est typiquement un petit entier (2 ou 3 bits), etc.
+Ce type d'information (que nous appellerons drapeaux) peut souvent être représenté de manière très simple: la présence de nuage peut être indiqué par un booléen (un seul bit), la qualité de la mesure est typiquement un petit entier (2 ou 3 bits), etc.
 
 Cependant, du fait de l'architecture des processeurs, les outils informatiques ne permettent généralement pas de manipuler des variables aussi petites.
 Chaque variable drapeau ne peut être traitée et stockée que sur un octet, au minimum.
-On gâche alors de l'espace de stockage puisque seuls quelques bits sont utilisés sur les huits.
+On gâche alors de l'espace de stockage puisque seuls quelques bits sont utilisés sur les huit.
 
 Plutôt que d'utiliser plusieurs variables drapeaux, l'idée de cette technique est de réunir tous ces drapeaux sur une seule et même variable, en associant à chaque drapeau certains bits de cette variable.
 Prenons un exemple, nous voulons stocker les informations suivantes: la qualité de la mesure (un entier entre 1 et 3), l'algorithme utilisé pour calculer la Chlorophylle (\abbrv{OC4}, \abbrv{OC5}, ou CI), la présence de nuages (oui ou non), et la présence de glace de mer (oui ou non).
@@ -202,10 +202,10 @@ Cette implémentation, bien que fonctionnelle (une série de tests est définie)
 Elle redéfinit un dataset à chaque appel, sans cache. Le nombre d'opération est relativement faible, mais il pourrait être souhaitable que ces dernières ne soient néanmoins appelées qu'une seule fois.
 À l'inverse, l'utilisateur pourrait vouloir contrôler les objets en mémoire, notamment au vu de leur importance dans des calculs de grands volumes de données avec \citesoft{dask}. Une fonction de type \engquote{getter} serait appropriée.
 
-Par ailleurs, on ne récupère que des signications individuelles. Il pourrait être intéressant de pouvoir extraire un ensemble de drapeaux mutuellement exclusifs.
+Par ailleurs, on ne récupère que des significations individuelles. Il pourrait être intéressant de pouvoir extraire un ensemble de drapeaux mutuellement exclusifs.
 Par exemple, on voudrait pouvoir récupérer toutes les valeurs de qualité, ou d'algorithme utilisé (plutôt que seulement les pixels correspondant à \emph{un} algorithme, ou \emph{une} valeur de qualité).
 
-Enfin, la documentation de cette nouvelle fonctionalité n'a pas encore été rédigée.
+Enfin, la documentation de cette nouvelle fonctionnalité n'a pas encore été rédigée.
 
 
 \chapter{Conversion des pigments diagnostiques en proportion de PFT}
@@ -258,7 +258,7 @@ Conversion des concentrations de pigments diagnostiques~(DP) en proportion de gr
 % \suppressfloats[t]
 
 Dans cette section, j'estime le coût carbone engendré par mon travail de thèse.
-Commencons par les voyages professionels, typiquement un grand poste émetteur personnel dans les carrières scientifiques.
+Commençons par les voyages professionnels, typiquement un grand poste émetteur personnel dans les carrières scientifiques.
 
 Le premier est un aller-retour Paris--Venise, en avion, pour assister à la 7\ieme~conférence \abbrv{LAPCOD}~(Lagrangian Analysis and Prediction of Coastal and Ocean Dynamics).
 Réalisé pendant mon stage de master, je n'étais alors que peu sensibilisé à ces questions. Avec plus de prévoyance, il aurait pu être effectué en train.
@@ -274,7 +274,7 @@ J'estime \encadra{toujours avec \abbrv{GES}~1point5} mes trajets domicile-travai
 Ce coût est en dessous de celui préconisé pour respecter les accords de Paris (\qty{0.3}{\tonne\carbone} selon \cite{dugast_2019}).
 Enfin les 5~repas journaliers (végétariens), pris au self du personnel, et les très nécessaires tasses de café et thé sont estimés à~\qty{420}{\kg\carbone} annuels par l'outil \href{https://nosgestesclimat.fr}{Nos Gestes Climat}.
 
-Je comptabilise également les coûts communs liés au fonctionnement du laboratoire (consommation énérgétique, entretien bâtiment, mails,\dots) qui ont été estimés par le groupe Climaction-LOCEAN pour l'année 2018\footnote{\url{https://climactions.ipsl.fr/groupes-de-travail/locean-climactions/}}.
+Je comptabilise également les coûts communs liés au fonctionnement du laboratoire (consommation énergétique, entretien bâtiment, mails,\dots) qui ont été estimés par le groupe Climaction-LOCEAN pour l'année 2018\footnote{\url{https://climactions.ipsl.fr/groupes-de-travail/locean-climactions/}}.
 Individuellement, cela représente environ \qty{1}{\tcarbone} annuelle.
 
 Côté informatique, nous n'avons pas réalisé d'achats de matériel.

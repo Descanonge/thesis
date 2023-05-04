@@ -13,7 +13,7 @@
 
 % petite intro qui ref \cite{levy_2023}.
 
-\section{Impact des fronts sur la composition du phytoplankton}
+\section{Impact des fronts sur la composition du phytoplancton}
 \label{sec:persp-pft}
 
 % Est-ce que la somme des PFT en sortie de l'algo de Roy est contrainte à être égale à 1?
@@ -26,7 +26,7 @@ Par là même, les modifications de la composition de la communauté phytoplanct
 Plusieurs études montrent ainsi que les apports sporadiques de nutriments par les fronts bénéficient en grande partie aux diatomées, dont le taux de croissance peut être important (\cite{allen_2005,taylor_2012,treguer_2018,hernandez-carrasco_2020}).
 En outre, des interactions biologiques complexes entre les différents groupes de cette communauté, ainsi qu'avec leurs prédateurs (\as{ie} le zooplancton), modulent encore les effets des fronts (\cite{mangolte_2022}).
 
-La compréhension des intéractions entre les fines échelles et la composition du phytoplancton présente évidemment la difficulté supplémentaire de disposer d'une quantification de cette composition.
+La compréhension des interactions entre les fines échelles et la composition du phytoplancton présente évidemment la difficulté supplémentaire de disposer d'une quantification de cette composition.
 Néanmoins, des groupes de phytoplancton utilisent des pigments auxiliaires diagnostiques (c'est-à-dire qui permettent leur identification de manière univoque) potentiellement identifiable par imagerie satellitaire, ce qui motive donc un certain nombre de méthodes visant à inférer leur concentration (\cite{uitz_2006,uitz_2010,uitz_2012,pan_2010,pan_2010,organelli_2013,chase_2013,chase_2017,bracher_2015a,xi_2020,xi_2021}).
 
 Le travail présenté ici pourrait ainsi quantifier les impacts des fronts sur la composition du phytoplancton, à une échelle synoptique de la même manière que pour la biomasse.
@@ -61,7 +61,7 @@ Nous avons pu remarquer pendant cette étude un ensemble de défis techniques, d
 Ces défis sont essentiellement liés au volume de données conséquent qui serait requis, puisqu'en gardant la même résolution, et donc une grille globale de \numproduct{4320x8640}~pixels, nous multiplierions le volume des données par~40.
 Les ressources de calcul constitueraient probablement alors le goulot d'étranglement dans l'exploration des résultats.
 
-J'ai tenté, pour l'écriture des différents scripts, de mitiger cet éventuel problème notamment en veillant à permettre l'utilisation des fonctionalités de \citesoft{dask}.
+J'ai tenté, pour l'écriture des différents scripts, de mitiger cet éventuel problème notamment en veillant à permettre l'utilisation des fonctionnalités de \citesoft{dask}.
 Cet outil automatise la parallélisation des calculs, et facilite leur application \engquote{out-of-core}\footnote{%
   En séparant les données en sous-parties (quasi-)indépendantes \citesoft{dask} permet d'effectuer un calcul sans charger en mémoire la totalité des données d'un coup.
 }, accélérant les calculs et limitant les besoins en mémoire.
@@ -73,7 +73,7 @@ En pratique cependant, son utilisation n'est pas triviale et garantir son bon fo
 
 Nous avons montré précédemment qu'il existe des différences importantes entre les biorégions de notre zone d'étude, dans la prévalence des fronts selon leur intensité ainsi que dans la réponse du phytoplancton à ces fronts.
 Des calculs préliminaire du HI à l'échelle globale confirment cette variabilité dans la répartition des fronts (\nref{fig:global-fronts}).
-Les fronts forts (\(\am{hi}>10\)) semblent se confiner aux courants de mésoéchelle les plus intenses \encadra*{les courants de bord ouest que sont le Gulf Stream, le Kuroshio, le courant du Brésil, le courant des Aiguilles, et dans une moindre mesure le courant Est Autralien}.
+Les fronts forts (\(\am{hi}>10\)) semblent se confiner aux courants de mésoéchelle les plus intenses \encadra*{les courants de bord ouest que sont le Gulf Stream, le Kuroshio, le courant du Brésil, le courant des Aiguilles, et dans une moindre mesure le courant Est Australien}.
 Les fronts faibles, bien que présents sur un plus grande surface, semblent tout de même survenir dans des zones énergétiques limitées.
 On notera par exemple les recirculations du Gulf Stream et du Kuroshio, la zone de convergence intertropicale du Pacifique, ou le courant circumpolaire Antarctique.
 
@@ -113,7 +113,7 @@ Les espèces favorisées constituant les pics sont presque systématiquement les
 
 Le travail réalisé pour cette étude \encadra{bien que cela ne soit pas son objectif premier} constitue un premier effort de validation dans une autre région, et avec des données biologiques in situ.
 L'exploration des données de l'étude révèlent que le HI identifie correctement la position des fronts mais \emph{surestime leur largeur} par rapport aux données in situ (\nref{fig:comp-hi-fsle}).
-À l'inverse, les valeurs élevées de \as{fsle} sont décalées par rapport aux fronts in situ, les données d'altimétrie et de vent ne permettant pas de représenter complétement la dynamique des fronts.
+À l'inverse, les valeurs élevées de \as{fsle} sont décalées par rapport aux fronts in situ, les données d'altimétrie et de vent ne permettant pas de représenter complètement la dynamique des fronts.
 
 \begin{figure}
   \centering
@@ -160,7 +160,7 @@ Les valeurs du HI étant (à peu près) les plus élevées au centre du front pu
 Notre méthode comporte donc un couplage fort entre présence du front, intensité du front, et largeur du front.
 
 Intéressons-nous donc plus en détail à la méthode de calcul des valeurs du HI.
-En particulier, trois points sont d'intérết: la taille de la fenêtre glissante, les coefficients de normalisation des composantes (\ab{ie} l'importance relative de chaque componsante), et les composantes à inclure.
+En particulier, trois points sont d'intérêt: la taille de la fenêtre glissante, les coefficients de normalisation des composantes (\ab{ie} l'importance relative de chaque componsante), et les composantes à inclure.
 Nous avons démontré l'influence relativement faible sur les distributions de \as{chl} du choix de la taille de fenêtre et des coefficients de normalisation (\nref{sec:sensibilite-parametres}, \nref{fig:ts-sensitivity}), mais nous n'avons pas discuté plus en détail le choix des composantes en soit.
 
 La bimodalité a fait ses preuves à travers son utilisation pour la méthode de \al*{cc}~(\as*{cc}) (voir \nref{sec:detection-fronts}).
@@ -191,7 +191,7 @@ Nous avons montré l'impact potentiel de la surface de fronts détectés sur les
 En faisant varier les paramètres (coefficients de normalisation et taille de fenêtre), la surface impactée par les fronts varie légèrement et avec la distribution de \as{chl} dans les fronts (\nref{sec:sensibilite-parametres}, \nref{fig:sensibilite-surface}).
 Pour une augmentation de la surface des fronts, on observe une diminution des valeurs de \as{chl}.
 Il est probable que cela soit le fait d'un élargissement des fronts et donc une sélection de pixels plus éloignés du centre du front, aux valeurs de \as{chl} plus faible.
-On assiste ainsi à une sorte de dillution des valeurs de \as{chl}.
+On assiste ainsi à une sorte de dilution des valeurs de \as{chl}.
 
 Ce résultat souligne l'impact potentiel des choix dans la méthode sur les qualités des fronts détectés (positionnement, intensité, largeur), et donc sur les valeurs de \as{chl} sélectionnées.
 Ces couplages pourraient être mieux qualifiés par des études approfondie sur l'influence de chaque composante, de manière individuelle, sur ces qualités.
@@ -203,7 +203,7 @@ L'intensité et la largeur des fronts serait ainsi à déterminer de manière in
 
 Changer de méthode serait néanmoins loin d'être trivial.
 Les algorithmes ne sont pas nécessairement distribués tel qu'il est usuel dans le domaine de l'open-source, et/ou pas nécessairement implémenté de manière à permettre une réutilisation facile et pour de grands volumes de données.
-J'entends en fait ce qui a été fait pour cette thèse, à savoir un dépôt ouvert et communautaire pour le code et la documentation, et une implémentation en Python s'appuyant sur \citesoft{xarray} et \citesoft{dask}, dont les parties les plus intensives sont écrites en language compilé\footnote{le calcul des composantes du HI à proprement parler est fait en Fortran, lancé directement depuis Python}.
+J'entends en fait ce qui a été fait pour cette thèse, à savoir un dépôt ouvert et communautaire pour le code et la documentation, et une implémentation en Python s'appuyant sur \citesoft{xarray} et \citesoft{dask}, dont les parties les plus intensives sont écrites en langage compilé\footnote{le calcul des composantes du HI à proprement parler est fait en Fortran, lancé directement depuis Python}.
 Par exemple, l'algorithme Belkin--O'Reilly est distribué pour R (adapté d'un code IDL), et l'algorithme Cayula--Cornillon en Matlab\dots
 
 On pourra noter un effort dans cette direction par le projet \citesoft{juno}, qui distribue les algorithmes de Canny, \as{cc}, et \as{boa}, implémentés en Python.

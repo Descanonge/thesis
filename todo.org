@@ -109,9 +109,13 @@ Chercheur junior CNRS
 
 * Inbox
 ** Quel est le timerange des produits que j'utilise ?
-** Finir corrections méthodes
-** Finir corrections intro inès
-** Annexe sur création image préambule
+** attendre un jour ou deux la réponse de damien
+** au pire enlever le nom de Lars et envoyer comme ça
+** Envoi du manuscrit
+- 2 mails séparés aux rapporteurs et examinateurs
+- demander si ils veulent une version papier
+- bien préciser aux rapporteurs qu'il y a une date limite pour envoyer leurs rapports, et qu'ils vont aussi recevoir un mail officiel de l'ed un peu plus tard
+
 * Présentation soutenance
 ** idée plan
 question: quels sont les impacts des fronts ?
