@@ -166,24 +166,24 @@ en coopération avec le capitaine Cousteau à bord du Calypso\footnote{%
 Ces premières expériences permettront le déploiement d'un premier capteur dédié à l'étude de la couleur de l'océan: \as{czcs} à bord de Nimbus-7, lancé en 1978 qui fonctionnera jusqu'en 1986.
 Ce n'est que dix plus tard, en 1997, que le lancement de \as{seawifs} marquera le début d'une observation ininterrompue de la couleur de l'océan par un ensemble de capteurs et satellites.
 
-Attardons nous brièvement sur le processus permettant d'obtenir une concentration en \al{chl} à partir des données de ces capteurs.
-Ce derniers mesurent l'intensité lumineuse renvoyée, ou réflectance (\as{rrs}), pour différentes bandes de longueurs d'ondes (entre 6 et 16 dans le visible).
+Attardons-nous brièvement sur le processus permettant d'obtenir une concentration en \al{chl} à partir des données de ces capteurs.
+Ces derniers mesurent l'intensité lumineuse renvoyée, ou réflectance (\as{rrs}), pour différentes bandes de longueurs d'ondes (entre 6 et 16 dans le visible).
 Le satellite mesure les réflectances en dehors de l'atmosphère, et non pas à la surface de l'eau; il est nécessaire d'apporter plusieurs corrections.
 Les contributions de l'écume et du reflet direct du soleil sont retirées.
 La diffusion de Rayleigh est corrigée assez simplement, mais l'absorption et diffusion par divers aérosols sont plus complexes, leurs répartitions (horizontale et verticale) étant variables (\cite{werdell_2018}).
 
 Nous voulons maintenant relier ces réflectances au contenu de la surface de la colonne d'eau.
 En toute rigueur, il faudrait relier les réflectances aux propriétés optiques de la colonne d'eau: c'est-à-dire l’absorption et la rétrodiffusion causées par le phytoplancton, mais aussi les particules non-algales (\as{nap}) et les matières organiques dissoute colorées (\as{cdom}) (\cite{werdell_2018}).
-Certains algorithmes dits \emph{semi-analytiques} s'attachent à résoudre ce problèmes inverse, ce qui nécessite un certain nombre de simplifications, mais permet en théorie de remonter à tous les composants optiques en jeux (\as{chl}, \as{nap}, \as{cdom}) (\cite{werdell_2019}).
+Certains algorithmes dits \emph{semi-analytiques} s'attachent à résoudre ce problème inverse, ce qui nécessite un certain nombre de simplifications, mais permet en théorie de remonter à tous les composants optiques en jeux (\as{chl}, \as{nap}, \as{cdom}) (\cite{werdell_2019}).
 
 Cependant, dans la majorité de l'océan ouvert il est raisonnable de considérer que le contenu optique de la colonne d'eau est le seul fait du phytoplancton\footnotemark, et qu'il est donc possible de directement relier les réflectances à la concentration en \as{chl} (\cite{bailey_2006,brewin_2015a}).
 \footnotetext{C'est-à-dire qu'on fait l'hypothèse que les autres composantes (\as{nap} et \as{cdom}) sont des produits du phytoplancton, et co-varient avec sa concentration.}
 Ainsi, un certain nombres d'algorithmes dits \emph{empiriques} infèrent la \as{chl} en s'appuyant sur une simple relation vérifiée empiriquement par des mesures in situ.
-Par exemple, les algorithmes \guil{OC} utilisent des polynômes de ratio entre les réflectances bleu et verte (voir plus bas).
+Par exemple, les algorithmes \guil{OC} utilisent des polynômes de ratio entre les réflectances verte et bleue (voir plus bas).
 
 Cette hypothèse ne tient plus dans certains cas (classifiés comme les \engquote{case~II waters}, où \guil{optiquement complexes}), par exemples les régimes côtiers où la colonne d'eau est riche en sédiments (\cite{bailey_2006,brewin_2015a}), mais certains algorithmes sont tout de même disponibles pour ces cas plus complexes (\cite{gohin_2002}).
 On gardera néanmoins en tête ces hypothèses, et le fait que ces relations empiriques (validées sur des données passées) pourraient perdre en validité face à des écosystèmes modifiés par le changement climatique (\cite{dierssen_2010}).
-Toutefois, ces modèles empiriques sont de manière générale plus performant que les modèles semi-analytiques (\cite{brewin_2015a}), et sont donc employés pour les données opérationnelles.
+Toutefois, ces modèles empiriques sont de manière générale plus performants que les modèles semi-analytiques (\cite{brewin_2015a}), et sont donc employés pour les données opérationnelles.
 
 \begin{technique}
 Nous décrivons ici rapidement deux exemples d'algorithmes empiriques, utilisés de manière opérationnelle par le groupe NASA \as{obpg}.
@@ -200,7 +200,7 @@ Ces coefficients, régulièrement mis à jour par le groupe NASA \as{obpg}\footn
 L'algorithme utilise au total 3~bandes pour \abbrv{OC3}, et 4 pour \abbrv{OC4}.
 
 Cependant, \abbrv{OC3/4} montre des limites dans les eaux oligotrophes, où la concentration de \as{chl} est faible.
-Dans ces cas là, l'algorithme CI (\eng{Color Index}) est utilisé (\cite{hu_2012}).
+Dans ces cas-là, l'algorithme CI (\eng{Color Index}) est utilisé (\cite{hu_2012}).
 Il utilise la différence entre la bande verte~(\(V\)) et une combinaison des bandes rouge~(\(R\)) et bleue~(\(B\)):
 \begin{equation}
   \label{eq:CI}
@@ -231,10 +231,10 @@ Ensuite, nous avons évoqué la difficulté à travailler dans des zones où d'a
 C'est souvent le cas près des côtes et des décharges fluviales.
 La faible profondeur en régime côtier apporte également une difficulté, puisque dans le cas où la lumière incidente pénètre suffisamment profond, la réflectance mesurée comportera la lumière réfléchie par le fond marin (et re-traversant la colonne d'eau).
 
-Plus généralement, quelque soit la zone sondée, la profondeur jusqu'à laquelle pénètre la lumière est un point critique.
+Plus généralement, quelle que soit la zone sondée, la profondeur jusqu'à laquelle pénètre la lumière est un point critique.
 En effet, la réflectance mesurée ne peut comporter des informations que sur cette couche éclairée.
 De plus, les modèles empiriques sont ajustés par des mesures in situ réalisées sur les premiers mètres.
-Les données satellite manquent ainsi la biomasse plus en profondeur, potentiellement importante (\as{ie} le \engquote{Deep Chlorophyll Maximum}) (\cite{morel_1989,uitz_2006}).
+Les données satellites manquent ainsi la biomasse plus en profondeur, potentiellement importante (\as{ie} le \engquote{Deep Chlorophyll Maximum}) (\cite{morel_1989,uitz_2006}).
 
 Par ailleurs, nous nous sommes penchés sur la détection de la \al{chl}. Bien que ce soit le pigment majoritaire, ce n'est pas nécessairement un proxy parfait pour la biomasse présente dans la colonne d'eau.
 La relation entre la quantité de \al{chl} et la biomasse, exprimée par le ratio \hbox{\as{chl}:C}, peut varier selon les espèces et les conditions environnementales (\cite{behrenfeld_2015,halsey_2015,inomura_2022}).
@@ -249,34 +249,34 @@ En effet, au-delà de pouvoir accéder directement aux variables que les satelli
 D'abord, les mesures in situ ont accès à toute la colonne d'eau et non pas seulement la surface optiquement active.
 D'autre part, ces mesures offrent une vue beaucoup plus large et précise de la biodiversité présente.
 Les mesures \glsmargin{hplc} permettent par exemple d'accéder à la concentration exacte de la \al{chl} mais également d'autres pigments auxiliaires, donnant ainsi une meilleure idée de la composition de la communauté phytoplanctonique.
-D'autres techniques permettent d'explorer d'autres communauté, comme le cytomètre de flux pour les plus petits organismes (cyanobactéries et bactéries hétérotrophes), ou le zooscan pour les plus gros organismes (essentiellement le zooplancton).
+D'autres techniques permettent d'explorer d'autres communautés, comme le cytomètre de flux pour les plus petits organismes (cyanobactéries et bactéries hétérotrophes), ou le zooscan pour les plus gros organismes (essentiellement le zooplancton).
 L'application plus récente des sciences -omiques (génomique, métagénomique, transcriptomique,\dots) fourni également de nouvelles perspectives sur les écosystèmes (\cite{bork_2015,richter_2022,sunagawa_2020}).
 
 Par ailleurs, les mesures in situ offrent l'avantage de fournir une vision précise de la densité des masses d'eau par mesure de la température et de la salinité.
 Les satellites actuels n'ayant accès à la salinité qu'à relativement basse résolution (\qtyrange{35}{50}{\km} pour \as{smos} \ab{par-ex}), ils ne peuvent estimer les variations de densité aux fines échelles qu'avec la température.
 
 Néanmoins, ces mesures présentent également un certain nombre de limitations, et de difficultés technique de mise en place.
-Certaines mesures, physique ou biologiques \encadra{notamment les profils en profondeur} prennent du temps, ce qui se répercute sur la distance d’échantillonnage, pourtant essentielle dans les fronts, où les communautés peuvent varier sur de courtes distances (\cite{chekalyuk_2012,mangolte_2023}).
+Certaines mesures, physiques ou biologiques \encadra{notamment les profils en profondeur} prennent du temps, ce qui se répercute sur la distance d’échantillonnage, pourtant essentielle dans les fronts, où les communautés peuvent varier sur de courtes distances (\cite{chekalyuk_2012,mangolte_2023}).
 Des techniques sont mises en place pour contrer ce problème, comme le cytomètre de flux automatique (\cite{thyssen_2015}).
 Quand bien même, il leur est impossible de couvrir une large zone spatio-temporelle.
 Il est usuel que les campagnes en mer ciblent une zone d'intérêt en particulier, par exemple un front ou un tourbillon, identifiée pendant la mission par images satellites (un échantillonnage dit \guil{Lagrangien}, \cite{marrec_2018,tzortzis_2021}).
 Heureusement ces dernières années de telles campagnes se multiplient, déployant un éventail de méthodes de mesures, devant la nécessité d'obtenir une large gamme de paramètres (physiques et biologiques) à de fines échelles (\cite{shulman_2015,barcelo-llull_2021,marrec_2018,freilich_2021,tzortzis_2021,wilson_2021}).
 
 Parallèlement aux observations in situ, un effort est mené pour inclure les phénomènes biogéochimiques dans les modèles numériques d'océans.
-Cela comprend un certains nombre d'obstacles.
+Cela comprend un certain nombre d'obstacles.
 Nous avons souligné la grande diversité des organismes qui nous intéressent, laquelle est difficile à représenter numériquement.
 Chaque compartiment biologique ajoute un traceur à prendre en compte (\ab{ie} à advecter, diffuser,\dots). Le nombre de compartiment est ainsi limité par la puissance de calcul.
 Par ailleurs, il existe un grand nombre de paramétrisation des processus purement biologiques, liés à de fortes incertitudes.
 
 Ensuite, et c'est un point que nous allons développer par la suite, la biologie présente une grande variabilité aux fines échelles.
-Ces dernières sont cependant coûteuses à intégrer, ce qui limite leur application à de petits régions géographiques ou à des temps d'intégration courts (\cite{kessouri_2020,hewitt_2022}).
-En particulier, ces échelles sont absentes des modèles utilisés pour les projections biogéochimiques à long termes (\cite{bopp_2013}), dont les incertitudes sur la réponse du phytoplancton au changement climatique sont encore importantes (\cite{kwiatkowski_2020}).
+Ces dernières sont cependant coûteuses à intégrer, ce qui limite leur application à de petites régions géographiques ou à des temps d'intégration courts (\cite{kessouri_2020,hewitt_2022}).
+En particulier, ces échelles sont absentes des modèles utilisés pour les projections biogéochimiques à long terme (\cite{bopp_2013}), dont les incertitudes sur la réponse du phytoplancton au changement climatique sont encore importantes (\cite{kwiatkowski_2020}).
 
 % Les modèles climatiques sont, du coup, très incertains en ce qui concerne la bio.
 % Grosses barres d'erreurs dans les projections pour le prochain siècle.
 % Est-ce que c'est seulement possible sachant qu'on peut avoir des effets non-locaux potentiellement ?
 
-% Difficile de séparer les trois: processus dynamiques, mélange horizontal, et biologie, car ils ont les même temps caractéristiques.
+% Difficile de séparer les trois: processus dynamiques, mélange horizontal, et biologie, car ils ont les mêmes temps caractéristiques.
 
 \section{Interactions biophysiques}
 \label{sec:interactions-biophys}
@@ -343,7 +343,7 @@ Même si les phénomènes aux fines échelles sont relativement bien compris sur
 En effet, nous l'avons vu, mesurer l'impact local de ces fines échelles est difficile techniquement.
 En outre, il est nécessaire \encadra{à la fois pour quantifier leur impact sur tout un biome, ainsi que pour tenir compte de leur influence sur la grande échelle} de résoudre ces fines échelles sur un large domaine, ce qui s'avère difficile en utilisant des observations ou des modèles numériques (\cite{fox-kemper_2019,levy_2023}).
 
-Nous nous penchons dans la suite sur quelques uns de ces phénomènes et leurs impacts sur les cycles biogéochimiques.
+Nous nous penchons dans la suite sur quelques-uns de ces phénomènes et leurs impacts sur les cycles biogéochimiques.
 En particulier l'apport de nutriments par upwelling aux fronts, et le décalage du bloom du fait de la restratification aux fronts.
 
 \subsection{Mélange horizontal}
@@ -385,7 +385,7 @@ Ces vitesses peuvent atteindre des valeurs de l'ordre de \OM(\qty{100}{\meter\pe
 
 Les fronts de submésoéchelle sont généralement confinés à la couche de mélange.
 En été, lorsque la couche de mélange est peu profonde, l'énergie potentielle qui leur est disponible est faible.
-En revanche en hiver les forts gradients de densité se prolongent sur toute la hauteur de la couche de mélange, alors plus profonde, et l'énergie potentielle de ces structure en est d'autant plus grande (\cite{mensa_2013,callies_2015,buckingham_2016,sasaki_2020}).
+En revanche en hiver les forts gradients de densité se prolongent sur toute la hauteur de la couche de mélange, alors plus profonde, et l'énergie potentielle de ces structures en est d'autant plus grande (\cite{mensa_2013,callies_2015,buckingham_2016,sasaki_2020}).
 Cette dernière est convertie en énergie cinétique par le biais de l'instabilité de couche de mélange (\engquote{Mixed Layer Instability} ou parfois \engquote{Mixed Layer Eddies}) (\cite{boccaletti_2007,fox-kemper_2008}).
 Cette instabilité de type barocline tend à aplanir les isopycnes sur toute la hauteur de la couche de mélange en créant des tourbillons de submésoéchelles, réduisant ainsi le mélange vertical et favorisant la restratification.
 
@@ -424,13 +424,13 @@ La branche ascendante de ces circulation peut potentiellement remonter des nutri
 L'impact local de ces vitesses verticales a largement été observé in situ, grâce à des mesures de nutriments, ou de productivité (\cite{mourino_2004,allen_2005,johnson_2010,li_2012,shulman_2015,marrec_2018,little_2018,verneil_2019,ruiz_2019,uchida_2020,kessouri_2020,tzortzis_2021,wilson_2021}).
 Ces campagnes sont difficiles à réaliser, étant donné qu'il est nécessaire d’échantillonner à haute résolution spatiale et temporelle pour capturer la variabilité de submésoéchelle.
 Il est également nécessaire de cibler précisément les structures d'intérêt (ici les fronts) qui sont, par essence, éphémères et en constante évolution.
-La structure doit donc être repérée et suivie, par le biais \encadra{en temps réel} d'observations satellites, de leur analyses (en appliquant une détection de fronts \ab{par-ex}), ou de simulations numériques (stratégie du \engquote{Lagrangian sampling} \cite{marrec_2018,tzortzis_2021}).
+La structure doit donc être repérée et suivie, par le biais \encadra{en temps réel} d'observations satellites, de leur analyse (en appliquant une détection de fronts \ab{par-ex}), ou de simulations numériques (stratégie du \engquote{Lagrangian sampling} \cite{marrec_2018,tzortzis_2021}).
 
 La mesure des vitesses verticales en jeu est également compliquée.
 Ces courants ascendants n'occupent pas une surface importante et sont clairsemés, même le long d'un front.
 En outre, les vitesses verticales dans ces sites d'upwelling sont \encadra{bien qu'importantes relativement au reste de l'océan} trop faibles pour être directement mesurées facilement.
 Ces vitesses sont généralement plutôt inférées à partir d'autres mesures sur le terrain (\ab{par-ex} \cite{dasaro_2018,tarry_2021,comby_2022,cutolo_2022}).
-Notamment, elles peuvent être déterminée à partir du champ de vitesses horizontales en utilisant l'équation \guil{oméga} (\cite{hoskins_1978,pietri_2021}).
+Notamment, elles peuvent être déterminées à partir du champ de vitesses horizontales en utilisant l'équation \guil{oméga} (\cite{hoskins_1978,pietri_2021}).
 La mission \as{swot}, lancée en décembre 2022, promet d'ailleurs de pouvoir accéder à ce champ de vitesses horizontales à une résolution sans précédent (\cite{dovidio_2019,morrow_2019,barcelo-llull_2021}).
 
 Au-delà de la magnitude des vitesses verticales, cet apport de nutriment est également conditionné par l'extension en profondeur des circulations agéostrophiques.
@@ -457,15 +457,15 @@ Les données satellites offrent une vue globale synoptique avec une résolution 
 Malgré certaines lacunes discutées précédemment (\nref{sec:teledetection}), elles offrent l'opportunité de mesurer les effets de fine échelle sur de larges zone et de longues périodes.
 
 Une première tentative d'analyse géostatistique à partir de données de \al{chl} à une résolution de \qty{9}{\km}, par \textcite{doney_2003} puis étendue par \textcite{glover_2018}, a visé à évaluer l'évolution de la variance spatiale en fonction de la distance.
-L'impact des processus frontaux n'apparaît pas à cette résolution, mais la méthodologie a confirmé le rôle important des tourbillons de mésoéchelle dans le mélange des gradients grande échelle.
+L'impact des processus frontaux n'apparaît pas à cette résolution, mais la méthodologie a confirmé le rôle important des tourbillons de mésoéchelle dans le mélange des gradients de grande échelle.
 
 \Textcite{jonsson_2011} ont proposé un cadre lagrangien dans lequel les données satellitaires de couleur de l'océan\footnote{%
   La \al{chl} est combinée avec l'atténuation (\(K_{490}\)) pour estimer le carbone organique et son évolution (\ab{ie} la production nette).
 } sont projetées sur des trajectoires calculées à partir d'un modèle numérique opérationnel haute résolution.
-Ils ont pu évaluer le changement de biomasse le long des trajectoire et le relier aux apports de nutriments.
+Ils ont pu évaluer le changement de biomasse le long des trajectoires et le relier aux apports de nutriments.
 Un inconvénient majeur est que la méthode est fortement limitée par la quantité de données satellites disponibles le long des trajectoires (sans nuages).
-\Textcite{zhang_2019} contourne ce problème moyennant sur un grille de \ang{2}, en utilisant par ailleurs des données globales de dériveurs de surface, d'altimétrie et de couleur de l'océan.
-Leur analyse révèlent une corrélation positive entre le taux de cisaillement de l'écoulement et la croissance du phytoplancton.
+\Textcite{zhang_2019} contourne ce problème moyennant sur une grille de \ang{2}, en utilisant par ailleurs des données globales de dériveurs de surface, d'altimétrie et de couleur de l'océan.
+Leur analyse révèle une corrélation positive entre le taux de cisaillement de l'écoulement et la croissance du phytoplancton.
 
 D'autre part, le rôle des fronts a été évalué à l'aide de trois méthodes différentes.
 \Textcite{guo_2019} ont combiné des données de couleur de l'océan avec des données d'altimétrie et de flotteurs dérivants, et ont estimé que, dans les gyres subtropicales, les dynamiques de mésoéchelle et les dynamiques frontales de submésoéchelle contribuaient de manière comparable aux anomalies positives de \as{chl}.
@@ -483,7 +483,7 @@ Nous avons abordé plus haut le déclenchement d'un bloom au printemps, aux haut
 Cette hausse de productivité a précédemment été reliée à l'abattement des vents et au réchauffement de la surface par échange avec l'atmosphère (\cite{henson_2006,taylor_2011a}).
 Les fronts de submésoéchelle favorisent également la restratification, et peuvent ainsi provoquer des blooms, localement, avant la restratification saisonnière à l'échelle du biome (\cite{taylor_2011,karleskind_2011,mahadevan_2012}).
 
-Cet aspect de l'impact des fronts a été quantifié par \textcite{mahadevan_2012} en comparant l'évolution de la \al{chl} dans deux catégories de simulations numériques forcées de manière à correspondre à des observations récoltés dans l'Atlantique Nord. Les simulations de l'une de ces catégorie sont initialisées avec un gradient horizontal de densité de grande échelle, ce qui entraîne une restratification par instabilité de couche de mélange.
+Cet aspect de l'impact des fronts a été quantifié par \textcite{mahadevan_2012} en comparant l'évolution de la \al{chl} dans deux catégories de simulations numériques forcées de manière à correspondre à des observations récoltées dans l'Atlantique Nord. Les simulations de l'une de ces catégories sont initialisées avec un gradient horizontal de densité de grande échelle, ce qui entraîne une restratification par instabilité de couche de mélange.
 Les simulations avec gradient (donc restratifiées par la dynamique de submésoéchelle) présentent un bloom en accord avec les observations, et qui survient entre 20 et 30~jours avant les simulations sans gradient (\nref{fig:early-bloom-mahadevan}).
 
 \begin{figure}
@@ -531,7 +531,7 @@ Ce courant de surface intense, forcé par les vents dominants et la topographie 
 Le jet continue alors vers l'est. Instable, il forme de larges méandres qui se détachent parfois en formant des tourbillons de mésoéchelle.
 Le jet est encadré au nord et au sud par deux contre-courants.
 
-Les tourbillons froids (cycloniques) formées par le jet dérivent vers le sud puis l'ouest avant de rejoindre le Gulf Stream, formant ainsi une recirculation.
+Les tourbillons froids (cycloniques) formés par le jet dérivent vers le sud puis l'ouest avant de rejoindre le Gulf Stream, formant ainsi une recirculation.
 Ces tourbillons transportent une importante énergie cinétique dans la mer des Sargasses (\nref{fig:biomes}a, \cite{wunsch_1998,zhai_2008}).
 Nous pouvons donc nous attendre à la production de fronts de submésoéchelle éphémères mais intenses, forcés par la circulation énergétique de mésoéchelle.
 
@@ -557,7 +557,7 @@ Cette production est accrue lors d'un bloom printanier lié à la restratificati
 Nous qualifions cette région entre la limite nord du Gulf Stream et le talus continental comme le biome subpolaire (PB), aussi désigné par \engquote{subpolar waters} (\cite{sarmiento_2004}) ou \engquote{high chlorophyll bloom} (\cite{bock_2022}).
 
 Entre les deux précédents se trouve le biome subtropical saisonnier (SSB), ou \engquote{subtropical gyre seasonally stratified biome} (\cite{sarmiento_2004}).
-Il présente des concentration de \al{chl} et des températures intermédiaires.
+Il présente des concentrations de \al{chl} et des températures intermédiaires.
 La productivité y est légèrement accrue en hiver, du fait d'une convection saisonnière plus profonde que dans la gyre subtropicale.
 
 \begin{figure}
@@ -573,7 +573,7 @@ La productivité y est légèrement accrue en hiver, du fait d'une convection sa
 
     % \foreignblockquote{english}{
     %   The equatorially influenced biome covers the area between \latlon{5S} and \latlon{5N}, and is colored a dirty light blue in areas where upwelling occurs (labeled~``Eq-U'' on the color bar) and dark pink in areas where downwelling occurs (labeled~``Eq-D'').
-    %   Outside of this band, the region labeled ``Ice''~(red) is the marginal sea ice biome, the region labeled ``SP''~(yellow) is the subpolar biome, the region labeled ``LL-U''~(light blue) is the low-latitude upwelling biome , the region labeled ``ST-SS''~(dark blue) is the seasonally mixed subtropical gyre biome, and the region labeled ``ST-PS''~(pink) is the permanently stratified subtropical gyre biome.}
+    %   Outside of this band, the region labeled ``Ice''~(red) is the marginal sea ice biome, the region labeled ``SP''~(yellow) is the subpolar biome, the region labeled ``LL-U''~(light blue) is the low-latitude upwelling biome, the region labeled ``ST-SS''~(dark blue) is the seasonally mixed subtropical gyre biome, and the region labeled ``ST-PS''~(pink) is the permanently stratified subtropical gyre biome.}
   }
 \label{fig:biomes}
 \end{figure}
@@ -591,7 +591,7 @@ Une première catégorie de méthodes s'appuie la dérivation spatiale du champ 
 Ces étapes de dérivation introduisent cependant du bruit qui impacte négativement la détection.
 On notera d'ailleurs que la détection des fronts de fine échelle, qui nous intéresse ici, est plus sensible au bruit du fait de gradients plus faibles.
 Un filtrage préalable de l'image permet d'en limiter l'impact.
-C'est le cas de la méthode de détection de contours \emph{Canny} (\cite{canny_1986}), qui applique un filtre gaussien avant de calculer le gradient, et par ailleurs ajoute des traitements supplémentaire aux contours détectés.
+C'est le cas de la méthode de détection de contours \emph{Canny} (\cite{canny_1986}), qui applique un filtre gaussien avant de calculer le gradient, et par ailleurs ajoute des traitements supplémentaires aux contours détectés.
 Initialement développée pour de la détection de contours en traitement d'image \encadra{domaine où elle demeure un standard, et où ses implémentations sont amplement disponibles} elle a également été largement appliquée en océanographie à la détection de fronts en température, entre autres.
 % (cite{93-101}).
 
@@ -612,7 +612,7 @@ Une température seuil est choisie pour séparer l'histogramme en deux modes, de
 Pour cette séparation optimale, un critère évaluant la séparation des deux modes est calculé. Si ce dernier est supérieur à un certain seuil, la fenêtre est estimée contenir un front.
 
 Une étape supplémentaire consiste à vérifier que la cohérence spatiale de chacune des masses d'eau dans la fenêtre est suffisante.
-Cela permet d'éviter les faux positifs, notamment sur des images bruitée ou contaminée par des nuages.
+Cela permet d'éviter les faux positifs, notamment sur des images bruitées ou contaminées par des nuages.
 
 % \begin{note}
   On notera que \textcite{cayula_1992} choisissent les seuils de cohérence spatiale de manière à ce que le cas le plus cohérent soit un front en ligne droite.
@@ -635,27 +635,27 @@ Cette configuration sera réutilisée à plusieurs reprises (\cite{lan_2012} \ab
 
 Enfin, dans le but de quantifier les valeurs de \as{chl} dans les fronts de submésoéchelle de la gyre subtropicale du Pacifique Nord, \textcite{liu_2016} proposent une méthode inspirée de l'algorithme \as{cc}.
 Elles définissent un indice d'hétérogénéité (\as{hi}) du champ de SST.
-La valeur de cette indice est calculé en chaque pixel à partir de la distribution en température dans une fenêtre (glissante donc) autour de ce pixel.
-La valeur de l'indice est la somme (pondérée par des coefficient de normalisation) de la variance de la distribution, de sa bimodalité (calculée différemment que dans les méthodes ci-dessus), et de son asymétrie (afin de cibler les plus petits fronts).
+La valeur de cet indice est calculée en chaque pixel à partir de la distribution en température dans une fenêtre (glissante donc) autour de ce pixel.
+La valeur de l'indice est la somme (pondérée par des coefficients de normalisation) de la variance de la distribution, de sa bimodalité (calculée différemment que dans les méthodes ci-dessus), et de son asymétrie (afin de cibler les plus petits fronts).
 
 On notera dans cette dernière étude une différence d'approche, essentiellement sémantique mais qui reste néanmoins d'intérêt.
 C'est bien l'indice de l'\al{hi} qui apparaît comme au cœur de cette étude, qui finalement cherche plus à quantifier l'hétérogénéité spatiale de la SST pour chaque pixel, qu'à \guil{détecter les fronts}.
 Par ailleurs, bien qu'elle reprenne l'utilisation d'une fenêtre glissante, cette méthode se démarque de celle de \as{cc} et ses variations, en donnant un résultat nuancé plutôt que purement dichotomique (front / background).
-De plus, bien que nous les avons omises des descriptions ci-dessus, la plupart des méthodes incluent une étape algorithmique permettant d'obtenir en sortie uniquement la position des fronts, représentée par une ligne d'épaisseur nulle (ou 1~pixel).
+De plus, bien que nous les ayons omises des descriptions ci-dessus, la plupart des méthodes incluent une étape algorithmique permettant d'obtenir en sortie uniquement la position des fronts, représentée par une ligne d'épaisseur nulle (ou 1~pixel).
 En revanche, le positionnement des fronts par \citeauthor{liu_2016} est réalisé par un simple\footnotemark{} seuil sur le HI.
 \footnotetext{Bien que le choix du seuil soit fait de manière non-triviale par \textcite{liu_2016}, nous montrons dans notre implémentation qu'un seuil fixe suffit à notre étude.}
 Par cette construction orientée vers une mesure graduelle des fronts, cette méthode de détection apparaît pertinente pour distinguer différents types de fronts par intensité.
 
 \begin{note}
   La démocratisation des techniques de \eng{machine learning} s'est aussi étendu au domaine de la détection des fronts.
-  Bien que nous les ayons pas considérées ou décrites ici, ces dernières années, diverses méthodes ont été proposée (voir la review de \cite{liu_2022}).
+  Bien que nous les ayons pas considérées ou décrites ici, ces dernières années, diverses méthodes ont été proposées (voir la review de \cite{liu_2022}).
 \end{note}
 
 \subsection{Vers des fronts de densité}
 
-Dans la section précédente, la majorité des méthodes opèrent sur les données satellite de températures, qui est utilisée comme proxy de la densité.
+Dans la section précédente, la majorité des méthodes opèrent sur les données satellites de températures, qui est utilisée comme proxy de la densité.
 Cette dernière varie cependant aussi avec la salinité, qui n'est disponible par satellite qu'à basse résolution (entre \qtyrange[range-phrase={ et }]{35}{50}{\km} pour \as{smos} par exemple).
-Il est donc possible que pour certains fronts thermique, la variation de température soit \emph{compensée} par une variation de salinité, donnant ainsi une densité constante.
+Il est donc possible que pour certains fronts thermiques, la variation de température soit \emph{compensée} par une variation de salinité, donnant ainsi une densité constante.
 Dans la région de l'Atlantique Nord, des transects sont réalisés régulièrement par un navire d'opportunité, l'Oleander.
 Les résultats qui en découlent suggèrent que pour cette région, la salinité n'intervient que peu dans les variations de densité (\cite{flagg_2006}).
 
@@ -714,6 +714,6 @@ L'article présente des résultats concernant le budget de \as{chl} et la phéno
 Le reste de ce chapitre présente des résultats qui complémentent ceux présentés dans l'article.
 
 Le \nref[chapitre]{chp:res-phenologie} se penche sur les résultats obtenus concernant l'impact des fronts sur la phénologie du bloom.
-Il résume les résultats présenté au chapitre précédent, puis y ajoute des résultats complémentaires.
+Il résume les résultats présentés au chapitre précédent, puis y ajoute des résultats complémentaires.
 
 Enfin, les chapitres~\ref{chp:perspectives} et~\ref{chp:conclusion} apportent des perspectives et une conclusion, respectivement, sur le travail effectué pour cette thèse.

@@ -3,7 +3,7 @@
 \chapter{Variables drapeaux sur masque binaire}
 \label[appendix]{ax:cf-flags}
 
-Dans cette section, je décris succinctement le principe de stockage des variables drapeau (\engquote{flags}), tel que défini par les conventions \as{cf}\footnote{%
+Dans cette section, je décris succinctement le principe de stockage des variables drapeaux (\engquote{flags}), tel que défini par les conventions \as{cf}\footnote{%
   section 3.5:\par\noindent\glsurl{cf-flags}
 }.
 Ayant besoin d'extraire des flags des données de Chlorophylle, et voyant qu'aucune implémentation n'était disponible pour \citesoft{xarray}, j'ai écrit une simple implémentation.
@@ -12,7 +12,7 @@ Je l'ai ensuite adaptée et soumise au projet \citesoft{cf-xarray} pour qu'elle 
 
 Il est souvent utile voire nécessaire d'accompagner certaines quantités par des informations supplémentaires: pour des données satellites par exemple, la présence de nuages sur le pixel, la qualité de la mesure, ou encore le capteur qui a réalisé la mesure (pour un produit composite).
 Ces informations sont différentes pour chaque point de mesure, et doivent donc être stockées comme des variables (\as{ie} des tableaux multi-dimensionnels).
-Ce type d'information (que nous appellerons drapeaux) peut souvent être représenté de manière très simple: la présence de nuage peut être indiqué par un booléen (un seul bit), la qualité de la mesure est typiquement un petit entier (2 ou 3 bits), etc.
+Ce type d'information (que nous appellerons drapeaux) peut souvent être représenté de manière très simple: la présence de nuage peut être indiquée par un booléen (un seul bit), la qualité de la mesure est typiquement un petit entier (2 ou 3 bits), etc.
 
 Cependant, du fait de l'architecture des processeurs, les outils informatiques ne permettent généralement pas de manipuler des variables aussi petites.
 Chaque variable drapeau ne peut être traitée et stockée que sur un octet, au minimum.
@@ -70,7 +70,7 @@ Ainsi, pour l'exemple ci-dessus, il nous faudra définir les attributs suivants 
   Si tous les drapeaux sont des booléens (et donc encodés sur un seul bit), l'attribut \textsf{flag\_values} peut être omis, à l'inverse si tous les drapeaux sont mutuellement exclusifs (\ab{par-ex} on ne stocke \emph{que} la qualité des pixels) l'attribut \textsf{flag\_masks} peut être omis.
 \end{note}
 \begin{note}
-  Pour les drapeaux autres que booléens, on fait ici commencer les valeurs à~1, comme dans les exemples donnés par la convention \as{cf}. Cela réserve la valeur~0 comme, par exemple, erreur on valeur non-définie. Ce n'est pas une obligation.
+  Pour les drapeaux autres que booléens, on fait ici commencer les valeurs à~1, comme dans les exemples donnés par la convention \as{cf}. Cela permet réserver la valeur~0 comme erreur ou valeur non-définie par exemple. Ce n'est pas une obligation.
 \end{note}
 
 Suit ici l'implémentation de l'extraction des drapeaux pour \citesoft{cf-xarray} plus en détail\footnote{Il s'agit ici d'une version un peu plus claire que celle soumise au projet. Elle est fonctionnellement identique, et sera incorporée plus tard dans le projet, d'autres corrections étant de toute façon requises.}.
@@ -104,14 +104,14 @@ def create_flag_dict(da) -> Mapping[Hashable, Sequence]:
     return dict(zip(flag_meanings, zip(flag_masks, flag_values)))
 \end{python}
 
-Je défini quelques méthodes supplémentaires à une classe d'\emph{Accessor}, ce qui les rendra accessibles aux objets Xarray concernés (\as{ie} des variables \py{xarray.DataArray} contenant les drapeaux à extraire):
+Je définis quelques méthodes supplémentaires à une classe d'\emph{Accessor}, ce qui les rendra accessibles aux objets Xarray concernés (\as{ie} des variables \py{xarray.DataArray} contenant les drapeaux à extraire):
 \begin{python}
 @xr.register_dataarray_accessor("cf")
 class CFDataArrayAccessor(CFAccessor):
     ...
 \end{python}
 
-D'abord, je défini une propriété qui servira de point d'accès publique pour les drapeaux:
+D'abord, je définis une propriété qui servira de point d'accès publique pour les drapeaux:
 \begin{python}
 @property
 def flags(self) -> Dataset:
@@ -134,7 +134,7 @@ def _extract_flags(
     """
     flag_dict = create_flag_dict(self._obj)
 \end{pythonFirst}
-On récupère un dictionnaire qui contient pour chacune des signification de drapeau, la valeur associée et la valeur du masque binaire, ce qui correspond en fait à une colonne du tableau plus haut.
+On récupère un dictionnaire qui contient pour chacune des significations de drapeau, la valeur associée et la valeur du masque binaire, ce qui correspond en fait à une colonne du tableau plus haut.
 
 On ne garde que les drapeaux qui sont à extraire (par défaut, tous):
 \begin{pythonMiddle}[]
@@ -173,7 +173,7 @@ Si tous sont mutuellement exclusifs, il suffit d'appliquer une comparaison:
 \end{pythonMiddle}
 
 Sinon, on doit appliquer un masque binaire. On le fait en une seule opération pour tous les drapeaux.
-Ensuite, on converti en booléen soit par comparaison avec la valeur appropriée soit par simple conversion:
+Ensuite, on convertit en booléen soit par comparaison avec la valeur appropriée soit par simple conversion:
 \begin{pythonMiddle}[]
     else:
         # We cast both masks and flag variable as integers to make the
@@ -310,7 +310,7 @@ Il est donc compliqué d'estimer le coût de tous ces calculs dont l'historique 
 \label[appendix]{ax:boa}
 
 J'ai collaboré succinctement pendant ma thèse avec un étudiant en visite au laboratoire, qui cherchait à implémenter l'algorithme de \textcite{belkin_2009} en Python.
-Nous étions parvenu au code ci-dessous pour effectuer le filtrage (avant de calculer la norme du gradient ou d'appliquer l'opérateur de Sobel).
+Nous étions parvenus au code ci-dessous pour effectuer le filtrage (avant de calculer la norme du gradient ou d'appliquer l'opérateur de Sobel).
 L'utilisation de \citesoft{xarray} permet d'éviter quasiment toutes les boucles sur les pixels, si coûteuses quand faites directement en Python.
 
 \begin{python}

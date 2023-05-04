@@ -52,7 +52,7 @@ On retrouve ici le concept de \guil{gagnants} et \guil{perdants} décrit par \te
 
 Dans les chapitres précédents, ainsi que dans l'article publié, nous nous sommes concentrés sur la région de l'Atlantique Nord autour du Gulf Stream.
 Nous avons ainsi étendu les résultats de \textcite{liu_2016}, qui se concentraient sur la seule biorégion de la gyre subtropicale du Pacifique Nord, à deux biomes supplémentaires: un biome oligotrophe avec un mélange profond saisonnier, et un biome subpolaire comprenant un bloom printanier.
-Cette première étude nous a permis de valider la méthode de détection des fronts et de colocalisation avec la \as{chl}, et de préciser la trajectoire à adopter dans l'optique d'une quantification de ces même effets à l'échelle globale.
+Cette première étude nous a permis de valider la méthode de détection des fronts et de colocalisation avec la \as{chl}, et de préciser la trajectoire à adopter dans l'optique d'une quantification de ces mêmes effets à l'échelle globale.
 
 \subsection{Défis techniques}
 
@@ -67,21 +67,21 @@ Cet outil automatise la parallélisation des calculs, et facilite leur applicati
 }, accélérant les calculs et limitant les besoins en mémoire.
 En pratique cependant, son utilisation n'est pas triviale et garantir son bon fonctionnement pour les calculs plus complexes demande une certaine expertise.
 
-% Au delà d'un simple confort, l'optimisation des calculs ainsi que la mise en place d'outils efficaces et flexibles ont permis de mener une étude exploratoire, avec de nombreuses itérations.
+% Au-delà d'un simple confort, l'optimisation des calculs ainsi que la mise en place d'outils efficaces et flexibles ont permis de mener une étude exploratoire, avec de nombreuses itérations.
 
 \subsection{Variations spatiales}
 
 Nous avons montré précédemment qu'il existe des différences importantes entre les biorégions de notre zone d'étude, dans la prévalence des fronts selon leur intensité ainsi que dans la réponse du phytoplancton à ces fronts.
-Des calculs préliminaire du HI à l'échelle globale confirment cette variabilité dans la répartition des fronts (\nref{fig:global-fronts}).
+Des calculs préliminaires du HI à l'échelle globale confirment cette variabilité dans la répartition des fronts (\nref{fig:global-fronts}).
 Les fronts forts (\(\am{hi}>10\)) semblent se confiner aux courants de mésoéchelle les plus intenses \encadra*{les courants de bord ouest que sont le Gulf Stream, le Kuroshio, le courant du Brésil, le courant des Aiguilles, et dans une moindre mesure le courant Est Australien}.
-Les fronts faibles, bien que présents sur un plus grande surface, semblent tout de même survenir dans des zones énergétiques limitées.
+Les fronts faibles, bien que présents sur une plus grande surface, semblent tout de même survenir dans des zones énergétiques limitées.
 On notera par exemple les recirculations du Gulf Stream et du Kuroshio, la zone de convergence intertropicale du Pacifique, ou le courant circumpolaire Antarctique.
 
 \begin{figure}
   \centering
   \insertfig{global_fronts.pdf}
   \captionT{Instantané des fronts à l'échelle globale}{%
-    Le HI est calculé à partir des même données, et avec les même coefficients de normalisations que ceux calculés dans la région du Gulf Stream (le \frenchdate{2018}{2}{15}).
+    Le HI est calculé à partir des mêmes données, et avec les mêmes coefficients de normalisations que ceux calculés dans la région du Gulf Stream (le \frenchdate{2018}{2}{15}).
   }
   \label{fig:global-fronts}
 \end{figure}
@@ -120,7 +120,7 @@ L'exploration des données de l'étude révèlent que le HI identifie correcteme
   \insertfig{comp_hi_fsle.png}
   \captionT{Comparaison entre les fronts détectés par les transects in situ, le HI, et le FSLE}{%
     Carte de \as{fsle} (couleur), avec les contours de HI (\(\am{hi}=\num{5}\) en trait plein et \num{10} en pointillés).
-    Les points noirs marquent les stations du transect, et les croix rouges celles identifiés comme frontales par le gradient de densité mesuré in situ.
+    Les points noirs marquent les stations du transect, et les croix rouges celles identifiées comme frontales par le gradient de densité mesuré in situ.
   }
   \label{fig:comp-hi-fsle}
 \end{figure}
@@ -139,14 +139,14 @@ Nous l'avons mentionné en présentant les données utilisées, nous utilisons l
 Il en résulte un champ de SST de résolution \qty{4}{\km} légèrement lissé par l'interpolation.
 
 Les capteurs agrégés pour ce produit permettent cependant une résolution plus élevée (\qty{1}{\km}), à laquelle sont distribués les produits mono-capteurs \abbrv{L3}.
-Si ces derniers sont recommandés pour l'étude des structures les plus fines (\cite{merchant_2019}), leur utilisation est cependant accompagné d'une perte importante de couverture spatiale.
+Si ces derniers sont recommandés pour l'étude des structures les plus fines (\cite{merchant_2019}), leur utilisation est cependant accompagnée d'une perte importante de couverture spatiale.
 Pour éviter de perdre en couverture, il serait nécessaire de détecter les fronts sur la SST de chaque capteur, avant de réunir tous ces résultats.
 Cette étape supplémentaire a déjà été accomplie dans des situations similaires (\cite{miller_2009,nieto_2012}), mais une méthode précise resterait à être choisie et implémentée.
 Par ailleurs, le volume de données à traiter augmenterait, du fait de l'augmentation de la résolution bien entendu, mais aussi pour chaque capteur à traiter individuellement.
 Enfin, soit le produit de \as{chl} devrait être de résolution kilométrique, soit les fronts obtenus devraient être sous-échantillonnés pour s'adapter à la résolution plus faible du produit de \as{chl}.
 
 Un travail est nécessaire sur l'influence sur nos résultats de la résolution et du choix du produit (mono- ou multicapteur, avec ou sans nuages).
-Il pourrait être réalisé dans une région limitée, afin de mitiger les difficultés évoquées..
+Il pourrait être réalisé dans une région limitée, afin de mitiger les difficultés évoquées.
 
 \subsection{Choix sur la méthode de détection}
 
@@ -154,14 +154,14 @@ En second lieu, la largeur des fronts détectés peut être affectée par la mé
 
 Assez naturellement, le seuil choisi impacte la surface occupée par les fronts, puisqu'on va classifier plus ou moins de pixels comme frontaux.
 D'une part, le seuil permet de sélectionner des fronts plus ou moins intenses, les valeurs du HI étant plus élevées sur les fronts plus marqués.
-Nous avons ainsi fait la distinctions entre fronts faibles, et fronts forts.
+Nous avons ainsi fait la distinction entre fronts faibles, et fronts forts.
 Mais d'autre part, abaisser le seuil aura également pour effet de sélectionner plus largement autour des fronts.
 Les valeurs du HI étant (à peu près) les plus élevées au centre du front puis diminue lorsque l'on s'en éloigne.
 Notre méthode comporte donc un couplage fort entre présence du front, intensité du front, et largeur du front.
 
 Intéressons-nous donc plus en détail à la méthode de calcul des valeurs du HI.
 En particulier, trois points sont d'intérêt: la taille de la fenêtre glissante, les coefficients de normalisation des composantes (\ab{ie} l'importance relative de chaque componsante), et les composantes à inclure.
-Nous avons démontré l'influence relativement faible sur les distributions de \as{chl} du choix de la taille de fenêtre et des coefficients de normalisation (\nref{sec:sensibilite-parametres}, \nref{fig:ts-sensitivity}), mais nous n'avons pas discuté plus en détail le choix des composantes en soit.
+Nous avons démontré l'influence relativement faible sur les distributions de \as{chl} du choix de la taille de fenêtre et des coefficients de normalisation (\nref{sec:sensibilite-parametres}, \nref{fig:ts-sensitivity}), mais nous n'avons pas discuté plus en détail le choix des composantes en soi.
 
 La bimodalité a fait ses preuves à travers son utilisation pour la méthode de \al*{cc}~(\as*{cc}) (voir \nref{sec:detection-fronts}).
 On utilise ici pour le HI une implémentation plus simple, principalement du fait de la taille de la fenêtre glissante limitant le nombre de pixels disponibles.
@@ -169,10 +169,10 @@ On utilise ici pour le HI une implémentation plus simple, principalement du fai
 
 L'écart-type des valeurs de SST dans la fenêtre est relié au gradient moyen dans cette fenêtre.
 Le gradient est utilisé avec succès dans d'autres techniques de détection de fronts.
-% Une des critique qu'on peut émettre c'est que c'est trop proche du gradient justement, et qui peut prendre des valeurs très élevées si on a un gradient de grande échelle.
+% Une des critiques qu'on peut émettre c'est que c'est trop proche du gradient justement, et qui peut prendre des valeurs très élevées si on a un gradient de grande échelle.
 
 Enfin l'inclusion de l'asymétrie est justifiée par \textcite{liu_2016} par sa capacité à repérer les fins filaments de SST dont la distribution en température serait unimodale et asymétrique.
-Nous pouvons nous interroger sur la contribution de ces filaments lorsque l'on travaille à des résolution plus faibles (\citeauthor{liu_2016} utilisent des données kilométriques).
+Nous pouvons nous interroger sur la contribution de ces filaments lorsque l'on travaille à des résolutions plus faibles (\citeauthor{liu_2016} utilisent des données kilométriques).
 En outre, il apparaît que pour nos données et notre région, l'asymétrie montre essentiellement de forte valeurs \emph{autour} des fronts.
 En effet, en se déplaçant en travers du front, l'asymétrie est maximale de chaque côté du front et de signe opposée, et passe donc par zéro au centre du front, lorsque la fenêtre glissante contient autant de valeurs chaudes que froides (\nref{fig:asymetrie}).
 L'asymétrie semble donc principalement participer à élargir les fronts.
@@ -194,7 +194,7 @@ Il est probable que cela soit le fait d'un élargissement des fronts et donc une
 On assiste ainsi à une sorte de dilution des valeurs de \as{chl}.
 
 Ce résultat souligne l'impact potentiel des choix dans la méthode sur les qualités des fronts détectés (positionnement, intensité, largeur), et donc sur les valeurs de \as{chl} sélectionnées.
-Ces couplages pourraient être mieux qualifiés par des études approfondie sur l'influence de chaque composante, de manière individuelle, sur ces qualités.
+Ces couplages pourraient être mieux qualifiés par des études approfondies sur l'influence de chaque composante, de manière individuelle, sur ces qualités.
 
 \subsection{Tester d'autres méthodes existantes}
 

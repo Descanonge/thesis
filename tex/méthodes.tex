@@ -41,7 +41,7 @@ ou encore la couverture spatio-temporelle.
 % % Éventuellement à déplacer à une mention antérieure des résolutions
 % \begin{note}[label={note:approx-lat-km}]
 %   Bien que notre zone d'étude s'étende à de (relativement) hautes latitudes~(\tapprox\latlon{55N}), nous ne considérons pas les différences de distances zonales et méridionales.
-%   Nous faisons donc une correspondance simple entre fraction de degré et kilomètres, quelque soit la distance considérée, notamment pour la taille des pixels et des fenêtres.
+%   Nous faisons donc une correspondance simple entre fraction de degré et kilomètres, quel que soit la distance considérée, notamment pour la taille des pixels et des fenêtres.
 % \end{note}
 
 \subsubsection{Modis-L3}
@@ -57,14 +57,14 @@ Ce sont les données utilisées par \textcite{liu_2016} \encadra{et produites pa
   Tout au long de ce manuscrit nous utilisons les dénominations des niveaux de données tels que typiquement utilisés par les distributeurs, et qui correspondent de manière générale aux définitions suivantes:
   \newcommand*\lvllabel[1]{\hspace\labelsep \normalfont\bfseries\lfstyle #1}%
   \begin{flexlabelled}{lvllabel}{1em}{1.5em}{1em}{2em}{1em}
-    \item[L1] Données d'un seul capteur, sans traitement (au delà de ceux nécessaire à la transmission depuis le satellite), et à la résolution de capture \encadra*{\ab{cad} projetées dans le référentiel du capteur (nb.\ de lignes et nb.\ de pixels par ligne)}.
+    \item[L1] Données d'un seul capteur, sans traitement (au-delà de ceux nécessaires à la transmission depuis le satellite), et à la résolution de capture \encadra*{\ab{cad} projetées dans le référentiel du capteur (nb.\ de lignes et nb.\ de pixels par ligne)}.
     Elles sont accompagnées des données de positionnement du satellite.
 
     \item[L2] Variables géophysiques dérivées des données~\abbrv{L1}, à la même résolution et disposés de la même manière que ces dernières.
     Des métadonnées peuvent les accompagner, comme la qualité des pixels par exemple.
 
     \item[L3] Variables projetées sur une grille régulière en espace et en temps.
-    Des traitement supplémentaires peuvent être appliqués.
+    Des traitements supplémentaires peuvent être appliqués.
 
     \item[L4] Résultats d'analyses plus poussées comme l’agrégation de plusieurs sources de données, ou l'assimilation par un modèle numérique.
   \end{flexlabelled}
@@ -127,7 +127,7 @@ Le produit~\abbrv{L2P} est similaire aux données brutes utilisées pour le set 
 Ces données sont projetées capteur par capteur sur une grille régulière, à une résolution de~\resol{1}{20}, soit environ~\qty{5}{\km}, ce qui donne le produit~\abbrv{L3U}.
 
 \begin{note}
-  Nous pourrions réaliser nous même cette projection à une résolution plus élevée, de la même manière que pour le produit \dataname{sst_modis}.
+  Nous pourrions réaliser nous-même cette projection à une résolution plus élevée, de la même manière que pour le produit \dataname{sst_modis}.
   Nous disposerions alors de données~\abbrv{L3} à plus haute résolution, pour un grand ensemble de capteurs (plus nombreux que les deux disponibles pour \as{modis}).
 \end{note}
 
@@ -138,7 +138,7 @@ Ce produit donne ainsi un champ de SST sans nuages, estimé par une combinaison 
 L'absence de couverture nuageuse et la simplicité d'usage se fait au détriment du lissage inévitable des structures les plus fines.
 
 Une estimation quantitative du lissage due à l'interpolation est compliqué, car la paramétrisation de cette dernière dépend de la variabilité du champ de température à~\abbrv{J"~1}.
-On peut néanmoins imaginer que le champ de SST produit est plus lissé dans les zones normalement nuageuses, et de plus potentiellement plus éloigné de la réalité (voir \nref{sec:donnees-sst_glorys}).
+On peut néanmoins imaginer que le champ de SST produit est plus lissé dans les zones normalement nuageuses, ainsi que potentiellement plus éloigné de la réalité (voir \nref{sec:donnees-sst_glorys}).
 Il est tout de même possible de mitiger ces effets en ne comptabilisant dans nos statistiques seulement les pixels non-nuageux, ce que nous faisons pour tous les résultats présentés.
 Nous utilisons pour cela les données de \as{chl} qui identifient les pixels nuageux.
 % À noter qu'il serait également possible d'utiliser les erreurs d'intégration associées à chaque pixel, mais cela n'a pas été exploré.
@@ -152,7 +152,7 @@ Tôt dans ce projet, certaines pistes de travail (\ab{par-ex} le suivi temporel 
 Nous utilisons ici une réanalyse globale (désignée par \dataname{sst_glorys}), délivrée par \as{cmems}\footfullcite{sst_glorys} et produite par \glshref{mercator}.
 Cette réanalyse est faite sur une grille \engquote{eddy-resolving}, au \resol{1}{12} soit environ~\qty{8}{\km}, et sur 50~niveaux verticaux. Les données sont disponibles en résolution journalière.
 Le noyau \abbrv{NEMO} est forcé en surface par les réanalyses \abbrv{ERA}-Interim et \abbrv{ERA-5} du centre \as{ecmwf}.
-Le modèle fait de l'assimilation de données d'observations: altimétrie, SST \guil{Reynolds}~\resol{1}{4} (seulement \as{avhrr}), concentration en glace de mer, et profiles in situ de températures et profils de salinité~\as{cora}.
+Le modèle fait de l'assimilation de données d'observations: altimétrie, SST \guil{Reynolds}~\resol{1}{4} (seulement \as{avhrr}), concentration en glace de mer, et profils in situ de températures et profils de salinité~\as{cora}.
 
 \subsubsection{Comparaison des produits de SST}
 
@@ -167,7 +167,7 @@ Le modèle fait de l'assimilation de données d'observations: altimétrie, SST \
 Nous illustrons ici notre comparaison entre les différents produits de SST en nous appuyant sur un instantané (\nref{fig:comparaison-sst}).
 Seul le produit \dataname{sst_modis} n'est pas issu d'une interpolation ou d'une réanalyse, on peut le considérer comme étant le plus proche d'une \engquote{ground truth} (en dehors des pixels nuageux bien sûr).
 
-On notera pour le produit de réanalyses \dataname{sst_glorys}, outre sa résolution assez faible, des différences importantes dans les structures présentes sur les autres produits, qui ne sont visiblement pas due à un simple lissage du champ de SST.
+On notera pour le produit de réanalyses \dataname{sst_glorys}, outre sa résolution assez faible, des différences importantes dans les structures présentes sur les autres produits, qui ne sont visiblement pas dues à un simple lissage du champ de SST.
 Ce produit manque les caractéristiques de certaines structures, mais surtout manque leur position exacte.
 
 Les produits issus d'interpolations de plusieurs capteurs semblent moins souffrir de ce problème.
@@ -198,13 +198,13 @@ Les données sont récupérées sur \as{cmems}\footfullcite{chl_globcolour}.
 Elles sont de résolution spatiale~\resol{1}{24} (soit environ~\qty{4}{\km}), journalières, et comportent des nuages.
 
 Ce produit agrège les données optiques de plusieurs capteurs: \as{seawifs} à bord de OrbView-2, \as{modis} Aqua et Terra, \as{meris} à bord d'Envisat, \as{viirs} à bord de \as{snpp} et \as{noaa}[\textlf{-20}]\footnote{parfois indiqué par son nom avant lancement: \as{jpss}[\textlf{-1}]}, et enfin \as{olci} à bord de \textlf{Sentinel-3A et -3B}.
-Similairement au produit Modis, les valeurs de \as{chl} sont calculées à partir des réflectance en utilisant ici un mélange des algorithmes \abbrv{OC3/4}, CI, et \abbrv{OC5}.
+Similairement au produit Modis, les valeurs de \as{chl} sont calculées à partir des réflectances en utilisant ici un mélange des algorithmes \abbrv{OC3/4}, CI, et \abbrv{OC5}.
 
 \begin{note}[label={note:merge-chl-or-rrs}]
   L'aggrégation des capteurs se fait selon le traitement dit Copernicus-GlobColour: les données de reflectance de chaque capteur sont transformées en concentration de \as{chl} \emph{avant} d'être fusionnées en seul produit~(\cite{garnesson_2019}).
   À l'inverse, le produit (\as{esa})~OC-\as{cci}/\as{c3s} développé par le Plymouth Marine Laboratory pour le même projet \as{octac}, fusionne les reflectances des différents capteurs avant la conversion en \as{chl}.
 
-  Aggréger les valeurs de Chlorophylle plutôt que de réflectance permet \encadra{entre autres} un ajout de nouveaux capteurs facilité (à ce jour le produit OC-\as{cci} n'intègre pas encore le capteur de \as{noaa}[-\textlf{20}] par ex.), ainsi qu'une meilleur couverture spatiale~(\cite{garnesson_2019}).
+  Aggréger les valeurs de Chlorophylle plutôt que de réflectance permet \encadra{entre autres} un ajout de nouveaux capteurs facilité (à ce jour le produit OC-\as{cci} n'intègre pas encore le capteur de \as{noaa}[-\textlf{20}] par ex.), ainsi qu'une meilleure couverture spatiale~(\cite{garnesson_2019}).
 \end{note}
 
 \begin{figure}
@@ -278,7 +278,7 @@ Cette frontière géographique à celle délimitée par \textcite{sarmiento_2004
 On sépare ensuite le reste de la région au nord de~\latlon{32N} en prenant comme frontière physique le front nord du jet du Gulf Stream (le \engquote{North wall}).
 Cette frontière est donc dynamique et déterminée chaque jour à partir de l'image de température.
 En effet, il apparaît que la distribution de la SST (au nord de~\latlon{32N}) suffit à repérer de manière fiable et robuste une température seuil permettant de séparer les deux biomes (contour sinueux noir plein \nref[figure]{fig:regions}).
-Sur cette distribution apparaît clairement un pic dans des valeurs élevées correspondant au eaux du jet.
+Sur cette distribution apparaît clairement un pic dans des valeurs élevées correspondant aux eaux du jet.
 Il est aisé de repérer le pic et l'ajuster par une gaussienne.
 À~partir de là, la température seuil entre les biomes est prise comme la base froide de ce pic, \ab{cad} plus précisemment en soustrayant à la température moyenne du pic deux fois son écart-type (\nref{fig:temp-seuil-distrib}).
 La valeur journalière de ce seuil est filtrée temporellement par un filtre médian glissant (avec une fenêtre de largeur 8~jours) afin d'éviter d'éventuelles anomalies de détection.
@@ -313,7 +313,7 @@ Afin de concentrer l'étude sur l'océan ouvert, nous avons exclu les pixels sit
 La \as{chl} atteint dans les kilomètres les plus proches de côtes des valeurs très élevées (jusqu'à~\qty{10}{\mgm}) pour des raisons qui ne concernent pas notre étude et qui pourraient fausser les distributions mesurées.
 
 Le jet du Gulf Stream prend forme au sud de notre zone, le long de la côte de Floride. On trouve sur le plateau continental à ces latitudes~(\tapprox\latlon{28N}) de forts courants qu'on ne retrouve pas dans le reste du biome subtropical permanent.
-Plus au nord dans l'anse Nord-Est Américaine de l'Atlantique (\engquote{Mid-Atlantic Bight}), on trouve une séparation nette entre les eaux au nord du Gulf Stream (la \engquote{slope sea}), et les eaux sur le plateau continental.
+Plus au nord dans l'anse nord-est américaine de l'Atlantique (\engquote{Mid-Atlantic Bight}), on trouve une séparation nette entre les eaux au nord du Gulf Stream (la \engquote{slope sea}), et les eaux sur le plateau continental.
 Un jet marque cette séparation le long du talus continental~(\cite{flagg_2006}).
 
 Ainsi, pour calculer nos résultats, nous ne considérons que les pixels où la profondeur n'excède pas~\qty{1500}{\m}.
@@ -323,7 +323,7 @@ Nous utilisons pour cela les données de bathymétrie \dataname{etopo1}~(voir \d
 \label{sec:HI}
 
 Comme précisé en introduction, pour quantifier l'effet des fronts sur le phytoplancton il est nécessaire de détecter les fronts, \al{cad} de classer chaque pixel comme appartenant à un front ou non (\ab{cad} à l'arrière-plan ou au \engquote{background}).
-La méthode retenue ici suit celle présentée par \textcite{liu_2016} \encadra*{qui par son utilisation d'une fenêtre glissante s'apparente elle même à celle de \textcite{cayula_1992}}.
+La méthode retenue ici suit celle présentée par \textcite{liu_2016} \encadra*{qui par son utilisation d'une fenêtre glissante s'apparente elle-même à celle de \textcite{cayula_1992}}.
 Cette section définit cette méthode et notre implémentation, tout en indiquant les modifications que nous y avons apportées.
 
 La méthode de \textcite{liu_2016} consiste à quantifier plusieurs quantités statistiques du champ de SST dont les fortes valeurs sont associées à la présence de fronts et autres structures de fine échelle.
@@ -338,7 +338,7 @@ Ainsi, pour chaque pixel, la valeur de chaque composante est calculée sur la di
   \item \(7 \times 7 =\qty{49}{\pixels}\) soit~\tapprox\qty{40}{\km} de côté.
 \end{itemize}
 Parce qu'une fenêtre plus large entraînerait la détection de structures trop grandes pour notre étude, nous nous limiterons aux tailles présentées ci-dessus.
-Néanmoins une fenêtre trop petite limite le nombre de pixels disponibles pour calculer les valeurs statistique dont nous avons besoin convenablement.
+Néanmoins une fenêtre trop petite limite le nombre de pixels disponibles pour calculer les valeurs statistiques dont nous avons besoin convenablement.
 Un compromis est à définir.
 
 \subsection{Implémentation: Calcul des composantes}
@@ -360,7 +360,7 @@ Ensuite, le coefficient d'asymétrie~\as{skew}, est défini comme la valeur abso
 
 Enfin, on cherche à quantifier la bimodalité~\as{bimod} de la distribution des valeurs de SST.
 Pour ce faire on compare l'écart entre ladite distribution et une distribution gaussienne dont la moyenne et l'écart-type sont pris identiques à ceux de la SST (\nref{fig:bimodality}).
-Cela présuppose que lorsque les températures sont uni-modales (\ab{cad} quand il n'y pas de fronts dans la fenêtre) leur distribution tend vers une gaussienne, ce qui ne paraît pas déraisonnable.
+Cela présuppose que lorsque les températures sont uni-modales (\ab{cad} quand il n'y a pas de fronts dans la fenêtre) leur distribution tend vers une gaussienne, ce qui ne paraît pas déraisonnable.
 
 \begin{figure}
   \centering
@@ -377,14 +377,14 @@ Pour éviter que trop de valeurs tombent sur les bords des intervalles et que l'
 Par ailleurs, le nombre d'intervalles étant dépendant de la largeur de la distribution de SST, dans les cas où il est inférieur ou égal à quatre, la bimodalité est automatiquement assignée nulle~(\(B=0\)).
 \footnotetext{%
   Cette technique de compression avec pertes \encadra{définie dans les conventions \as{cf}\footnotemark{}} consiste à discrétiser des valeurs flottantes sur des entiers après une transformation linéaire.
-  Par exemple, en prenant pour stockage des entiers non-signés sur 16~bits~(\textsf{NC\_USHORT}) on peut évidement représenter des valeurs entières entre \num{0} et~\(2^{16}-1 = \num{65535}\); mais en multipliant ces valeurs entières par un facteur de, disons,~\num{0.005} on peut représenter des valeurs entre \num{0} et~\num{327.675}.
+  Par exemple, en prenant pour stockage des entiers non-signés sur 16~bits~(\textsf{NC\_USHORT}) on peut évidemment représenter des valeurs entières entre \num{0} et~\(2^{16}-1 = \num{65535}\); mais en multipliant ces valeurs entières par un facteur de, disons,~\num{0.005} on peut représenter des valeurs entre \num{0} et~\num{327.675}.
   On a gagné en volume par rapport à un stockage typique de 32 ou~64~bits, mais en perdant évidemment en précision puisque nos valeurs sont maintenant discrétisées avec un intervalle de~\num{0.005}.}
 \footnotetext{%
   \raggedleft%
   section 8.1: {\scriptsize\glsurl{cf-packed}}
 }
 
-Par ailleurs on définit une distribution gaussienne~\(g_i\) sur les même intervalles en utilisant les statistiques calculées précédemment:
+Par ailleurs on définit une distribution gaussienne~\(g_i\) sur les mêmes intervalles en utilisant les statistiques calculées précédemment:
 \begin{equation}
   g_i = \frac{1}{\sqrt{2\pi\am{std}}} \exp\paren{-\frac{\paren{x_i-\moy{s}}^2}{2\am{std}^2}},
 \end{equation}
@@ -400,7 +400,7 @@ Ce principe de calcul de bimodalité s'apparente à celle de \textcite{cayula_19
 Cependant, cette méthode nécessite un nombre conséquent de valeurs pour construire un histogramme de résolution suffisante, ce qui s'avère difficile aux échelles et à la résolution où nous travaillons.
 
 Notre méthode de calcul de la bimodalité est la première grande modification apportée à celle de \textcite{liu_2016}.
-Ces dernier·ère·s calculent également l'histogramme de la température, mais au lieu de directement le comparer avec une distribution gaussienne, iels ajustent l'histogramme par un polynôme de degré~5 avant de comparer ce dernier avec la gaussienne.
+Ces dernières calculent également l'histogramme de la température, mais au lieu de directement le comparer avec une distribution gaussienne, iels ajustent l'histogramme par un polynôme de degré~5 avant de comparer ce dernier avec la gaussienne.
 Cet ajustement, par ailleurs difficile à mettre en place, est facilement mal conditionné et rien ne garantit sa convergence.
 Nous proposons donc une méthode plus facile à implémenter, plus robuste, et au coût de calcul réduit.
 
@@ -417,7 +417,7 @@ nous préférons normaliser par l'écart-type:
   \norm{C_i^n} = \am{coef}^n C_i^n
   \text{ avec } \am{coef}^n = \frac {1} {\std(C^n)} .
 \end{equation}
-En effet un rapide coup d’œil aux distributions des composantes (\nref{fig:distrib-composantes}) permet de constater qu'aucune des composante ne semble avoir des valeurs bornées.
+En effet un rapide coup d’œil aux distributions des composantes (\nref{fig:distrib-composantes}) permet de constater qu'aucune des composantes ne semble avoir des valeurs bornées.
 Normaliser par les valeurs maximales donne d'une part une normalisation arbitraire, très sensible aux valeurs extrêmes, et d'autre part donne un poids disproportionné aux valeurs élevées dans la normalisation.
 En revanche, la normalisation par l'écart-type permet d'attribuer une part équivalente de la variance du HI à chaque composante.
 
@@ -426,7 +426,7 @@ En revanche, la normalisation par l'écart-type permet d'attribuer une part équ
   \insertfig[0.7]{distrib_composantes.pdf}
   \captionT{Distribution des valeurs de HI et de ses composantes}{%
     Densités de probabilité des valeurs de HI~(a) et de ses composantes: l'écart-type~(b), le coefficient d'asymétrie~(c), et la bimodalité~(d), calculées sur l'année 2007.
-    Chacune des composante s'est vue appliquée son coefficient de normalisation, mais pas le HI, qui est donc ici la simple somme de ces composantes.
+    Chacune des composantes s'est vue appliquée son coefficient de normalisation, mais pas le HI, qui est donc ici la simple somme de ces composantes.
   }
   \label{fig:distrib-composantes}
 \end{figure}
@@ -449,7 +449,7 @@ Il reste toutefois à définir une méthode pour classifier chaque pixel comme a
 Nous allons même plus loin et séparons les pixels en trois catégories: les pixels appartenant à un front fort~(\(\am{hi} > 5\)), à un front faible~(\(5 < \am{hi} < 10\)), ou à aucun front~(\(\am{hi} < 5\), aussi dénotés \engquote{background}).
 La pertinence des valeurs de seuils entre les catégories est discutée dans la suite du manuscrit.
 
-Nous avons réalisé des test de sensibilité à certains paramètres de cette méthode \encadra{à savoir la taille de la fenêtre glissante et le choix des coefficients de normalisation} qui sont discutés plus en détail \nref[section]{sec:sensibilite-parametres}.
+Nous avons réalisé des tests de sensibilité à certains paramètres de cette méthode \encadra{à savoir la taille de la fenêtre glissante et le choix des coefficients de normalisation} qui sont discutés plus en détail \nref[section]{sec:sensibilite-parametres}.
 
 \begin{figure}
   \centering
@@ -478,7 +478,7 @@ Nous avons réalisé des test de sensibilité à certains paramètres de cette m
 \label{sec:extraction-hist}
 
 Afin d'optimiser les calculs et le stockage, j'ai transformé chaque image \abbrv{2D} de SST et de \as{chl} en une série d'histogrammes.
-Une fois le HI calculé, il devient possible de catégoriser chaque pixel par la biome auquel il appartient (subtropical permanent, subtropical saisonnier, subpolaire), ainsi que par sa valeur de HI.
+Une fois le HI calculé, il devient possible de catégoriser chaque pixel par le biome auquel il appartient (subtropical permanent, subtropical saisonnier, subpolaire), ainsi que par sa valeur de HI.
 On cherche ensuite à extraire des informations de ces ensembles de pixels ainsi constitués.
 Le nombre total de pixels étant conséquent, et parce que l'établissement des ensembles est compliqué et coûteux, les ensembles de pixels sont chacun réduits à des histogrammes de variables d'intérêt (SST ou \as{chl}).
 Cela diminue les étapes de calcul ainsi que la quantité de données à traiter pour obtenir un diagnostic.
@@ -498,7 +498,7 @@ En effet, tous les histogrammes calculés sont stockés non-normalisés, c'est-�
 Ce procédé est notamment utilisé pour calculer des diagnostics sur des périodes de temps autres que journalières, sans avoir besoin de refaire un calcul coûteux impliquant les pixels.
 
 \begin{note}[title={Note technique}, label={note:flags-hist}]
-  Nous avons besoin de calculer des histogrammes pour chaque combinaisons de type de fronts et de région.
+  Nous avons besoin de calculer des histogrammes pour chaque combinaison de type de fronts et de région.
   Pour éviter de répéter certains calculs, j'encode le type de front et la biorégion sur un seul entier grâce à la technique présentée en \nref[annexe]{ax:cf-flags}, et que je stocke ensuite sur disque.
   En réalisant un histogramme \abbrv{2D} de cet indice et de la variable d'intérêt (SST ou \as{chl}), on obtient tous les histogrammes dont nous avons besoin.
 \end{note}
@@ -554,7 +554,7 @@ L'évolution temporelle de la médiane de \as{chl} dans le biome subpolaire pré
 Étant donné que le bloom se propage vers le nord, ces mesures sont faites sur des bandes de latitudes de largeur~\ang[mode=math]{5}.
 
 Pour extraire ces mesures, nous prenons la série temporelle de la médiane de \as{chl}, à laquelle nous appliquons un filtre Butterworth d'ordre~2 et de fréquence de coupure~\qty[parse-numbers=false]{1/20}{\jours^{-1}}.
-La série filtré montre de fortes variations dans leur phénologie d'une année sur l'autre, mais un bloom est toujours discernable.
+La série filtrée montre de fortes variations dans leur phénologie d'une année sur l'autre, mais un bloom est toujours discernable.
 Seuls les données de février à juillet sont considérées ce qui permet d'isoler le bloom printanier et d'exclure le bloom automnal.
 Nous utilisons également la dérivée de \as{chl} que nous calculons à partir de la série filtrée\footnote{%
   La dérivée est également ré-échantillonnée par interpolation cubique à une résolution temporelle de 3~heures, ce qui permet de repérer plus précisement le maximum de dérivée sans avoir à passer par une régression.
@@ -568,7 +568,7 @@ Afin d'estimer l'incertitude de cette mesure, nous prenons l'écart-type de l'en
   \centering
   \insertfig{phenologie_méthode_2015_N:45-50.pdf}
   \captionT{Mesure des dates de début et de fin du bloom}{%
-    Séries temporelles de la médiane de \as{chl}~(a) et de sa dérivé~(b), pour l'année~2015 et la bande de latitude~\latlonRange{40}{45N}.
+    Séries temporelles de la médiane de \as{chl}~(a) et de sa dérivée~(b), pour l'année~2015 et la bande de latitude~\latlonRange{40}{45N}.
 
     Le processus est illustré sur la série correspondant aux fronts faibles:
     \textcircled{1}\,Nous déterminons l'instant pour lequel la \as{chl} est maximale, puis \textcircled{2}\,prenons pour démarrage du bloom l'instant antérieur à ce dernier et pour lequel la dérivée de \as{chl} est maximale.
@@ -589,7 +589,7 @@ Il est légitime de questionner le détail de ces méthodes \encadra{d'autant pl
   \centering
   \insertfig{phenologie_frt-bkg_2015_N:45-50.pdf}
   \captionT{Différences de phénologie du bloom entre fronts et background}{%
-    Séries temporelles de la médiane de \as{chl}~(a) et de sa dérivé~(b), pour le \eng{background}~(rouge), les fronts faibles~(bleu), et les fronts forts~(vert), pour l'année~2015 et la bande de latitude~\latlonRange{40}{45N}.
+    Séries temporelles de la médiane de \as{chl}~(a) et de sa dérivée~(b), pour le \eng{background}~(rouge), les fronts faibles~(bleu), et les fronts forts~(vert), pour l'année~2015 et la bande de latitude~\latlonRange{40}{45N}.
     La date de démarrages et la durée du bloom pour chaque série est représenté par une flèche horizontale.
   }
   \label{fig:bloom-lag}
