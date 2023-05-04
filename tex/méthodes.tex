@@ -377,7 +377,7 @@ Pour éviter que trop de valeurs tombent sur les bords des intervalles et que l'
 Par ailleurs, le nombre d'intervalles étant dépendant de la largeur de la distribution de SST, dans les cas où il est inférieur ou égal à quatre, la bimodalité est automatiquement assignée nulle~(\(B=0\)).
 \footnotetext{%
   Cette technique de compression avec pertes \encadra{définie dans les conventions \as{cf}\footnotemark{}} consiste à discrétiser des valeurs flottantes sur des entiers après une transformation linéaire.
-  Par exemple, en prenant pour stockage des entiers non-signés sur 16~bits~(\textsf{NC\_USHORT}) on peut évidemment représenter des valeurs entières entre \num{0} et~\(2^{16}-1 = \num{65535}\); mais en multipliant ces valeurs entières par un facteur de, disons,~\num{0.005} on peut représenter des valeurs entre \num{0} et~\num{327.675}.
+  Par exemple, en prenant pour stockage des entiers non-signés sur 16~bits~(\textsf{NC\_USHORT}) on peut évidemment représenter des valeurs entières entre \textlf{0} et~\(2^{16}-1 = \num{65535}\); mais en multipliant ces valeurs entières par un facteur de, disons,~\num{0.005} on peut représenter des valeurs entre \textlf{0} et~\num{327.675}.
   On a gagné en volume par rapport à un stockage typique de 32 ou~64~bits, mais en perdant évidemment en précision puisque nos valeurs sont maintenant discrétisées avec un intervalle de~\num{0.005}.}
 \footnotetext{%
   \raggedleft%

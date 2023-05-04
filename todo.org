@@ -109,8 +109,6 @@ Chercheur junior CNRS
 
 * Inbox
 ** Quel est le timerange des produits que j'utilise ?
-** attendre un jour ou deux la réponse de damien
-** au pire enlever le nom de Lars et envoyer comme ça
 ** Envoi du manuscrit
 - 2 mails séparés aux rapporteurs et examinateurs
 - demander si ils veulent une version papier
@@ -122,10 +120,6 @@ question: quels sont les impacts des fronts ?
 - dans la région subtropicale (correspond au HI faible)
 - dans la région Gulf Stream (correspond hi faible / fort)
 - dans la région subpolaire (bloom)
-
-* Traduction
-- mixed layer instability -> instabilité de couche de mélange ?
-** mots d'emprunts
 
 * Recommendations de style
 ** GLS
@@ -249,8 +243,6 @@ selon certain, si cela sert à désigner une partie de la terre une majuscule es
 Je préfère celle-ci en vrai, proche de l'anglais
 
 * Vérifications à faire
-** Spelling
-** Les overfull hbox yaaay
 ** que les footnotes ne soient pas coupées
 ça implique peut être de jouer avec les marges
 ** Regexps
@@ -269,9 +261,6 @@ Espaces avant commandes de cross-ref
 
 Espaces avant inline maths
 \s-[(]?\\(
-
-Tirets normaux
-[[[[:alpha:]]]]-[[[[:alpha:]]]]
 
 Espaces avant commandes. Ajouter à l'option Linker de ChkTeX ce qu'il faut.
 \parencite

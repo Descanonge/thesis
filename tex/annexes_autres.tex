@@ -30,13 +30,13 @@ On peut stocker chacune de ces informations de la manière suivante:
   \item glace, sur 1 bit: \binary{0}=libre, \binary{1}=glace.
 \end{itemize}
 
-On les combine ensuite en une seule variable \(v\) stockée sur 8~bits (le minimum nécessaire), en commençant par le bit le moins signifiant (le plus à droite ici): glace, nuage, algorithme, qualité.
+On les combine ensuite en une seule variable~\(v\) stockée sur 8~bits (le minimum nécessaire), en commençant par le bit le moins signifiant (le plus à droite ici): glace, nuage, algorithme, qualité.
 La représentation binaire de cette variable est donc:
 \begin{equation}
   v = \overline{\texttosf{00} \ \overline{qq} \ \overline{aa} \ \overline{n} \ \overline{g}},
 \end{equation}
 avec \(\overline{qq}\) les bits codant la qualité, \(\overline{aa}\) codant pour l'algorithme, \(\overline{n}\) les nuages, et \(\overline{g}\) la glace.
-Par exemple un pixel de valeur~44, dont la représentation binaire est \(\overline{\textosf{00101100}}\), indique que la mesure est de qualité moyenne (2), effectuée avec l'algorithme CI, et ne comporte ni nuages, ni glace.
+Par exemple un pixel de valeur~44, dont la représentation binaire est \(\overline{\textosf{00101100}}\), indique que la mesure est de qualité moyenne~(2), effectuée avec l'algorithme CI, et ne comporte ni nuages, ni glace.
 Comparé à une approche naïve avec 4~variables séparées, nous avons gagné un facteur~4 en stockage.
 
 Cette variable est facile à calculer à partir des valeurs des drapeaux que l'on veut encoder.
@@ -44,7 +44,7 @@ Il suffit d'additionner les drapeaux entre eux, dont on aura décalé les bits v
 Une fois cette variable créée, les drapeaux individuels sont récupérés simplement en appliquant un masque binaire, ce qui correspond à une opération \guil*{et} bit à bit (\engquote{bitwise AND}, notée~\textsf{\&} pour \citesoft{numpy}).
 Ce sont toutes des opérations élémentaires facilement applicables à tout un tableau.
 Par exemple pour récupérer la valeur de qualité d'un pixel on fera l'opération: \(v \mathbin{\&} 48 (\overline{\textosf{00110000}})\).
-La valeur récupérée est encore décalée sur la gauche, ici de 4~bits (\as{ie} multipliée par 8), mais dans la convention \as{cf} la signification des valeurs est stockée décalée, on aura donc directement 16: qualité~1, 32: qualité~2, 48: qualité~3.
+La valeur récupérée est encore décalée sur la gauche, ici de 4~bits (\as{ie} multipliée par~8), mais dans la convention \as{cf} la signification des valeurs est stockée décalée, on aura donc directement 16: qualité~1, 32: qualité~2, 48: qualité~3.
 La valeur du masque binaire est aussi stockée.
 Ainsi, pour l'exemple ci-dessus, il nous faudra définir les attributs suivants pour la variable~\(v\):
 \begin{center}
