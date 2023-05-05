@@ -14,7 +14,7 @@
   \centering
   {%
     \setlength{\fboxsep}{0pt}%
-    \framebox[\figwidth]{\insertfig{illustration/illus_preamble_smol.jpg}}
+    \framebox[\figwidth]{\insertfig{illustration/composite_smol.jpg}}
   }%
   \captionT{Les couleurs du Gulf Stream par satellite}{%
     Image en fausses couleurs de l'océan Atlantique Nord le \frenchdate{2020}{02}{23}.
@@ -55,6 +55,7 @@ Les champs de différentes variables (comme la température, la densité ou la c
 Apparaissent ainsi des structures plus fines et plus éphémères (de temps caractéristique entre le jour et la semaine) (\cite{thomas_2008,mcwilliams_2016}).
 Parmi ces structures, on trouve notamment des fronts de densité propices à la formation de circulations secondaires verticales, plus localisées, mais aussi plus intenses que celles engendrées par les tourbillons de mésoéchelle.
 Ces circulations, pour des fronts suffisamment intenses, peuvent s'étendre en profondeur et alors remonter des nutriments dans la couche euphotique, augmentant localement la productivité (\cite{mahadevan_2016,levy_2018}).
+\enlargethispage{-\baselineskip}
 
 Une autre conséquence de ces gradients, due à leur tendance à aplanir les isopycnes par instabilité barocline, est de restratifier localement les couches supérieures (\cite{fox-kemper_2008}).
 La restratification étant un facteur fort dans le démarrage du bloom printanier, ces structures de submésoéchelles peuvent donc également conduire à des démarrages précoces (\cite{mahadevan_2020}).
@@ -78,6 +79,7 @@ Cette zone comprend trois régimes biogéochimiques différents (\cite{bock_2022
 Au sud, notre zone d'étude englobe une partie de la gyre subtropicale de l'Atlantique Nord, caractérisée par un régime oligotrophe et une faible productivité tout au long de l'année.
 Au nord du jet du Gulf Stream se trouve un régime subpolaire plus productif, caractérisé par un bloom printanier.
 Entre les deux est présent un régime modérément productif, avec une productivité maximale en hiver.
+% \enlargethispage{-\baselineskip}
 
 Par ailleurs, cette zone présente deux fronts permanents intenses, un front le long du talus continental, et le Gulf Stream, tous deux associés à des circulations verticales fortes et profondes (\cite{flagg_2006,liao_2022}).
 Mais l'on peut également trouver dans le reste de la zone des fronts moins intenses, d'une durée de vie de l'ordre de la semaine, et en constante évolution (\cite{drushka_2019,sanchez-rios_2020}).
@@ -113,7 +115,7 @@ Ils transforment le dioxyde de carbone et les nutriments dissous (Nitrate, Phosp
 Le pigment principalement utilisé est la \al{chl}, mais certains organismes possèdent également des pigments auxiliaires comme la fucoxanthine chez les diatomées ou la péridinine chez les dinoflagellés.
 Ce sont ces pigments qui affectent la couleur de l'océan comme nous l'avons vu dans le préambule (\nref{fig:oc-illustration}), point sur lequel nous reviendrons plus tard.
 
-Le phytoplancton est consommé par le zooplancton. La matière organique qu'ils ont créée circule ainsi dans le réseau trophique: zooplancton, petits prédateurs, grands prédateurs, oiseaux marins, mammifères marins,\dots
+Le phytoplancton est consommé par le zooplancton. La matière organique qu'ils ont créée circule ainsi dans le réseau trophique: zooplancton, petits prédateurs, grands prédateurs, oiseaux marins, mammifères marins,\dots\ %
 Le phytoplancton occupe donc une place centrale dans l'écosystème marin.
 Il est à la base de la chaîne alimentaire dans les océans, et il est estimé qu'il génère~\pct{50} de la production primaire mondiale.
 
@@ -353,6 +355,7 @@ Les masses d'eau, et donc les traceurs biogéochimiques qu'elles contiennent, so
 Ce simple principe (ré"~)organise ces traceurs dans l'espace, sans directement en altérer le contenu\footnote{%
   Dans la plupart des cas, cependant la dispersion d'une parcelle d'eau entraîne néanmoins une dilution pouvant affecter les processus biologiques (\cite{lehahn_2017}.)
 }, et génère des structures de taille plus petite que celle l'écoulement lui-même \encadra{comme de fins filaments par exemple} (\cite{abraham_1998,lehahn_2007,dovidio_2010,levy_2018,lehahn_2018}), qui peuvent néanmoins s'étendre sur de larges distances (\cite{sergi_2020}).
+\enlargethispage{2\baselineskip}
 
 De récentes études montrent qu'une large part de la variabilité (spatiale et temporelle) du phytoplancton observée est expliquée par le mélange horizontal (\cite{glover_2018,keerthi_2022,jonsson_2023}).
 
@@ -449,7 +452,7 @@ Par ailleurs, le gradient vertical en nutriment \encadra{maintenu par la consomm
 
 L'effet \emph{local} de l'apport de nutriments aux fronts a été largement observé dans les études ci-dessus.
 Cependant il est difficile de quantifier précisément cet effet sur les cycles biogéochimiques à plus grande échelle.
-Les observations in situ ne peuvent observer qu'un nombre limité de structures, et ont d'ailleurs tendances à cibler les plus intenses.
+Les observations in situ ne peuvent observer qu'un nombre limité de structures, et ont d'ailleurs tendances à cibler les plus intenses.\enlargethispage{-2.2\baselineskip}
 Les modèles numériques peuvent résoudre les circulations de submésoéchelles mais contre un fort coût calculatoire qui limite leur étude avec des modèles régionaux ou globaux\footnote{%
   En particulier, la modification de la circulation grande échelle par rétroaction des dynamiques de fines échelles nécessite un long temps de spin-up.
 } (\cite{kessouri_2020,hewitt_2022}).
@@ -653,7 +656,7 @@ Par cette construction orientée vers une mesure graduelle des fronts, cette mé
 
 \subsection{Vers des fronts de densité}
 
-Dans la section précédente, la majorité des méthodes opèrent sur les données satellites de températures, qui est utilisée comme proxy de la densité.
+Dans la section précédente, la majorité des méthodes opèrent sur les données satellites de température, qui est utilisée comme proxy de la densité.
 Cette dernière varie cependant aussi avec la salinité, qui n'est disponible par satellite qu'à basse résolution (entre \qtyrange[range-phrase={ et }]{35}{50}{\km} pour \as{smos} par exemple).
 Il est donc possible que pour certains fronts thermiques, la variation de température soit \emph{compensée} par une variation de salinité, donnant ainsi une densité constante.
 Dans la région de l'Atlantique Nord, des transects sont réalisés régulièrement par un navire d'opportunité, l'Oleander.
@@ -717,4 +720,4 @@ Le reste de ce chapitre présente des résultats qui complémentent ceux présen
 Le \nref[chapitre]{chp:res-phenologie} se penche sur les résultats obtenus concernant l'impact des fronts sur la phénologie du bloom.
 Il résume les résultats présentés au chapitre précédent, puis y ajoute des résultats complémentaires.
 
-Enfin, les chapitres~\ref{chp:perspectives} et~\ref{chp:conclusion} apportent des perspectives et une conclusion, respectivement, sur le travail effectué pour cette thèse.
+Enfin, les chapitres~\ref{chp:conclusion} et~\ref{chp:perspectives} apportent une conclusion et des perspectives, respectivement, sur le travail effectué pour cette thèse.

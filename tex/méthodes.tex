@@ -190,6 +190,7 @@ Comme évoqué précédemment ce capteur mesure concomitamment les bandes infrar
 Les valeurs de \as{chl} sont calculées à partir des valeurs de réflectance à différentes bandes de longueurs d'ondes, ici avec l'algorithme OCI~(Ocean Colour Index).
 Ce dernier combine les algorithmes: CI pour les faibles valeurs de \as{chl}, OCx~(\as{ie} \abbrv{OC3} pour le capteur \as{modis}) pour les fortes valeurs, et un mélange des deux dans une zone de transition~(0.25~\textless \as{chl}~\textless 0.35~\unit{mgm}).
 Les données de \as{chl} sont téléchargées séparément, cette fois-ci depuis le \as{cmems}\footfullcite{chl_modis}, mais le même traitement de projection sur grille régulière kilométrique leur est appliquée.
+\enlargethispage{\baselineskip}
 
 En second lieu, nous utilisons également des données de l'initiative \as{octac} (service du \as{cmems}).
 Nous utilisons le produit global, MultiYear\footnote{%
@@ -334,9 +335,9 @@ Ces composantes sont ensuite réunies dans un seul index qui ainsi reflète l'h�
 Pour limiter la taille des structures détectées, on limite le calcul de ces composantes sur une fenêtre de taille appropriée, \al{cad} pour nous de l'ordre de grandeur d'une dizaine de kilomètres.
 Ainsi, pour chaque pixel, la valeur de chaque composante est calculée sur la distribution de SST à l'intérieur d'une fenêtre glissante centrée sur ce pixel et dont les tailles possibles sont:
 \begin{itemize}
-  \item \(3 \times 3 =\qty{9}{\pixels}\) soit~\tapprox\qty{20}{\km} de côté,
-  \item \(5 \times 5 =\qty{25}{\pixels}\) soit~\tapprox\qty{30}{\km} de côté,
-  \item \(7 \times 7 =\qty{49}{\pixels}\) soit~\tapprox\qty{40}{\km} de côté.
+  \item 3 \texttimes 3 =  9 pixels soit~\tapprox\qty{20}{\km} de côté,
+  \item 5 \texttimes 5 = 25 pixels soit~\tapprox\qty{30}{\km} de côté,
+  \item 7 \texttimes 7 = 49 pixels soit~\tapprox\qty{40}{\km} de côté.
 \end{itemize}
 Parce qu'une fenêtre plus large entraînerait la détection de structures trop grandes pour notre étude, nous nous limiterons aux tailles présentées ci-dessus.
 Néanmoins une fenêtre trop petite limite le nombre de pixels disponibles pour calculer les valeurs statistiques dont nous avons besoin convenablement.
