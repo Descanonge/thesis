@@ -23,10 +23,12 @@
   print .initial:n = false,
 
   urlshowpage .bool_set:N = \l_chthesis_url_showpage_bool,
-  print .initial:n = false,
+  urlshowpage .initial:n = false,
 }
 
 \ProcessKeysOptions{chthesis}
+
+
 
 \NewDocumentCommand \ifPrintTF { +m +m } {
   \bool_if:NTF \l_chthesis_print_bool {#1} {#2} }
@@ -283,6 +285,7 @@ cachedir=minted]{minted}
   runcolor=runcolor,
   urlcolor=urlcolor,
 }
+\ifPrintTF{\hypersetup{hidelinks}}{}
 \AtEndPreamble{
   \hypersetup{
     pdftitle={\Title},
@@ -336,7 +339,7 @@ cachedir=minted]{minted}
   \makeevenfoot{thesis}{\pnumstyle\thepage}{}{}
   \makeoddfoot{thesis}{}{}{\pnumstyle\thepage}
   \makeevenhead{thesis}{\scshape\leftmark}{}{}
-  \makeoddhead{thesis}{}{}{\rightmark}
+  \makeoddhead{thesis}{}{}{\lfstyle\rightmark}
   \marginparmargin{outer}
 }{
   \makeevenfoot{thesis}{}{\pnumstyle\thepage}{}
@@ -348,7 +351,7 @@ cachedir=minted]{minted}
 
 \copypagestyle{thesis-front}{thesis}
 \ifPrintTF{
-  \makeevenhead{thesis-front}{\leftmark}{}{}
+  \makeevenhead{thesis-front}{\rightmark}{}{}
   \makeoddhead{thesis-front}{}{}{\rightmark}
 }{
   \makeevenhead{thesis-front}{\rightmark}{}{}
@@ -719,12 +722,13 @@ cachedir=minted]{minted}
     \clearpage
     \section {Article:\ \articleTitle}
     \label {sec:article-bg}
+    \markright{}
     \tl_set:Nn \tl_tmpa_l {\small [\textit{Pre-print\ Biogeosciences}\ \glsurl{preprint-bgs-doi}]}
     \ifPrintTF{
       % \renewcommand*\ruledefootc{\tl_tmpa_l}
       % \renewcommand*\ruledofootc{\tl_tmpa_l}
       \makeevenfoot{thesis}{\pnumstyle\thepage}{\tl_tmpa_l}{}
-      \makeoddfoot{thesis}{}{}{\tl_tmpa_l}{\pnumstyle\thepage}
+      \makeoddfoot{thesis}{\tl_tmpa_l}{}{\pnumstyle\thepage}
     }{
       \makeevenfoot{thesis}{\pnumstyle\thepage}{}{\tl_tmpa_l}
       \makeoddfoot{thesis}{\pnumstyle\thepage}{}{\tl_tmpa_l}
