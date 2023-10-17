@@ -154,7 +154,7 @@ En effet cette dernière offre une couverture globale, journalière, et à haute
 La possibilité d'observer des micro-organismes depuis l'espace n'apparaît pourtant pas comme évidente.
 Rappelons alors que ces organismes, réalisant de la photosynthèse, contiennent différents pigments leur permettant de récupérer l'énergie lumineuse du soleil.
 Toutes les espèces de phytoplancton contiennent majoritairement de la \al{chl}~(\as{chl}) et, éventuellement, des pigments secondaires.
-Ces pigments absorbent plus ou moins certaines longueurs d'onde du rayonnement pénétrant dans la couche de surface de l'océan, affectant ainsi la rétrodiffusion (\engquote{backscatter}).
+Ces pigments affectent plus ou moins certaines longueurs d'onde de la lumière pénétrant dans la couche de surface de l'océan, modifiant ainsi le rayonnement rétrodiffus (\engquote{backscatter}).
 En d'autres termes, la couleur de l'océan apparaît plus verte\footnote{%
   la chlorophylle, pigment majoritaire, absorbe dans le rouge et le bleu}
 sur les zones où la concentration en phytoplancton est élevée.
@@ -180,7 +180,7 @@ Certains algorithmes dits \emph{semi-analytiques} s'attachent à résoudre ce pr
 
 Cependant, dans la majorité de l'océan ouvert il est raisonnable de considérer que le contenu optique de la colonne d'eau est le seul fait du phytoplancton\footnotemark, et qu'il est donc possible de directement relier les réflectances à la concentration en \as{chl} (\cite{bailey_2006,brewin_2015a}).
 \footnotetext{C'est-à-dire qu'on fait l'hypothèse que les autres composantes (\as{nap} et \as{cdom}) sont des produits du phytoplancton, et co-varient avec sa concentration.}
-Ainsi, un certain nombres d'algorithmes dits \emph{empiriques} infèrent la \as{chl} en s'appuyant sur une simple relation vérifiée empiriquement par des mesures in situ.
+Ainsi, un certain nombres d'algorithmes dits \emph{empiriques} infèrent la \as{chl} en s'appuyant sur une simple relation développée empiriquement par des mesures in situ.
 Par exemple, les algorithmes \guil{OC} utilisent des polynômes de ratio entre les réflectances verte et bleue (voir plus bas).
 
 Cette hypothèse ne tient plus dans certains cas (classifiés comme les \engquote{case~II waters}, où \guil{optiquement complexes}), par exemples les régimes côtiers où la colonne d'eau est riche en sédiments (\cite{bailey_2006,brewin_2015a}), mais certains algorithmes sont tout de même disponibles pour ces cas plus complexes (\cite{gohin_2002}).
@@ -234,7 +234,7 @@ C'est souvent le cas près des côtes et des décharges fluviales.
 La faible profondeur en régime côtier apporte également une difficulté, puisque dans le cas où la lumière incidente pénètre suffisamment profond, la réflectance mesurée comportera la lumière réfléchie par le fond marin (et re-traversant la colonne d'eau).
 
 Plus généralement, quelle que soit la zone sondée, la profondeur jusqu'à laquelle pénètre la lumière est un point critique.
-En effet, la réflectance mesurée ne peut comporter des informations que sur cette couche éclairée.
+En effet, la réflectance mesurée ne peut comporter des informations que sur cette couche éclairée (typiquement épaisse d'une centaine de mètres).
 De plus, les modèles empiriques sont ajustés par des mesures in situ réalisées sur les premiers mètres.
 Les données satellites manquent ainsi la biomasse plus en profondeur, potentiellement importante (\as{ie} le \engquote{Deep Chlorophyll Maximum}) (\cite{morel_1989,uitz_2006}).
 
@@ -248,7 +248,7 @@ La relation entre la quantité de \al{chl} et la biomasse, exprimée par le rati
 Pour toutes ces raisons, les mesures in situ constituent un outil nécessaire et complémentaire à la télédétection, à la fois pour l'observation opérationnelle mais aussi pour mieux comprendre les processus en jeu.
 En effet, au-delà de pouvoir accéder directement aux variables que les satellites doivent inférer, parfois à travers des proxys, ces mesures peuvent explorer des dimensions invisibles aux satellites.
 
-D'abord, les mesures in situ ont accès à toute la colonne d'eau et non pas seulement la surface optiquement active.
+D'abord, les mesures in situ ont accès à toute la colonne d'eau, et non pas seulement la couche de surface.
 D'autre part, ces mesures offrent une vue beaucoup plus large et précise de la biodiversité présente.
 Les mesures \glsmargin{hplc} permettent par exemple d'accéder à la concentration exacte de la \al{chl} mais également d'autres pigments auxiliaires, donnant ainsi une meilleure idée de la composition de la communauté phytoplanctonique.
 D'autres techniques permettent d'explorer d'autres communautés, comme le cytomètre de flux pour les plus petits organismes (cyanobactéries et bactéries hétérotrophes), ou le zooscan pour les plus gros organismes (essentiellement le zooplancton).
@@ -620,7 +620,7 @@ Cela permet d'éviter les faux positifs, notamment sur des images bruitées ou c
 % \begin{note}
   On notera que \textcite{cayula_1992} choisissent les seuils de cohérence spatiale de manière à ce que le cas le plus cohérent soit un front en ligne droite.
   Cela signifie qu'un front sinueux se vera attribuer une cohérence spatiale moindre, et pourrait être disqualifié.
-  En fonction des structures à détecter, il sera nécessaire d'adapter les divers seuils de la méthode, éventuellement au détriment la spécificité de la méthode (éviter les faux positifs).
+  En fonction des structures à détecter, il sera nécessaire d'adapter les divers seuils de la méthode, éventuellement au détriment de la spécificité de la méthode (éviter les faux positifs).
 % \end{note}
 
 \end{technique}
