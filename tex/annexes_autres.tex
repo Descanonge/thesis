@@ -277,11 +277,26 @@ Enfin les 5~repas journaliers (végétariens), pris au self du personnel, et les
 Je comptabilise également les coûts communs liés au fonctionnement du laboratoire (consommation énergétique, entretien bâtiment, mails,\dots) qui ont été estimés par le groupe Climaction-LOCEAN pour l'année 2018\footnote{\url{https://climactions.ipsl.fr/groupes-de-travail/locean-climactions/}}.
 Individuellement, cela représente environ \qty{1}{\tcarbone} annuelle.
 
-Côté informatique, nous n'avons pas réalisé d'achats de matériel.
-La majorité des calculs sont réalisés sur les machines du mésocentre de l'\ab{ipsl}; les données y sont également stockées (\(\lesssim \qty{1}{\To}\)).
-Ces calculs sont pour leur vaste majorité de nombreux processus, courts (quelques minutes), et utilisent peu de ressources (un seul processeur et quelques~\unit{\Go} de mémoire vive) \encadra*{en contraste à une situation plus \guil*{simple}, par exemple, de quelques calculs très intensifs qui représenteraient la quasi-totalité du bilan carbone}.
-Il est donc compliqué d'estimer le coût de tous ces calculs dont l'historique n'a pas été conservé, en plus des difficultés usuelles de ce genre d'estimation sur des ressources informatiques partagées.
+Concernant l'informatique, nous n'avons pas réalisé d'achats de matériel.
+La majorité des calculs sont réalisés sur au mésocentre de l'\ab{ipsl}, et où les données sont également stockées (\(\lesssim \qty{1}{\To}\)).
+Ces calculs sont pour leur vaste majorité de nombreux processus courts (quelques minutes à quelques heures), qui utilisent peu de ressources (un seul processeur et quelques~\unit{\Go} de mémoire vive) mais peuvent néanmoins fonctionner en parallèle.
 
+L'empreinte carbone associée au calcul intensif au sein du laboratoire ou de l'\ab{ipsl} n'a pas encore été établie, la méthodologie restant à être définie (une tâche ardue compte tenu de la complexité de ces structures de calcul partagées).
+On peut néanmoins estimer grossièrement le coût carbone des calculs effectués avec l'outil \href{http://calculator.green-algorithms.org}{\hbox{\textsf{green-algorithms.org}}}.
+On choisit les paramètres pour un hypothétique calcul intégral (des 20~années de données satellites d'entrée aux figures de résultats) comme suit:
+\begin{itemize}
+  \item un CPU AMD EPYC 7343 (au plus proche du modèle utilisé au mésocentre),
+  \item 8 cœurs: les calculs tournant typiquement en parallèle sur quelques cœurs,
+  \item \qty{32}{Go} de mémoire,
+  \item une plateforme \eng{cloud} située en France,
+  \item un temps d'exécution de 16~heures, normalement largement suffisant.
+\end{itemize}
+L'outil estime alors une consommation électrique de \qty{2.70}{\kWh}, équivalente à une empreinte de \qty{139}{\g\carbone}.
+Prenons une fois encore une valeur (très) haute et considérons que ce calcul serait répété tous les jours dans son intégralité, on obtiendrait une empreinte de \qty{50}{\kg\carbone} par an.
+Cette estimation ne tient pas compte du stockage des données satellites d'entrée, ou de leur téléchargement depuis le \as{cmems}.
+On notera surtout l'influence de la localisation des machines de calcul, l'empreinte du même calcul atteignant \qty{625}{\g\carbone} aux Royaume-Unis, \qty{1.1}{\kg\carbone} aux États-Unis, et \qty{2.3}{\kg\carbone} en Australie (soit 16 fois l'empreinte en France).
+
+Nous obtenons donc finalement une empreinte totale de \qty{6.8}{\tcarbone}, étalée sur 4~années soit \qty{1.7}{\tcarbone} par an.
 
 \begin{table}
   \centering
@@ -295,12 +310,13 @@ Il est donc compliqué d'estimer le coût de tous ces calculs dont l'historique 
     EGU (Vienne)         &        & 75                                   \\
     \addlinespace
 
+    Calcul intensif      & 50     & 200                                  \\
     Domicile-travail     & 162    & 648                                  \\
     Alimentation         & 420    & 1680                                 \\
     Fonctionnement       & 1000   & 4000                                 \\
 
     \midrule
-    Total                &        & \bfseries 6669                       \\
+    Total                &        & \bfseries 6869                       \\
     \bottomrule
   \end{tabular}
 \end{table}
