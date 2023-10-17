@@ -153,7 +153,7 @@ To detect the start of this peak, which marks our boundary, we fit the peak with
 Then, the threshold temperature time series is median filtered over an 8-day window to eliminate spurious detection anomalies.
 This separation method ensures quasi-unimodal \as{chl} distributions within each biome (\nref{fig:zone-separation}d).
 
-\begin{figure*}
+\begin{figure}
   \centering
   \includegraphics[width=12cm]{fig01.pdf}
   \caption[Delimitation of biomes]{
@@ -164,7 +164,7 @@ This separation method ensures quasi-unimodal \as{chl} distributions within each
     The black line in~(c) shows the SST threshold value detected to delimit the Gulf Stream northern wall (see methods section).
   }%
   \label{fig:zone-separation}
-\end{figure*}
+\end{figure}
 
 \subsubsection{Front detection}
 
@@ -190,7 +190,7 @@ Sorting fronts by range of HI enabled us to roughly separate the persistent fron
 The choice of the two HI threshold is somehow arbitrary, but it is supported by the HI distributions presented below.
 
 
-\begin{figure*}
+\begin{figure}
   \centering
   \includegraphics[width=12cm]{fig02.pdf}
   \caption[Example of front]{
@@ -200,7 +200,7 @@ The choice of the two HI threshold is somehow arbitrary, but it is supported by 
     \as{chl} are elevated inside the front.
   }%
   \label{fig:zoom}
-\end{figure*}
+\end{figure}
 
 \subsubsection{Quantification of the impact of fronts on Chl-\textit{a}}
 
@@ -243,7 +243,7 @@ Secondly, the number of points in the HI distribution decreases sharply as the H
 We used the HI threshold of~10 to distinguish weak fronts from strong fronts.
 This separation is imperfect, as seen for instance in \nref{fig:zoom} where a few pixels with HI values larger than~10 appear at the core of an otherwise weak front.
 
-\begin{figure*}
+\begin{figure}
   \centering
   \includegraphics[width=12cm]{fig03.pdf}
   \caption[Distribution of Chl-\textit{a} against HI]{
@@ -252,7 +252,7 @@ This separation is imperfect, as seen for instance in \nref{fig:zoom} where a fe
     Note that \pct{0.5} of pixels have outstanding large HI values and are not included here.
   }%
   \label{fig:chl-vs-hi}
-\end{figure*}
+\end{figure}
 
 However, the choice of these two HI thresholds is also guided by the resulting global spatial climatology of weak and strong fronts (\nref{fig:frt-occurrence}).
 Weak fronts are abundant, and more or less evenly distributed, over a broad band around and north of the Gulf Stream jet (\nref{fig:frt-occurrence}a).
@@ -260,14 +260,14 @@ To the south of the Gulf Stream jet, weak fronts are less present, with neverthe
 This distribution of weak fronts is consistent with the predominance of mesoscale variability observed along the Gulf Stream system from satellite altimetry (\cite{zhai_2008}), and the injection of eddy kinetic energy north of the Gulf Stream jet by the Gulf Stream extension.
 It is thus consistent with the generation process of ephemeral fronts through mesoscale strain.
 
-\begin{figure*}
+\begin{figure}
   \centering
   \includegraphics[width=12cm]{fig04.pdf}
   \caption[Occurrence map of strong and weak fronts]{
     Occurrence of (a)~weak fronts and (b)~strong fronts expressed as the percentage of time steps over the time series (2000--2020) for which a given pixel is occupied by a front.
   }%
   \label{fig:frt-occurrence}
-\end{figure*}
+\end{figure}
 
 The climatological distribution of strong fronts shows that they coincide mainly with the two persistent fronts of the Western Boundary Current system, the Gulf Stream front extending northeast from Cape Hatteras, and the more northerly shelf-break front extending eastward to \latlon{50W}, following the northeastern U.S.\ continental shelf break (\nref{fig:frt-occurrence}b).
 Thus these contrasted coverage of localized strong fronts and more widespread weak fronts are consistent with the hypothesis that weak fronts capture the ephemeral fronts, whereas strong fronts capture the persistent ones.
@@ -292,7 +292,7 @@ Importantly, in all 3 biomes, \as{chl} values increase with HI, and are also mor
 Thus the excess in \as{chl} depends continuously on the value of HI.\@
 
 
-\begin{figure*}
+\begin{figure}
   \centering
   \includegraphics[width=12cm]{fig05.pdf}
   \caption[Seasonal impact of fronts on Chl-\textit{a}]{
@@ -305,7 +305,7 @@ Thus the excess in \as{chl} depends continuously on the value of HI.\@
     The excess in \as{chl} is larger over strong fronts than over weak fronts, but weak fronts are more numerous than strong fronts, resulting in a \as{chl} surplus that can be comparable or even larger for weak fronts.
   }%
   \label{fig:ts-climato}
-\end{figure*}
+\end{figure}
 
 In the permanent subtropical biome (\nref{fig:ts-climato}a), the seasonal variations of \as{chl} are very modest with a weak peak in winter.
 In the seasonal subtropical biome (\nref{fig:ts-climato}b), the seasonal variations are well marked, with a minimum in summer, and an increase that starts in fall and peaks in late winter.
@@ -333,7 +333,7 @@ The excess is two to three times larger over fronts North of the Gulf Stream (i.
 Overall, the annual mean local excess over weak fronts varies between \textlf{0} and \pct{+30}, and between \pct{15} and \pct{+60} over strong fronts.
 
 
-\begin{figure*}
+\begin{figure}
   \centering
   \includegraphics[width=12cm]{fig06.pdf}
   \caption[Local impact of front on Chl-\textit{a} in the permanent subtropical biome]{
@@ -343,9 +343,9 @@ Overall, the annual mean local excess over weak fronts varies between \textlf{0}
     The excess increases from south to north.
   }%
   \label{fig:latbands-s}
-\end{figure*}
+\end{figure}
 
-\begin{figure*}
+\begin{figure}
   \centering
   \includegraphics[width=12cm]{fig07.pdf}
   \caption[Local impact of front on Chl-\textit{a} in the seasonal subtropical biome]{
@@ -355,9 +355,9 @@ Overall, the annual mean local excess over weak fronts varies between \textlf{0}
     The excess is maximum at mid-latitudes.
   }%
   \label{fig:latbands-i}
-\end{figure*}
+\end{figure}
 
-\begin{figure*}
+\begin{figure}
   \centering
   \includegraphics[width=12cm]{fig08.pdf}
   \caption[Local impact of front on Chl-\textit{a} in the subpolar biome]{
@@ -367,7 +367,7 @@ Overall, the annual mean local excess over weak fronts varies between \textlf{0}
     The excess decreases from south to north.
   }%
   \label{fig:latbands-n}
-\end{figure*}
+\end{figure}
 
 
 \subsubsection{Biome-scale Chl-\textit{a} surplus associated with fronts}
@@ -384,7 +384,7 @@ Overall, the annual mean \as{chl} surplus due to fronts is very modest (\nref{fi
 All fronts added, the surplus is of the order of \pct{1} for the permanent subtropical biome and \pct{6} for the seasonal subtropical and subpolar biomes, with contributions from weak and strong fronts which have similar magnitudes.
 Therefore, there is roughly \pct{5} more \as{chl} in the Gulf Stream region than there would be in the absence of fronts.
 
-\begin{figure*}
+\begin{figure}
   \centering
   \includegraphics[width=12cm]{fig09.pdf}
   \caption[Recap of local and global impact of fronts on Chl-\textit{a}]{
@@ -392,7 +392,7 @@ Therefore, there is roughly \pct{5} more \as{chl} in the Gulf Stream region than
     (b)~Annual mean global surplus of \as{chl} (in \%) for each biome, sorted by front type.
   }%
   \label{fig:recap}
-\end{figure*}
+\end{figure}
 
 
 \subsubsection{Bloom timing in the subpolar biome}
@@ -541,7 +541,7 @@ Finally, the combination of these observation-based results with theoretical arg
 \end{articleSubBlock}
 
 
-\begin{figure*}
+\begin{figure}
   \centering
   \includegraphics[width=12cm]{fig_suppl_01.pdf}
   \caption[Sensitivity of the seasonal impact of fronts on HI parameters]{
@@ -551,9 +551,9 @@ Finally, the combination of these observation-based results with theoretical arg
     Different normalization coefficients are tested for a \qty{30}{\km} window size: double the variance, double the bimodality, and double the skewness.
   }%
  \label{fig:ts-sensitivity}
-\end{figure*}
+\end{figure}
 
-\begin{figure*}
+\begin{figure}
   \centering
   \includegraphics[width=12cm]{fig_suppl_02.pdf}
   \caption[Seasonal distributions of Chl-\textit{a}]{
@@ -561,7 +561,7 @@ Finally, the combination of these observation-based results with theoretical arg
     The median value of each distribution is indicated by a vertical line.
   }
   \label{fig:hist-chl}
-\end{figure*}
+\end{figure}
 
 \begin{articleSubBlock}{Author contributions}
   ML, LB and CH conceived the study. CH conceived the methodology and performed the analysis. ML and CH wrote the paper. All authors contributed to the analysis and discussion of the results.
