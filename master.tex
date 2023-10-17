@@ -17,7 +17,7 @@
 12pt,
 a4paper,
 french,
-print,
+% print,
 twoside,
 openright,
 hyperfootnotes=false, % put here otherwise option clash
@@ -112,13 +112,13 @@ trophic interactions at ocean fronts}
   \graphicspath{{resources/}}%
   \markboth{\memUChead{\appendixname\ \thechapter}}{}%
   \clearpage%
-  \centering%
-  \includegraphics[
-  width=\textwidth,
-  height=\textheight-1mm,
-  keepaspectratio=true,
-  viewport=51 42 545 740
-  ]{mangolte_2023_frontpage.pdf}
+  \adjustbox{center}{%
+    \includegraphics[
+    width=\textwidth+4cm,
+    height=\textheight-1mm,
+    keepaspectratio=true,
+    ]{mangolte_2023_frontpage.pdf}%
+  }
   \clearpage
 }
 
@@ -128,14 +128,13 @@ trophic interactions at ocean fronts}
   \graphicspath{{resources/}}%
   \markboth{\memUChead{\appendixname\ \thechapter}}{}%
   \clearpage%
-  \centering%
-  \includegraphics[
-  width=\textwidth,
-  height=\textheight-1mm,
-  keepaspectratio=true,
-  viewport=40 100 570 690,
-  clip
-  ]{levy_2023_frontpage.pdf}
+  \adjustbox{center}{%
+    \includegraphics[
+    width=\textwidth+4cm,
+    height=\textheight-1mm,
+    keepaspectratio=true,
+    ]{levy_2024_frontpage.pdf}%
+  }
   \clearpage
 }
 

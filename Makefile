@@ -33,7 +33,7 @@ $(SUB_NAMES):%: tex/%.tex
 $(PROJECT): $(MAIN).tex
 	mkdir -p $(BUILD_DIR)/tex
 	latexmk  $(LMK_FLAGS) $(AUXDIR_FLAGS) \
-		-jobname="$(PROJECT)_paper" \
+		-jobname="$(PROJECT)" \
 		$(MAIN).tex
 
 html: $(MAIN).tex
