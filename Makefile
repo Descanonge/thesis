@@ -36,9 +36,6 @@ $(PROJECT): $(MAIN).tex
 		-jobname="$(PROJECT)" \
 		$(MAIN).tex
 
-html: $(MAIN).tex
-	latex2html $(MAIN).tex
-
 clean:
 	rm -rf $(BUILD_DIR)
 	rm -f $(MAIN).fls
